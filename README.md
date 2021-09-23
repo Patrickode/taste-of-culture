@@ -3,5 +3,6 @@
 ## Team Members
  - Patrick Mitchell - Game Design, Git Manager
  - Corinne Fair - Technical Co-Lead
+ - Robley Evans - Background Researcher
 ## Team Google Document
  https://docs.google.com/document/d/1qTsPKLkM5TqMrwiw1zqRbsa-2WnW__E_0AKE2jAgoVM/edit#heading=h.ipheq6ceua3u
