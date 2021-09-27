@@ -3,5 +3,8 @@
 ## Team Members
  - Patrick Mitchell - Game Design, Git Manager
  - Joseph Hong - Producer, Team Liaison
+ - Gel Howell - Technical
+ - Robley Evans - Background Researcher
+ - Corinne Fair - Technical Co-Lead
 ## Team Google Document
  https://docs.google.com/document/d/1qTsPKLkM5TqMrwiw1zqRbsa-2WnW__E_0AKE2jAgoVM/edit#heading=h.ipheq6ceua3u
