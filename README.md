@@ -1,5 +1,5 @@
-# Food For Thought
- Food for Thought is a game made by *Too Many Cooks*, Team 6 of Fall 2021's 601 class.
+# A Taste of Culture
+ *A Taste of Culture* is a game made by *Too Many Cooks*, Team 6 of Fall 2021's 601 class.
 ## Team Members
  - Patrick Mitchell - Game Design, Git Manager
  - Joseph Hong - Producer, Team Liaison
