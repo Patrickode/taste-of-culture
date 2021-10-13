@@ -14,6 +14,11 @@ public class Knife : MonoBehaviour
     Vector2 cutStartPosition;
     Vector2 cutEndPosition;
 
+    public SpriteRenderer spriteRenderer;
+    public Sprite knifeUp;
+    public Sprite knifeDown;
+    public Animation animation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +39,12 @@ public class Knife : MonoBehaviour
 
             lineRenderer.enabled = true;                        // Start drawing line at initial "cut location".
             lineRenderer.SetPosition(0, cutStartPosition);
+
+            if (spriteRenderer.sprite == knifeUp)
+            {
+                // ???
+                spriteRenderer.sprite = knifeDown;
+            }
         }
 
         if(Input.GetMouseButton(0) && lineRenderer.enabled == true)
@@ -48,6 +59,12 @@ public class Knife : MonoBehaviour
             lineRenderer.enabled = false;
 
             CutObjects(cutStartPosition, cutEndPosition);
+
+            if (spriteRenderer.sprite == knifeDown)
+            {
+                // ???
+                spriteRenderer.sprite = knifeUp;
+            }
         }
     } 
 
