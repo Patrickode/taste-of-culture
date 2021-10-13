@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2126107845756472185}
   - component: {fileID: 8163482407324758161}
-  - component: {fileID: 7790524365511782870}
+  - component: {fileID: 1915095550069433089}
   - component: {fileID: 2126107845756472187}
   - component: {fileID: 2126107845756472186}
   - component: {fileID: 2810664235539695080}
@@ -88,23 +88,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &7790524365511782870
-Animation:
+--- !u!95 &1915095550069433089
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126107845756472188}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 450878c51b893324bb8653c67b0fe7bb, type: 2}
-  - {fileID: 7400000, guid: 39ecd4e2a77c3084e894419a10abcd86, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3606e4b5e8ebbe42aed4f0c8b4dca84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &2126107845756472187
 Rigidbody2D:
   serializedVersion: 4
@@ -266,9 +268,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   spriteRenderer: {fileID: 8163482407324758161}
-  knifeUp: {fileID: 21300000, guid: 63ae55d9e7ffbb547a96def1c1d91b4d, type: 3}
-  knifeDown: {fileID: 21300000, guid: 163e59e331457c740a167071687180e8, type: 3}
-  animation: {fileID: 7790524365511782870}
+  animator: {fileID: 1915095550069433089}
 --- !u!114 &7635648072165040025
 MonoBehaviour:
   m_ObjectHideFlags: 0

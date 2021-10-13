@@ -280,11 +280,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2126107845756472185, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2126107845756472185, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2126107845756472185, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -318,17 +318,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2126107845756472187, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2126107845756472188, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
       propertyPath: m_Name
       value: Knife
-      objectReference: {fileID: 0}
-    - target: {fileID: 2126107845756472189, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae8716a585b5ca246ac0a6968bc2123c, type: 3}
