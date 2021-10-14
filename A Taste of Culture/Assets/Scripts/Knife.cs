@@ -7,6 +7,9 @@ public class Knife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;            // Layer to detect colliders on.
     
+    public SpriteRenderer spriteRenderer;
+    public Animator animator;
+
     Rigidbody2D rigidbodyComponent;
     IngredientCutter ingredientCutter;
     LineRenderer lineRenderer;
@@ -14,12 +17,11 @@ public class Knife : MonoBehaviour
     Vector2 cutStartPosition;
     Vector2 cutEndPosition;
 
-    public SpriteRenderer spriteRenderer;
-    public Animator animator;
-
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         ingredientCutter = GetComponent<IngredientCutter>();
         lineRenderer = GetComponent<LineRenderer>();
@@ -74,10 +76,7 @@ public class Knife : MonoBehaviour
 
         foreach(GameObject objectToCut in objectsToCut)
         {
-            // if(ingredientCutter == null) { break; }              // If ingredient cutter isn't present stop trying to cut objects.
-            // ingredientCutter.CutIngredient(startPosition, endPosition, objectToCut);
-            
-            objectToCut.GetComponent<CuttableIngredient>().CutIngredient(startPosition, endPosition);
+            objectToCut.GetComponent<IngredientCutter>().CutIngredient(startPosition, endPosition, objectToCut);
         }
     }
 }
