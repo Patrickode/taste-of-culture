@@ -8,4 +8,4 @@
  - Corinne Fair - Technical Co-Lead
  - Ajay Ramnarine - Aesthetics 
 ## Team Google Document
- https://docs.google.com/document/d/1qTsPKLkM5TqMrwiw1zqRbsa-2WnW__E_0AKE2jAgoVM/edit#heading=h.ipheq6ceua3u
+ https://docs.google.com/document/d/1y9kU3IbrXUNtskCyVQP18FIc4h_aKrAI1_wMWW6DS18/edit?usp=sharing
