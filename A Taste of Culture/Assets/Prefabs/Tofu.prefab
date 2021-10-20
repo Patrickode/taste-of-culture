@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5996856056605292721}
   - component: {fileID: 1788910273944390421}
   - component: {fileID: 1864904876131130458}
-  - component: {fileID: -5908866642039358160}
   - component: {fileID: 1369348870825212650}
+  - component: {fileID: -505060867381241877}
   m_Layer: 6
   m_Name: Tofu
   m_TagString: Tofu
@@ -135,19 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.143958, y: 5.020666}
   m_EdgeRadius: 0
---- !u!114 &-5908866642039358160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351043721425848537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7a361810cb1c554ab6c732871b65a47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tofuPrefab: {fileID: 351043721425848537}
 --- !u!114 &1369348870825212650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +148,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientPrefab: {fileID: 351043721425848537}
-  spriteMask: {fileID: 0}
+  spriteMask: {fileID: 1490022700101722497, guid: 37977ce5956a4924791382d669c85cf7, type: 3}
+  cutWidth: 0.5
+--- !u!114 &-505060867381241877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351043721425848537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648d5f15f748c9a4aafddf46b7cbe3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guidelinePrefab: {fileID: 1042026321526072308, guid: 87b42d52702bdef4db30272d4f786ec7, type: 3}
+  cutWidth: 1.75
+  marginOfError: 0.5
+  drawInitialGuideline: 1
 --- !u!1 &1018064125821411017
 GameObject:
   m_ObjectHideFlags: 0

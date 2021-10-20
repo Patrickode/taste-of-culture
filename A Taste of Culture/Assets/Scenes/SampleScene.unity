@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &293675774
 Transform:
   m_ObjectHideFlags: 0
@@ -244,9 +244,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1795539049}
     m_Modifications:
+    - target: {fileID: -505060867381241877, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: cutWidth
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -505060867381241877, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: marginOfError
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 351043721425848537, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
       propertyPath: m_Name
       value: Tofu
+      objectReference: {fileID: 0}
+    - target: {fileID: 351043721425848537, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1369348870825212650, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
       propertyPath: cutWidth
@@ -382,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1795539049
 Transform:
   m_ObjectHideFlags: 0
@@ -649,9 +661,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 293675774}
     m_Modifications:
+    - target: {fileID: -2866641080516490743, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
+      propertyPath: cutWidth
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: -2866641080516490743, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
+      propertyPath: marginOfError
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1659590435992888763, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_Name
       value: Raw Chicken
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659590435992888763, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4390804124029773825, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_RootOrder

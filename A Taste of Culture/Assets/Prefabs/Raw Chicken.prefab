@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 793856983504873079}
   - component: {fileID: 735878704247697720}
   - component: {fileID: 60731902966601608}
+  - component: {fileID: -2866641080516490743}
   m_Layer: 6
   m_Name: Raw Chicken
   m_TagString: Tofu
@@ -147,3 +148,19 @@ MonoBehaviour:
   ingredientPrefab: {fileID: 1659590435992888763}
   spriteMask: {fileID: 1490022700101722497, guid: 37977ce5956a4924791382d669c85cf7, type: 3}
   cutWidth: 0.1
+--- !u!114 &-2866641080516490743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659590435992888763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648d5f15f748c9a4aafddf46b7cbe3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guidelinePrefab: {fileID: 1042026321526072308, guid: 87b42d52702bdef4db30272d4f786ec7, type: 3}
+  cutWidth: 2.15
+  marginOfError: 1
+  drawInitialGuideline: 1

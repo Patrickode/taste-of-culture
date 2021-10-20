@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Knife : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask;            // Layer to detect colliders on.
+    [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
     
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -31,14 +31,18 @@ public class Knife : MonoBehaviour
     void Update() 
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        rigidbodyComponent.position =  mousePosition;           // Make knife move according to mouse location.
+        rigidbodyComponent.position =  mousePosition;               // Make knife move according to mouse location.
 
         if(Input.GetMouseButtonDown(0))
         {
             cutStartPosition = mousePosition;
 
-            lineRenderer.enabled = true;                        // Start drawing line at initial "cut location".
-            lineRenderer.SetPosition(0, cutStartPosition);
+            // Check if player is cutting within margin of error
+            if(CutWithinMargin(cutStartPosition))
+            {
+                lineRenderer.enabled = true;                        // Start drawing line at initial "cut location".
+                lineRenderer.SetPosition(0, cutStartPosition);
+            }
 
             // this will turn the knife "down" on click
             animator.SetBool("Click", true);
@@ -46,16 +50,20 @@ public class Knife : MonoBehaviour
 
         if(Input.GetMouseButton(0) && lineRenderer.enabled == true)
         {
-            lineRenderer.SetPosition(1, mousePosition);         // Continue drawing line to current location of mouse.
+            lineRenderer.SetPosition(1, mousePosition);             // Continue drawing line to current location of mouse.
         }
 
         if(Input.GetMouseButtonUp(0))
         {
             cutEndPosition = mousePosition;
 
-            lineRenderer.enabled = false;
+            // Check if player has made cut within margin of error
+            if(CutWithinMargin(cutEndPosition) && CutWithinMargin(cutStartPosition))
+            {
+                lineRenderer.enabled = false;
 
-            CutObjects(cutStartPosition, cutEndPosition);
+                CutObjects(cutStartPosition, cutEndPosition);
+            }
 
             // this will turn the knife "up" on release"
             animator.SetBool("Click", false);
@@ -78,5 +86,25 @@ public class Knife : MonoBehaviour
         {
             objectToCut.GetComponent<IngredientCutter>().CutIngredient(startPosition, endPosition, objectToCut);
         }
+    }
+
+    bool CutWithinMargin(Vector2 cutPostion)
+    {
+        GameObject guideline = GameObject.FindGameObjectWithTag("Guideline");
+        if(guideline == null) { return false; }
+
+        Vector2 guidelinePosition = guideline.transform.position;
+
+        float margin = FindObjectOfType<CutGuideline>().MarginOfError;
+
+        if((cutPostion.x > guidelinePosition.x + margin) || (cutPostion.x < guidelinePosition.x - margin)) 
+        { 
+            Debug.Log("ERROR: Attempting to cut outside the margin of error");      // TODO: Replace with comment from mentor
+
+            lineRenderer.enabled = false;
+            return false; 
+        }
+
+        return true;
     }
 }
