@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Knife
+  - Ingredient
+  - Tofu
+  - Guideline
+  - Background
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -11,10 +17,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Ingredient
+  - Tool
+  - Background
+  - UI
   - 
   - 
   - 
@@ -40,4 +46,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1662690909
+    locked: 0
+  - name: Ingredient
+    uniqueID: 2283829357
+    locked: 0
+  - name: Tool
+    uniqueID: 2900641199
+    locked: 0
+  - name: UI
+    uniqueID: 3891370501
     locked: 0
