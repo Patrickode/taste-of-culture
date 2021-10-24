@@ -50,6 +50,9 @@ TagManager:
   - name: Background
     uniqueID: 1662690909
     locked: 0
+  - name: Chopped Ingredient
+    uniqueID: 4262295351
+    locked: 0
   - name: Ingredient
     uniqueID: 2283829357
     locked: 0
