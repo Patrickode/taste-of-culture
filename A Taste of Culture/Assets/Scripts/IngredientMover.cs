@@ -6,13 +6,21 @@ using UnityEngine;
 public class IngredientMover : MonoBehaviour
 {
     [SerializeField] float movementDistance = 2f;
+    [SerializeField] float finalXPosition;
     [SerializeField] GameObject choppedPrefab;
     [SerializeField] Vector2 choppedPosition;
     [SerializeField] GameObject spriteMask;
     [SerializeField] Vector2 spriteMaskPosition;
-    
-    Rigidbody2D rigidbodyComponent;
 
+    // Allow player to move ingredient.
+    private bool allowMovement = false;
+    public bool AllowMovement { set { allowMovement = value; } }
+
+    // Allow player to rotate ingredient.
+    private bool allowRotation = false;
+    public bool AllowRotation { set { allowRotation = value; } }
+
+    Rigidbody2D rigidbodyComponent;
     Vector2 originalPosition;
 
     // Start is called before the first frame update
@@ -28,22 +36,34 @@ public class IngredientMover : MonoBehaviour
     {
         Vector2 ingredientPosition = gameObject.transform.position;
 
-        // TODO: Restrict player control so that ingredient can only move once cut is made
         if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            ingredientPosition.x += movementDistance;
-            gameObject.transform.position = ingredientPosition;
+            // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
+            if(allowMovement)
+            {
+                ingredientPosition.x += movementDistance;
+                gameObject.transform.position = ingredientPosition;
+
+                allowMovement = false;
+            }
+            else
+            { 
+                // TODO: Prompt mentor to tell player to make a cut before moving ingredient.
+                Debug.Log("You need to make a cut before moving the ingredient!");
+            }
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Space)) 
+        { 
+            // TODO: Only allow rotation if demo gif has played and the player has sufficiently cut the ingredient.
+            if(allowRotation) { RotateIngredient(); }
         }
 
-        // TODO: Restrict player control & remove ability to move ingredient backwards
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            ingredientPosition.x -= movementDistance;
-            gameObject.transform.position = ingredientPosition;
+        if(!allowRotation && (gameObject.transform.position.x >= finalXPosition)) 
+        { 
+            // TODO: Prompt rotation demo gif
+            allowRotation = true; 
         }
-
-        // TODO: 
-        if(Input.GetKeyDown(KeyCode.Space)) { RotateIngredient(); }
     }
 
     // Rotate ingredient and reset it's position
@@ -51,7 +71,7 @@ public class IngredientMover : MonoBehaviour
     {
         gameObject.transform.position = originalPosition;
 
-        // Instantiate that will allow chunks to become visible
+        // Instantiate mask that will allow chunks to become visible
         GameObject mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
@@ -59,5 +79,7 @@ public class IngredientMover : MonoBehaviour
         choppedIngredient.transform.parent = gameObject.transform;
 
         gameObject.transform.Rotate(0, 0, 90);
+
+        allowRotation = false;
     }
 }

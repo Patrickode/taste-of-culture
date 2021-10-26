@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDistance: 0.5
+  finalXPosition: 3.72
   choppedPrefab: {fileID: 8994391589829546340, guid: ffc139fea8cbe7041a182ceccd136a72, type: 3}
   choppedPosition: {x: -2, y: 0.07}
   spriteMask: {fileID: 1490022700101722497, guid: 37977ce5956a4924791382d669c85cf7, type: 3}
@@ -620,7 +621,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143904058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.81, y: 0, z: 0}
+  m_LocalPosition: {x: -1.58, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1451573298}
@@ -640,6 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDistance: 0.5
+  finalXPosition: 2.92
   choppedPrefab: {fileID: 2884203642612794587, guid: b00864d44c6c81341bf89c968ba42334, type: 3}
   choppedPosition: {x: -1, y: 0.51}
   spriteMask: {fileID: 1490022700101722497, guid: 37977ce5956a4924791382d669c85cf7, type: 3}
@@ -829,7 +831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7686835833489450436, guid: 8e85b2a6d85788f4a972a62a3887ac54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 7686835833489450436, guid: 8e85b2a6d85788f4a972a62a3887ac54, type: 3}
       propertyPath: m_LocalPosition.y

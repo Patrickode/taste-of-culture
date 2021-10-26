@@ -39,7 +39,6 @@ public class ChoppingKnife : MonoBehaviour
 
     void Chop()
     {
-        Debug.Log("Chop");
         List<GameObject> objectsToCut = new List<GameObject>();
 
         // Get an array of all ingredients that were hit. 

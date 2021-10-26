@@ -17,6 +17,13 @@ public class IngredientCutter : MonoBehaviour
 
     CutGuideline guideline;
 
+    IngredientMover ingredientMover;
+
+    void Awake() 
+    {
+        ingredientMover = gameObject.transform.parent.GetComponent<IngredientMover>();
+    }
+
     void Start() 
     {
         colliderComponent = GetComponent<BoxCollider2D>();
@@ -67,6 +74,9 @@ public class IngredientCutter : MonoBehaviour
                 ResizeCollider(newPiece, new Vector2(rightHalfScale, colliderBounds.size.y), rightHalfPosition.x);
             }
         }
+
+        // If the ingredient can be moved, allow movement after cut is made.
+        if(ingredientMover != null){ ingredientMover.AllowMovement = true; }
 
     }
 
