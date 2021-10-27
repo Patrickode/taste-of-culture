@@ -30,11 +30,11 @@ public class ChoppingKnife : MonoBehaviour
             StartCoroutine(Chop());
         }
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            // this will turn the knife "up" on release"
-            animator.SetBool("Click", false);
-        }
+        // if(Input.GetMouseButtonUp(0))
+        // {
+        //     // this will turn the knife "up" on release"
+        //     animator.SetBool("Click", false);
+        // }
     }
 
     IEnumerator Chop()
@@ -55,5 +55,7 @@ public class ChoppingKnife : MonoBehaviour
         {
             objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeEdge, objectToCut);
         }  
+
+        animator.SetBool("Click", false);
     }
 }
