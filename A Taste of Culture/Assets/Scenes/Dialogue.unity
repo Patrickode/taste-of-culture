@@ -637,6 +637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1410508100918557110, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
+      propertyPath: m_Color.a
+      value: 0.88235295
+      objectReference: {fileID: 0}
     - target: {fileID: 1410508101733756595, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
       propertyPath: m_Text
       value: Cooking Grandma
