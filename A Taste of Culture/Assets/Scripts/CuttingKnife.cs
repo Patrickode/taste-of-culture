@@ -7,7 +7,6 @@ public class CuttingKnife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
     
-    public SpriteRenderer spriteRenderer;
     public Animator animator;
 
     Rigidbody2D rigidbodyComponent;

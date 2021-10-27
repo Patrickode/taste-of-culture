@@ -9,14 +9,14 @@ public class ChoppingKnife : MonoBehaviour
     
     public Animator animator;
 
-    Vector2 knifeCenter;
+    Vector2 knifeEdge;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
 
-        knifeCenter = gameObject.transform.GetChild(0).gameObject.transform.position;
+        knifeEdge = gameObject.transform.GetChild(0).gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class ChoppingKnife : MonoBehaviour
             // this will turn the knife "down" on click
             animator.SetBool("Click", true);
 
-            Chop();
+            StartCoroutine(Chop());
         }
 
         if(Input.GetMouseButtonUp(0))
@@ -37,12 +37,14 @@ public class ChoppingKnife : MonoBehaviour
         }
     }
 
-    void Chop()
+    IEnumerator Chop()
     {
+        yield return new WaitForSeconds(0.1f);
+
         List<GameObject> objectsToCut = new List<GameObject>();
 
         // Get an array of all ingredients that were hit. 
-        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeCenter, knifeCenter, layerMask);       
+        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeEdge, knifeEdge, layerMask);       
 
         foreach(RaycastHit2D hitObject in hitObjects)
         {
@@ -51,7 +53,7 @@ public class ChoppingKnife : MonoBehaviour
 
         foreach(GameObject objectToCut in objectsToCut)
         {
-            objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeCenter, objectToCut);
+            objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeEdge, objectToCut);
         }  
     }
 }

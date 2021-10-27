@@ -130,29 +130,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1282171304665513889, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 382d9d12a999c1f4f93db04edeb718d8, type: 3}
     - target: {fileID: 2269513200192152586, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: layerMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6075877295949646230, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.26
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075877295949646230, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840661670883645459, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
+      propertyPath: m_Name
+      value: Knife Tip Chop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840661670883645459, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
+      propertyPath: m_TagString
+      value: Knife
       objectReference: {fileID: 0}
     - target: {fileID: 8796227974067563569, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8796227974067563569, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7d165c654413f364a90032586eaf3a71, type: 2}
+    - target: {fileID: 8796227974067563569, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.76
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_LocalPosition.y
@@ -412,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1405330899
 Transform:
   m_ObjectHideFlags: 0
@@ -612,7 +632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2143904059
 Transform:
   m_ObjectHideFlags: 0
