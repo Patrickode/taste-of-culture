@@ -584,6 +584,9 @@ MonoBehaviour:
     - Ariel is such an awful font. So bland. A font for squares, if you ask me. Anyways,
       can you guess my favorite kind of music?
     - WOK and roll!!!
+    expressions:
+    - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
+    - {fileID: 21300000, guid: d1ed27ee52a4179438042caebcb8faeb, type: 3}
 --- !u!114 &1236916131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +693,7 @@ GameObject:
   - component: {fileID: 1248825825}
   m_Layer: 0
   m_Name: DialogueManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -709,6 +712,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1514759459}
   dialogueText: {fileID: 818474494}
+  animator: {fileID: 1636219993}
+  spriteRenderer: {fileID: 1002983743}
 --- !u!4 &1248825826
 Transform:
   m_ObjectHideFlags: 0
