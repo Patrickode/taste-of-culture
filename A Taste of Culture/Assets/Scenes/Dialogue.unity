@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: Cooking Grandma
+    name: Jaya
     sentences:
     - Ariel is such an awful font. So bland. A font for squares, if you ask me. Anyways,
       can you guess my favorite kind of music?
@@ -1000,6 +1000,18 @@ PrefabInstance:
     - target: {fileID: 1410508102270992738, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410508102270992748, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
+      propertyPath: m_Name
+      value: ContinueButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410508102270992748, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410508102270992748, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
+      propertyPath: m_TagString
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 1410508102719767212, guid: 9892301bff5aae34f826612c6ea1328a, type: 3}
       propertyPath: m_Text

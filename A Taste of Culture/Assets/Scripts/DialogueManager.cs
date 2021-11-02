@@ -14,18 +14,28 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences;
     private Queue<Sprite> expressions;
 
+    private GameObject continueButton;
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
         sentences = new Queue<string>();
         expressions = new Queue<Sprite>();
+        continueButton = GameObject.Find("ContinueButton");
+
+        nameText.enabled = false;
+        dialogueText.enabled = false;
+        continueButton.SetActive(false);
+        
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("StartDialogue");
         animator.SetBool("IsOpen", true);
+
+        nameText.enabled = true;
+        dialogueText.enabled = true;
+        continueButton.SetActive(true);
 
         nameText.text = dialogue.name;
 
@@ -46,7 +56,6 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        Debug.Log("DisplayNextSentence");
         if (sentences.Count == 0)
         {
             EndDialogue();
@@ -63,18 +72,19 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
-        Debug.Log("TypeSentence");
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.005f);
         }
     }
 
     void EndDialogue()
     {
-        Debug.Log("EndDialogue");
+        continueButton.SetActive(false);
+        nameText.enabled = false;
+        dialogueText.enabled = false;
         animator.SetBool("IsOpen", false);
     }
 }
