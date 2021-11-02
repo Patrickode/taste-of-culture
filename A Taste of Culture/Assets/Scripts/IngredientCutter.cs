@@ -21,7 +21,8 @@ public class IngredientCutter : MonoBehaviour
 
     void Awake() 
     {
-        ingredientMover = gameObject.transform.parent.GetComponent<IngredientMover>();
+        if(!isCuttable)
+            ingredientMover = gameObject.transform.parent.GetComponent<IngredientMover>();
     }
 
     void Start() 
