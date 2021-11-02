@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Knife : MonoBehaviour
+public class CuttingKnife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
     
-    public SpriteRenderer spriteRenderer;
     public Animator animator;
 
     Rigidbody2D rigidbodyComponent;
@@ -84,7 +83,9 @@ public class Knife : MonoBehaviour
 
         foreach(GameObject objectToCut in objectsToCut)
         {
-            objectToCut.GetComponent<IngredientCutter>().CutIngredient(startPosition, endPosition, objectToCut);
+            Vector2 cutCenter = startPosition + (endPosition - startPosition) * 0.5f;
+            objectToCut.GetComponent<IngredientCutter>().CutIngredient(cutCenter, objectToCut);
+            // objectToCut.GetComponent<IngredientCutter>().CutIngredient(startPosition, endPosition, objectToCut);
         }
     }
 
