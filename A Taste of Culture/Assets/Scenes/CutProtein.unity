@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knife: {fileID: 996389352}
-  dialogueManager: {fileID: 1303241744}
+  introDialogue: {fileID: 340182730}
 --- !u!4 &158146641
 Transform:
   m_ObjectHideFlags: 0
@@ -296,6 +296,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &340182730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 8514143425860913752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &472007981 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8514143426328432501, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
@@ -609,7 +614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1303241745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,6 +1328,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: It's time to cut the chicken for our Makhani!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: We have to be careful to cut the chicken neatly so that it will cook
+        evenly.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: I've laid out some guidelines for you to help, but it's OK if you aren't
+        perfect!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: To cut the chicken, CLICK and DRAG the mouse along the guidelines.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: Happy slicing!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
     - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

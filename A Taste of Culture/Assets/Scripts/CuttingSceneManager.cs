@@ -5,17 +5,17 @@ using UnityEngine;
 public class CuttingSceneManager : MonoBehaviour
 {
     public GameObject knife;
-    public GameObject dialogueManager;
+    public GameObject introDialogue;
 
     // Start is called before the first frame update
     void Start()
     {
-        dialogueManager.SetActive(true);
+        introDialogue.SetActive(true);
     }
 
     public void IntroEnded()
     {
-        dialogueManager.SetActive(false);
+        introDialogue.SetActive(false);
         knife.SetActive(true);
     }
 }
