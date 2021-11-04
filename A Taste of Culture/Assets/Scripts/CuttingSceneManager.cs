@@ -46,4 +46,9 @@ public class CuttingSceneManager : MonoBehaviour
         knife.SetActive(true);
         Cursor.visible = false;
     }
+
+    public void FinishedCutting()
+    {
+
+    }
 }
