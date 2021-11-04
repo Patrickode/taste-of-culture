@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This handles the initialization and ending of the dialogue, printing it to screen, etc.
 public class DialogueManager : MonoBehaviour
 {
     public Text nameText;
@@ -16,7 +17,7 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject continueButton;
 
-    // Start is called before the first frame update
+    // Initializations. Make sure all the text fields are not visible yet.
     void Start()
     {
         sentences = new Queue<string>();
@@ -31,6 +32,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        // Fade in dialogue box and make the text fields visible
         animator.SetBool("IsOpen", true);
 
         nameText.enabled = true;
@@ -39,9 +41,11 @@ public class DialogueManager : MonoBehaviour
 
         nameText.text = dialogue.name;
 
+        // Clear anything that may be lingering in the queues
         sentences.Clear();
         expressions.Clear();
 
+        // Add dialogue and corresponding expressions to the queues
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
@@ -62,6 +66,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        // Pop out sentence and expression and type them on screen
         string sentence = sentences.Dequeue();
         Sprite expression = expressions.Dequeue();
         spriteRenderer.sprite = expression;
@@ -72,6 +77,8 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
+        // For each letter, type it on screen and wait for a very short period of time
+        // This creates the scrolling effect
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
@@ -82,6 +89,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        // Hide everything and fade out the dialogue box
         continueButton.SetActive(false);
         nameText.enabled = false;
         dialogueText.enabled = false;
