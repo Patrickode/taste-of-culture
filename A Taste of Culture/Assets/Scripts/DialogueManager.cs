@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
     public SpriteRenderer spriteRenderer;
+    public CuttingSceneManager sceneManager;
 
     private Queue<string> sentences;
     private Queue<Sprite> expressions;
@@ -97,5 +98,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.enabled = false;
         spriteRenderer.enabled = false;
         animator.SetBool("IsOpen", false);
+
+        sceneManager.IntroEnded();
     }
 }
