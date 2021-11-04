@@ -9,34 +9,41 @@ public class GifManager : MonoBehaviour
     [SerializeField] GameObject ingredient1Instruction;
     [SerializeField] GameObject ingredient2Instruction;
     
-    GameObject demoVideo;
-    GameObject button;
+    RawImage demoVideo;
 
     VideoPlayer demoPlayer;
     Button closeButton;
+    Button startButton;
 
-    void Awake() 
+    void Start() 
     {
-        demoVideo = gameObject.transform.GetChild(0).gameObject;
-        closeButton = gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<Button>();
-        
-        if(closeButton != null) 
-        { 
+        demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
+        closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
+        startButton = GameObject.Find("StartButton").GetComponent<Button>();
+
+        if (closeButton != null)
+        {
             closeButton.gameObject.SetActive(false);
-            closeButton.onClick.AddListener(ButtonClicked); 
+            closeButton.onClick.AddListener(ButtonClicked);
         }
 
-        if(demoVideo != null) { demoPlayer = demoVideo.GetComponent<VideoPlayer>(); }
+        demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
+
+        demoPlayer.gameObject.SetActive(false);
+        demoVideo.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void StartVideo()
     {
         if(demoVideo != null) 
         { 
             Cursor.visible = true;
 
-            demoVideo.SetActive(true); 
+            startButton.gameObject.SetActive(false);
+
+            demoPlayer.gameObject.SetActive(true);
+            demoVideo.gameObject.SetActive(true); 
         }
     }
 
@@ -59,8 +66,9 @@ public class GifManager : MonoBehaviour
     {
         if(demoVideo == null) { return; }
 
-        demoVideo.SetActive(false);
+        demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
+        demoPlayer.gameObject.SetActive(false);
         
         // Cursor.visible = false;
 
