@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject continueButton;
 
-    // Initializations. Make sure all the text fields are not visible yet.
+    // Initializations. Make sure all the text fields and mentor are not visible yet.
     void Start()
     {
         sentences = new Queue<string>();
@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
         nameText.enabled = false;
         dialogueText.enabled = false;
         continueButton.SetActive(false);
+        spriteRenderer.enabled = false;
         
     }
 
@@ -38,6 +39,7 @@ public class DialogueManager : MonoBehaviour
         nameText.enabled = true;
         dialogueText.enabled = true;
         continueButton.SetActive(true);
+        spriteRenderer.enabled = true;
 
         nameText.text = dialogue.name;
 
@@ -93,6 +95,7 @@ public class DialogueManager : MonoBehaviour
         continueButton.SetActive(false);
         nameText.enabled = false;
         dialogueText.enabled = false;
+        spriteRenderer.enabled = false;
         animator.SetBool("IsOpen", false);
     }
 }
