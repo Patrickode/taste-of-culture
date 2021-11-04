@@ -11,10 +11,13 @@ public class ChoppingKnife : MonoBehaviour
 
     Vector2 knifeEdge;
 
+    private bool canChop = true;
+    public bool CanChop { set { canChop = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        // Cursor.visible = false;
 
         knifeEdge = gameObject.transform.GetChild(0).gameObject.transform.position;
     }
@@ -22,7 +25,7 @@ public class ChoppingKnife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && canChop)
         {
             // this will turn the knife "down" on click
             animator.SetBool("Click", true);

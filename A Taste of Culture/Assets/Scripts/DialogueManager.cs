@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+
         // Fade in dialogue box and make the text fields visible
         animator.SetBool("IsOpen", true);
 

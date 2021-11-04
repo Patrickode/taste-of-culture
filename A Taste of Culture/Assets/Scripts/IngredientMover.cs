@@ -6,6 +6,7 @@ using UnityEngine;
 public class IngredientMover : MonoBehaviour
 {
     [SerializeField] float movementDistance = 2f;
+    [SerializeField] float rotateXPosition;
     [SerializeField] float finalXPosition;
     [SerializeField] GameObject choppedPrefab;
     [SerializeField] Vector2 choppedPosition;
@@ -23,6 +24,9 @@ public class IngredientMover : MonoBehaviour
     Rigidbody2D rigidbodyComponent;
     Vector2 originalPosition;
 
+    bool hasBeenRotated = false;
+    bool taskComplete = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,7 @@ public class IngredientMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(taskComplete) { return; }
         Vector2 ingredientPosition = gameObject.transform.position;
 
         if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -55,15 +60,12 @@ public class IngredientMover : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.Space)) 
         { 
-            // TODO: Only allow rotation if demo gif has played and the player has sufficiently cut the ingredient.
             if(allowRotation) { RotateIngredient(); }
         }
 
-        if(!allowRotation && (gameObject.transform.position.x >= finalXPosition)) 
-        { 
-            // TODO: Prompt rotation demo gif
-            allowRotation = true; 
-        }
+        if(!allowRotation && (gameObject.transform.position.x >= rotateXPosition)) { allowRotation = true; }
+
+        if(hasBeenRotated && (gameObject.transform.position.x >= finalXPosition)) { BroadcastTaskCompletion(); }
     }
 
     // Rotate ingredient and reset it's position
@@ -81,5 +83,25 @@ public class IngredientMover : MonoBehaviour
         gameObject.transform.Rotate(0, 0, 90);
 
         allowRotation = false;
+        hasBeenRotated = true;
+    }
+
+    // Disable knife interaction and inform scene controller that the task has been completed.
+    void BroadcastTaskCompletion()
+    {
+        taskComplete = true;
+
+        SceneController sceneController = FindObjectOfType<SceneController>();
+        
+        if(sceneController != null) 
+        { 
+            if(sceneController.CurrentIngredient == SceneController.Ingredient.Tomato)
+            {
+                ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
+                if(knife != null) { knife.CanChop = false; }
+            }
+
+            sceneController.TaskComplete();
+        }
     }
 }

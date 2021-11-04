@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutGuideline : MonoBehaviour
 {
@@ -39,5 +40,17 @@ public class CutGuideline : MonoBehaviour
         {
             Instantiate(guidelinePrefab, guidelinePosition, Quaternion.identity);
         }
+        else { BroadcastTaskCompletion(); }
+    }
+
+    // Disable knife interaction and inform scene controller that the task has been completed.
+    void BroadcastTaskCompletion()
+    {
+        // If unable to draw new guideline then task is complete...
+        CuttingKnife knife = FindObjectOfType<CuttingKnife>();
+        if(knife != null) { knife.CanChop = false; }
+
+        SceneController sceneController = FindObjectOfType<SceneController>();
+        if(sceneController != null) { sceneController.TaskComplete(); }
     }
 }
