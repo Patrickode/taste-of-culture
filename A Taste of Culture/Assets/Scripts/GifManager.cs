@@ -62,7 +62,7 @@ public class GifManager : MonoBehaviour
         demoVideo.SetActive(false);
         closeButton.gameObject.SetActive(false);
         
-        Cursor.visible = false;
+        // Cursor.visible = false;
 
         // TODO: enable instruction gif
     }

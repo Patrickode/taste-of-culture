@@ -123,6 +123,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &158146639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 158146641}
+  - component: {fileID: 158146640}
+  - component: {fileID: 158146642}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &158146640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158146639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3598260d1f42f438e8aa2d66f3d304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knife: {fileID: 996389352}
+  dialogueManager: {fileID: 1303241745}
+  dialogueTrigger: {fileID: 158146642}
+  dialogue: {fileID: 340182730}
+  dialogueString: 
+--- !u!4 &158146641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158146639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158146642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158146639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Jaya
+    sentences:
+    - It's time to cut the chicken for our Makhani!
+    - We have to be careful to cut the chicken neatly so that it will cook evenly.
+    - I've laid out some guidelines for you to help, but it's OK if you aren't perfect!
+    - To cut the chicken, CLICK and DRAG the mouse along the guidelines.
+    - Happy slicing!
+    expressions:
+    - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
+    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
 --- !u!1001 &199231567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,7 +310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &293675774
 Transform:
   m_ObjectHideFlags: 0
@@ -249,8 +324,24 @@ Transform:
   m_Children:
   - {fileID: 4715771416863980064}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &340182730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 8514143425860913752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &472007981 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8514143426328432501, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 8514143425860913752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &688768499
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fdeaaf5cce8fe4fb8055d990ff41e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demoVideo: {fileID: 0}
   ingredient1Instruction: {fileID: 0}
   ingredient2Instruction: {fileID: 0}
 --- !u!4 &688768501
@@ -311,6 +401,7 @@ GameObject:
   - component: {fileID: 753783584}
   - component: {fileID: 753783583}
   - component: {fileID: 753783582}
+  - component: {fileID: 996389353}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -346,14 +437,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 753783580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &753783583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +484,53 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &873245414 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8514143426733039806, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 8514143425860913752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &996389352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9007410564129555532, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
+  m_PrefabInstance: {fileID: 6954037199261298140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &996389353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753783580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &996389354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996389352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Jaya
+    sentences:
+    - Whoops! Make sure to cut the chicken neatly!
+    - We don't want it to cook unevenly. Try again!
+    expressions:
+    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
 --- !u!1 &1167209003
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +612,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1218835611
 PrefabInstance:
@@ -562,6 +695,65 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+--- !u!114 &1270892369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8514143427098217737, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 8514143425860913752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1303241744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303241746}
+  - component: {fileID: 1303241745}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1303241745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303241744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06514e79870dcab40b0f5ec22fe70b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 1270892369}
+  dialogueText: {fileID: 472007981}
+  animator: {fileID: 873245414}
+  spriteRenderer: {fileID: 1602473988}
+  sceneManager: {fileID: 158146640}
+--- !u!4 &1303241746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303241744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405330898
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +785,7 @@ Transform:
   m_Children:
   - {fileID: 1490144910}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1405330900
 MonoBehaviour:
@@ -608,6 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDistance: 0.5
+  rotateXPosition: 0
   finalXPosition: 3.72
   choppedPrefab: {fileID: 8994391589829546340, guid: ffc139fea8cbe7041a182ceccd136a72, type: 3}
   choppedPosition: {x: -2, y: 0.07}
@@ -726,6 +919,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!212 &1602473988 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8514143427429472860, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 8514143425860913752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789885322
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1789885323
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -806,7 +1004,73 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1792188092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792188095}
+  - component: {fileID: 1792188094}
+  - component: {fileID: 1792188093}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1792188093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792188092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1792188094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792188092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1792188095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792188092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1795539048
 GameObject:
@@ -837,7 +1101,7 @@ Transform:
   m_Children:
   - {fileID: 2085035720}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2085035720 stripped
 Transform:
@@ -875,7 +1139,7 @@ Transform:
   m_Children:
   - {fileID: 1451573298}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2143904060
 MonoBehaviour:
@@ -890,6 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDistance: 0.5
+  rotateXPosition: 0
   finalXPosition: 2.92
   choppedPrefab: {fileID: 2884203642612794587, guid: b00864d44c6c81341bf89c968ba42334, type: 3}
   choppedPosition: {x: -1, y: 0.51}
@@ -1078,9 +1343,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
+      propertyPath: sceneManager
+      value: 
+      objectReference: {fileID: 158146640}
+    - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 996389354}
     - target: {fileID: 9007410564129555529, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1141,7 +1414,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7163157346266789802, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7163157346266789802, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1278,6 +1551,186 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e85b2a6d85788f4a972a62a3887ac54, type: 3}
+--- !u!1001 &8514143425860913752
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8514143426328432499, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Name
+      value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Name
+      value: InstructionDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354037, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1167209005}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581164, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: It's time to cut the chicken for our Makhani!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: We have to be careful to cut the chicken neatly so that it will cook
+        evenly.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: I've laid out some guidelines for you to help, but it's OK if you aren't
+        perfect!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: To cut the chicken, CLICK and DRAG the mouse along the guidelines.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: Happy slicing!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - target: {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: dialogue.expressions.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
+    - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1303241745}
+    - target: {fileID: 8514143426733039802, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Name
+      value: DialogueBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143427098217751, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Name
+      value: Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143427429472858, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_Name
+      value: MentorHead
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8514143426498581166, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
 --- !u!1001 &9051826267233669665
 PrefabInstance:
   m_ObjectHideFlags: 0
