@@ -39,41 +39,40 @@ public class IngredientCutter : MonoBehaviour
 
         // Find the center of the line.
         Vector2 center = cutCenter;
-        Debug.Log("Cut Center: " + center);
 
         // Get reference to collider component's bounds to help with sizing info.
         UnityEngine.Bounds colliderBounds = colliderComponent.bounds;
 
         // Draw sprite mask to make it look like a cut was made.
-        bool cutDrawnSuccessfully = RepresentCut(new Vector2(center.x, 0), colliderBounds.size.y + 1f);
+        bool cutDrawnSuccessfully = RepresentCut(new Vector2(center.x, colliderBounds.center.y), colliderBounds.size.y + 1f);
 
         if(isCuttable)
         {
-            // Find size & position of original (left) ingredient piece.
-            float leftHalfScale = Vector2.Distance(colliderBounds.min, center) - 1f;
-            Debug.Log("LeftHalfScale: " + leftHalfScale);
-            Vector2 leftHalfPosition = new Vector2(colliderBounds.min.x + (center.x - colliderBounds.min.x) * 0.5f, ingredientPosition.y);
-            Debug.Log("LeftHalfPosition: " + leftHalfPosition);
+            // // Find size & position of original (left) ingredient piece.
+            // float leftHalfScale = Vector2.Distance(colliderBounds.min, center) - 1f;
+            // Debug.Log("LeftHalfScale: " + leftHalfScale);
+            // Vector2 leftHalfPosition = new Vector2(colliderBounds.min.x + (center.x - colliderBounds.min.x) * 0.5f, ingredientPosition.y);
+            // Debug.Log("LeftHalfPosition: " + leftHalfPosition);
 
-            // Find size & position of new (right) ingredient piece.
-            float rightHalfScale = Vector2.Distance(colliderBounds.max, center) - 1f;
-            Debug.Log("RightHalfScale: " + rightHalfScale);
-            Vector2 rightHalfPosition = new Vector2(colliderBounds.max.x + (center.x - colliderBounds.max.x) * 0.5f, ingredientPosition.y);
-            Debug.Log("RightHalfPosition: " + rightHalfPosition);
+            // // Find size & position of new (right) ingredient piece.
+            // float rightHalfScale = Vector2.Distance(colliderBounds.max, center) - 1f;
+            // Debug.Log("RightHalfScale: " + rightHalfScale);
+            // Vector2 rightHalfPosition = new Vector2(colliderBounds.max.x + (center.x - colliderBounds.max.x) * 0.5f, ingredientPosition.y);
+            // Debug.Log("RightHalfPosition: " + rightHalfPosition);
         
-            if(cutDrawnSuccessfully)
-            {
-                // Resize the collider of original (left) piece.
-                ResizeCollider(this.gameObject, new Vector2(leftHalfScale, colliderBounds.size.y), leftHalfPosition.x);
+            // if(cutDrawnSuccessfully)
+            // {
+            //     // Resize the collider of original (left) piece.
+            //     ResizeCollider(this.gameObject, new Vector2(leftHalfScale, colliderBounds.size.y), leftHalfPosition.x);
 
-                // Create new (right) ingredient piece.
-                GameObject newPiece = Instantiate(ingredientPrefab, ingredientPosition, Quaternion.identity);
-                newPiece.transform.parent = gameObject.transform.parent; 
-                newPiece.GetComponent<CutGuideline>().drawInitialGuideline = false;
+            //     // Create new (right) ingredient piece.
+            //     GameObject newPiece = Instantiate(ingredientPrefab, ingredientPosition, Quaternion.identity);
+            //     newPiece.transform.parent = gameObject.transform.parent; 
+            //     newPiece.GetComponent<CutGuideline>().drawInitialGuideline = false;
 
-                // Resize the collider of new (right) piece.
-                ResizeCollider(newPiece, new Vector2(rightHalfScale, colliderBounds.size.y), rightHalfPosition.x);
-            }
+            //     // Resize the collider of new (right) piece.
+            //     ResizeCollider(newPiece, new Vector2(rightHalfScale, colliderBounds.size.y), rightHalfPosition.x);
+            // }
         }
 
         // If the ingredient can be moved, allow movement after cut is made.

@@ -18,10 +18,13 @@ public class CuttingKnife : MonoBehaviour
     Vector2 cutStartPosition;
     Vector2 cutEndPosition;
 
+    private bool canChop = true;
+    public bool CanChop { set { canChop = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        // Cursor.visible = false;
 
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         ingredientCutter = GetComponent<IngredientCutter>();
@@ -31,6 +34,9 @@ public class CuttingKnife : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
+        // Only allow for knife movement and cutting if knife can chop.
+        if(!canChop){ return; }
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         rigidbodyComponent.position =  mousePosition;               // Make knife move according to mouse location.
 

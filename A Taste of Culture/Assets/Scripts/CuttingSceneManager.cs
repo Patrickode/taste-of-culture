@@ -15,6 +15,7 @@ public class CuttingSceneManager : MonoBehaviour
     void Start()
     {
         dialogue.SetActive(true);
+        knife.SetActive(false);
         dialogueString = "intro";
         StartCoroutine(TriggerIntro());
     }
@@ -29,6 +30,7 @@ public class CuttingSceneManager : MonoBehaviour
     {
         dialogue.SetActive(false);
         knife.SetActive(true);
+        Cursor.visible = false;
     }
 
     public void CutOutsideMargins()
