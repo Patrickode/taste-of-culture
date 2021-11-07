@@ -100,11 +100,11 @@ public class DialogueManager : MonoBehaviour
         spriteRenderer.enabled = false;
         animator.SetBool("IsOpen", false);
 
-        if (sceneManager.dialogueString == "intro")
+        if (sceneManager != null && sceneManager.dialogueString == "intro")
         {
             sceneManager.IntroEnded();
         }
-        else if (sceneManager.dialogueString == "margins")
+        else if (sceneManager != null && sceneManager.dialogueString == "margins")
         {
             sceneManager.MarginsEnded();
         }

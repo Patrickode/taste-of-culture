@@ -403,6 +403,7 @@ MonoBehaviour:
   dialogueText: {fileID: 818474494}
   animator: {fileID: 1636219993}
   spriteRenderer: {fileID: 1002983743}
+  sceneManager: {fileID: 0}
 --- !u!4 &1248825826
 Transform:
   m_ObjectHideFlags: 0
