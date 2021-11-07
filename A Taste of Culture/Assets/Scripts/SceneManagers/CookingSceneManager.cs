@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CuttingSceneManager : MonoBehaviour
+public class CookingSceneManager : MonoBehaviour
 {
     public GameObject knife;
-    public DialogueManager dialogueManager;
-    public DialogueTrigger dialogueTrigger;
+    public CookingDialogueManager dialogueManager;
+    public CookingDialogueTrigger dialogueTrigger;
     public GameObject dialogue;
     public string dialogueString;
 
@@ -38,7 +38,7 @@ public class CuttingSceneManager : MonoBehaviour
         knife.SetActive(false);
         Cursor.visible = true;
         dialogue.SetActive(true);
-        dialogueString = "margins";
+        dialogueString = "error";
         dialogueTrigger.TriggerDialogue();
     }
 

@@ -8,8 +8,8 @@ public class CuttingKnife : MonoBehaviour
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
     
     public Animator animator;
-    public CuttingSceneManager sceneManager;
-    public DialogueTrigger dialogueTrigger;
+    public CookingSceneManager sceneManager;
+    public CookingDialogueTrigger dialogueTrigger;
 
     Rigidbody2D rigidbodyComponent;
     IngredientCutter ingredientCutter;

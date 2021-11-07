@@ -4,12 +4,12 @@ using UnityEngine;
 
 // This class just manages triggering the dialogue
 // Attach it to whatever should trigger the dialogue
-public class DialogueTrigger : MonoBehaviour
+public class CookingDialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<CookingDialogueManager>().StartDialogue(dialogue);
     }
 }
