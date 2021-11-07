@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] string nextScene;
+    public GameObject sceneManager;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
 
@@ -54,7 +55,10 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // TODO: Have mentor applaud player
-        Debug.Log("GREAT JOB!!");
+        if (sceneManager.GetComponent<DialogueSceneManager>() != null)
+        {
+            // potentially do something
+        }
 
         // If current ingredient is Onion, disable it and enable tomato
         if(currentIngredient == Ingredient.Onion)
@@ -80,7 +84,8 @@ public class SceneController : MonoBehaviour
 
         else
         {
-            yield return new WaitForSeconds(3f);
+            sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            yield return new WaitForSeconds(5f);
             
             // Load next scene
             if(nextScene != null) { SceneManager.LoadScene(nextScene); }

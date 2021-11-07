@@ -8,6 +8,7 @@ public class GifManager : MonoBehaviour
 {
     [SerializeField] GameObject ingredient1Instruction;
     [SerializeField] GameObject ingredient2Instruction;
+    public CookingSceneManager sceneManager;
     
     RawImage demoVideo;
 
@@ -29,8 +30,6 @@ public class GifManager : MonoBehaviour
 
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
-
-        StartVideo();
     }
 
     // Start is called before the first frame update
@@ -67,5 +66,6 @@ public class GifManager : MonoBehaviour
         demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
+        sceneManager.GifEnded();
     }
 }
