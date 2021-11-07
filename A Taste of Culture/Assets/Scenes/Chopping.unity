@@ -131,12 +131,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 624994995}
     m_Modifications:
     - target: {fileID: 2160260384142422304, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160260384142422304, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
       propertyPath: m_TargetCamera
       value: 
       objectReference: {fileID: 74386172}
+    - target: {fileID: 2160260384142422304, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 8119895f0f5cca54db175b0ed854072c, type: 2}
     - target: {fileID: 2160260384142422305, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
       propertyPath: m_Name
-      value: Chopping Video
+      value: VideoPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160260384142422305, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160260384142422305, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
+      propertyPath: m_TagString
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 2160260384142422307, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
       propertyPath: m_RootOrder
@@ -447,6 +463,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &186773601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 186773602}
+  - component: {fileID: 186773604}
+  - component: {fileID: 186773603}
+  m_Layer: 5
+  m_Name: VideoTexture
+  m_TagString: UI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &186773602
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186773601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 885081330}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1134, y: 626}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &186773603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186773601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 8119895f0f5cca54db175b0ed854072c, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &186773604
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186773601}
+  m_CullTransparentMesh: 1
 --- !u!1 &624994993
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +596,7 @@ GameObject:
   - component: {fileID: 885081331}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,6 +612,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 186773602}
   - {fileID: 2065404473}
   m_Father: {fileID: 624994995}
   m_RootOrder: 1
@@ -582,8 +671,8 @@ Canvas:
   m_GameObject: {fileID: 885081329}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 74386172}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -591,8 +680,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -403596795
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1271469025
 GameObject:
@@ -606,8 +695,8 @@ GameObject:
   - component: {fileID: 1271469028}
   - component: {fileID: 1271469027}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
+  m_Name: CloseButton
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -840,9 +929,9 @@ GameObject:
   - component: {fileID: 1764430183}
   - component: {fileID: 1764430182}
   - component: {fileID: 1764430181}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Tomato Instruction
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1164,8 +1253,8 @@ GameObject:
   - component: {fileID: 2065404475}
   - component: {fileID: 2065404474}
   m_Layer: 5
-  m_Name: Button
-  m_TagString: Untagged
+  m_Name: CloseButton
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1179,15 +1268,15 @@ RectTransform:
   m_GameObject: {fileID: 2065404472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271469026}
   m_Father: {fileID: 885081330}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 717, y: 459}
+  m_AnchoredPosition: {x: 452, y: 259}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2065404474

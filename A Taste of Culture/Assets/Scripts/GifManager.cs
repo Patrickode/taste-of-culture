@@ -13,13 +13,11 @@ public class GifManager : MonoBehaviour
 
     VideoPlayer demoPlayer;
     Button closeButton;
-    Button startButton;
 
     void Start() 
     {
         demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
         closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
-        startButton = GameObject.Find("StartButton").GetComponent<Button>();
 
         if (closeButton != null)
         {
@@ -31,6 +29,8 @@ public class GifManager : MonoBehaviour
 
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
+
+        StartVideo();
     }
 
     // Start is called before the first frame update
@@ -39,8 +39,6 @@ public class GifManager : MonoBehaviour
         if(demoVideo != null) 
         { 
             Cursor.visible = true;
-
-            startButton.gameObject.SetActive(false);
 
             demoPlayer.gameObject.SetActive(true);
             demoVideo.gameObject.SetActive(true); 
@@ -69,9 +67,5 @@ public class GifManager : MonoBehaviour
         demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
-        
-        // Cursor.visible = false;
-
-        // TODO: enable instruction gif
     }
 }
