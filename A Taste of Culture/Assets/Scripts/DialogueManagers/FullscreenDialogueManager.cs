@@ -100,13 +100,6 @@ public class FullscreenDialogueManager : MonoBehaviour
         spriteRenderer.enabled = false;
         animator.SetBool("IsOpen", false);
 
-        if (sceneManager != null && sceneManager.dialogueString == "intro")
-        {
-            sceneManager.IntroEnded();
-        }
-        else if (sceneManager != null && sceneManager.dialogueString == "error")
-        {
-            sceneManager.MarginsEnded();
-        }
+        sceneManager.DialogueEnded();
     }
 }
