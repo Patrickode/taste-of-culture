@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDistance: 0.5
-  rotateXPosition: 0
+  rotateXPosition: 2.92
   finalXPosition: 2.92
   choppedPrefab: {fileID: 2884203642612794587, guid: b00864d44c6c81341bf89c968ba42334, type: 3}
   choppedPosition: {x: -0.5, y: 0.51}
