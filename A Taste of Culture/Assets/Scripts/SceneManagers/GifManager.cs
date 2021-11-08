@@ -15,7 +15,7 @@ public class GifManager : MonoBehaviour
     VideoPlayer demoPlayer;
     Button closeButton;
 
-    void Awake() 
+    void Start() 
     {
         demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
         closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
@@ -40,6 +40,12 @@ public class GifManager : MonoBehaviour
         demoVideo.gameObject.SetActive(false);
     }
 
+    public void MessWithButton()
+    {
+        closeButton.gameObject.SetActive(false);
+        closeButton.onClick.AddListener(ButtonClicked);
+    }
+
     // Start is called before the first frame update
     public void StartVideo()
     {
@@ -53,7 +59,7 @@ public class GifManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(demoPlayer != null) 
         {

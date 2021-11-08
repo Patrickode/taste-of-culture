@@ -54,7 +54,6 @@ public class SceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        // TODO: Have mentor applaud player
         if (sceneManager.GetComponent<DialogueSceneManager>() != null)
         {
             // potentially do something
@@ -88,7 +87,10 @@ public class SceneController : MonoBehaviour
             yield return new WaitForSeconds(5f);
             
             // Load next scene
-            if(nextScene != null) { SceneManager.LoadScene(nextScene); }
+            if(nextScene != null) 
+            {
+                SceneManager.LoadScene(nextScene);
+            }
         }
     }
 }
