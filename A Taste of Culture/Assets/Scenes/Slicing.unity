@@ -1254,20 +1254,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: VideoPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7163157346266789812, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7163157346266789812, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7163157346266789812, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
-      propertyPath: m_TagString
-      value: UI
-      objectReference: {fileID: 0}
     - target: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
-      propertyPath: m_Looping
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 67455b083fb07f142a276855fc68a8a0, type: 3}
+    - target: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
+      propertyPath: m_DataSource
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
@@ -1275,17 +1267,13 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
       propertyPath: m_TargetCamera
       value: 
       objectReference: {fileID: 74386172}
     - target: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 8119895f0f5cca54db175b0ed854072c, type: 2}
+      propertyPath: m_TargetCameraAlpha
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
 --- !u!4 &1438460961 stripped

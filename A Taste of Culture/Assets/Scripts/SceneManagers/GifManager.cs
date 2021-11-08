@@ -27,6 +27,14 @@ public class GifManager : MonoBehaviour
         }
 
         demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
+        if (sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Chopping Knife"))
+        {
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping Video.mp4");
+        }
+        else
+        {
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Slicing Video.mp4");
+        }
 
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
