@@ -15,7 +15,7 @@ public class GifManager : MonoBehaviour
     VideoPlayer demoPlayer;
     Button closeButton;
 
-    void Start() 
+    void Awake() 
     {
         demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
         closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
@@ -53,16 +53,13 @@ public class GifManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(demoPlayer != null) 
         {
-            if((ulong)demoPlayer.frame == demoPlayer.frameCount - 1)
+            if(closeButton != null && closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true) 
             {
-                if(closeButton != null && closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true) 
-                {
-                    closeButton.gameObject.SetActive(true); 
-                }
+                closeButton.gameObject.SetActive(true);
             }
         }
     }

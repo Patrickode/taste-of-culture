@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/CutProtein.unity
+    path: 
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Slicing.unity
@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chopping.unity
     guid: 64b0c19ad6c39304e92f61e46dd93019
+  - enabled: 1
+    path: Assets/Scenes/IntroDialogue.unity
+    guid: 6d6ff56e499418740a7ce792ce4517d1
+  - enabled: 1
+    path: Assets/Scenes/ClosingDialogue.unity
+    guid: 61bde242c657792448f46c00a213d319
   m_configObjects: {}
