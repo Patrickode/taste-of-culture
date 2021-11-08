@@ -59,7 +59,7 @@ public class GifManager : MonoBehaviour
         {
             if((ulong)demoPlayer.frame == demoPlayer.frameCount - 1)
             {
-                if(closeButton != null && closeButton.gameObject.activeInHierarchy == false) 
+                if(closeButton != null && closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true) 
                 {
                     closeButton.gameObject.SetActive(true); 
                 }
