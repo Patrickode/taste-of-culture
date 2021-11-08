@@ -74,7 +74,6 @@ public class CuttingKnife : MonoBehaviour
                 lineRenderer.enabled = false;
                 CutObjects(cutStartPosition, cutEndPosition);
                 sliceAudio.Play();
-
             }
 
             // this will turn the knife "up" on release"
