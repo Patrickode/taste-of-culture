@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // This handles the initialization and ending of the dialogue, printing it to screen, etc.
-public class DialogueManager : MonoBehaviour
+public class CookingDialogueManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
 
     public Animator animator;
     public SpriteRenderer spriteRenderer;
-    public CuttingSceneManager sceneManager;
+    public CookingSceneManager sceneManager;
 
     private Queue<string> sentences;
     private Queue<Sprite> expressions;
@@ -100,11 +100,11 @@ public class DialogueManager : MonoBehaviour
         spriteRenderer.enabled = false;
         animator.SetBool("IsOpen", false);
 
-        if (sceneManager.dialogueString == "intro")
+        if (sceneManager != null && sceneManager.dialogueString == "intro")
         {
             sceneManager.IntroEnded();
         }
-        else if (sceneManager.dialogueString == "margins")
+        else if (sceneManager != null && sceneManager.dialogueString == "error")
         {
             sceneManager.MarginsEnded();
         }

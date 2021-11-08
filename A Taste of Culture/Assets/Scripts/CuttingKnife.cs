@@ -8,8 +8,8 @@ public class CuttingKnife : MonoBehaviour
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
     
     public Animator animator;
-    public CuttingSceneManager sceneManager;
-    public DialogueTrigger dialogueTrigger;
+    public CookingSceneManager sceneManager;
+    public CookingDialogueTrigger dialogueTrigger;
 
     Rigidbody2D rigidbodyComponent;
     IngredientCutter ingredientCutter;
@@ -108,7 +108,6 @@ public class CuttingKnife : MonoBehaviour
 
         if((cutPostion.x > guidelinePosition.x + margin) || (cutPostion.x < guidelinePosition.x - margin)) 
         {
-            //Debug.Log("ERROR: Attempting to cut outside the margin of error");      // TODO: Replace with comment from mentor
             sceneManager.dialogueTrigger = dialogueTrigger;
             sceneManager.CutOutsideMargins();
 

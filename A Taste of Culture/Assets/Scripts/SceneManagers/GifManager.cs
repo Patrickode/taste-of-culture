@@ -8,18 +8,17 @@ public class GifManager : MonoBehaviour
 {
     [SerializeField] GameObject ingredient1Instruction;
     [SerializeField] GameObject ingredient2Instruction;
+    public CookingSceneManager sceneManager;
     
     RawImage demoVideo;
 
     VideoPlayer demoPlayer;
     Button closeButton;
-    Button startButton;
 
     void Start() 
     {
         demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
         closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
-        startButton = GameObject.Find("StartButton").GetComponent<Button>();
 
         if (closeButton != null)
         {
@@ -28,6 +27,14 @@ public class GifManager : MonoBehaviour
         }
 
         demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
+        if (sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Chopping Knife"))
+        {
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping Video.mp4");
+        }
+        else
+        {
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Slicing Video.mp4");
+        }
 
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
@@ -39,8 +46,6 @@ public class GifManager : MonoBehaviour
         if(demoVideo != null) 
         { 
             Cursor.visible = true;
-
-            startButton.gameObject.SetActive(false);
 
             demoPlayer.gameObject.SetActive(true);
             demoVideo.gameObject.SetActive(true); 
@@ -54,7 +59,7 @@ public class GifManager : MonoBehaviour
         {
             if((ulong)demoPlayer.frame == demoPlayer.frameCount - 1)
             {
-                if(closeButton != null && closeButton.gameObject.activeInHierarchy == false) 
+                if(closeButton != null && closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true) 
                 {
                     closeButton.gameObject.SetActive(true); 
                 }
@@ -69,9 +74,6 @@ public class GifManager : MonoBehaviour
         demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
-        
-        // Cursor.visible = false;
-
-        // TODO: enable instruction gif
+        sceneManager.GifEnded();
     }
 }
