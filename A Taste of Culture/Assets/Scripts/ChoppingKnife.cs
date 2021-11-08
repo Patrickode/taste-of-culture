@@ -11,6 +11,8 @@ public class ChoppingKnife : MonoBehaviour
 
     Vector2 knifeEdge;
 
+    private AudioSource choppingAudio;
+
     private bool canChop = true;
     public bool CanChop { set { canChop = value; } }
 
@@ -20,6 +22,7 @@ public class ChoppingKnife : MonoBehaviour
         // Cursor.visible = false;
 
         knifeEdge = gameObject.transform.GetChild(0).gameObject.transform.position;
+        choppingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class ChoppingKnife : MonoBehaviour
             animator.SetBool("Click", true);
 
             StartCoroutine(Chop());
+            choppingAudio.Play();
         }
 
         // if(Input.GetMouseButtonUp(0))
