@@ -19,6 +19,9 @@ public class IngredientCutter : MonoBehaviour
 
     IngredientMover ingredientMover;
 
+    Quaternion cutRotation = Quaternion.identity;
+    public Quaternion CutRotation { set { cutRotation = value; } } 
+
     void Awake() 
     {
         if(!isCuttable)
@@ -46,35 +49,6 @@ public class IngredientCutter : MonoBehaviour
         // Draw sprite mask to make it look like a cut was made.
         bool cutDrawnSuccessfully = RepresentCut(new Vector2(center.x, colliderBounds.center.y), colliderBounds.size.y + 1f);
 
-        if(isCuttable)
-        {
-            // // Find size & position of original (left) ingredient piece.
-            // float leftHalfScale = Vector2.Distance(colliderBounds.min, center) - 1f;
-            // Debug.Log("LeftHalfScale: " + leftHalfScale);
-            // Vector2 leftHalfPosition = new Vector2(colliderBounds.min.x + (center.x - colliderBounds.min.x) * 0.5f, ingredientPosition.y);
-            // Debug.Log("LeftHalfPosition: " + leftHalfPosition);
-
-            // // Find size & position of new (right) ingredient piece.
-            // float rightHalfScale = Vector2.Distance(colliderBounds.max, center) - 1f;
-            // Debug.Log("RightHalfScale: " + rightHalfScale);
-            // Vector2 rightHalfPosition = new Vector2(colliderBounds.max.x + (center.x - colliderBounds.max.x) * 0.5f, ingredientPosition.y);
-            // Debug.Log("RightHalfPosition: " + rightHalfPosition);
-        
-            // if(cutDrawnSuccessfully)
-            // {
-            //     // Resize the collider of original (left) piece.
-            //     ResizeCollider(this.gameObject, new Vector2(leftHalfScale, colliderBounds.size.y), leftHalfPosition.x);
-
-            //     // Create new (right) ingredient piece.
-            //     GameObject newPiece = Instantiate(ingredientPrefab, ingredientPosition, Quaternion.identity);
-            //     newPiece.transform.parent = gameObject.transform.parent; 
-            //     newPiece.GetComponent<CutGuideline>().drawInitialGuideline = false;
-
-            //     // Resize the collider of new (right) piece.
-            //     ResizeCollider(newPiece, new Vector2(rightHalfScale, colliderBounds.size.y), rightHalfPosition.x);
-            // }
-        }
-
         // If the ingredient can be moved, allow movement after cut is made.
         if(ingredientMover != null){ ingredientMover.AllowMovement = true; }
 
@@ -99,7 +73,7 @@ public class IngredientCutter : MonoBehaviour
         GameObject oldGuideline = GameObject.FindGameObjectWithTag("Guideline");
         if(oldGuideline != null) { Destroy(oldGuideline); }
 
-        GameObject mask = Instantiate(spriteMask, position, Quaternion.identity);
+        GameObject mask = Instantiate(spriteMask, position, cutRotation);
         mask.transform.localScale = new Vector2(cutWidth, verticalScale);
         mask.transform.parent = gameObject.transform.parent;
         mask.SetActive(true);

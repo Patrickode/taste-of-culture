@@ -11,6 +11,8 @@ public class CuttingKnife : MonoBehaviour
     public CookingSceneManager sceneManager;
     public CookingDialogueTrigger dialogueTrigger;
 
+    private AudioSource sliceAudio;
+
     Rigidbody2D rigidbodyComponent;
     IngredientCutter ingredientCutter;
     LineRenderer lineRenderer;
@@ -29,6 +31,8 @@ public class CuttingKnife : MonoBehaviour
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         ingredientCutter = GetComponent<IngredientCutter>();
         lineRenderer = GetComponent<LineRenderer>();
+
+        sliceAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,7 +73,8 @@ public class CuttingKnife : MonoBehaviour
             {
                 lineRenderer.enabled = false;
 
-                CutObjects(cutStartPosition, cutEndPosition);
+                Vector2 cutdirection = cutEndPosition - cutStartPosition;
+                CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
             }
 
             // this will turn the knife "up" on release"
@@ -77,7 +82,7 @@ public class CuttingKnife : MonoBehaviour
         }
     } 
 
-    void CutObjects(Vector2 startPosition, Vector2 endPosition)
+    void CutObjects(Vector2 startPosition, Vector2 endPosition, Quaternion cutRotation)
     {
         List<GameObject> objectsToCut = new List<GameObject>();
 
@@ -92,8 +97,8 @@ public class CuttingKnife : MonoBehaviour
         foreach(GameObject objectToCut in objectsToCut)
         {
             Vector2 cutCenter = startPosition + (endPosition - startPosition) * 0.5f;
+            objectToCut.GetComponent<IngredientCutter>().CutRotation = cutRotation;
             objectToCut.GetComponent<IngredientCutter>().CutIngredient(cutCenter, objectToCut);
-            // objectToCut.GetComponent<IngredientCutter>().CutIngredient(startPosition, endPosition, objectToCut);
         }
     }
 
