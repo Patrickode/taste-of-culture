@@ -19,6 +19,7 @@ public class CookingSceneManager : MonoBehaviour
         knife.SetActive(false);
         dialogueString = "intro";
         StartCoroutine(TriggerIntro());
+        Cursor.visible = true;
     }
 
     IEnumerator TriggerIntro()
