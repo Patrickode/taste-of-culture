@@ -11,6 +11,8 @@ public class CuttingKnife : MonoBehaviour
     public CookingSceneManager sceneManager;
     public CookingDialogueTrigger dialogueTrigger;
 
+    private AudioSource sliceAudio;
+
     Rigidbody2D rigidbodyComponent;
     IngredientCutter ingredientCutter;
     LineRenderer lineRenderer;
@@ -29,6 +31,8 @@ public class CuttingKnife : MonoBehaviour
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         ingredientCutter = GetComponent<IngredientCutter>();
         lineRenderer = GetComponent<LineRenderer>();
+
+        sliceAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -70,9 +74,7 @@ public class CuttingKnife : MonoBehaviour
                 lineRenderer.enabled = false;
 
                 Vector2 cutdirection = cutEndPosition - cutStartPosition;
-
-                CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));       
-                // Don't have a solid reason for multiplying by 10 besides making the rotation bigger ¯\_(ツ)_/¯     
+                CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
             }
 
             // this will turn the knife "up" on release"
