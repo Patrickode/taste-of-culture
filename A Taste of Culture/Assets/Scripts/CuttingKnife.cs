@@ -75,6 +75,8 @@ public class CuttingKnife : MonoBehaviour
 
                 Vector2 cutdirection = cutEndPosition - cutStartPosition;
                 CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
+
+                sliceAudio.Play();
             }
 
             // this will turn the knife "up" on release"
