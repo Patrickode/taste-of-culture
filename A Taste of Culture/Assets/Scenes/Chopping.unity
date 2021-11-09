@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bfe527eb47a844d90017f2a74830ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: Slicing
+  nextScene: ClosingDialogue
   sceneManager: {fileID: 1749865172}
   currentIngredient: 2
 --- !u!4 &1919847979

@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public enum DialogueTime
+{
+    Opening,
+    Closing
+}
 
 public class DialogueSceneManager : MonoBehaviour
 {
+    public DialogueTime time;
     public FullscreenDialogueManager dialogueManager;
     public FullscreenDialogueTrigger dialogueTrigger;
     public GameObject dialogue;
@@ -26,5 +34,15 @@ public class DialogueSceneManager : MonoBehaviour
     {
         dialogue.SetActive(false);
         Cursor.visible = false;
+        switch (time)
+        {
+            case DialogueTime.Closing:
+                SceneManager.LoadScene("IntroDialogue");
+                break;
+
+            case DialogueTime.Opening:
+                SceneManager.LoadScene("Slicing");
+                break;
+        }
     }
 }

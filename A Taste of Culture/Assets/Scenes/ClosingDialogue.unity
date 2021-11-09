@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22c3029aee3323409505ac8d480c556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1
   dialogueManager: {fileID: 886467088}
   dialogueTrigger: {fileID: 374514689}
   dialogue: {fileID: 215096702}
