@@ -72,8 +72,9 @@ public class CuttingKnife : MonoBehaviour
             if(CutWithinMargin(cutEndPosition) && CutWithinMargin(cutStartPosition))
             {
                 lineRenderer.enabled = false;
-                CutObjects(cutStartPosition, cutEndPosition);
-                sliceAudio.Play();
+
+                Vector2 cutdirection = cutEndPosition - cutStartPosition;
+                CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
             }
 
             // this will turn the knife "up" on release"
@@ -81,7 +82,7 @@ public class CuttingKnife : MonoBehaviour
         }
     } 
 
-    void CutObjects(Vector2 startPosition, Vector2 endPosition)
+    void CutObjects(Vector2 startPosition, Vector2 endPosition, Quaternion cutRotation)
     {
         List<GameObject> objectsToCut = new List<GameObject>();
 
@@ -96,8 +97,8 @@ public class CuttingKnife : MonoBehaviour
         foreach(GameObject objectToCut in objectsToCut)
         {
             Vector2 cutCenter = startPosition + (endPosition - startPosition) * 0.5f;
+            objectToCut.GetComponent<IngredientCutter>().CutRotation = cutRotation;
             objectToCut.GetComponent<IngredientCutter>().CutIngredient(cutCenter, objectToCut);
-            // objectToCut.GetComponent<IngredientCutter>().CutIngredient(startPosition, endPosition, objectToCut);
         }
     }
 
