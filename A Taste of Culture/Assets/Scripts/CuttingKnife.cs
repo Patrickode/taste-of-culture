@@ -11,6 +11,8 @@ public class CuttingKnife : MonoBehaviour
     public CookingSceneManager sceneManager;
     public CookingDialogueTrigger dialogueTrigger;
 
+    private AudioSource sliceAudio;
+
     Rigidbody2D rigidbodyComponent;
     IngredientCutter ingredientCutter;
     LineRenderer lineRenderer;
@@ -29,6 +31,8 @@ public class CuttingKnife : MonoBehaviour
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         ingredientCutter = GetComponent<IngredientCutter>();
         lineRenderer = GetComponent<LineRenderer>();
+
+        sliceAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -68,8 +72,8 @@ public class CuttingKnife : MonoBehaviour
             if(CutWithinMargin(cutEndPosition) && CutWithinMargin(cutStartPosition))
             {
                 lineRenderer.enabled = false;
-
                 CutObjects(cutStartPosition, cutEndPosition);
+                sliceAudio.Play();
             }
 
             // this will turn the knife "up" on release"
