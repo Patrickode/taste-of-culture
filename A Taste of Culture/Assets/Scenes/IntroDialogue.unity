@@ -499,13 +499,13 @@ MonoBehaviour:
     sentences:
     - Hello! I'm Chef Jaya (JAY-uh). I own and operate a restaurant downtown. I'm
       glad you could join me today.
-    - Today we'll be making Makhani (mah-KAH-nee), a curry sauce originally from
+    - Today we'll be making Makhani (MAH-kuh-nee), a curry sauce originally from
       my hometown, Delhi (DEH-lee), in northern India.
     - For the protein, we will be using chicken today.
     - Curry is really just sauce with spices, so what sets Makhani apart from other
       curries is its heavy use of butter and spices that warm the body.
-    - "I've made enough Makhani to feed a few cities at this point, I think. It's
-      a very popular item at my restaurant \u2014 I'm sure it will serve you well."
+    - I've made enough Makhani to feed a few cities at this point. It's a very popular
+      item at my restaurant. I'm sure it will serve you well.
     - Well, let's not delay for too long. We can talk more while we cook.
     expressions:
     - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
