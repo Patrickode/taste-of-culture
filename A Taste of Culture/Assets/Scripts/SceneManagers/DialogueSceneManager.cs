@@ -20,6 +20,7 @@ public class DialogueSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
         dialogue.SetActive(true);
         StartCoroutine(TriggerDialogue());
     }
