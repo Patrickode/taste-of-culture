@@ -568,9 +568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fdeaaf5cce8fe4fb8055d990ff41e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredient1Instruction: {fileID: 0}
-  ingredient2Instruction: {fileID: 0}
   sceneManager: {fileID: 1749865173}
+  demoVideo: {fileID: 186773603}
+  closeButton: {fileID: 2065404474}
+  demoPlayer: {fileID: 1539021626}
 --- !u!4 &624994995
 Transform:
   m_ObjectHideFlags: 0
@@ -647,29 +648,13 @@ PrefabInstance:
       value: InstructionDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354036, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354036, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_MatchWidthOrHeight
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354036, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354036, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354037, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 74386172}
-    - target: {fileID: 8514143426444354037, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -758,14 +743,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 704421187}
-    - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayNextSentence
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CookingDialogueManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
 --- !u!1 &777324150 stripped
@@ -1140,6 +1117,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7686835833489450436, guid: 8e85b2a6d85788f4a972a62a3887ac54, type: 3}
   m_PrefabInstance: {fileID: 2096681961}
+  m_PrefabAsset: {fileID: 0}
+--- !u!328 &1539021626 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 2160260384142422304, guid: d3b88a7b5077c0144a0c26f58c0289b7, type: 3}
+  m_PrefabInstance: {fileID: 41785547}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1749865172
 GameObject:

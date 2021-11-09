@@ -873,9 +873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fdeaaf5cce8fe4fb8055d990ff41e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredient1Instruction: {fileID: 0}
-  ingredient2Instruction: {fileID: 0}
   sceneManager: {fileID: 1920461719}
+  demoVideo: {fileID: 908536769}
+  closeButton: {fileID: 849884065}
+  demoPlayer: {fileID: 1438460962}
 --- !u!4 &1054445501
 Transform:
   m_ObjectHideFlags: 0
@@ -1279,6 +1280,11 @@ PrefabInstance:
 --- !u!4 &1438460961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7163157346266789802, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
+  m_PrefabInstance: {fileID: 1438460960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!328 &1438460962 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 7163157346266789813, guid: 96ea7d54415157640aa3b2c9f0dd0450, type: 3}
   m_PrefabInstance: {fileID: 1438460960}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1533509938

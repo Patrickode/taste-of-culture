@@ -6,19 +6,17 @@ using UnityEngine.UI;
 
 public class GifManager : MonoBehaviour
 {
-    [SerializeField] GameObject ingredient1Instruction;
-    [SerializeField] GameObject ingredient2Instruction;
+    //[SerializeField] GameObject ingredient1Instruction;
+    //[SerializeField] GameObject ingredient2Instruction;
     public CookingSceneManager sceneManager;
-    
-    RawImage demoVideo;
-
-    VideoPlayer demoPlayer;
-    Button closeButton;
+    public RawImage demoVideo;
+    public Button closeButton;
+    public VideoPlayer demoPlayer;
 
     void Start() 
     {
-        demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
-        closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
+        //demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
+        //closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
 
         if (closeButton != null)
         {
@@ -26,10 +24,10 @@ public class GifManager : MonoBehaviour
             closeButton.onClick.AddListener(ButtonClicked);
         }
 
-        demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
+        //demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
         if (sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Chopping Knife"))
         {
-            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping Video.mp4");
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping.mp4");
         }
         else
         {
@@ -38,12 +36,8 @@ public class GifManager : MonoBehaviour
 
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
-    }
 
-    public void MessWithButton()
-    {
-        closeButton.gameObject.SetActive(false);
-        closeButton.onClick.AddListener(ButtonClicked);
+        demoPlayer.loopPointReached += LoopedOnce;
     }
 
     // Start is called before the first frame update
@@ -59,16 +53,13 @@ public class GifManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(demoPlayer != null) 
-        {
-            if(closeButton != null && closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true) 
-            {
-                closeButton.gameObject.SetActive(true);
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true)
+    //    {
+    //        closeButton.gameObject.SetActive(true);
+    //    }
+    //}
 
     void ButtonClicked()
     {
@@ -78,5 +69,12 @@ public class GifManager : MonoBehaviour
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
         sceneManager.GifEnded();
+    }
+
+    void LoopedOnce(VideoPlayer demoPlayer)
+    {
+        closeButton.gameObject.SetActive(true);
+        //demoPlayer.gameObject.SetActive(false);
+        //demoVideo.gameObject.SetActive(false);
     }
 }

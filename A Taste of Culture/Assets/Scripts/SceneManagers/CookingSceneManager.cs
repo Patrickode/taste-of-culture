@@ -25,7 +25,6 @@ public class CookingSceneManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         dialogueTrigger.TriggerDialogue();
-        gifManager.MessWithButton();
     }
 
     public void IntroEnded()
