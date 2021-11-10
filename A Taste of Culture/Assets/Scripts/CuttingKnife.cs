@@ -74,6 +74,10 @@ public class CuttingKnife : MonoBehaviour
                 lineRenderer.enabled = false;
 
                 Vector2 cutdirection = cutEndPosition - cutStartPosition;
+
+                // if cut is started from the bottom, flip the x difference
+                if(cutStartPosition.y < cutEndPosition.y) { cutdirection.x *= -1; }
+                
                 CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
             }
 
