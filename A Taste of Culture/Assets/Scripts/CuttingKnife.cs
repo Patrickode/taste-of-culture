@@ -6,6 +6,8 @@ using UnityEngine;
 public class CuttingKnife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
+    [SerializeField] IngredientCollider collider1;
+    [SerializeField] IngredientCollider collider2;
     
     public Animator animator;
     public CookingSceneManager sceneManager;
@@ -78,13 +80,39 @@ public class CuttingKnife : MonoBehaviour
                 // if cut is started from the bottom, flip the x difference
                 if(cutStartPosition.y < cutEndPosition.y) { cutdirection.x *= -1; }
                 
-                CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
+                if(collider1.HasCollided && collider2.HasCollided)
+                    CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
+
+                collider1.ResetCollider();
+                collider2.ResetCollider();
             }
 
             // this will turn the knife "up" on release"
             animator.SetBool("Click", false);
         }
     } 
+
+    // void HandleEndOfSlice()
+    // {
+    //     // Check if player has made cut within margin of error
+    //     if(CutWithinMargin(cutEndPosition) && CutWithinMargin(cutStartPosition))
+    //     {
+    //         lineRenderer.enabled = false;
+
+    //         Vector2 cutdirection = cutEndPosition - cutStartPosition;
+
+    //         // if cut is started from the bottom, flip the x difference
+    //         if(cutStartPosition.y < cutEndPosition.y) { cutdirection.x *= -1; }
+            
+    //         if(collider1.HasCollided && collider2.HasCollided)
+    //             CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
+    //         else 
+    //         {
+    //             collider1.ResetCollider();
+    //             collider2.ResetCollider();
+    //         }
+    //     }
+    // }
 
     void CutObjects(Vector2 startPosition, Vector2 endPosition, Quaternion cutRotation)
     {
