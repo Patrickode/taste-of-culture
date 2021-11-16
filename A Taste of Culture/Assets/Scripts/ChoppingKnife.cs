@@ -19,8 +19,6 @@ public class ChoppingKnife : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Cursor.visible = false;
-
         knifeEdge = gameObject.transform.GetChild(0).gameObject.transform.position;
         choppingAudio = GetComponent<AudioSource>();
     }
@@ -36,12 +34,6 @@ public class ChoppingKnife : MonoBehaviour
             StartCoroutine(Chop());
             choppingAudio.Play();
         }
-
-        // if(Input.GetMouseButtonUp(0))
-        // {
-        //     // this will turn the knife "up" on release"
-        //     animator.SetBool("Click", false);
-        // }
     }
 
     IEnumerator Chop()
