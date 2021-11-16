@@ -6,10 +6,10 @@ TagManager:
   tags:
   - Knife
   - Ingredient
-  - Tofu
   - Guideline
   - Background
   - UI
+  - Hand
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -505060867381241877}
   m_Layer: 6
   m_Name: Tofu
-  m_TagString: Tofu
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
