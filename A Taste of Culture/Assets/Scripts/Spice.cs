@@ -8,17 +8,9 @@ public class Spice : MonoBehaviour
     
     [SerializeField] TypeOfSpice spiceCategory;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public CookingDialogueTrigger dialogueTrigger;
+    public GameObject dialogue;
+    // public string dialogueString;
 
     void OnTriggerEnter2D(Collider2D other) 
     {
@@ -26,5 +18,14 @@ public class Spice : MonoBehaviour
 
         // TODO: Trigger Tooltip
         Debug.Log("Tooltip: " + spiceCategory);
+
+        dialogueTrigger.TriggerDialogue();
+    }
+
+    void OnTriggerExit2D(Collider2D other) 
+    {
+        if(other.gameObject.tag != "Hand") { return; }
+
+        dialogueTrigger.DisableDialogue();
     }
 }

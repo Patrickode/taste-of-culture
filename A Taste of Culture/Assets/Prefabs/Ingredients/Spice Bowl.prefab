@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3956968207194152631}
   - component: {fileID: 6603583218373795538}
   - component: {fileID: 4166426903561602324}
+  - component: {fileID: 6807639864633222944}
   m_Layer: 6
   m_Name: Spice Bowl
   m_TagString: Ingredient
@@ -113,3 +114,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiceCategory: 0
+  dialogueTrigger: {fileID: 0}
+  dialogue: {fileID: 0}
+  dialogueString: 
+--- !u!114 &6807639864633222944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956968207194152630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Jaya
+    sentences:
+    - 
+    expressions:
+    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}

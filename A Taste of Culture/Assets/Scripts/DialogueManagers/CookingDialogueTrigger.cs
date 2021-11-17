@@ -12,4 +12,9 @@ public class CookingDialogueTrigger : MonoBehaviour
     {
         FindObjectOfType<CookingDialogueManager>().StartDialogue(dialogue);
     }
+
+    public void DisableDialogue()
+    {
+        FindObjectOfType<CookingDialogueManager>().EndDialogue();
+    }
 }

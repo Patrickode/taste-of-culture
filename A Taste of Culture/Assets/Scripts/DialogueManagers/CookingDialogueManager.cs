@@ -91,7 +91,7 @@ public class CookingDialogueManager : MonoBehaviour
         }
     }
 
-    void EndDialogue()
+    public void EndDialogue()
     {
         // Hide everything and fade out the dialogue box
         continueButton.SetActive(false);

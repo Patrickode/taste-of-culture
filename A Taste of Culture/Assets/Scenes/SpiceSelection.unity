@@ -179,11 +179,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 9461485}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Here are some facts about salt...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+--- !u!114 &9461485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+  m_PrefabInstance: {fileID: 9461484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &74386170
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +290,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &422567583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+  m_PrefabInstance: {fileID: 3956968208655813808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &455783527
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,11 +436,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 806216059}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Here are some facts about peppercorn...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+--- !u!114 &806216059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+  m_PrefabInstance: {fileID: 806216058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &849884063
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354037, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_Camera
@@ -703,10 +760,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8514143426531067260, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1321017251}
+    - target: {fileID: 8514143427098217751, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514143427429472858, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
 --- !u!212 &1031464207 stripped
@@ -877,7 +946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1321017251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,11 +1222,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 1503757050}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Here are some facts about tumeric...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+--- !u!114 &1503757050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+  m_PrefabInstance: {fileID: 1503757049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1533509938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,11 +1500,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 1975970278}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Here are some facts about ginger...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+--- !u!114 &1975970278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+  m_PrefabInstance: {fileID: 1975970277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2134111582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1469,11 +1584,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 2134111583}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Here are some facts about cumin...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+--- !u!114 &2134111583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+  m_PrefabInstance: {fileID: 2134111582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3956968208655813808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1528,6 +1666,18 @@ PrefabInstance:
     - target: {fileID: 3956968207194152632, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 422567583}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Here are some facts about garlic...
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
