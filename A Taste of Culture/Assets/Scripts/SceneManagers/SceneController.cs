@@ -78,6 +78,10 @@ public class SceneController : MonoBehaviour
 
             if(tomatoInstruction != null) { tomatoInstruction.SetActive(true); }
 
+            // Reset instruction tooltip so that movement instructions will be toggled again
+            InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
+            if(tooltips != null) { tooltips.ResetInstructions(); }
+
             yield break;
         }
 
