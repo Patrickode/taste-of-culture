@@ -86,8 +86,6 @@ public class CuttingKnife : MonoBehaviour
                 collider1.ResetCollider();
                 collider2.ResetCollider();
 
-                CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
-
                 sliceAudio.Play();
             }
 
