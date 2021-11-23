@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3956968207194152630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.25, y: 2.36, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -116,7 +116,6 @@ MonoBehaviour:
   spiceCategory: 0
   dialogueTrigger: {fileID: 0}
   dialogue: {fileID: 0}
-  dialogueString: 
 --- !u!114 &6807639864633222944
 MonoBehaviour:
   m_ObjectHideFlags: 0

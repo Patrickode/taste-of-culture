@@ -8,10 +8,15 @@ public class HandController : MonoBehaviour
 
     Rigidbody2D rigidbodyComponent;
 
+    private GameObject spicePrefab;
+    public GameObject SpicePrefab { set { spicePrefab = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbodyComponent = GetComponent<Rigidbody2D>();
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -32,6 +37,7 @@ public class HandController : MonoBehaviour
             // animator.SetBool("Click", false);
 
             // TODO: Generate spice and have it fall into bowl
+            if(spicePrefab != null) { }
         }
     }
 }
