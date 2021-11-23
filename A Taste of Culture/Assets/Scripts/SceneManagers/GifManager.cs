@@ -8,6 +8,7 @@ public class GifManager : MonoBehaviour
 {
     //[SerializeField] GameObject ingredient1Instruction;
     //[SerializeField] GameObject ingredient2Instruction;
+
     public CookingSceneManager sceneManager;
     public RawImage demoVideo;
     public Button closeButton;
@@ -15,16 +16,12 @@ public class GifManager : MonoBehaviour
 
     void Start() 
     {
-        //demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
-        //closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
-
         if (closeButton != null)
         {
             closeButton.gameObject.SetActive(false);
             closeButton.onClick.AddListener(ButtonClicked);
         }
 
-        //demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
         if (sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Chopping Knife"))
         {
             demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping.mp4");
@@ -52,15 +49,6 @@ public class GifManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if (closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true)
-    //    {
-    //        closeButton.gameObject.SetActive(true);
-    //    }
-    //}
-
     void ButtonClicked()
     {
         if(demoVideo == null) { return; }
@@ -69,12 +57,14 @@ public class GifManager : MonoBehaviour
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
         sceneManager.GifEnded();
+
+        // Start timer for toggling instruction tooltips
+        InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
+        if(tooltips != null) { tooltips.PrepToToggle(); }
     }
 
     void LoopedOnce(VideoPlayer demoPlayer)
     {
         closeButton.gameObject.SetActive(true);
-        //demoPlayer.gameObject.SetActive(false);
-        //demoVideo.gameObject.SetActive(false);
     }
 }

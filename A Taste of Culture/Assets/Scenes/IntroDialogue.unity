@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22c3029aee3323409505ac8d480c556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
   dialogueManager: {fileID: 1248825825}
   dialogueTrigger: {fileID: 1785572515}
   dialogue: {fileID: 2288599735662789476}
@@ -498,13 +499,13 @@ MonoBehaviour:
     sentences:
     - Hello! I'm Chef Jaya (JAY-uh). I own and operate a restaurant downtown. I'm
       glad you could join me today.
-    - Today we'll be making Makhani (mah-KAH-nee), a curry sauce originally from
+    - Today we'll be making Makhani (MAH-kuh-nee), a curry sauce originally from
       my hometown, Delhi (DEH-lee), in northern India.
     - For the protein, we will be using chicken today.
     - Curry is really just sauce with spices, so what sets Makhani apart from other
       curries is its heavy use of butter and spices that warm the body.
-    - "I've made enough Makhani to feed a few cities at this point, I think. It's
-      a very popular item at my restaurant \u2014 I'm sure it will serve you well."
+    - I've made enough Makhani to feed a few cities at this point. It's a very popular
+      item at my restaurant. I'm sure it will serve you well.
     - Well, let's not delay for too long. We can talk more while we cook.
     expressions:
     - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
@@ -520,38 +521,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2288599735958809397, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288599735958809397, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288599735958809398, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288599735958809398, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -25
-      objectReference: {fileID: 0}
     - target: {fileID: 2288599736332118267, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1248825825}
-    - target: {fileID: 2288599736869586730, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288599736869586731, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288599736869586731, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 102
-      objectReference: {fileID: 0}
     - target: {fileID: 2288599736888806084, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
       propertyPath: m_Camera
       value: 

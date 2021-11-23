@@ -27,6 +27,8 @@ public class IngredientMover : MonoBehaviour
     bool hasBeenRotated = false;
     bool taskComplete = false;
 
+    GameObject mask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +65,14 @@ public class IngredientMover : MonoBehaviour
             if(allowRotation) { RotateIngredient(); }
         }
 
-        if(!allowRotation && (gameObject.transform.position.x >= rotateXPosition)) { allowRotation = true; }
+        if(!allowRotation && (gameObject.transform.position.x >= rotateXPosition)) 
+        { 
+            allowRotation = true; 
+
+            // Switch to showing rotation instructions
+            InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
+            if(tooltips != null) { tooltips.ToggleRotationInstructions(); }
+        }
 
         if(hasBeenRotated && (gameObject.transform.position.x >= finalXPosition)) { BroadcastTaskCompletion(); }
     }
@@ -74,7 +83,7 @@ public class IngredientMover : MonoBehaviour
         gameObject.transform.position = originalPosition;
 
         // Instantiate mask that will allow chunks to become visible
-        GameObject mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
+        mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
         GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPosition, Quaternion.identity);
@@ -90,6 +99,10 @@ public class IngredientMover : MonoBehaviour
     void BroadcastTaskCompletion()
     {
         taskComplete = true;
+
+        Vector3 scale = new Vector3(1, 1, 0);
+
+        mask.transform.localScale += scale;
 
         SceneController sceneController = FindObjectOfType<SceneController>();
         
