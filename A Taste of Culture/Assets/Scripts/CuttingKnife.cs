@@ -6,6 +6,8 @@ using UnityEngine;
 public class CuttingKnife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
+    [SerializeField] IngredientCollider collider1;
+    [SerializeField] IngredientCollider collider2;
     
     public Animator animator;
     public CookingSceneManager sceneManager;
@@ -74,6 +76,16 @@ public class CuttingKnife : MonoBehaviour
                 lineRenderer.enabled = false;
 
                 Vector2 cutdirection = cutEndPosition - cutStartPosition;
+
+                // if cut is started from the bottom, flip the x difference
+                if(cutStartPosition.y < cutEndPosition.y) { cutdirection.x *= -1; }
+                
+                if(collider1.HasCollided && collider2.HasCollided)
+                    CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
+
+                collider1.ResetCollider();
+                collider2.ResetCollider();
+
                 CutObjects(cutStartPosition, cutEndPosition, Quaternion.Euler(0, 0, cutdirection.x * 10));
 
                 sliceAudio.Play();
