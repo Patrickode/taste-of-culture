@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] Sprite openSprite;
+    [SerializeField] Sprite pinchedSprite;
 
+    SpriteRenderer spriteRenderer;
     Rigidbody2D rigidbodyComponent;
 
     private GameObject spicePrefab;
     public GameObject SpicePrefab { set { spicePrefab = value; } }
 
+    Vector2 spawnPosition;
+
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbodyComponent = GetComponent<Rigidbody2D>();
 
         Cursor.visible = false;
@@ -27,17 +32,30 @@ public class HandController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            // this will pinch the hand on click
-            // animator.SetBool("Click", true);
+            if(spriteRenderer != null && pinchedSprite != null) { spriteRenderer.sprite = pinchedSprite; }
         }
 
         if(Input.GetMouseButtonUp(0))
         {
-            // this will unpinch/open the hand on release"
-            // animator.SetBool("Click", false);
+            StartCoroutine(DropSpice());
 
-            // TODO: Generate spice and have it fall into bowl
-            if(spicePrefab != null) { }
+            if(spriteRenderer != null && openSprite != null) { spriteRenderer.sprite = openSprite; }
         }
+    }
+
+    // Generate spice and have it fall into bowl
+    // TODO: Test -> Does this need to be a coroutine?
+    IEnumerator DropSpice()
+    {
+        spawnPosition = gameObject.transform.GetChild(0).gameObject.transform.position;
+
+        if(spicePrefab != null) 
+        { 
+            Instantiate(spicePrefab, spawnPosition, Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(.1f);
+
+        spicePrefab = null;
     }
 }

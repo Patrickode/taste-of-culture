@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3956968207194152632}
   - component: {fileID: 3956968207194152631}
-  - component: {fileID: 6603583218373795538}
   - component: {fileID: 4166426903561602324}
   - component: {fileID: 6807639864633222944}
+  - component: {fileID: 2846882559174446741}
   m_Layer: 6
   m_Name: Spice Bowl
   m_TagString: Ingredient
@@ -85,22 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6603583218373795538
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3956968207194152630}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &4166426903561602324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiceCategory: 0
+  pinchedSpicePrefab: {fileID: 0}
   dialogueTrigger: {fileID: 0}
   dialogue: {fileID: 0}
 --- !u!114 &6807639864633222944
@@ -134,3 +119,29 @@ MonoBehaviour:
     - 
     expressions:
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+--- !u!61 &2846882559174446741
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956968207194152630}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.19696987, y: -0.59091187}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.236971, y: 3.052486}
+  m_EdgeRadius: 0

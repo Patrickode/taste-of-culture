@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spice : MonoBehaviour
 {
-    enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander };
+    enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
     
     [SerializeField] TypeOfSpice spiceCategory;
     [SerializeField] GameObject pinchedSpicePrefab;
@@ -21,28 +21,23 @@ public class Spice : MonoBehaviour
         hand = FindObjectOfType<HandController>();
     }
 
-    // void Update() 
-    // {
-    //     if(Input.GetMouseButtonDown(0))
-    //     {
-    //         if(colliding) { hand.SpicePrefab = pinchedSpicePrefab; }
-    //         else { hand.SpicePrefab = null; }
-
-    //         Debug.Log("Current spice: " + pinchedSpicePrefab.name);
-    //     }
-    // }
+    void Update() 
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            if(colliding) { hand.SpicePrefab = pinchedSpicePrefab; }
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other) 
     {
         if(other.gameObject.tag != "Hand") { return; }
 
-        // TODO: Trigger Tooltip
+        // Trigger tooltip
+        dialogueTrigger.TriggerDialogue();
         Debug.Log("Tooltip: " + spiceCategory);
 
-        dialogueTrigger.TriggerDialogue();
-
         colliding = true;
-        // if(hand != null) { hand.SpicePrefab = pinchedSpicePrefab; }
     }
 
     void OnTriggerExit2D(Collider2D other) 
@@ -50,8 +45,6 @@ public class Spice : MonoBehaviour
         if(other.gameObject.tag != "Hand") { return; }
 
         dialogueTrigger.DisableDialogue();
-
-        // if(hand != null) { hand.SpicePrefab = null; }
 
         colliding = false;
     }
