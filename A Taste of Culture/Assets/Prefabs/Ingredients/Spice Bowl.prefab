@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3956968207194152632}
   - component: {fileID: 3956968207194152631}
-  - component: {fileID: 4166426903561602324}
-  - component: {fileID: 6807639864633222944}
   - component: {fileID: 2846882559174446741}
+  - component: {fileID: 6807639864633222944}
+  - component: {fileID: 2898717281772421305}
   m_Layer: 6
   m_Name: Spice Bowl
   m_TagString: Ingredient
@@ -85,40 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4166426903561602324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3956968207194152630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cca932737f26d6348b1d3acb0b4c088b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spiceCategory: 0
-  pinchedSpicePrefab: {fileID: 0}
-  dialogueTrigger: {fileID: 0}
-  dialogue: {fileID: 0}
---- !u!114 &6807639864633222944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3956968207194152630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    name: Jaya
-    sentences:
-    - 
-    expressions:
-    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
 --- !u!61 &2846882559174446741
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,3 +111,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.236971, y: 3.052486}
   m_EdgeRadius: 0
+--- !u!114 &6807639864633222944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956968207194152630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: 
+    sentences:
+    - 
+    expressions:
+    - {fileID: 0}
+--- !u!114 &2898717281772421305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956968207194152630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb083c3b9a7f4a4e97dfe8047133f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiceCategory: 0
+  pinchedSpicePrefab: {fileID: 0}
+  dialogueTrigger: {fileID: 0}
+  dialogue: {fileID: 0}

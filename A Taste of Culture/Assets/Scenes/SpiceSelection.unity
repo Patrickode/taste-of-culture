@@ -138,6 +138,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 9461485}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 1747384934}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cinnamon
@@ -190,22 +206,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 9461485}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 1747384934}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about cinnamon...
@@ -311,6 +311,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &247872725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247872726}
+  - component: {fileID: 247872728}
+  - component: {fileID: 247872727}
+  m_Layer: 5
+  m_Name: Reset Button
+  m_TagString: UI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &247872726
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247872725}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1701473670}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &247872727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247872725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 32
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Reset
+
+'
+--- !u!222 &247872728
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247872725}
+  m_CullTransparentMesh: 1
 --- !u!1001 &249461144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,6 +399,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Sweetness
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Garlic
@@ -487,6 +584,18 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 939196239}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Salt
@@ -531,18 +640,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 939196239}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about salt...
@@ -556,6 +653,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Sweetness
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Paprika
@@ -635,6 +748,18 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 806216059}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 1962849155}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cayenne Pepper
@@ -687,22 +812,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 806216059}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 1962849155}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about cayenne pepper...
@@ -734,23 +843,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Size.x
-      value: 1.2288404
+      value: 2.4642386
       objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Size.y
-      value: 2.3457508
+      value: 3.7422876
       objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Offset.x
-      value: -2.7339156
+      value: -2.1162164
       objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Offset.y
-      value: 2.6448932
+      value: 1.9466248
       objectReference: {fileID: 0}
     - target: {fileID: 2820222837753164620, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2820222837753164620, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1015,6 +1124,107 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &984749937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984749941}
+  - component: {fileID: 984749940}
+  - component: {fileID: 984749939}
+  - component: {fileID: 984749938}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: UI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &984749938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984749937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &984749939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984749937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &984749940
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984749937}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: -403596795
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
+--- !u!224 &984749941
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984749937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 1365595573}
+  - {fileID: 1701473670}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1027306175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1022,6 +1232,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Sweetness
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Ginger
@@ -1115,7 +1341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1357,7 +1583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1058309390
 PrefabInstance:
@@ -1366,6 +1592,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Sweetness
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Nutmeg
@@ -1437,6 +1675,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Sweetness
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Coriander
@@ -1564,6 +1818,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 1338839917}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 1058309392}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Nutmeg
@@ -1616,22 +1886,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 1338839917}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 1058309392}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about nutmeg...
@@ -1654,6 +1908,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3956968207194152632, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
   m_PrefabInstance: {fileID: 1338839916}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1365595572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365595573}
+  - component: {fileID: 1365595575}
+  - component: {fileID: 1365595574}
+  m_Layer: 5
+  m_Name: VideoTexture
+  m_TagString: UI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1365595573
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365595572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 984749941}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1365595574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365595572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 8119895f0f5cca54db175b0ed854072c, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1365595575
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365595572}
+  m_CullTransparentMesh: 1
 --- !u!1 &1393739933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,6 +2183,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 1503757050}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 743979285}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Paprika
@@ -1909,22 +2251,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 1503757050}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 743979285}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about paprika...
@@ -1993,6 +2319,140 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1701473669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701473670}
+  - component: {fileID: 1701473673}
+  - component: {fileID: 1701473672}
+  - component: {fileID: 1701473671}
+  - component: {fileID: 1701473674}
+  m_Layer: 5
+  m_Name: Reset Button
+  m_TagString: UI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1701473670
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701473669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 247872726}
+  m_Father: {fileID: 984749941}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 770, y: 479.1}
+  m_SizeDelta: {x: 249.4, y: 63.53}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1701473671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701473669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1701473672}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1701473672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701473669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1701473673
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701473669}
+  m_CullTransparentMesh: 1
+--- !u!114 &1701473674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701473669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cfc5d5f0736934458fa394f9ef9d0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1747057740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,7 +2490,7 @@ Transform:
   - {fileID: 2003601191}
   - {fileID: 939196238}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1747384932
 PrefabInstance:
@@ -2039,6 +2499,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Sweetness
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Cinnamon
@@ -2110,6 +2586,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Bitterness
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Cumin
@@ -2290,6 +2782,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 1975970278}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 1027306177}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Ginger
@@ -2342,22 +2850,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 1975970278}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 1027306177}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about ginger...
@@ -2395,6 +2887,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 2003601190}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 1085881062}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Coriander
@@ -2435,22 +2943,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 2003601190}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 1085881062}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about coriander...
@@ -2509,7 +3001,7 @@ Transform:
   - {fileID: 1085881061}
   - {fileID: 249461145}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2134111582
 PrefabInstance:
@@ -2526,6 +3018,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 2134111583}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 1871038880}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cumin
@@ -2578,22 +3086,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 2134111583}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 1871038880}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about cumin...
@@ -2631,6 +3123,22 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 1031464211}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceCategory
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 422567583}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: pinchedSpicePrefab
+      value: 
+      objectReference: {fileID: 249461146}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Garlic
@@ -2671,22 +3179,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 1031464211}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: spiceCategory
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: dialogueTrigger
-      value: 
-      objectReference: {fileID: 422567583}
-    - target: {fileID: 4166426903561602324, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-      propertyPath: pinchedSpicePrefab
-      value: 
-      objectReference: {fileID: 249461146}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about garlic...
@@ -2705,6 +3197,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2109562421}
     m_Modifications:
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310532695232641620, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: Spiciness
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Cayenne Pepper
@@ -2756,7 +3260,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 566129141781605380, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 566129141781605380, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2829,7 +3333,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_Size.y
-      value: 1.317379
+      value: 2.0008001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_Offset.x
@@ -2837,7 +3345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_Offset.y
-      value: -0.97834873
+      value: -1.7974491
       objectReference: {fileID: 0}
     - target: {fileID: 2495087547573679144, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_SortingLayer
@@ -2851,9 +3359,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpiceBowl
       objectReference: {fileID: 0}
+    - target: {fileID: 5324701546484046400, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
+      propertyPath: resetButton
+      value: 
+      objectReference: {fileID: 1701473671}
     - target: {fileID: 7070841883206164393, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7070841883206164393, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_LocalScale.x

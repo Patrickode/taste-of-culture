@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spice : MonoBehaviour
+public class SpiceBowl : MonoBehaviour
 {
     enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
     
@@ -35,7 +35,7 @@ public class Spice : MonoBehaviour
 
         // Trigger tooltip
         dialogueTrigger.TriggerDialogue();
-        Debug.Log("Tooltip: " + spiceCategory);
+        // Debug.Log("Tooltip: " + spiceCategory);
 
         colliding = true;
     }

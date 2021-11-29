@@ -10,6 +10,7 @@ TagManager:
   - Background
   - UI
   - Hand
+  - Spice
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ingredient
   - Tool
   - Background
-  - 
+  - Spice
   - 
   - 
   - 

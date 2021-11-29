@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7070841883206164393}
   - component: {fileID: 2495087547573679144}
   - component: {fileID: 1545689923576313490}
+  - component: {fileID: 5324701546484046400}
   m_Layer: 0
   m_Name: SpiceBowl
   m_TagString: Untagged
@@ -109,3 +110,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19.2, y: 10.8}
   m_EdgeRadius: 0
+--- !u!114 &5324701546484046400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2768158312151153632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c38228a773cd14e9867c3de224dcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
