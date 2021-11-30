@@ -16,11 +16,15 @@ public class DialogueManager : MonoBehaviour
     public Text npcNameTextUI;
     public Text playerTextUI;
     public Text npcTextUI;
+    public SpriteRenderer playerSprite;
+    public SpriteRenderer npcSprite;
 
     [Tooltip("The part of the UI that displays the UI")]
     public GameObject DialogueUI;
     [Tooltip("The text UIs that displays options")]
     public Text[] optionsUI;
+
+    public Animator animator;
 
     DialogueContainer dialogue;
     Sentence currentSentence;
@@ -32,8 +36,12 @@ public class DialogueManager : MonoBehaviour
         if (ConversationStarted != null)
             ConversationStarted.Raise();
 
+        // animator.SetBool("IsOpen", true);
+
         npcTextUI.text = null;
         playerTextUI.text = null;
+        playerSprite.sprite = null;
+        npcSprite.sprite = null;
         HideOptions();
         DialogueUI.SetActive(false);
 
@@ -72,6 +80,7 @@ public class DialogueManager : MonoBehaviour
                     playerNameTextUI.text = playerName.value;
                 }
                 dialogueText = playerTextUI;
+                playerSprite.sprite = currentSentence.expression;
             }
             else
             {
@@ -80,6 +89,7 @@ public class DialogueManager : MonoBehaviour
                     npcNameTextUI.text = currentSentence.speaker.name;
                 }
                 dialogueText = npcTextUI;
+                playerSprite.sprite = currentSentence.expression;
             }
 
             StopAllCoroutines();

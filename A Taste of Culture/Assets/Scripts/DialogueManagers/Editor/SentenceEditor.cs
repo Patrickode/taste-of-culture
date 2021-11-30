@@ -61,7 +61,9 @@ public class SentenceEditor : Editor
 
         currentSentence = (Sentence)target;
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("name"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("speaker"));
+        EditorGUILayout.Space(); 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("expression"));
         EditorGUILayout.Space();
 
         if (!currentSentence.HasOptions())

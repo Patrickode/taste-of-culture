@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu]
 public class Sentence : ScriptableObject
 {
@@ -9,6 +10,8 @@ public class Sentence : ScriptableObject
 
     [TextArea(3, 10)]
     public string text = "text";
+
+    public Sprite expression;
 
     [Tooltip("Available only when this dialogue has no choices")]
     public Sentence nextSentence;
