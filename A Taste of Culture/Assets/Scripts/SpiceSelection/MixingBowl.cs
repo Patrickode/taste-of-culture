@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MixingBowl : MonoBehaviour
 {
     public Button resetButton;
+    public Button doneButton;
 
     // Flavor Profile values
     int BitternessValue;
@@ -23,6 +24,12 @@ public class MixingBowl : MonoBehaviour
             resetButton.gameObject.SetActive(false);
             resetButton.onClick.AddListener(ResetValues);
         }
+
+        if (doneButton != null)
+        {
+            doneButton.gameObject.SetActive(false);
+            doneButton.onClick.AddListener(FinishSelecting);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other) 
@@ -35,6 +42,7 @@ public class MixingBowl : MonoBehaviour
         { 
             firstSpiceAdded = true; 
             resetButton.gameObject.SetActive(true);
+            doneButton.gameObject.SetActive(true);
         }
         
         // Add to flavor profile
@@ -55,6 +63,7 @@ public class MixingBowl : MonoBehaviour
         }
 
         resetButton.gameObject.SetActive(false);
+        doneButton.gameObject.SetActive(false);
         firstSpiceAdded = false;
 
         // Ensures cursor isn't visible after clicking button
@@ -63,5 +72,13 @@ public class MixingBowl : MonoBehaviour
         BitternessValue = 0;
         SpicinessValue = 0;
         SweetnessValue = 0;
+    }
+
+    public void FinishSelecting()
+    {
+        /// TODO: save flavor profile...
+
+        SceneController sceneController = FindObjectOfType<SceneController>();
+        if(sceneController != null) { sceneController.TaskComplete(); }
     }
 }

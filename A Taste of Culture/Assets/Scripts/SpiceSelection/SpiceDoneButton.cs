@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SpiceResetButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SpiceDoneButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public void OnPointerEnter(PointerEventData eventData)
     {

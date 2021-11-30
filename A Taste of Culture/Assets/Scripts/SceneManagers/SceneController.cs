@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
 
-    public enum Ingredient { Chicken, Tofu, Onion, Tomato };
+    public enum Ingredient { Chicken, Tofu, Onion, Tomato, Spices };
 
     [SerializeField] private Ingredient currentIngredient;
     public Ingredient CurrentIngredient { get { return currentIngredient; } }
@@ -81,9 +81,17 @@ public class SceneController : MonoBehaviour
             yield break;
         }
 
-        else
+        else 
         {
-            sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
+            {
+                sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            }
+            else 
+            { 
+                /// TODO: Disable hand in spice selection...
+                Debug.Log("Done selecting spices");
+            }
             yield return new WaitForSeconds(5f);
             
             // Load next scene
@@ -92,5 +100,6 @@ public class SceneController : MonoBehaviour
                 SceneManager.LoadScene(nextScene);
             }
         }
+
     }
 }
