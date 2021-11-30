@@ -210,11 +210,67 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2288599737680728105, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
   m_PrefabInstance: {fileID: 2288599735662789475}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &358728669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358728668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4ef594b1351dd8a4386b29ce49ca0ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 358728670}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EndDialogue
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &358728670 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2288599737265127226, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
   m_PrefabInstance: {fileID: 2288599735662789475}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &358728671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358728668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 964f5f206d832ee4f9248f0885e50214, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 358728670}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: StartDialogue
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &461929237
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +755,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2288599736888806091, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288599737265127226, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288599737680728111, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

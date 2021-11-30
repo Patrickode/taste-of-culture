@@ -36,8 +36,6 @@ public class DialogueManager : MonoBehaviour
         if (ConversationStarted != null)
             ConversationStarted.Raise();
 
-        // animator.SetBool("IsOpen", true);
-
         npcTextUI.text = null;
         playerTextUI.text = null;
         playerSprite.sprite = null;
@@ -154,6 +152,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        DialogueUI.SetActive(false);
         Debug.Log("Dialogue Ended");
         if (ConversationEnded != null)
             ConversationEnded.Raise();
