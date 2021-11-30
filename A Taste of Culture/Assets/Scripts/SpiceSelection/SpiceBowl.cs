@@ -13,19 +13,22 @@ public class SpiceBowl : MonoBehaviour
     public GameObject dialogue;
     
     HandController hand;
+    SpiceStation spiceStation;
 
     bool colliding;
 
     void Awake() 
     {
         hand = FindObjectOfType<HandController>();
+
+        spiceStation = FindObjectOfType<SpiceStation>();
     }
 
     void Update() 
     {
         if(Input.GetMouseButtonDown(0))
         {
-            if(colliding) { hand.SpicePrefab = pinchedSpicePrefab; }
+            if(colliding && spiceStation.CanDisplayTooltip) { hand.SpicePrefab = pinchedSpicePrefab; }
         }
     }
 
@@ -33,11 +36,11 @@ public class SpiceBowl : MonoBehaviour
     {
         if(other.gameObject.tag != "Hand") { return; }
 
-        // Trigger tooltip
-        dialogueTrigger.TriggerDialogue();
-        // Debug.Log("Tooltip: " + spiceCategory);
-
-        colliding = true;
+        if(spiceStation.CanDisplayTooltip) 
+        {
+            dialogueTrigger.TriggerDialogue();
+            colliding = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other) 
@@ -45,7 +48,6 @@ public class SpiceBowl : MonoBehaviour
         if(other.gameObject.tag != "Hand") { return; }
 
         dialogueTrigger.DisableDialogue();
-
         colliding = false;
     }
 }
