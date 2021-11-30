@@ -19,30 +19,30 @@ MonoBehaviour:
   - BaseNodeGuid: 44f883b0-8e7f-45e7-b340-ede701b6197c
     PortName: Continue
     TargetNodeGuid: 532a5bd8-8ff8-4960-be53-62748d1b765a
-  - BaseNodeGuid: 532a5bd8-8ff8-4960-be53-62748d1b765a
-    PortName: Continue
-    TargetNodeGuid: abe19b8e-434b-4b49-a8f1-2a64f4438f12
   - BaseNodeGuid: abe19b8e-434b-4b49-a8f1-2a64f4438f12
     PortName: Chicken
     TargetNodeGuid: 31f7c7cd-3fae-4955-ae80-4f68c3930e46
   - BaseNodeGuid: abe19b8e-434b-4b49-a8f1-2a64f4438f12
     PortName: Tofu
     TargetNodeGuid: e5a29c8a-6b3e-468e-af24-de3bc63ac635
-  - BaseNodeGuid: 31f7c7cd-3fae-4955-ae80-4f68c3930e46
+  - BaseNodeGuid: e5a29c8a-6b3e-468e-af24-de3bc63ac635
     PortName: Continue
     TargetNodeGuid: e0cbd61b-d369-4d27-b13f-0b8f4a899fe8
-  - BaseNodeGuid: e5a29c8a-6b3e-468e-af24-de3bc63ac635
+  - BaseNodeGuid: 31f7c7cd-3fae-4955-ae80-4f68c3930e46
     PortName: Continue
     TargetNodeGuid: e0cbd61b-d369-4d27-b13f-0b8f4a899fe8
   - BaseNodeGuid: e0cbd61b-d369-4d27-b13f-0b8f4a899fe8
     PortName: Continue
     TargetNodeGuid: 9784c9e4-f0b9-4b3d-ba0c-dd5784fb014a
-  - BaseNodeGuid: 9784c9e4-f0b9-4b3d-ba0c-dd5784fb014a
+  - BaseNodeGuid: 532a5bd8-8ff8-4960-be53-62748d1b765a
     PortName: Continue
-    TargetNodeGuid: 45ce4a20-40fd-433b-a03e-7b5ae441f0e5
+    TargetNodeGuid: abe19b8e-434b-4b49-a8f1-2a64f4438f12
   - BaseNodeGuid: 45ce4a20-40fd-433b-a03e-7b5ae441f0e5
     PortName: Continue
     TargetNodeGuid: 4e1c87b2-57bb-4951-9f88-4a48cfc26821
+  - BaseNodeGuid: 9784c9e4-f0b9-4b3d-ba0c-dd5784fb014a
+    PortName: Continue
+    TargetNodeGuid: 45ce4a20-40fd-433b-a03e-7b5ae441f0e5
   DialogueNodeData:
   - Guid: 44f883b0-8e7f-45e7-b340-ede701b6197c
     DialogueText: Hello, I'm Chef Jaya (JAY-uh). I own and operate a restaurant downtown.
@@ -51,16 +51,6 @@ MonoBehaviour:
   - Guid: abe19b8e-434b-4b49-a8f1-2a64f4438f12
     DialogueText: For the protein, we can use chicken or tofu. Which would you prefer?
     Position: {x: 225, y: 528}
-  - Guid: e5a29c8a-6b3e-468e-af24-de3bc63ac635
-    DialogueText: Tofu it is. Mahkani was made to bring back moisture to leftover
-      tandoori chicken, but it's become so famous that tofu is a common substitute,
-      to accommodate the many vegetarians of India and the world.
-    Position: {x: 1136, y: 650}
-  - Guid: 31f7c7cd-3fae-4955-ae80-4f68c3930e46
-    DialogueText: You can never go wrong with chicken! Makhani was made for it; the
-      chefs of the Moti Mahal back in the 1950s wanted a way to reuse leftover, dried
-      out tandoori chicken.
-    Position: {x: 1136, y: 430}
   - Guid: e0cbd61b-d369-4d27-b13f-0b8f4a899fe8
     DialogueText: Curry is really just sauce with spices, so what sets Makhani apart
       from other curries is its heavy use of butter and spices that warm the body.
@@ -81,3 +71,13 @@ MonoBehaviour:
   - Guid: 4e1c87b2-57bb-4951-9f88-4a48cfc26821
     DialogueText: END
     Position: {x: 808, y: 1047}
+  - Guid: 31f7c7cd-3fae-4955-ae80-4f68c3930e46
+    DialogueText: You can never go wrong with chicken! Makhani was made for it; the
+      chefs of the Moti Mahal back in the 1950s wanted a way to reuse leftover, dried
+      out tandoori chicken.
+    Position: {x: 1265, y: 430}
+  - Guid: e5a29c8a-6b3e-468e-af24-de3bc63ac635
+    DialogueText: Tofu it is. Mahkani was made to bring back moisture to leftover
+      tandoori chicken, but it's become so famous that tofu is a common substitute,
+      to accommodate the many vegetarians of India and the world.
+    Position: {x: 1265, y: 650}

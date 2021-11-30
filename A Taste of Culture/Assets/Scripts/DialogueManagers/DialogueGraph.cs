@@ -20,7 +20,7 @@ public class DialogueGraph : EditorWindow
     {
         ConstructGraphView();
         GenerateToolbar();
-        GenerateMiniMap();
+        // GenerateMiniMap();
     }
 
     private void ConstructGraphView()
