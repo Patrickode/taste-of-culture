@@ -54,11 +54,6 @@ public class SceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        if (sceneManager.GetComponent<DialogueSceneManager>() != null)
-        {
-            // potentially do something
-        }
-
         // If current ingredient is Onion, disable it and enable tomato
         if(currentIngredient == Ingredient.Onion)
         {
@@ -87,7 +82,6 @@ public class SceneController : MonoBehaviour
 
         else
         {
-            sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
             yield return new WaitForSeconds(5f);
             
             // Load next scene

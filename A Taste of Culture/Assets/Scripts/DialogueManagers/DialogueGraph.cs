@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
 
 public class DialogueGraph : EditorWindow
 {
-    private DialogueGraphView _graphView;
-    private string _fileName = "New Narrative";
+    // private string _fileName = "New Narrative";
+    ObjectField sentenceField;
+    DialogueGraphView _graphView;
+    Toolbar toolbar;
+    Sentence startingSentence;
 
     [MenuItem("Graph/Dialogue Graph")]
     public static void OpenDialogueGraphWindow()
@@ -20,7 +22,6 @@ public class DialogueGraph : EditorWindow
     {
         ConstructGraphView();
         GenerateToolbar();
-        // GenerateMiniMap();
     }
 
     private void ConstructGraphView()
@@ -32,62 +33,61 @@ public class DialogueGraph : EditorWindow
 
         _graphView.StretchToParentSize();
         rootVisualElement.Add(_graphView);
+
+        _graphView.SendToBack();
     }
 
     private void GenerateToolbar()
     {
-        Toolbar toolbar = new Toolbar();
+        toolbar = new Toolbar();
 
-        TextField fileNameTextField = new TextField("File Name:");
-        fileNameTextField.SetValueWithoutNotify(_fileName);
-        fileNameTextField.MarkDirtyRepaint();
-        fileNameTextField.RegisterValueChangedCallback(evt => _fileName = evt.newValue);
-        toolbar.Add(fileNameTextField);
-
-        toolbar.Add(new Button(() => RequestDataOperation(true)) { text = "Save Data" });
-        toolbar.Add(new Button(() => RequestDataOperation(false)) { text = "Load Data" });
-
-        Button nodeCreateButton = new Button(() =>
+        Button button = new Button(clickEvent: () =>
         {
-            _graphView.CreateNode("Dialogue Node");
+            DialogueContainer dialogue = (DialogueContainer)sentenceField.value;
+            startingSentence = dialogue.startingSentence;
+            if (startingSentence != null)
+            {
+                rootVisualElement.Remove(_graphView);
+                ConstructGraphView();
+                _graphView.AutoGenerateNodes(startingSentence);
+            }
         })
         {
-            text = "Create Node"
+            text = "Show Dialogue Graph"
         };
-        toolbar.Add(nodeCreateButton);
+
+        Button saveButton = new Button(clickEvent: () => { _graphView.SaveConnections(); })
+        {
+            text = "Save"
+        };
+        Button clearButton = new Button(clickEvent: () => { Clear(); })
+        {
+            text = "Clear"
+        };
+
+        sentenceField = new ObjectField
+        {
+            objectType = typeof(DialogueContainer)
+        };
+        toolbar.Add(sentenceField);
+        toolbar.Add(button);
+        toolbar.Add(saveButton);
+        toolbar.Add(clearButton);
 
         rootVisualElement.Add(toolbar);
-    }
-
-    private void GenerateMiniMap()
-    {
-        MiniMap miniMap = new MiniMap { anchored = true };
-        miniMap.SetPosition(new Rect(10, 30, 200, 140));
-        _graphView.Add(miniMap);
-    }
-
-    private void RequestDataOperation(bool save)
-    {
-        if (string.IsNullOrEmpty(_fileName))
-        {
-            EditorUtility.DisplayDialog("Invalid file name!", "Please enter a valid file name.", "OK");
-            return;
-        }
-
-        GraphSaveUtility saveUtility = GraphSaveUtility.GetInstance(_graphView);
-
-        if (save)
-        {
-            saveUtility.SaveGraph(_fileName);
-        }
-        else
-        {
-            saveUtility.LoadGraph(_fileName);
-        }
     }
 
     private void OnDisable()
     {
         rootVisualElement.Remove(_graphView);
+    }
+
+    private void Clear()
+    {
+        rootVisualElement.Remove(_graphView);
+        rootVisualElement.Remove(toolbar);
+
+        ConstructGraphView();
+        GenerateToolbar();
     }
 }
