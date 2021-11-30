@@ -19,7 +19,7 @@ MonoBehaviour:
   options:
   - text: Chicken
     nextSentence: {fileID: 11400000, guid: 0c9ca5fbd9692eb45bebcdd69ceecbb7, type: 2}
-    consequence: {fileID: 0}
+    consequence: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
   - text: Tofu
     nextSentence: {fileID: 11400000, guid: e463bf478de77f74e9bff7c64285aec6, type: 2}
-    consequence: {fileID: 0}
+    consequence: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
