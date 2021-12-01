@@ -83,15 +83,16 @@ public class SceneController : MonoBehaviour
 
         else 
         {
-            if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
-            {
-                sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
-            }
-            else 
-            { 
-                /// TODO: Disable hand in spice selection...
-                Debug.Log("Done selecting spices");
-            }
+            sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
+            // {
+            //     sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            // }
+            // else 
+            // { 
+            //     /// TODO: Disable hand in spice selection...
+            //     Debug.Log("Done selecting spices");
+            // }
             yield return new WaitForSeconds(5f);
             
             // Load next scene

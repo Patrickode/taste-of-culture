@@ -10,7 +10,7 @@ public class SpiceBowl : MonoBehaviour
     [SerializeField] GameObject pinchedSpicePrefab;
 
     public CookingDialogueTrigger dialogueTrigger;
-    public GameObject dialogue;
+    // public GameObject dialogue;
     
     HandController hand;
     SpiceStation spiceStation;

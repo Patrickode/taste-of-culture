@@ -36,13 +36,13 @@ public class MixingBowl : MonoBehaviour
     {
         Spice spice = other.gameObject.GetComponent<Spice>();
         if(spice == null) { return; }
-
+      
         // Toggle reset button
-        if(!firstSpiceAdded) 
+        if(!firstSpiceAdded && other.gameObject.tag == "Spice") 
         { 
             firstSpiceAdded = true; 
-            resetButton.gameObject.SetActive(true);
-            doneButton.gameObject.SetActive(true);
+            if(resetButton != null) { resetButton.gameObject.SetActive(true); }
+            if(doneButton != null) { doneButton.gameObject.SetActive(true); }
         }
         
         // Add to flavor profile
@@ -77,6 +77,9 @@ public class MixingBowl : MonoBehaviour
     public void FinishSelecting()
     {
         /// TODO: save flavor profile...
+
+        if(resetButton != null) { resetButton.gameObject.SetActive(false); }
+        if(doneButton != null) { doneButton.gameObject.SetActive(false); }
 
         SceneController sceneController = FindObjectOfType<SceneController>();
         if(sceneController != null) { sceneController.TaskComplete(); }

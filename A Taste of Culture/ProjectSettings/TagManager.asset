@@ -11,6 +11,7 @@ TagManager:
   - UI
   - Hand
   - Spice
+  - Initial Spice
   layers:
   - Default
   - TransparentFX

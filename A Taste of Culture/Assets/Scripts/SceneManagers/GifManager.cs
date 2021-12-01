@@ -13,6 +13,8 @@ public class GifManager : MonoBehaviour
     public Button closeButton;
     public VideoPlayer demoPlayer;
 
+    bool hasBeenPlayed = false;
+
     void Start() 
     {
         //demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
@@ -29,9 +31,13 @@ public class GifManager : MonoBehaviour
         {
             demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping.mp4");
         }
-        else
+        else if(sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Cutting Knife"))
         {
             demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Slicing Video.mp4");
+        }
+        else
+        {
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Spice Picking.mp4");
         }
 
         demoPlayer.gameObject.SetActive(false);
@@ -43,6 +49,8 @@ public class GifManager : MonoBehaviour
     // Start is called before the first frame update
     public void StartVideo()
     {
+        // if(hasBeenPlayed) { return; }               // Fixes bug where slicing scene restarts video.
+
         if(demoVideo != null) 
         { 
             Cursor.visible = true;
@@ -50,6 +58,8 @@ public class GifManager : MonoBehaviour
             demoPlayer.gameObject.SetActive(true);
             demoVideo.gameObject.SetActive(true); 
         }
+
+        // hasBeenPlayed = true;
     }
 
     // Update is called once per frame

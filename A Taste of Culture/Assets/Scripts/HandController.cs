@@ -21,7 +21,7 @@ public class HandController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbodyComponent = GetComponent<Rigidbody2D>();
 
-        Cursor.visible = false;
+        // Cursor.visible = false;
     }
 
     // Update is called once per frame
