@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 5
@@ -212,7 +212,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Here are some facts about cinnamon...
+      value: Cinnamon is very sweet and tastes a bit earthy. Be careful not too add
+        too much though, you might be surprised at how spicy it can make the dish.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -933,11 +934,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455783527}
   m_CullTransparentMesh: 1
---- !u!1 &522614524 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 784323114}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &654364694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -956,7 +952,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 8
@@ -1196,127 +1192,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 743979283}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &784323114
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_Name
-      value: 'TooltipDialogue '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354037, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 74386172}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426531067260, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1321017251}
-    - target: {fileID: 8514143427098217751, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514143427429472858, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
 --- !u!1001 &806216058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1335,7 +1210,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogueTrigger
       value: 
@@ -1402,7 +1277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Cayenne pepper is moderately spicy and a little bit sweet.
+      value: Cayenne pepper is spicy and a little sweet, with a moderate heat.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -2399,7 +2274,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 6
@@ -2470,7 +2345,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Here are some facts about nutmeg...
+      value: Nutmeg is from ground seeds that have a lingering sweetness with a warm,
+        savory undertone.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -2696,7 +2572,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 4
@@ -2859,6 +2735,10 @@ PrefabInstance:
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Tumeric (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_TagString
@@ -3318,6 +3198,10 @@ PrefabInstance:
       value: Tumeric
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_TagString
       value: Initial Spice
       objectReference: {fileID: 0}
@@ -3410,12 +3294,25 @@ MonoBehaviour:
   dialogue:
     name: Jaya
     sentences:
-    - First, we need to cut the chicken. I like to slice them into thin strips, so
-      they're totally cooked and covered in sauce, but still have some size left.
-    - Here, let me show you how...
+    - First, we need to decide which, and how much spice to use.
+    - "I\u2019ve already put a pinch of pepper, salt, and turmeric in our bowl, since
+      we need those for sure. I\u2019ll let you choose what else to use, from all
+      the spices I have space for here.\r\n"
+    - 'From here, I typically use three pinches of coriander, and one pinch of cumin
+      and nutmeg.
+
+'
+    - "Heat, or \u201Cspiciness,\u201D is different for everyone, but I think four
+      pinches of cayenne will be medium heat, in your case. But if you\u2019d like
+      it to be more mild, maybe stick to three pinches.\n"
+    - "Or maybe you want it to be extra hot and want four pinches. Like I said, it\u2019s
+      up to you."
     expressions:
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
+    - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
 --- !u!114 &1920461719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,8 +3360,7 @@ MonoBehaviour:
   dialogue:
     name: Jaya
     sentences:
-    - Good job! I'm going to start cooking these right now. While I do that, let's
-      start chopping the veggies.
+    - Great job! I'll set this aside for us to use later...
     expressions:
     - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
 --- !u!1 &1962849155 stripped
@@ -3495,7 +3391,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 2
@@ -3605,7 +3501,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 7
@@ -3664,7 +3560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Here are some facts about coriander...
+      value: Coriander has a light, earthy flavor.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -3928,7 +3824,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 1
@@ -4037,7 +3933,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue
       value: 
-      objectReference: {fileID: 522614524}
+      objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceCategory
       value: 3
