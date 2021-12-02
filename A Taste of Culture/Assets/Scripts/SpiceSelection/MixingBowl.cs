@@ -55,11 +55,11 @@ public class MixingBowl : MonoBehaviour
 
     public void ResetValues()
     {
-        Spice[] spices = FindObjectsOfType<Spice>();
+        GameObject[] spices = GameObject.FindGameObjectsWithTag("Spice");
 
-        foreach(Spice spice in spices) 
+        foreach(GameObject spice in spices) 
         {
-            Destroy(spice.gameObject);
+            Destroy(spice);
         }
 
         resetButton.gameObject.SetActive(false);
