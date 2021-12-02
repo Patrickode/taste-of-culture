@@ -66,7 +66,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // If current ingredient is Onion, disable it and enable tomato
-        if(currentVeggie == Veggie.Onion)
+        if(currentVeggie == Veggie.Onion && SceneManager.GetActiveScene().name == "Chopping")
         {
             yield return new WaitForSeconds(1f);
             if(onion != null) { onion.SetActive(false); }

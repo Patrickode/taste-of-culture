@@ -59,6 +59,7 @@ public class CookingSceneManager : MonoBehaviour
 
     public void FinishedCutting()
     {
+        Debug.Log("Finished cutting");
         dialogue.SetActive(true);
         knife.SetActive(false);
         Cursor.visible = true;
