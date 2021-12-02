@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
+  m_Name: Makhani2
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  text: "My dad could handle the hottest food around, but he liked to keep the heat
+    down. My mom, on the other hand, always raised it. Maybe that\u2019s where my
+    dad got his resistance to heat."
+  expression: {fileID: 21300000, guid: d1ed27ee52a4179438042caebcb8faeb, type: 3}
+  nextSentence: {fileID: 11400000, guid: 6b57688b0a4ad8a4da66e078e155931b, type: 2}
+  options: []

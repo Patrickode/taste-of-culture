@@ -14,7 +14,6 @@ public class DialogueSceneManager : MonoBehaviour
 {
     public DialogueTime time;
     public DialogueManager dialogueManager;
-    public DialogueTrigger dialogueTrigger;
     public GameObject dialogue;
     public DialogueTrigger trigger;
 

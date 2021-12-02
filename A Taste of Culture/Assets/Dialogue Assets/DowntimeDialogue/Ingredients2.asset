@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
+  m_Name: Ingredients2
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  text: "For religious reasons, a lot of Indians can\u2019t eat beef. In America,
+    though, beef tends to be a big part of everyone\u2019s diet."
+  expression: {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
+  nextSentence: {fileID: 11400000, guid: a9b5a3d7b6aca544ab276bb05b6fde2a, type: 2}
+  options: []

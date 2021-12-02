@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
+  m_Name: Downtime11
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  text: "I\u2019ll start cooking the chicken while we wait, but it\u2019s not too
+    involved. If you have any questions\u2014about the food, about me, whatever\u2014now\u2019s
+    the time to ask.\r\n"
+  expression: {fileID: 0}
+  nextSentence: {fileID: 11400000, guid: da45bf87f4ac9de419ab8ddd5617933d, type: 2}
+  options: []

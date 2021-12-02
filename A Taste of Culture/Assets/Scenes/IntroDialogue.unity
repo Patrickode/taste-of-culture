@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
+  dialogueManager: {fileID: 1248825825}
   dialogue: {fileID: 358728668}
   trigger: {fileID: 1405199866}
 --- !u!4 &1405199868

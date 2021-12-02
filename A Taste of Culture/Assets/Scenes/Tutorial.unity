@@ -300,7 +300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fdeaaf5cce8fe4fb8055d990ff41e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gif: {fileID: 0}
+  sceneManager: {fileID: 0}
+  demoVideo: {fileID: 0}
+  closeButton: {fileID: 0}
+  demoPlayer: {fileID: 0}
 --- !u!4 &1366852295
 Transform:
   m_ObjectHideFlags: 0
