@@ -13,16 +13,20 @@ public class SceneController : MonoBehaviour
     public GameEvent choseChicken;
     public GameEvent choseTofu;
 
-    public enum Ingredient { Onion, Tomato, Spices };
+    public enum Ingredient { Protein, Onion, Tomato, Spices };
 
     [SerializeField] private Ingredient currentIngredient;
     public Ingredient CurrentIngredient { get { return currentIngredient; } }
+
+    // public DataHolder dataHolder;
     
     // Will only be referenced if in chopping scene.
     GameObject onion;
     GameObject tomato;
     GameObject onionInstruction;
     GameObject tomatoInstruction;
+
+    GameObject currentProtein;
 
     void Awake() 
     {
@@ -39,13 +43,17 @@ public class SceneController : MonoBehaviour
         if (protein.value == "chicken")
         {
             choseChicken.Raise();
+
+            ActivateProtein("Raw Chicken", "Tofu Block");
         }
         else if (protein.value == "tofu")
         {
             choseTofu.Raise();
-        }
-        
+
+            ActivateProtein("Tofu Block", "Raw Chicken");
+        }       
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +62,22 @@ public class SceneController : MonoBehaviour
         {
             if(tomato != null) { tomato.SetActive(false); }
             if(tomatoInstruction != null) { tomatoInstruction.SetActive(false); }
+        }
+    }
+
+    void ActivateProtein(string selectedProtein, string otherProtein)
+    {
+        currentProtein = GameObject.Find(selectedProtein);
+        // if(currentProtein != null) { currentProtein.SetActive(true); } 
+
+        GameObject proteinToDeactivate = GameObject.Find(otherProtein);
+        if(proteinToDeactivate != null) { proteinToDeactivate.SetActive(false); } 
+
+        CuttingKnife knife = FindObjectOfType<CuttingKnife>();
+        if(knife != null && currentProtein != null) 
+        { 
+            knife.collider1 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<IngredientCollider>();
+            knife.collider2 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<IngredientCollider>();
         }
     }
 

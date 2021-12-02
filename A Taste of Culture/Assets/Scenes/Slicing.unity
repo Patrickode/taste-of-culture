@@ -431,6 +431,14 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 3.224058
       objectReference: {fileID: 0}
+    - target: {fileID: 4821346198439822670, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858010493043867236, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5959611214628921406, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
       propertyPath: m_Size.y
       value: 4.365484
@@ -1641,7 +1649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1710292001
 Transform:
   m_ObjectHideFlags: 0
@@ -1694,7 +1702,7 @@ MonoBehaviour:
   dialogue:
     name: Jaya
     sentences:
-    - First, we need to cut the protein. I like to slice it into strips, so the pieces
+    - Next, we need to cut the protein. I like to slice it into strips, so the pieces
       are totally cooked and covered in sauce without being too small.
     - Here, let me show you how...
     expressions:

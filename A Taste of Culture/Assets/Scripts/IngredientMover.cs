@@ -93,6 +93,9 @@ public class IngredientMover : MonoBehaviour
 
         allowRotation = false;
         hasBeenRotated = true;
+
+        InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
+        if(tooltips != null) { tooltips.ResetInstructions(); }
     }
 
     // Disable knife interaction and inform scene controller that the task has been completed.

@@ -604,8 +604,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
+  dialogueManager: {fileID: 0}
+  dialogueTrigger: {fileID: 0}
   dialogue: {fileID: 358728668}
   trigger: {fileID: 1405199866}
+  nextScene: SpiceSelection
 --- !u!4 &1405199868
 Transform:
   m_ObjectHideFlags: 0

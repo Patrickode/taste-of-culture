@@ -1498,7 +1498,7 @@ MonoBehaviour:
   dialogue:
     name: Jaya
     sentences:
-    - Before I start cooking the chicken, let me show you how I like to dice the
+    - Before I start cooking the protein, let me show you how I like to dice the
       vegetables. It's not too difficult, but you might as well learn from a chef,
       no?
     expressions:
@@ -1860,7 +1860,7 @@ MonoBehaviour:
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
   choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
-  currentVeggie: 0
+  currentIngredient: 1
 --- !u!4 &1919847979
 Transform:
   m_ObjectHideFlags: 0
@@ -1977,7 +1977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59cdc2cb64b04f4ab0be01d54e7b6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 3
+  delay: 0.5
 --- !u!4 &2022783553
 Transform:
   m_ObjectHideFlags: 0

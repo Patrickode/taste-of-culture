@@ -17,6 +17,7 @@ public class DialogueSceneManager : MonoBehaviour
     public DialogueTrigger dialogueTrigger;
     public GameObject dialogue;
     public DialogueTrigger trigger;
+    public string nextScene;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class DialogueSceneManager : MonoBehaviour
                 break;
 
             case DialogueTime.Opening:
-                SceneManager.LoadScene("Slicing");
+                SceneManager.LoadScene(nextScene);
                 break;
         }
     }
