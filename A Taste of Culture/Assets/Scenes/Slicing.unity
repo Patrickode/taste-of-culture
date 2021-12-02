@@ -823,12 +823,22 @@ PrefabInstance:
       objectReference: {fileID: 1321017251}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
---- !u!212 &1031464207 stripped
+--- !u!1 &1031464207 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 1031464206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1031464208 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8514143427429472860, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
   m_PrefabInstance: {fileID: 1031464206}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1031464208 stripped
+--- !u!95 &1031464209 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8514143426733039806, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 1031464206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1031464210 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8514143426328432501, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
   m_PrefabInstance: {fileID: 1031464206}
@@ -839,7 +849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1031464209 stripped
+--- !u!114 &1031464211 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8514143427098217737, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
   m_PrefabInstance: {fileID: 1031464206}
@@ -850,16 +860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1031464210 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8514143426733039806, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1031464211 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1054445499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1001,7 @@ PrefabInstance:
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: dialogueTrigger
       value: 
-      objectReference: {fileID: 1236782931}
+      objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1070,13 +1070,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236782930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
     name: Jaya
     sentences:
-    - Careful! If you don't slice evenly enough, the chicken may cook unevenly.
+    - "Careful, if you don\u2019t slice evenly enough, the protein may cook unevenly."
     expressions:
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
 --- !u!82 &1236782939
@@ -1201,13 +1201,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321017250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06514e79870dcab40b0f5ec22fe70b2f, type: 3}
+  m_Script: {fileID: 11500000, guid: d26edc3cc4233cd4f885749c227c603f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 1031464209}
-  dialogueText: {fileID: 1031464208}
-  animator: {fileID: 1031464210}
-  spriteRenderer: {fileID: 1031464207}
+  nameText: {fileID: 1031464211}
+  dialogueText: {fileID: 1031464210}
+  animator: {fileID: 1031464209}
+  spriteRenderer: {fileID: 1031464208}
   sceneManager: {fileID: 1920461719}
 --- !u!4 &1321017252
 Transform:
@@ -1653,14 +1653,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920461717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
     name: Jaya
     sentences:
-    - First, we need to cut the chicken. I like to slice it into thin strips, so
-      the pieces are totally cooked and covered in sauce without being too small.
+    - First, we need to cut the protein. I like to slice it into strips, so the pieces
+      are totally cooked and covered in sauce without being too small.
     - Here, let me show you how...
     expressions:
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
@@ -1674,13 +1674,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920461717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3598260d1f42f438e8aa2d66f3d304, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c6fccf44905e6b4aae70e0215f5ab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knife: {fileID: 1236782930}
   dialogueManager: {fileID: 1321017251}
   dialogueTrigger: {fileID: 1920461718}
-  dialogue: {fileID: 1031464211}
+  dialogue: {fileID: 1031464207}
   gifManager: {fileID: 1054445500}
   dialogueString: 
 --- !u!4 &1920461720
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920461717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
