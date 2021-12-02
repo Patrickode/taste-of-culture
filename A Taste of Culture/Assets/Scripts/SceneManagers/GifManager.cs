@@ -14,7 +14,7 @@ public class GifManager : MonoBehaviour
     public Button closeButton;
     public VideoPlayer demoPlayer;
 
-    void Start() 
+    void Start()
     {
         if (closeButton != null)
         {
@@ -40,18 +40,18 @@ public class GifManager : MonoBehaviour
     // Start is called before the first frame update
     public void StartVideo()
     {
-        if(demoVideo != null) 
-        { 
+        if (demoVideo != null)
+        {
             Cursor.visible = true;
 
             demoPlayer.gameObject.SetActive(true);
-            demoVideo.gameObject.SetActive(true); 
+            demoVideo.gameObject.SetActive(true);
         }
     }
 
     void ButtonClicked()
     {
-        if(demoVideo == null) { return; }
+        if (demoVideo == null) { return; }
 
         demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
@@ -60,7 +60,7 @@ public class GifManager : MonoBehaviour
 
         // Start timer for toggling instruction tooltips
         InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
-        if(tooltips != null) { tooltips.PrepToToggle(); }
+        if (tooltips != null) { tooltips.PrepToToggle(); }
     }
 
     void LoopedOnce(VideoPlayer demoPlayer)

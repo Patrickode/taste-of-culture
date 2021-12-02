@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] string nextScene;
-    public GameObject sceneManager;
+    public CookingSceneManager sceneManager;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
+    public StringVariable protein;
+    public GameEvent choseChicken;
+    public GameEvent choseTofu;
+    public enum Veggie { Onion, Tomato };
 
-    public enum Ingredient { Chicken, Tofu, Onion, Tomato };
+    [SerializeField] private Veggie currentVeggie;
+    public Veggie CurrentVeggie { get { return currentVeggie; } }
 
-    [SerializeField] private Ingredient currentIngredient;
-    public Ingredient CurrentIngredient { get { return currentIngredient; } }
-    
     // Will only be referenced if in chopping scene.
     GameObject onion;
     GameObject tomato;
@@ -24,7 +26,7 @@ public class SceneController : MonoBehaviour
     void Awake() 
     {
         // If ingredient is onion, then grab onion and tomato gameobjects to be referenced on task completion
-        if(currentIngredient == Ingredient.Onion)
+        if(currentVeggie == Veggie.Onion)
         {
             onion = GameObject.Find("Onion");
             tomato = GameObject.Find("Tomato");
@@ -32,13 +34,22 @@ public class SceneController : MonoBehaviour
             onionInstruction = GameObject.Find("Onion Instruction");
             tomatoInstruction = GameObject.Find("Tomato Instruction");
         }
+
+        if (protein.value == "chicken")
+        {
+            choseChicken.Raise();
+        }
+        else if (protein.value == "tofu")
+        {
+            choseTofu.Raise();
+        }
         
     }
     // Start is called before the first frame update
     void Start()
     {
         // If ingredient is onion, then disable the tomato gameobject
-        if(currentIngredient == Ingredient.Onion)
+        if(currentVeggie == Veggie.Onion)
         {
             if(tomato != null) { tomato.SetActive(false); }
             if(tomatoInstruction != null) { tomatoInstruction.SetActive(false); }
@@ -54,13 +65,8 @@ public class SceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        if (sceneManager.GetComponent<DialogueSceneManager>() != null)
-        {
-            // potentially do something
-        }
-
         // If current ingredient is Onion, disable it and enable tomato
-        if(currentIngredient == Ingredient.Onion)
+        if(currentVeggie == Veggie.Onion && SceneManager.GetActiveScene().name == "Chopping")
         {
             yield return new WaitForSeconds(1f);
             if(onion != null) { onion.SetActive(false); }
@@ -72,8 +78,8 @@ public class SceneController : MonoBehaviour
             if(tomato != null) 
             { 
                 // Debug.Log("Found Tomato!");
-                tomato.SetActive(true); 
-                currentIngredient = Ingredient.Tomato;
+                tomato.SetActive(true);
+                currentVeggie = Veggie.Tomato;
             }
 
             if(tomatoInstruction != null) { tomatoInstruction.SetActive(true); }
@@ -87,7 +93,7 @@ public class SceneController : MonoBehaviour
 
         else
         {
-            sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            sceneManager.FinishedCutting();
             yield return new WaitForSeconds(5f);
             
             // Load next scene

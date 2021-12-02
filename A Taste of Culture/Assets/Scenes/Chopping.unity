@@ -841,7 +841,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 704421186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06514e79870dcab40b0f5ec22fe70b2f, type: 3}
+  m_Script: {fileID: 11500000, guid: d26edc3cc4233cd4f885749c227c603f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 777324153}
@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749865172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3598260d1f42f438e8aa2d66f3d304, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c6fccf44905e6b4aae70e0215f5ab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knife: {fileID: 1881950115}
@@ -1492,7 +1492,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749865172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749865172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
@@ -1856,8 +1856,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: ClosingDialogue
-  sceneManager: {fileID: 1749865172}
-  currentIngredient: 2
+  sceneManager: {fileID: 1749865173}
+  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
+  choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
+  choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
+  currentVeggie: 0
 --- !u!4 &1919847979
 Transform:
   m_ObjectHideFlags: 0
