@@ -108,7 +108,7 @@ public class IngredientMover : MonoBehaviour
         
         if(sceneController != null) 
         { 
-            if(sceneController.CurrentVeggie == SceneController.Veggie.Tomato)
+            if(sceneController.CurrentIngredient == SceneController.Ingredient.Tomato)
             {
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
                 if(knife != null) { knife.CanChop = false; }
