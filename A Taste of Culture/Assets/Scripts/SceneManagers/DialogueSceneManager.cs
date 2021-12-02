@@ -16,25 +16,20 @@ public class DialogueSceneManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public DialogueTrigger dialogueTrigger;
     public GameObject dialogue;
+    public DialogueTrigger trigger;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = true;
         dialogue.SetActive(true);
-        StartCoroutine(TriggerDialogue());
-    }
-
-    IEnumerator TriggerDialogue()
-    {
-        yield return new WaitForSeconds(0.5f);
-        dialogueTrigger.StartDialogue();
+        trigger.StartDialogue();
     }
 
     public void DialogueEnded()
     {
-        dialogue.SetActive(false);
         Cursor.visible = false;
+        dialogue.SetActive(false);
         switch (time)
         {
             case DialogueTime.Closing:

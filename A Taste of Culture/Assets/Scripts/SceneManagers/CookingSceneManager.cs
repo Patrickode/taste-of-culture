@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -76,6 +76,7 @@ public class CookingSceneManager : MonoBehaviour
 
     public void FinishedCutting()
     {
+        Debug.Log("Finished cutting");
         dialogue.SetActive(true);
         knife.SetActive(false);
         Cursor.visible = true;

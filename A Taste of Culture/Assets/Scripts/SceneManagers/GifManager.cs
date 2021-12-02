@@ -8,6 +8,7 @@ public class GifManager : MonoBehaviour
 {
     //[SerializeField] GameObject ingredient1Instruction;
     //[SerializeField] GameObject ingredient2Instruction;
+
     public CookingSceneManager sceneManager;
     public RawImage demoVideo;
     public Button closeButton;
@@ -56,7 +57,7 @@ public class GifManager : MonoBehaviour
             Cursor.visible = true;
 
             demoPlayer.gameObject.SetActive(true);
-            demoVideo.gameObject.SetActive(true); 
+            demoVideo.gameObject.SetActive(true);
         }
 
         // hasBeenPlayed = true;
@@ -73,12 +74,16 @@ public class GifManager : MonoBehaviour
 
     void ButtonClicked()
     {
-        if(demoVideo == null) { return; }
+        if (demoVideo == null) { return; }
 
         demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
         sceneManager.GifEnded();
+
+        // Start timer for toggling instruction tooltips
+        InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
+        if (tooltips != null) { tooltips.PrepToToggle(); }
     }
 
     void LoopedOnce(VideoPlayer demoPlayer)

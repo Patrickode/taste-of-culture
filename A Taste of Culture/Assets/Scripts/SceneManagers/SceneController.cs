@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] string nextScene;
-    public GameObject sceneManager;
+    public CookingSceneManager sceneManager;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
+    public StringVariable protein;
+    public GameEvent choseChicken;
+    public GameEvent choseTofu;
 
-    public enum Ingredient { Chicken, Tofu, Onion, Tomato, Spices };
+    public enum Ingredient { Onion, Tomato, Spices };
 
     [SerializeField] private Ingredient currentIngredient;
     public Ingredient CurrentIngredient { get { return currentIngredient; } }
@@ -31,6 +34,15 @@ public class SceneController : MonoBehaviour
 
             onionInstruction = GameObject.Find("Onion Instruction");
             tomatoInstruction = GameObject.Find("Tomato Instruction");
+        }
+
+        if (protein.value == "chicken")
+        {
+            choseChicken.Raise();
+        }
+        else if (protein.value == "tofu")
+        {
+            choseTofu.Raise();
         }
         
     }
@@ -53,11 +65,6 @@ public class SceneController : MonoBehaviour
     IEnumerator CompleteTask()
     {
         yield return new WaitForSeconds(0.5f);
-
-        if (sceneManager.GetComponent<DialogueSceneManager>() != null)
-        {
-            // potentially do something
-        }
 
         // If current ingredient is Onion, disable it and enable tomato
         if(currentIngredient == Ingredient.Onion)
@@ -83,7 +90,7 @@ public class SceneController : MonoBehaviour
 
         else 
         {
-            sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            sceneManager.FinishedCutting();
             // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
             // {
             //     sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
@@ -101,6 +108,5 @@ public class SceneController : MonoBehaviour
                 SceneManager.LoadScene(nextScene);
             }
         }
-
     }
 }
