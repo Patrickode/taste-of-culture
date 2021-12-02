@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7df7a15302d170b4bb27080f2d986833, type: 3}
-  m_Name: ProteinSV
+  m_Name: IngredientSV
   m_EditorClassIdentifier: 
-  value: 
+  value: tofu
