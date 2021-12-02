@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
-  m_Name: Intro2
+  m_Name: Outro6
   m_EditorClassIdentifier: 
   speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
-  text: Today we'll be making Makhani (MAH-kuh-nee), a curry sauce originally from
-    my hometown, Delhi (DEH-lee), in northern India. For the protein, we can use
-    chicken or tofu. Which would you prefer?
+  text: Oh, and here's my secret recipe if you want to make this again sometime.
   expression: {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
-  nextSentence: {fileID: 11400000, guid: 48c2dbfa06836b749b4749a97fde184e, type: 2}
+  nextSentence: {fileID: 0}
   options: []

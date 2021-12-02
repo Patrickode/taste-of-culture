@@ -226,11 +226,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2288599737265127226, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
 --- !u!1 &215096702 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2288599736888806087, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5022556868633497050, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
   m_PrefabInstance: {fileID: 215096701}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &215096703 stripped
@@ -265,6 +269,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &215096707 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2288599737680728105, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
+  m_PrefabInstance: {fileID: 215096701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &215096708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215096707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 964f5f206d832ee4f9248f0885e50214, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 215096704}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: StartDialogue
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &215096709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215096707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4ef594b1351dd8a4386b29ce49ca0ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 215096704}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: EndDialogue
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &374514686
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +341,7 @@ GameObject:
   - component: {fileID: 374514688}
   - component: {fileID: 374514687}
   - component: {fileID: 374514689}
+  - component: {fileID: 374514690}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: GameController
@@ -296,9 +362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 1
-  dialogueManager: {fileID: 886467088}
-  dialogueTrigger: {fileID: 374514689}
-  dialogue: {fileID: 215096702}
+  dialogue: {fileID: 215096707}
+  trigger: {fileID: 374514689}
 --- !u!4 &374514688
 Transform:
   m_ObjectHideFlags: 0
@@ -322,26 +387,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 374514686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ae3df2d694b6846a3834aeea685983, type: 3}
+  m_Script: {fileID: 11500000, guid: c03101fa480bc2a439739b43a75ad63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Jaya
-    sentences:
-    - I know we didn't do much, but this cooking class isn't fully developed.
-    - Anyways, as the head chef, you should have the first taste.
-    - That's a good face! Looks like you enjoyed it. Now, let me try.
-    - Hm, not too shabby for a first-timer. Maybe you can work for me some day!
-    - I'm just kidding. Our time here is at an end, though, so I hope you'll come
-      visit my restaurant in the future.
-    - Oh, and here's my secret recipe if you want to make this again sometime.
-    expressions:
-    - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
-    - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
-    - {fileID: 21300000, guid: d1ed27ee52a4179438042caebcb8faeb, type: 3}
-    - {fileID: 21300000, guid: d1ed27ee52a4179438042caebcb8faeb, type: 3}
-    - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
-    - {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
+  dialogue: {fileID: 11400000, guid: 5b4ecfbd144f60849aceb7318fcde461, type: 2}
+  dialogueManager: {fileID: 886467088}
+--- !u!114 &374514690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374514686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4ef594b1351dd8a4386b29ce49ca0ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 374514687}
+        m_TargetAssemblyTypeName: DialogueSceneManager, Assembly-CSharp
+        m_MethodName: DialogueEnded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &886467086
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,14 +446,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 886467086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ef6a38eadf8a142af7b313734f34e5, type: 3}
+  m_Script: {fileID: 11500000, guid: b22baf3691775574cb704f5e0f17bfcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 215096706}
-  dialogueText: {fileID: 215096705}
+  ConversationEnded: {fileID: 11400000, guid: 4ef594b1351dd8a4386b29ce49ca0ec5, type: 2}
+  ConversationStarted: {fileID: 11400000, guid: 964f5f206d832ee4f9248f0885e50214, type: 2}
+  playerName: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  timeBetweenChars: 0.01
+  playerNameTextUI: {fileID: 215096706}
+  npcNameTextUI: {fileID: 215096706}
+  playerTextUI: {fileID: 215096705}
+  npcTextUI: {fileID: 215096705}
+  playerSprite: {fileID: 215096703}
+  npcSprite: {fileID: 215096703}
+  DialogueUI: {fileID: 215096702}
+  optionsUI: []
   animator: {fileID: 215096704}
-  spriteRenderer: {fileID: 215096703}
-  sceneManager: {fileID: 374514687}
 --- !u!4 &886467089
 Transform:
   m_ObjectHideFlags: 0
