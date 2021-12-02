@@ -109,15 +109,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5711306186731597365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: Jaya
-    sentences:
-    - Try not to make a mess...
-    expressions:
-    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+    name: 
+    sentences: []
+    expressions: []
 --- !u!61 &3569171547480309981
 BoxCollider2D:
   m_ObjectHideFlags: 0

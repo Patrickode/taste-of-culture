@@ -211,9 +211,17 @@ PrefabInstance:
       value: Cinnamon
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Cinnamon is very sweet and tastes a bit earthy. Be careful not too add
-        too much though, you might be surprised at how spicy it can make the dish.
+      value: Cinnamon is very sweet and tastes a bit earthy. Be careful not to add
+        too much, though, you might be surprised how spicy it can make the dish.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -225,7 +233,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &9461486 stripped
@@ -270,8 +278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 832.7031, y: 479.10156}
-  m_SizeDelta: {x: 200, y: 63.5}
+  m_AnchoredPosition: {x: 837.93, y: 454.57}
+  m_SizeDelta: {x: 161.56, y: 66.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10635380
 MonoBehaviour:
@@ -550,7 +558,7 @@ GameObject:
   - component: {fileID: 213751820}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -605,10 +613,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -625,8 +633,8 @@ Canvas:
   m_GameObject: {fileID: 213751818}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 74386172}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -634,7 +642,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -403596795
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &247872725
@@ -852,7 +860,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &455783527
@@ -1276,6 +1284,14 @@ PrefabInstance:
       value: Cayenne Pepper
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Cayenne pepper is spicy and a little sweet, with a moderate heat.
       objectReference: {fileID: 0}
@@ -1289,7 +1305,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &806216060 stripped
@@ -1533,7 +1549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -22}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &908536769
@@ -1584,7 +1600,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1010058378
@@ -2234,7 +2250,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321017250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06514e79870dcab40b0f5ec22fe70b2f, type: 3}
+  m_Script: {fileID: 11500000, guid: d26edc3cc4233cd4f885749c227c603f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 1031464209}
@@ -2344,6 +2360,14 @@ PrefabInstance:
       value: Nutmeg
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Nutmeg is from ground seeds that have a lingering sweetness with a warm,
         savory undertone.
@@ -2358,7 +2382,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1338839918 stripped
@@ -2642,8 +2666,16 @@ PrefabInstance:
       value: Paprika
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: 'Paprika is a subtle, sweet spice with a hint of spiciness. '
+      value: Paprika is a subtle, sweet spice with a hint of heat.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -2655,7 +2687,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1503757051 stripped
@@ -2693,8 +2725,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: Slicing
-  sceneManager: {fileID: 1920461717}
-  currentIngredient: 4
+  sceneManager: {fileID: 1920461719}
+  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
+  choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
+  choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
+  currentIngredient: 2
 --- !u!4 &1533509940
 Transform:
   m_ObjectHideFlags: 0
@@ -2799,17 +2834,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1550984606}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1685165192 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
-  m_PrefabInstance: {fileID: 8186237723322062362}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1701473669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,8 +2871,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 603.2031, y: 479.10156}
-  m_SizeDelta: {x: 200, y: 63.5}
+  m_AnchoredPosition: {x: 652.53, y: 454.57}
+  m_SizeDelta: {x: 161.56, y: 66.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1701473671
 MonoBehaviour:
@@ -3288,25 +3312,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920461717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
     name: Jaya
     sentences:
     - First, we need to decide which, and how much spice to use.
-    - "I\u2019ve already put a pinch of pepper, salt, and turmeric in our bowl, since
-      we need those for sure. I\u2019ll let you choose what else to use, from all
-      the spices I have space for here.\r\n"
-    - 'From here, I typically use three pinches of coriander, and one pinch of cumin
-      and nutmeg.
-
-'
-    - "Heat, or \u201Cspiciness,\u201D is different for everyone, but I think four
-      pinches of cayenne will be medium heat, in your case. But if you\u2019d like
-      it to be more mild, maybe stick to three pinches.\n"
-    - "Or maybe you want it to be extra hot and want four pinches. Like I said, it\u2019s
-      up to you."
+    - I've already put in a pinch of pepper, salt, and tumeric in our bowl, since
+      we need those for sure. I'll let you choose what else to use, from all the
+      spices I have space for here.
+    - From here, I typically use three pinches of coriander, and one pinch each of
+      cumin and nutmeg.
+    - Heat, or "spiciness," is different for everyone, but I think four pinches of
+      cayenne will be medium heat, in your case. But if you'd like it to be more
+      mild, stick to three pinches.
+    - Or maybe you want it to be extra hot and want five pinches! Like I said, it's
+      up to you.
     expressions:
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
     - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
@@ -3322,7 +3344,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920461717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3598260d1f42f438e8aa2d66f3d304, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c6fccf44905e6b4aae70e0215f5ab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knife: {fileID: 1715652776}
@@ -3354,7 +3376,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920461717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
@@ -3461,6 +3483,14 @@ PrefabInstance:
       value: Ginger
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Ginger is a root vegetable with a complex zesty, warm, spicy, and sweet
         flavor.
@@ -3475,7 +3505,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1975970279 stripped
@@ -3559,6 +3589,14 @@ PrefabInstance:
       value: Coriander
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Coriander has a light, earthy flavor.
       objectReference: {fileID: 0}
@@ -3572,7 +3610,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2003601191 stripped
@@ -3894,6 +3932,14 @@ PrefabInstance:
       value: Cumin
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Cumin seeds have an earthy, smoky, and slightly bitter flavor.
       objectReference: {fileID: 0}
@@ -3907,7 +3953,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3c73d8ae6ca6d48ad8698deb17ee07, type: 3}
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2134111584 stripped
@@ -3991,8 +4037,16 @@ PrefabInstance:
       value: Garlic
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: 'Garlic is a root vegetable with a pungent savory and spicy flavor. '
+      value: Garlic is a root vegetable with a pungeant savory and spicy flavor.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
@@ -4125,6 +4179,26 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1662690909
       objectReference: {fileID: 0}
+    - target: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: dialogue.name
+      value: Jaya
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: dialogue.expressions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Try not to make a mess...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: dialogue.expressions.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
     - target: {fileID: 5487744331305554281, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: sceneManager
       value: 
@@ -4132,7 +4206,7 @@ PrefabInstance:
     - target: {fileID: 5487744331305554281, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: dialogueTrigger
       value: 
-      objectReference: {fileID: 1685165192}
+      objectReference: {fileID: 8186237723322062363}
     - target: {fileID: 5711306186731597365, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: m_Name
       value: SpiceStation
@@ -4143,6 +4217,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+--- !u!114 &8186237723322062363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3641003041472394794, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+  m_PrefabInstance: {fileID: 8186237723322062362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8652904761806396423
 PrefabInstance:
   m_ObjectHideFlags: 0
