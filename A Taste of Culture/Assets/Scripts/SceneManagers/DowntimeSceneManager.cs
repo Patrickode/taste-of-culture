@@ -126,15 +126,6 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         Cursor.visible = false;
         dialogue.SetActive(false);
-        //switch (time)
-        //{
-        //    case DialogueTime.Closing:
-        //        SceneManager.LoadScene("IntroDialogue");
-        //        break;
-
-        //    case DialogueTime.Opening:
-        //        SceneManager.LoadScene("Slicing");
-        //        break;
-        //}
+        SceneManager.LoadScene("IntroDialogue");
     }
 }

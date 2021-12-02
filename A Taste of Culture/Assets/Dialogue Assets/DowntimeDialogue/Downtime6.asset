@@ -15,5 +15,5 @@ MonoBehaviour:
   speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
   text: Next up, we put the blended tomato in with the onions.
   expression: {fileID: 0}
-  nextSentence: {fileID: 0}
+  nextSentence: {fileID: 11400000, guid: c2ad327ee150fa74aa4b58043dcc8076, type: 2}
   options: []
