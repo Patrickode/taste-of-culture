@@ -604,12 +604,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-<<<<<<< HEAD
-  dialogueManager: {fileID: 1248825825}
-=======
+
   dialogueManager: {fileID: 0}
   dialogueTrigger: {fileID: 0}
->>>>>>> e1ef9180de7be11787f62724e586d666cc29380a
+
   dialogue: {fileID: 358728668}
   trigger: {fileID: 1405199866}
   nextScene: SpiceSelection
