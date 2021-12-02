@@ -9,6 +9,7 @@ public class DowntimeSceneManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public GameObject dialogue;
     public DialogueTrigger trigger;
+    public GameObject mentor;
 
     public GameObject[] backgrounds;
 
@@ -46,6 +47,7 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
+        mentor.SetActive(false);
         StartCoroutine(TakeOffLid());
         StartCoroutine(ButterInPot());
         StartCoroutine(BackgroundToSchool());
@@ -53,7 +55,7 @@ public class DowntimeSceneManager : MonoBehaviour
 
     IEnumerator ButterInPot()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         backgrounds[6].SetActive(true);
     }
 
@@ -61,8 +63,10 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[11].SetActive(false);
         backgrounds[7].SetActive(true);
+        mentor.SetActive(false);
         StartCoroutine(TakeOffLid());
         StartCoroutine(ProteinInPot());
+        StartCoroutine(BackgroundToSchool());
     }
 
     IEnumerator ProteinInPot()
@@ -71,27 +75,51 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[8].SetActive(true);
     }
 
+    public void CheckOnCurry()
+    {
+        backgrounds[11].SetActive(false);
+        backgrounds[8].SetActive(true);
+        backgrounds[9].SetActive(true);
+        StartCoroutine(TakeOffLid());
+    }
+
+    public void PlateCurry()
+    {
+        StartCoroutine(ShowPlate());
+    }
+
+    IEnumerator ShowPlate()
+    {
+        mentor.SetActive(false);
+        backgrounds[10].SetActive(true);
+        yield return new WaitForSeconds(5.0f);
+        backgrounds[11].SetActive(true);
+        mentor.SetActive(true);
+    }
+
     IEnumerator PutOnLid()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         backgrounds[9].SetActive(true);
     }
 
     IEnumerator TakeOffLid()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         backgrounds[9].SetActive(false);
     }
 
     IEnumerator BackgroundToSchool()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(4.0f);
         backgrounds[11].SetActive(true);
+        mentor.SetActive(true);
     }
     IEnumerator BackgroundToDish()
     {
         yield return new WaitForSeconds(1.0f);
         backgrounds[10].SetActive(true);
+        mentor.SetActive(false);
     }
 
     public void DialogueEnded()

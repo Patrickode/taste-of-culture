@@ -16,6 +16,6 @@ MonoBehaviour:
   text: "I\u2019ll start cooking the chicken while we wait, but it\u2019s not too
     involved. If you have any questions\u2014about the food, about me, whatever\u2014now\u2019s
     the time to ask.\r\n"
-  expression: {fileID: 0}
+  expression: {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
   nextSentence: {fileID: 11400000, guid: da45bf87f4ac9de419ab8ddd5617933d, type: 2}
   options: []
