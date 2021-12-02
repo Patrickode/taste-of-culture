@@ -6,10 +6,12 @@ TagManager:
   tags:
   - Knife
   - Ingredient
-  - Tofu
   - Guideline
   - Background
   - UI
+  - Hand
+  - Spice
+  - Initial Spice
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - Ingredient
   - Tool
   - Background
+  - Spice
   - Ingredient Collider
-  - 
   - 
   - 
   - 

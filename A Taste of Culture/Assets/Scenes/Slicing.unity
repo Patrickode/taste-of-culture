@@ -431,6 +431,14 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 3.224058
       objectReference: {fileID: 0}
+    - target: {fileID: 4821346198439822670, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858010493043867236, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5959611214628921406, guid: 24d127cfb746c6045bd2d27b557becbd, type: 3}
       propertyPath: m_Size.y
       value: 4.365484
@@ -1475,7 +1483,7 @@ MonoBehaviour:
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
   choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
-  currentVeggie: 0
+  currentIngredient: 0
 --- !u!4 &1533509940
 Transform:
   m_ObjectHideFlags: 0
@@ -1524,7 +1532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3270537869083788526, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3270537869083788526, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_IsActive
@@ -1596,7 +1604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8644843542420962632, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8644843542420962632, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_IsActive
@@ -1641,7 +1649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1710292001
 Transform:
   m_ObjectHideFlags: 0
@@ -1694,7 +1702,7 @@ MonoBehaviour:
   dialogue:
     name: Jaya
     sentences:
-    - First, we need to cut the protein. I like to slice it into strips, so the pieces
+    - Next, we need to cut the protein. I like to slice it into strips, so the pieces
       are totally cooked and covered in sauce without being too small.
     - Here, let me show you how...
     expressions:

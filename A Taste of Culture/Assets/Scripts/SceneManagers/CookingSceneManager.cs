@@ -12,6 +12,8 @@ public class CookingSceneManager : MonoBehaviour
     public GifManager gifManager;
     public string dialogueString;
 
+    bool gifHasPlayed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,15 +32,25 @@ public class CookingSceneManager : MonoBehaviour
 
     public void IntroEnded()
     {
+        if(gifHasPlayed) { return; }
+
         dialogue.SetActive(false);
         // knife.SetActive(true);
         gifManager.StartVideo();
+
+        gifHasPlayed = true;
     }
 
     public void GifEnded()
     {
         knife.SetActive(true);
         Cursor.visible = false;
+
+        SceneController sceneController = FindObjectOfType<SceneController>();
+        if(sceneController != null && sceneController.CurrentIngredient == SceneController.Ingredient.Spices) 
+        { 
+            dialogue.SetActive(true); 
+        }
     }
 
     public void CutOutsideMargins()

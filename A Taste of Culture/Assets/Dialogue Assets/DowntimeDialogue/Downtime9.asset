@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
+  m_Name: Downtime9
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  text: "That\u2019s all for the short steps. Now we put the butter and cream in
+    and let everything simmer."
+  expression: {fileID: 0}
+  nextSentence: {fileID: 11400000, guid: dc6f7c4a27ea0bf4e8f35d7dbdc3c998, type: 2}
+  options: []

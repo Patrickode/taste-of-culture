@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
+  m_Name: Downtime16
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  text: text
+  expression: {fileID: 21300000, guid: 719df196748f5a44dab3d5bc16bbfef1, type: 3}
+  nextSentence: {fileID: 0}
+  options:
+  - text: 
+    nextSentence: {fileID: 11400000, guid: d7a46cd8eb293e04ba6bd99daa687067, type: 2}
+    consequence: {fileID: 0}
+  - text: '[Check on the curry]'
+    nextSentence: {fileID: 11400000, guid: d7a46cd8eb293e04ba6bd99daa687067, type: 2}
+    consequence: {fileID: 11400000, guid: 120cfdb583b166745b8027393093e936, type: 2}

@@ -13,8 +13,10 @@ public enum DialogueTime
 public class DialogueSceneManager : MonoBehaviour
 {
     public DialogueTime time;
+    public DialogueManager dialogueManager;
     public GameObject dialogue;
     public DialogueTrigger trigger;
+    public string nextScene;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,7 @@ public class DialogueSceneManager : MonoBehaviour
                 break;
 
             case DialogueTime.Opening:
-                SceneManager.LoadScene("Slicing");
+                SceneManager.LoadScene(nextScene);
                 break;
         }
     }

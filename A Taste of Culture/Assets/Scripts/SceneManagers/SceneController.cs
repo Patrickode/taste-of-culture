@@ -12,21 +12,26 @@ public class SceneController : MonoBehaviour
     public StringVariable protein;
     public GameEvent choseChicken;
     public GameEvent choseTofu;
-    public enum Veggie { Onion, Tomato };
 
-    [SerializeField] private Veggie currentVeggie;
-    public Veggie CurrentVeggie { get { return currentVeggie; } }
+    public enum Ingredient { Protein, Onion, Tomato, Spices };
 
+    [SerializeField] private Ingredient currentIngredient;
+    public Ingredient CurrentIngredient { get { return currentIngredient; } }
+
+    // public DataHolder dataHolder;
+    
     // Will only be referenced if in chopping scene.
     GameObject onion;
     GameObject tomato;
     GameObject onionInstruction;
     GameObject tomatoInstruction;
 
+    GameObject currentProtein;
+
     void Awake() 
     {
         // If ingredient is onion, then grab onion and tomato gameobjects to be referenced on task completion
-        if(currentVeggie == Veggie.Onion)
+        if(currentIngredient == Ingredient.Onion)
         {
             onion = GameObject.Find("Onion");
             tomato = GameObject.Find("Tomato");
@@ -38,21 +43,41 @@ public class SceneController : MonoBehaviour
         if (protein.value == "chicken")
         {
             choseChicken.Raise();
+
+            ActivateProtein("Raw Chicken", "Tofu Block");
         }
         else if (protein.value == "tofu")
         {
             choseTofu.Raise();
-        }
-        
+
+            ActivateProtein("Tofu Block", "Raw Chicken");
+        }       
     }
+
     // Start is called before the first frame update
     void Start()
     {
         // If ingredient is onion, then disable the tomato gameobject
-        if(currentVeggie == Veggie.Onion)
+        if(currentIngredient == Ingredient.Onion)
         {
             if(tomato != null) { tomato.SetActive(false); }
             if(tomatoInstruction != null) { tomatoInstruction.SetActive(false); }
+        }
+    }
+
+    void ActivateProtein(string selectedProtein, string otherProtein)
+    {
+        currentProtein = GameObject.Find(selectedProtein);
+        // if(currentProtein != null) { currentProtein.SetActive(true); } 
+
+        GameObject proteinToDeactivate = GameObject.Find(otherProtein);
+        if(proteinToDeactivate != null) { proteinToDeactivate.SetActive(false); } 
+
+        CuttingKnife knife = FindObjectOfType<CuttingKnife>();
+        if(knife != null && currentProtein != null) 
+        { 
+            knife.collider1 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<IngredientCollider>();
+            knife.collider2 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<IngredientCollider>();
         }
     }
 
@@ -66,7 +91,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // If current ingredient is Onion, disable it and enable tomato
-        if(currentVeggie == Veggie.Onion && SceneManager.GetActiveScene().name == "Chopping")
+        if(currentIngredient == Ingredient.Onion)
         {
             yield return new WaitForSeconds(1f);
             if(onion != null) { onion.SetActive(false); }
@@ -78,22 +103,27 @@ public class SceneController : MonoBehaviour
             if(tomato != null) 
             { 
                 // Debug.Log("Found Tomato!");
-                tomato.SetActive(true);
-                currentVeggie = Veggie.Tomato;
+                tomato.SetActive(true); 
+                currentIngredient = Ingredient.Tomato;
             }
 
             if(tomatoInstruction != null) { tomatoInstruction.SetActive(true); }
 
-            // Reset instruction tooltip so that movement instructions will be toggled again
-            InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
-            if(tooltips != null) { tooltips.ResetInstructions(); }
-
             yield break;
         }
 
-        else
+        else 
         {
             sceneManager.FinishedCutting();
+            // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
+            // {
+            //     sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
+            // }
+            // else 
+            // { 
+            //     /// TODO: Disable hand in spice selection...
+            //     Debug.Log("Done selecting spices");
+            // }
             yield return new WaitForSeconds(5f);
             
             // Load next scene
