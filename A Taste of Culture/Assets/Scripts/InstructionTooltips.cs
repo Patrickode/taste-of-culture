@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InstructionTooltips : MonoBehaviour
 {
-    [SerializeField] float delay = 3f;
+    [SerializeField] float delay = 0.5f;
 
     GameObject movementControls;
     GameObject rotationControls;

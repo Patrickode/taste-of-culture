@@ -6,8 +6,8 @@ using UnityEngine;
 public class CuttingKnife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
-    [SerializeField] IngredientCollider collider1;
-    [SerializeField] IngredientCollider collider2;
+    public IngredientCollider collider1;
+    public IngredientCollider collider2;
 
     public Animator animator;
     public CookingSceneManager sceneManager;
