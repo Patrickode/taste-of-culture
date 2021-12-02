@@ -22,8 +22,6 @@ public class CookingSceneManager : MonoBehaviour
         dialogueString = "intro";
         StartCoroutine(TriggerIntro());
         Cursor.visible = true;
-
-        Debug.Log("Trigger intro");
     }
 
     IEnumerator TriggerIntro()
@@ -39,7 +37,6 @@ public class CookingSceneManager : MonoBehaviour
         dialogue.SetActive(false);
         // knife.SetActive(true);
         gifManager.StartVideo();
-        Debug.Log("Video started");
 
         gifHasPlayed = true;
     }
@@ -48,13 +45,11 @@ public class CookingSceneManager : MonoBehaviour
     {
         knife.SetActive(true);
         Cursor.visible = false;
-        Debug.Log("Gif ended");
 
         SceneController sceneController = FindObjectOfType<SceneController>();
         if(sceneController != null && sceneController.CurrentIngredient == SceneController.Ingredient.Spices) 
         { 
             dialogue.SetActive(true); 
-            Debug.Log("Dialogue active");
         }
     }
 

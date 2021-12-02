@@ -1475,7 +1475,7 @@ MonoBehaviour:
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
   choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
-  currentVeggie: 0
+  currentIngredient: 0
 --- !u!4 &1533509940
 Transform:
   m_ObjectHideFlags: 0
@@ -1524,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3270537869083788526, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3270537869083788526, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_IsActive
@@ -1596,7 +1596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8644843542420962632, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8644843542420962632, guid: 370d176bc80718a4a9278a992b7c6e18, type: 3}
       propertyPath: m_IsActive
