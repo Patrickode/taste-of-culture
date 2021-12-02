@@ -1304,25 +1304,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 889277574172800399, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.33
-      objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Size.x
-      value: 2.8003306
+      value: 2.4642386
       objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Size.y
-      value: 3.4061956
+      value: 3.7422876
       objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Offset.x
-      value: -0.90255046
+      value: -2.1162164
       objectReference: {fileID: 0}
     - target: {fileID: 1262234882216229611, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_Offset.y
-      value: 2.1146708
+      value: 1.9466248
       objectReference: {fileID: 0}
     - target: {fileID: 2820222837753164620, guid: 21b9152b2e9400c42a235a5a892c3217, type: 3}
       propertyPath: m_RootOrder
@@ -4128,26 +4124,6 @@ PrefabInstance:
     - target: {fileID: 2481182906558787019, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: m_SortingLayerID
       value: 1662690909
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569171547480309981, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
-      propertyPath: m_Size.x
-      value: 5.0951233
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569171547480309981, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
-      propertyPath: m_Size.y
-      value: 2.8737984
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569171547480309981, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
-      propertyPath: m_Offset.x
-      value: 7.054764
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971753522492671725, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
-      propertyPath: m_Size.x
-      value: 5.0049434
-      objectReference: {fileID: 0}
-    - target: {fileID: 4971753522492671725, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
-      propertyPath: m_Offset.x
-      value: -7.01742
       objectReference: {fileID: 0}
     - target: {fileID: 5487744331305554281, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: sceneManager

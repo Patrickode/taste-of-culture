@@ -47,10 +47,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if(other.gameObject.tag != "Hand") { return; }
 
-        if(spiceStation.CanDisplayTooltip)
-        {
-            dialogueTrigger.DisableDialogue();
-            colliding = false;
-        }
+        dialogueTrigger.DisableDialogue();
+        colliding = false;
     }
 }

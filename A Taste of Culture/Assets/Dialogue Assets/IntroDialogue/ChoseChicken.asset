@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e722040cfeb1924ca3da27bc509cfb8, type: 3}
+  m_Name: ChoseChicken
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
+  text: You can never go wrong with chicken. Makhani was made for it; the chefs of
+    the Moti Mahal back in the 1950s wanted a way to reuse leftover, dried out tandoori
+    chicken.
+  expression: {fileID: 21300000, guid: d1ed27ee52a4179438042caebcb8faeb, type: 3}
+  nextSentence: {fileID: 11400000, guid: 3531aee131de07e48888c7cf01e202ab, type: 2}
+  options: []

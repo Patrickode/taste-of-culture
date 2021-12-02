@@ -13,8 +13,8 @@ public enum DialogueTime
 public class DialogueSceneManager : MonoBehaviour
 {
     public DialogueTime time;
-    public FullscreenDialogueManager dialogueManager;
-    public FullscreenDialogueTrigger dialogueTrigger;
+    public DialogueManager dialogueManager;
+    public DialogueTrigger dialogueTrigger;
     public GameObject dialogue;
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class DialogueSceneManager : MonoBehaviour
     IEnumerator TriggerDialogue()
     {
         yield return new WaitForSeconds(0.5f);
-        dialogueTrigger.TriggerDialogue();
+        dialogueTrigger.StartDialogue();
     }
 
     public void DialogueEnded()
