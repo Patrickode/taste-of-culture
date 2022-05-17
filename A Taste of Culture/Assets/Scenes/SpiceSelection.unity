@@ -211,6 +211,10 @@ PrefabInstance:
       value: Cinnamon
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1018,6 +1022,10 @@ PrefabInstance:
       value: Salt
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Here are some facts about salt...
       objectReference: {fileID: 0}
@@ -1282,6 +1290,10 @@ PrefabInstance:
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.name
       value: Cayenne Pepper
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -2364,6 +2376,10 @@ PrefabInstance:
       value: Nutmeg
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2668,6 +2684,10 @@ PrefabInstance:
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.name
       value: Paprika
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -3406,6 +3426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showContinueButton: 1
   dialogue:
     name: Jaya
     sentences:
@@ -3470,6 +3491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showContinueButton: 1
   dialogue:
     name: Jaya
     sentences:
@@ -3572,6 +3594,10 @@ PrefabInstance:
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.name
       value: Ginger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -3678,6 +3704,10 @@ PrefabInstance:
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.name
       value: Coriander
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
@@ -4023,6 +4053,10 @@ PrefabInstance:
       value: Cumin
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -4126,6 +4160,10 @@ PrefabInstance:
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.name
       value: Garlic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: showContinueButton
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807639864633222944, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: dialogue.sentences.Array.size

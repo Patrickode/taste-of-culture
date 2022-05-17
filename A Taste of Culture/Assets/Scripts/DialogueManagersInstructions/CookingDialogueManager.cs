@@ -32,7 +32,7 @@ public class CookingDialogueManager : MonoBehaviour
 
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue, bool showContinueButton = true)
     {
 
         // Fade in dialogue box and make the text fields visible
@@ -43,7 +43,7 @@ public class CookingDialogueManager : MonoBehaviour
 
         nameText.enabled = true;
         dialogueText.enabled = true;
-        continueButton.SetActive(true);
+        continueButton.SetActive(showContinueButton);
         spriteRenderer.enabled = true;
 
         nameText.text = dialogue.name;

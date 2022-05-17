@@ -6,6 +6,7 @@ using UnityEngine;
 // Attach it to whatever should trigger the dialogue
 public class CookingDialogueTrigger : MonoBehaviour
 {
+    public bool showContinueButton = true;
     public Dialogue dialogue;
 
     private CookingDialogueManager cachedManager;
@@ -22,7 +23,7 @@ public class CookingDialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        DialogueManager.StartDialogue(dialogue);
+        DialogueManager.StartDialogue(dialogue, showContinueButton);
     }
 
     public void DisableDialogue()
