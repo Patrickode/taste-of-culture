@@ -36,7 +36,10 @@ public class CookingDialogueManager : MonoBehaviour
     {
 
         // Fade in dialogue box and make the text fields visible
-        animator.SetTrigger("StartDialogue");
+        //   CrossFade goes from current state to argument state, as opposed to SetTrigger 
+        //   just queueing(?) another animation
+        animator.CrossFade("DialogueBoxOpen", 0.25f);
+        //animator.SetTrigger("StartDialogue");
 
         nameText.enabled = true;
         dialogueText.enabled = true;
@@ -98,7 +101,8 @@ public class CookingDialogueManager : MonoBehaviour
         nameText.enabled = false;
         dialogueText.enabled = false;
         spriteRenderer.enabled = false;
-        animator.SetTrigger("EndDialogue");
+        animator.CrossFade("DialogueBoxClose", 0.25f);
+        //animator.SetTrigger("EndDialogue");
 
         if (sceneManager != null && sceneManager.dialogueString == "intro")
         {
