@@ -23,7 +23,7 @@ public class SpiceBowl : MonoBehaviour
     private void OnSpiceTooltipStateChange(SpiceBowl owner) => activeTooltipOwner = owner;
 
     /// <summary>
-    /// How many bowls the hand is hovering over right now.
+    /// How many bowls the hand is hovering over (colliding with) right now.
     /// </summary>
     private int spiceBowlsHovered;
     private static System.Action<bool> TriggerOccupiedStateChange;
@@ -48,6 +48,7 @@ public class SpiceBowl : MonoBehaviour
 
     void Update()
     {
+        //If the mouse is down and this is the spice bowl it's hovering over, pinch this spice
         if (Input.GetMouseButtonDown(0) &&
             activeTooltipOwner && activeTooltipOwner == this &&
             spiceStation.CanDisplayTooltip)
@@ -60,6 +61,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Hand")) { return; }
 
+        //Once when first hovering, note that we're hovering
         TriggerOccupiedStateChange?.Invoke(true);
         TryEnableTooltip();
     }
@@ -68,6 +70,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Hand")) { return; }
 
+        //If we're hovering over this and there's not a tooltip, try to enable one
         if (!activeTooltipOwner)
             TryEnableTooltip();
     }
@@ -76,6 +79,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if (spiceStation.CanDisplayTooltip)
         {
+            //Note that this spice bowl is the owner of the tooltip we're spawning
             TooltipOwnerStateChange?.Invoke(this);
             Coroutilities.TryStopCoroutine(this, ref DisableTooltipCorout);
 
@@ -87,10 +91,15 @@ public class SpiceBowl : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Hand")) { return; }
 
+        //Note that we've stopped hovering over this spice bowk
         TriggerOccupiedStateChange?.Invoke(false);
+        //If this spice bowl is also the one with a tooltip right now, since we just 
+        //stopped hovering over it, discard ownership of that tooltip
         if (activeTooltipOwner == this)
             TooltipOwnerStateChange?.Invoke(null);
 
+        //Wait a frame before trying to disable the tooltip, just in case another spice bowl picks 
+        //it up immediately after this
         DisableTooltipCorout = Coroutilities.DoAfterDelayFrames(this, TryDisableTooltip, 1);
     }
 
@@ -98,7 +107,6 @@ public class SpiceBowl : MonoBehaviour
     {
         if (spiceStation.CanDisplayTooltip && spiceBowlsHovered < 1)
         {
-            Debug.Log($"Disabling tooltips; {name} was the last occupant and just exited");
             dialogueTrigger.DisableDialogue();
         }
     }
