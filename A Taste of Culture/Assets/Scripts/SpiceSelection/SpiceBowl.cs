@@ -5,52 +5,109 @@ using UnityEngine;
 public class SpiceBowl : MonoBehaviour
 {
     enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
-    
+
     [SerializeField] TypeOfSpice spiceCategory;
     [SerializeField] GameObject pinchedSpicePrefab;
 
     public CookingDialogueTrigger dialogueTrigger;
     // public GameObject dialogue;
-    
+
     HandController hand;
     SpiceStation spiceStation;
 
-    bool colliding;
+    /// <summary>
+    /// Which SpiceBowl owns the current active tooltip? (null if there is no active tooltip)<br/>
+    /// </summary>
+    private SpiceBowl activeTooltipOwner;
+    private static System.Action<SpiceBowl> TooltipOwnerStateChange;
+    private void OnSpiceTooltipStateChange(SpiceBowl owner) => activeTooltipOwner = owner;
 
-    void Awake() 
+    /// <summary>
+    /// How many bowls the hand is hovering over (colliding with) right now.
+    /// </summary>
+    private int spiceBowlsHovered;
+    private static System.Action<bool> TriggerOccupiedStateChange;
+    private void OnTriggerOccupiedStateChange(bool occupied) => spiceBowlsHovered += occupied ? 1 : -1;
+
+    private Coroutine DisableTooltipCorout;
+
+    void Awake()
     {
         hand = FindObjectOfType<HandController>();
 
         spiceStation = FindObjectOfType<SpiceStation>();
+
+        TooltipOwnerStateChange += OnSpiceTooltipStateChange;
+        TriggerOccupiedStateChange += OnTriggerOccupiedStateChange;
+    }
+    private void OnDestroy()
+    {
+        TooltipOwnerStateChange -= OnSpiceTooltipStateChange;
+        TriggerOccupiedStateChange -= OnTriggerOccupiedStateChange;
     }
 
-    void Update() 
+    void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        //If the mouse is down and this is the spice bowl it's hovering over, pinch this spice
+        if (Input.GetMouseButtonDown(0) &&
+            activeTooltipOwner && activeTooltipOwner == this &&
+            spiceStation.CanDisplayTooltip)
         {
-            if(colliding && spiceStation.CanDisplayTooltip) { hand.SpicePrefab = pinchedSpicePrefab; }
+            hand.SpicePrefab = pinchedSpicePrefab;
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag != "Hand") { return; }
+        if (!other.gameObject.CompareTag("Hand")) { return; }
 
-        if(spiceStation.CanDisplayTooltip) 
+        //Once when first hovering, note that we're hovering
+        TriggerOccupiedStateChange?.Invoke(true);
+        TryEnableTooltip();
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.gameObject.CompareTag("Hand")) { return; }
+
+        //If we're hovering over this and there's not a tooltip, try to enable one
+        if (!activeTooltipOwner)
+            TryEnableTooltip();
+    }
+
+    void TryEnableTooltip()
+    {
+        if (spiceStation.CanDisplayTooltip)
         {
+            //Note that this spice bowl is the owner of the tooltip we're spawning
+            TooltipOwnerStateChange?.Invoke(this);
+            Coroutilities.TryStopCoroutine(this, ref DisableTooltipCorout);
+
             dialogueTrigger.TriggerDialogue();
-            colliding = true;
         }
     }
 
-    void OnTriggerExit2D(Collider2D other) 
+    void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag != "Hand") { return; }
+        if (!other.gameObject.CompareTag("Hand")) { return; }
 
-        if(spiceStation.CanDisplayTooltip) 
+        //Note that we've stopped hovering over this spice bowk
+        TriggerOccupiedStateChange?.Invoke(false);
+        //If this spice bowl is also the one with a tooltip right now, since we just 
+        //stopped hovering over it, discard ownership of that tooltip
+        if (activeTooltipOwner == this)
+            TooltipOwnerStateChange?.Invoke(null);
+
+        //Wait a frame before trying to disable the tooltip, just in case another spice bowl picks 
+        //it up immediately after this
+        DisableTooltipCorout = Coroutilities.DoAfterDelayFrames(this, TryDisableTooltip, 1);
+    }
+
+    void TryDisableTooltip()
+    {
+        if (spiceStation.CanDisplayTooltip && spiceBowlsHovered < 1)
         {
             dialogueTrigger.DisableDialogue();
-            colliding = false;
         }
     }
 }
