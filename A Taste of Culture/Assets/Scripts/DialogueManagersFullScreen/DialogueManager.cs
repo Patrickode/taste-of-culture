@@ -114,7 +114,7 @@ public class DialogueManager : MonoBehaviour
         Choice option = currentSentence.options[index];
         if (option.consequence != null)
         {
-            Debug.Log("Raise Events");
+            Debug.Log($"Raised consequence event \"{option.consequence}\" of option \"{option.text}\"");
             option.consequence.Raise();
         }
         currentSentence = option.nextSentence;
@@ -125,7 +125,7 @@ public class DialogueManager : MonoBehaviour
     public void DisplayOptions()
     {
         DialogueUI.SetActive(false);
-        
+
         if (currentSentence.speaker.value == playerName.value && playerNameTextUI != null)
         {
             playerNameTextUI.text = playerName.value;
@@ -135,7 +135,7 @@ public class DialogueManager : MonoBehaviour
         {
             for (int i = 0; i < currentSentence.options.Count; i++)
             {
-                Debug.Log(currentSentence.options[i].text);
+                //Debug.Log(currentSentence.options[i].text);
                 optionsUI[i].text = currentSentence.options[i].text;
                 optionsUI[i].gameObject.SetActive(true);
             }
@@ -153,7 +153,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         DialogueUI.SetActive(false);
-        Debug.Log("Dialogue Ended");
+        //Debug.Log("Dialogue Ended");
         if (ConversationEnded != null)
             ConversationEnded.Raise();
     }

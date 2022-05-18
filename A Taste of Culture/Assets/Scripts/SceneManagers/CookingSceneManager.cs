@@ -32,7 +32,7 @@ public class CookingSceneManager : MonoBehaviour
 
     public void IntroEnded()
     {
-        if(gifHasPlayed) { return; }
+        if (gifHasPlayed) { return; }
 
         dialogue.SetActive(false);
         // knife.SetActive(true);
@@ -47,9 +47,9 @@ public class CookingSceneManager : MonoBehaviour
         Cursor.visible = false;
 
         SceneController sceneController = FindObjectOfType<SceneController>();
-        if(sceneController != null && sceneController.CurrentIngredient == SceneController.Ingredient.Spices) 
-        { 
-            dialogue.SetActive(true); 
+        if (sceneController != null && sceneController.CurrentIngredient == SceneController.Ingredient.Spices)
+        {
+            dialogue.SetActive(true);
         }
     }
 
@@ -71,7 +71,7 @@ public class CookingSceneManager : MonoBehaviour
 
     public void FinishedCutting()
     {
-        Debug.Log("Finished cutting");
+        Debug.Log("CookingSceneManager's FinishedCutting called");
         dialogue.SetActive(true);
         knife.SetActive(false);
         Cursor.visible = true;

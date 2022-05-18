@@ -40,13 +40,13 @@ public class IngredientMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(taskComplete) { return; }
+        if (taskComplete) { return; }
         Vector2 ingredientPosition = gameObject.transform.position;
 
-        if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
-            if(allowMovement)
+            if (allowMovement)
             {
                 ingredientPosition.x += movementDistance;
                 gameObject.transform.position = ingredientPosition;
@@ -54,27 +54,28 @@ public class IngredientMover : MonoBehaviour
                 allowMovement = false;
             }
             else
-            { 
+            {
                 // TODO: Prompt mentor to tell player to make a cut before moving ingredient.
-                Debug.Log("You need to make a cut before moving the ingredient!");
+                Debug.Log("IngredientMover: Attempted to make a cut before moving the ingredient" +
+                    "\n<color=#FDCE2A>TODO:</color> Prompt mentor to tell player about making cuts before moving ingredients?");
             }
         }
-        
-        if(Input.GetKeyDown(KeyCode.Space)) 
-        { 
-            if(allowRotation) { RotateIngredient(); }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (allowRotation) { RotateIngredient(); }
         }
 
-        if(!allowRotation && (gameObject.transform.position.x >= rotateXPosition)) 
-        { 
-            allowRotation = true; 
+        if (!allowRotation && (gameObject.transform.position.x >= rotateXPosition))
+        {
+            allowRotation = true;
 
             // Switch to showing rotation instructions
             InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
-            if(tooltips != null) { tooltips.ToggleRotationInstructions(); }
+            if (tooltips != null) { tooltips.ToggleRotationInstructions(); }
         }
 
-        if(hasBeenRotated && (gameObject.transform.position.x >= finalXPosition)) { BroadcastTaskCompletion(); }
+        if (hasBeenRotated && (gameObject.transform.position.x >= finalXPosition)) { BroadcastTaskCompletion(); }
     }
 
     // Rotate ingredient and reset it's position
@@ -95,7 +96,7 @@ public class IngredientMover : MonoBehaviour
         hasBeenRotated = true;
 
         InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
-        if(tooltips != null) { tooltips.ResetInstructions(); }
+        if (tooltips != null) { tooltips.ResetInstructions(); }
     }
 
     // Disable knife interaction and inform scene controller that the task has been completed.
@@ -108,13 +109,13 @@ public class IngredientMover : MonoBehaviour
         mask.transform.localScale += scale;
 
         SceneController sceneController = FindObjectOfType<SceneController>();
-        
-        if(sceneController != null) 
-        { 
-            if(sceneController.CurrentIngredient == SceneController.Ingredient.Tomato)
+
+        if (sceneController != null)
+        {
+            if (sceneController.CurrentIngredient == SceneController.Ingredient.Tomato)
             {
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
-                if(knife != null) { knife.CanChop = false; }
+                if (knife != null) { knife.CanChop = false; }
             }
 
             sceneController.TaskComplete();
