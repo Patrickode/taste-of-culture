@@ -1081,6 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showContinueButton: 1
   dialogue:
     name: Jaya
     sentences:
@@ -1096,7 +1097,7 @@ AudioSource:
   m_GameObject: {fileID: 1236782930}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7115919289786539096, guid: a7d2e93aa4b27874788588c70f64c001, type: 2}
   m_audioClip: {fileID: 8300000, guid: c6ae6a5b90c10b34ab55822a691b85c5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1105,7 +1106,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1669,6 +1670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showContinueButton: 1
   dialogue:
     name: Jaya
     sentences:
@@ -1722,6 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showContinueButton: 1
   dialogue:
     name: Jaya
     sentences:
