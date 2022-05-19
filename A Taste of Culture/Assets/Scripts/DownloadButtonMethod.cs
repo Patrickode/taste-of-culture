@@ -15,8 +15,16 @@ public class DownloadButtonMethod : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
     private byte[] fileBytes = null;
 
+    /// <summary>
+    /// See <c>StandaloneFileBrowser/Plugins/StandaloneFileBrowser.jslib</c> for this function's definition.<br/>
+    /// It basically just does what <see cref="StandaloneFileBrowser.SaveFilePanel(string, string, string, ExtensionFilter)"/>
+    /// does, but in JS, because WebGL shenanigans, or something.
+    /// </summary>
+    /// <param name="filename">The default name of the file to be downloaded.</param>
+    /// <param name="byteArray">The thing to download in the form of a byte array.</param>
+    /// <param name="byteArraySize">The length of <paramref name="byteArray"/>.</param>
     [DllImport("__Internal")]
-    private static extern void DownloadFile(string gameObjectName, string methodName, string filename, byte[] byteArray, int byteArraySize);
+    private static extern void DownloadFileImmediate(string filename, byte[] byteArray, int byteArraySize);
 
     // Called by browser/DownloadFile, apparently the reason that DownloadFile needs a gameObjectName as a parameter
     public void OnFileDownload() => Debug.Log("File successfully downloaded");
@@ -32,7 +40,7 @@ public class DownloadButtonMethod : MonoBehaviour
             () =>
             {
                 fileBytes = request.downloadHandler.data;
-                DownloadFile(gameObject.name, "OnFileDownload", sourceFileName, fileBytes, fileBytes.Length);
+                DownloadFileImmediate(sourceFileName, fileBytes, fileBytes.Length);
             },
             request.SendWebRequest());
 #else

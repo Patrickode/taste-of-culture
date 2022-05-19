@@ -84,6 +84,22 @@ var StandaloneFileBrowserWebGLPlugin = {
 
             SendMessage(gameObjectName, methodName);
         }
+    },
+
+    // New method written by Patrick Mitchell @ https://patrickode.github.com to download a file immediately, based on
+    // the jsfiddle mentioned in https://stackoverflow.com/a/55784435. Also doesn't call any extra methods.
+    DownloadFileImmediate: function(filenamePtr, byteArray, byteArraySize) {
+        filename = Pointer_stringify(filenamePtr);
+
+        var bytes = new Uint8Array(byteArraySize);
+        for (var i = 0; i < byteArraySize; i++) {
+            bytes[i] = HEAPU8[byteArray + i];
+        }
+
+        var downloader = window.document.createElement('a');
+        downloader.href = window.URL.createObjectURL(new Blob([bytes], { type: 'application/octet-stream' }));
+        downloader.download = filename;
+        downloader.click();
     }
 };
 
