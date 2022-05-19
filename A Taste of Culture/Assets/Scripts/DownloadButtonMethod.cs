@@ -36,7 +36,10 @@ public class DownloadButtonMethod : MonoBehaviour
             },
             request.SendWebRequest());
 #else
-        string userPath = StandaloneFileBrowser.SaveFilePanel("Save Recipe", "", sourceFileName, recipeFilter);
+        string userPath = StandaloneFileBrowser.SaveFilePanel(
+            "Save Recipe", "",
+            sourceFileName.Split('.')[0],
+            recipeFilter);
 
         if (!string.IsNullOrEmpty(userPath))
             File.Copy(sourcePath, userPath, true);
