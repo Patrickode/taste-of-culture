@@ -77,6 +77,30 @@ public static class Coroutilities
 
 
     /// <summary>
+    /// Calls the function <paramref name="thingToDo"/> after <paramref name="yielder"/>, whatever it is, is done.<br/>
+    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
+    /// function, and MonoBehaviours cannot be static.)</i>
+    /// </summary>
+    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
+    /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="yielder"/>.</param>
+    /// <param name="yielder">The thing that comes before <paramref name="thingToDo"/>. Could be a 
+    /// <see cref="Coroutine"/>, an <see cref="AsyncOperation"/>, or anything else that inherits <see cref="YieldInstruction"/>.</param>
+    /// <returns>The coroutine this function starts. Use it with <see cref="MonoBehaviour.StopCoroutine(Coroutine)"/> to cancel <paramref name="thingToDo"/>.</returns>
+    public static Coroutine DoAfter(MonoBehaviour coroutineCaller, Action thingToDo, YieldInstruction yielder)
+    {
+        return coroutineCaller.StartCoroutine(DoAfter(thingToDo, yielder));
+    }
+
+    /// <inheritdoc cref="DoAfter(MonoBehaviour, Action, YieldInstruction)"/>
+    private static IEnumerator DoAfter(Action thingToDo, YieldInstruction yielder)
+    {
+        yield return yielder;
+        thingToDo();
+    }
+
+
+
+    /// <summary>
     /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds for <paramref name="duration"/> seconds.<br/>
     /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
     /// function, and MonoBehaviours cannot be static.)</i>

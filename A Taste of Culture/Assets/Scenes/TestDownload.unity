@@ -218,7 +218,6 @@ GameObject:
   - component: {fileID: 747459278}
   - component: {fileID: 747459277}
   - component: {fileID: 747459276}
-  - component: {fileID: 747459275}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -226,18 +225,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &747459275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747459274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 044f5dfcc343d2e409c5a9b9e0e6db96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &747459276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +463,7 @@ GameObject:
   - component: {fileID: 1490991784}
   - component: {fileID: 1490991783}
   - component: {fileID: 1490991782}
+  - component: {fileID: 1490991785}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -547,7 +535,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 747459275}
+      - m_Target: {fileID: 1490991785}
         m_TargetAssemblyTypeName: DownloadButtonMethod, Assembly-CSharp
         m_MethodName: Download
         m_Mode: 5
@@ -597,3 +585,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490991780}
   m_CullTransparentMesh: 1
+--- !u!114 &1490991785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490991780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044f5dfcc343d2e409c5a9b9e0e6db96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
