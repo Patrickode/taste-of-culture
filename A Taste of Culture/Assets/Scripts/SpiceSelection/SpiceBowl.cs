@@ -15,6 +15,8 @@ public class SpiceBowl : MonoBehaviour
     HandController hand;
     SpiceStation spiceStation;
 
+    public static bool CanDisplayTooltip { get; set; } = true;
+
     /// <summary>
     /// Which SpiceBowl owns the current active tooltip? (null if there is no active tooltip)<br/>
     /// </summary>
@@ -51,7 +53,7 @@ public class SpiceBowl : MonoBehaviour
         //If the mouse is down and this is the spice bowl it's hovering over, pinch this spice
         if (Input.GetMouseButtonDown(0) &&
             activeTooltipOwner && activeTooltipOwner == this &&
-            spiceStation.CanDisplayTooltip)
+            CanDisplayTooltip)
         {
             hand.SpicePrefab = pinchedSpicePrefab;
         }
@@ -77,7 +79,7 @@ public class SpiceBowl : MonoBehaviour
 
     void TryEnableTooltip()
     {
-        if (spiceStation.CanDisplayTooltip)
+        if (CanDisplayTooltip)
         {
             //Note that this spice bowl is the owner of the tooltip we're spawning
             TooltipOwnerStateChange?.Invoke(this);
@@ -105,7 +107,7 @@ public class SpiceBowl : MonoBehaviour
 
     void TryDisableTooltip()
     {
-        if (spiceStation.CanDisplayTooltip && spiceBowlsHovered < 1)
+        if (CanDisplayTooltip && spiceBowlsHovered < 1)
         {
             dialogueTrigger.DisableDialogue();
         }

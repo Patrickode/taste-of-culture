@@ -340,7 +340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 10635382}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8652904761806396424}
+        m_TargetAssemblyTypeName: MixingBowl, Assembly-CSharp
+        m_MethodName: FinishSelecting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &10635382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,7 +2953,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1701473672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8652904761806396424}
+        m_TargetAssemblyTypeName: MixingBowl, Assembly-CSharp
+        m_MethodName: ResetValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1701473672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4462,3 +4486,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
+--- !u!114 &8652904761806396424 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5324701546484046400, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
+  m_PrefabInstance: {fileID: 8652904761806396423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c38228a773cd14e9867c3de224dcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

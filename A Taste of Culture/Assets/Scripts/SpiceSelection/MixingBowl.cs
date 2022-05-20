@@ -14,50 +14,48 @@ public class MixingBowl : MonoBehaviour
     int SweetnessValue;
 
     // Used to toggle reset button after first spice added to bowl
-    bool firstSpiceAdded;                
+    bool firstSpiceAdded;
 
     // Start is called before the first frame update
     void Start()
     {
         if (resetButton != null)
-        {
             resetButton.gameObject.SetActive(false);
-            resetButton.onClick.AddListener(ResetValues);
-        }
 
         if (doneButton != null)
-        {
             doneButton.gameObject.SetActive(false);
-            doneButton.onClick.AddListener(FinishSelecting);
-        }
     }
 
-    void OnCollisionEnter2D(Collision2D other) 
+    void OnCollisionEnter2D(Collision2D other)
     {
         Spice spice = other.gameObject.GetComponent<Spice>();
-        if(spice == null) { return; }
-      
+        if (spice == null) { return; }
+
         // Toggle reset button
-        if(!firstSpiceAdded && other.gameObject.tag == "Spice") 
-        { 
-            firstSpiceAdded = true; 
-            if(resetButton != null) { resetButton.gameObject.SetActive(true); }
-            if(doneButton != null) { doneButton.gameObject.SetActive(true); }
+        if (!firstSpiceAdded && other.gameObject.tag == "Spice")
+        {
+            firstSpiceAdded = true;
+            if (resetButton != null) { resetButton.gameObject.SetActive(true); }
+            if (doneButton != null) { doneButton.gameObject.SetActive(true); }
         }
-        
+
         // Add to flavor profile
         BitternessValue += spice.Bitterness;
         SpicinessValue += spice.Spiciness;
         SweetnessValue += spice.Sweetness;
 
-        Debug.Log("Bitterness: " + BitternessValue + " Spiciness: " + SpicinessValue + " Sweetness: " + SweetnessValue);
+        Debug.Log($"{name}: Added spice \"{spice.name}\" with flavor profile " +
+            $"(Bit: {BitternessValue}, Sp: {SpicinessValue} Sw: {SweetnessValue})");
     }
 
+    /// <summary>
+    /// Called with <see cref="resetButton"/>'s OnClick via the inspector
+    /// </summary>
     public void ResetValues()
     {
         GameObject[] spices = GameObject.FindGameObjectsWithTag("Spice");
 
-        foreach(GameObject spice in spices) 
+        foreach (GameObject spice in spices)
         {
             Destroy(spice);
         }
@@ -67,21 +65,25 @@ public class MixingBowl : MonoBehaviour
         firstSpiceAdded = false;
 
         // Ensures cursor isn't visible after clicking button
-        Cursor.visible = false;                         
+        Cursor.visible = false;
 
         BitternessValue = 0;
         SpicinessValue = 0;
         SweetnessValue = 0;
     }
 
+    /// <summary>
+    /// Called with <see cref="doneButton"/>'s OnClick via the inspector
+    /// </summary>
     public void FinishSelecting()
     {
         /// TODO: save flavor profile...
 
-        if(resetButton != null) { resetButton.gameObject.SetActive(false); }
-        if(doneButton != null) { doneButton.gameObject.SetActive(false); }
+        SpiceBowl.CanDisplayTooltip = false;
+        if (resetButton != null) { resetButton.gameObject.SetActive(false); }
+        if (doneButton != null) { doneButton.gameObject.SetActive(false); }
 
         SceneController sceneController = FindObjectOfType<SceneController>();
-        if(sceneController != null) { sceneController.TaskComplete(); }
+        if (sceneController != null) { sceneController.TaskComplete(); }
     }
 }
