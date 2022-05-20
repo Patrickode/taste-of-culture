@@ -12,6 +12,18 @@ public class AudioCooking : MonoBehaviour
     [SerializeField] private AudioSource lowBoil;
     [SerializeField] private AudioSource highBoil;
 
+    [SerializeField] private AudioMixer mixer;
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("MasterVolume"))
+        {
+            mixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume")) * 20);
+            mixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+            mixer.SetFloat("SoundsFX", Mathf.Log10(PlayerPrefs.GetFloat("SoundFXVolume")) * 20);
+        }
+    }
+
     public void AddOnions()
     {
         sizzle1.Play();
