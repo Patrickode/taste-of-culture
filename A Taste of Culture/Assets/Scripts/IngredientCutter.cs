@@ -57,13 +57,14 @@ public class IngredientCutter : MonoBehaviour
 
     void ResizeCollider(GameObject colliderOwner, Vector2 colliderSize, float colliderXOffset)
     {
-        colliderOwner.GetComponent<BoxCollider2D>().size = colliderSize;
-        colliderOwner.GetComponent<BoxCollider2D>().offset = new Vector2(colliderXOffset, colliderOwner.GetComponent<BoxCollider2D>().offset.y);
+        var coll = colliderOwner.GetComponent<BoxCollider2D>();
+        coll.size = colliderSize;
+        coll.offset = new Vector2(colliderXOffset, coll.offset.y);
     }
 
     bool RepresentCut(Vector2 position, float verticalScale)
     {
-        if (spriteMask == null)
+        if (!spriteMask)
         {
             Debug.Log("ERROR: No Sprite Mask Found.");
 
