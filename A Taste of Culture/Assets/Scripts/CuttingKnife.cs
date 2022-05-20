@@ -109,8 +109,7 @@ public class CuttingKnife : MonoBehaviour
         foreach (GameObject objectToCut in objectsToCut)
         {
             Vector2 cutCenter = startPosition + (endPosition - startPosition) * 0.5f;
-            objectToCut.GetComponent<IngredientCutter>().CutRotation = cutRotation;
-            objectToCut.GetComponent<IngredientCutter>().CutIngredient(cutCenter, objectToCut);
+            objectToCut.GetComponent<IngredientCutter>().CutIngredient(cutCenter, objectToCut, cutRotation);
         }
     }
 
