@@ -14,7 +14,7 @@ public class GifManager : MonoBehaviour
     public Button closeButton;
     public VideoPlayer demoPlayer;
 
-    bool hasBeenPlayed = false;
+    //bool hasBeenPlayed = false;
 
     void Start() 
     {
