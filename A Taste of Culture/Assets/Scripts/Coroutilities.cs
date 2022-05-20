@@ -9,15 +9,20 @@ using UnityEngine;
 public static class Coroutilities
 {
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> in <paramref name="delay"/> seconds.<br/>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
-    /// function, and MonoBehaviours cannot be static.)</i>
+    /// Calls the function <paramref name="thingToDo"/> in <paramref name="delay"/> seconds.
     /// </summary>
-    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
+    /// <remarks>
+    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since
+    /// </i><see cref="MonoBehaviour.StartCoroutine(IEnumerator)"/><i> is<br/>a MonoBehavior function, and MonoBehaviours cannot be static.)</i>
+    /// </remarks>
+    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that'll call the coroutine.</param>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="delay"/> seconds.</param>
     /// <param name="delay">How many seconds to wait before calling <paramref name="thingToDo"/>.</param>
     /// <param name="realTime">Whether to delay in real time or scaled time; see <see cref="Time.timeScale"/>.</param>
-    /// <returns>The delay coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
+    /// <returns>
+    /// The coroutine this function will start. Use it with <see cref="MonoBehaviour.StopCoroutine(Coroutine)"/> or<br/>
+    /// <see cref="TryStopCoroutine(MonoBehaviour, Coroutine)"/> to cancel <paramref name="thingToDo"/>.
+    /// </returns>
     public static Coroutine DoAfterDelay(MonoBehaviour coroutineCaller, Action thingToDo, float delay, bool realTime = false)
     {
         //If delay is too low, just call the function immediately and bail out
@@ -30,7 +35,7 @@ public static class Coroutilities
         return coroutineCaller.StartCoroutine(DoAfterDelay(thingToDo, delay, realTime));
     }
 
-    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
+    /// <remarks></remarks> <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     private static IEnumerator DoAfterDelay(Action thingToDo, float delay, bool realTime = false)
     {
         if (realTime)
@@ -44,14 +49,11 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> after a given number of <paramref name="frames"/>.<br/>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
-    /// function, and MonoBehaviours cannot be static.)</i>
+    /// Calls the function <paramref name="thingToDo"/> after a given number of <paramref name="frames"/>.
     /// </summary>
-    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
-    /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="delay"/> seconds.</param>
+    /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="frames"/> frames.</param>
     /// <param name="frames">How many frames to wait before calling <paramref name="thingToDo"/>.</param>
-    /// <returns>The delay coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
+    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoAfterDelayFrames(MonoBehaviour coroutineCaller, Action thingToDo, int frames)
     {
         //If delay is too low, just call the function immediately and bail out
@@ -64,7 +66,7 @@ public static class Coroutilities
         return coroutineCaller.StartCoroutine(DoAfterDelayFrames(thingToDo, frames));
     }
 
-    /// <inheritdoc cref="DoAfterDelayFrames(MonoBehaviour, Action, int)"/>
+    /// <remarks></remarks> <inheritdoc cref="DoAfterDelayFrames(MonoBehaviour, Action, int)"/>
     private static IEnumerator DoAfterDelayFrames(Action thingToDo, int frames)
     {
         for (int i = 0; i < frames; i++)
@@ -76,21 +78,16 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> after <paramref name="yielder"/>, whatever it is, is done.<br/>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
-    /// function, and MonoBehaviours cannot be static.)</i>
+    /// Calls the function <paramref name="thingToDo"/> after <paramref name="yielder"/>, whatever it is, is done.
     /// </summary>
-    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="yielder"/>.</param>
-    /// <param name="yielder">The thing that comes before <paramref name="thingToDo"/>. Could be a 
-    /// <see cref="Coroutine"/>, an <see cref="AsyncOperation"/>, or anything else that inherits <see cref="YieldInstruction"/>.</param>
-    /// <returns>The coroutine this function starts. Use it with <see cref="MonoBehaviour.StopCoroutine(Coroutine)"/> to cancel <paramref name="thingToDo"/>.</returns>
+    /// <param name="yielder">The thing that comes before <paramref name="thingToDo"/>. This could be a <see cref="Coroutine"/>, 
+    /// an <see cref="AsyncOperation"/>, or anything else that inherits <see cref="YieldInstruction"/>.</param>
+    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoAfter(MonoBehaviour coroutineCaller, Action thingToDo, YieldInstruction yielder)
-    {
-        return coroutineCaller.StartCoroutine(DoAfter(thingToDo, yielder));
-    }
+        => coroutineCaller.StartCoroutine(DoAfter(thingToDo, yielder));
 
-    /// <inheritdoc cref="DoAfter(MonoBehaviour, Action, YieldInstruction)"/>
+    /// <remarks></remarks> <inheritdoc cref="DoAfter(MonoBehaviour, Action, YieldInstruction)"/>
     private static IEnumerator DoAfter(Action thingToDo, YieldInstruction yielder)
     {
         yield return yielder;
@@ -100,23 +97,20 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds for <paramref name="duration"/> seconds.<br/>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
-    /// function, and MonoBehaviours cannot be static.)</i>
+    /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds for <paramref name="duration"/> seconds.
     /// </summary>
-    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
     /// <param name="thingToDo">The function or lambda expression that will be called for <paramref name="delay"/> seconds.</param>
     /// <param name="duration">How many seconds <paramref name="thingToDo"/> should happen for.</param>
     /// <param name="interval"><paramref name="thingToDo"/> will run every <paramref name="interval"/> seconds.<br/>
-    ///     <i>(At minimum, every frame; anything less than <see cref="Time.deltaTime"/> will behave the same as <see cref="Time.deltaTime"/>.)</i></param>
+    /// <i>
+    ///     (At minimum, every frame; anything less than </i><see cref="Time.deltaTime"/><i> will behave the<br/>same as </i><see cref="Time.deltaTime"/>.<i>)
+    /// </i></param>
     /// <param name="realTime">Whether to repeatedly do <paramref name="thingToDo"/> in real time or scaled time; see <see cref="Time.timeScale"/>.</param>
-    /// <returns>The coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
+    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoForSeconds(MonoBehaviour coroutineCaller, Action thingToDo, float duration, float interval = 0, bool realTime = false)
-    {
-        return coroutineCaller.StartCoroutine(DoForSeconds(thingToDo, duration, interval, realTime));
-    }
+        => coroutineCaller.StartCoroutine(DoForSeconds(thingToDo, duration, interval, realTime));
 
-    /// <inheritdoc cref="DoForSeconds(MonoBehaviour, Action, float, float, bool)"/>
+    /// <remarks></remarks> <inheritdoc cref="DoForSeconds(MonoBehaviour, Action, float, float, bool)"/>
     private static IEnumerator DoForSeconds(Action thingToDo, float duration, float interval = 0, bool realTime = false)
     {
         float intervalTimer = 0;
@@ -137,20 +131,44 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> once <paramref name="predicate"/> evaluates to true.<br/>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
-    /// function, and MonoBehaviours cannot be static.)</i>
+    /// Calls the function <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.
     /// </summary>
-    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
+    /// <param name="thingToDo">The thing to do for <paramref name="eachOfThese"/>.</param>
+    /// <param name="eachOfThese">A "<see langword="foreach"/>-able" collection of things. <paramref name="thingToDo"/> will happen once for each of them.</param>
+    /// <param name="timeBetween">How long to wait between each call of <paramref name="thingToDo"/> in seconds.</param>
+    /// <param name="realTime">Whether to <see langword="yield"/> in real time or scaled time; see <see cref="Time.timeScale"/>.</param>
+    /// <inheritdoc cref="DoForSeconds(MonoBehaviour, Action, float, float, bool)"/>
+    public static Coroutine DoForEach(MonoBehaviour coroutineCaller, Action thingToDo, IEnumerable eachOfThese, float timeBetween = 0, bool realTime = false)
+        => coroutineCaller.StartCoroutine(DoForEach(thingToDo, eachOfThese, timeBetween, realTime));
+
+    /// <remarks></remarks> <inheritdoc cref="DoForEach(MonoBehaviour, Action, IEnumerable, float, bool)"/>
+    private static IEnumerator DoForEach(Action thingToDo, IEnumerable eachOfThese, float timeBetween = 0, bool realTime = false)
+    {
+        foreach (var _ in eachOfThese)
+        {
+            thingToDo();
+
+            if (realTime)
+                yield return new WaitForSeconds(timeBetween);
+            else
+                yield return new WaitForSecondsRealtime(timeBetween);
+        }
+    }
+
+
+
+    /// <summary>
+    /// Calls the function <paramref name="thingToDo"/> once <paramref name="predicate"/> evaluates to true.
+    /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called once <paramref name="predicate"/> evaluates to true.</param>
     /// <param name="predicate">Delegate or lambda that will be evaluated every frame. Once it evaluates to true, call <paramref name="thingToDo"/>.</param>
-    /// <returns>The coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
+    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoWhen(MonoBehaviour coroutineCaller, Action thingToDo, Func<bool> predicate)
     {
         return coroutineCaller.StartCoroutine(DoWhen(thingToDo, predicate));
     }
 
-    /// <inheritdoc cref="DoWhen(MonoBehaviour, Action, Func{bool})"/>
+    /// <remarks></remarks> <inheritdoc cref="DoWhen(MonoBehaviour, Action, Func{bool})"/>
     private static IEnumerator DoWhen(Action thingToDo, Func<bool> predicate)
     {
         yield return new WaitUntil(predicate);
@@ -160,22 +178,17 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds, until <paramref name="predicate"/> evaluates to true.<br/>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
-    /// function, and MonoBehaviours cannot be static.)</i>
+    /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds, until <paramref name="predicate"/> evaluates to true.
     /// </summary>
-    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
     /// <param name="thingToDo">The function or lambda expression that will be called until <paramref name="predicate"/> evaluates to true.</param>
     /// <param name="predicate">Delegate or lambda that will be evaluated every frame. Once it evaluates to true, stop calling <paramref name="thingToDo"/>.</param>
-    /// <param name="interval"><paramref name="thingToDo"/> will run every <paramref name="interval"/> seconds.<br/>
-    ///     <i>(At minimum, every frame; anything less than <see cref="Time.deltaTime"/> will behave the same as <see cref="Time.deltaTime"/>.)</i></param>
-    /// <returns>The coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
+    /// <inheritdoc cref="DoForSeconds(MonoBehaviour, Action, float, float, bool)"/>
     public static Coroutine DoUntil(MonoBehaviour coroutineCaller, Action thingToDo, Func<bool> predicate, float interval = 0, bool realTime = false)
     {
         return coroutineCaller.StartCoroutine(DoUntil(thingToDo, predicate, interval, realTime));
     }
 
-    /// <inheritdoc cref="DoUntil(MonoBehaviour, Action, Func{bool}, float, bool)"/>
+    /// <remarks></remarks> <inheritdoc cref="DoUntil(MonoBehaviour, Action, Func{bool}, float, bool)"/>
     private static IEnumerator DoUntil(Action thingToDo, Func<bool> predicate, float interval = 0, bool realTime = false)
     {
         float intervalTimer = 0;

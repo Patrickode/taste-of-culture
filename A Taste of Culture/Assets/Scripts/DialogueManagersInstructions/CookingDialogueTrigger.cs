@@ -9,13 +9,17 @@ public class CookingDialogueTrigger : MonoBehaviour
     public bool showContinueButton = true;
     public Dialogue dialogue;
 
-    private CookingDialogueManager cachedManager;
+    private static CookingDialogueManager cachedManager;
     private CookingDialogueManager DialogueManager
     {
         get
         {
             if (!cachedManager)
+            {
                 cachedManager = FindObjectOfType<CookingDialogueManager>();
+                Debug.Assert(cachedManager, "No CookingDialogueManager found; CookingDialogTriggers need a " +
+                    "manager to function properly.");
+            }
 
             return cachedManager;
         }

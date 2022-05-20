@@ -32,13 +32,13 @@ public class CookingDialogueManager : MonoBehaviour
 
     }
 
-    public void StartDialogue(Dialogue dialogue, bool showContinueButton = true)
+    public void StartDialogue(Dialogue dialogue, bool showContinueButton = true, float fadeInDuration = 0.25f)
     {
 
         // Fade in dialogue box and make the text fields visible
         //   CrossFade goes from current state to argument state, as opposed to SetTrigger 
         //   just queueing(?) another animation
-        animator.CrossFade("DialogueBoxOpen", 0.25f);
+        animator.CrossFade("DialogueBoxOpen", fadeInDuration);
         //animator.SetTrigger("StartDialogue");
 
         nameText.enabled = true;
@@ -54,20 +54,17 @@ public class CookingDialogueManager : MonoBehaviour
 
         // Add dialogue and corresponding expressions to the queues
         foreach (string sentence in dialogue.sentences)
-        {
             sentences.Enqueue(sentence);
-        }
+
         foreach (Sprite expression in dialogue.expressions)
-        {
             expressions.Enqueue(expression);
-        }
 
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (sentences.Count < 1)
         {
             EndDialogue();
             return;
@@ -77,9 +74,9 @@ public class CookingDialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         Sprite expression = expressions.Dequeue();
         spriteRenderer.sprite = expression;
+
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
-
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -94,14 +91,14 @@ public class CookingDialogueManager : MonoBehaviour
         }
     }
 
-    public void EndDialogue()
+    public void EndDialogue(float fadeOutDuration = 0.25f)
     {
         // Hide everything and fade out the dialogue box
         continueButton.SetActive(false);
         nameText.enabled = false;
         dialogueText.enabled = false;
         spriteRenderer.enabled = false;
-        animator.CrossFade("DialogueBoxClose", 0.25f);
+        animator.CrossFade("DialogueBoxClose", fadeOutDuration);
         //animator.SetTrigger("EndDialogue");
 
         if (sceneManager != null && sceneManager.dialogueString == "intro")
