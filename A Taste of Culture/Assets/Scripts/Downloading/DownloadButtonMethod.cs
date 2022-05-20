@@ -51,8 +51,6 @@ public class DownloadButtonMethod : MonoBehaviour
 
         if (!string.IsNullOrEmpty(userPath))
             File.Copy(sourcePath, userPath, true);
-        else
-            Debug.LogError("userPath is null or empty");
 #endif
     }
 }
