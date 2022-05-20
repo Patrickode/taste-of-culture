@@ -126,6 +126,6 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         Cursor.visible = false;
         dialogue.SetActive(false);
-        SceneManager.LoadScene("IntroDialogue");
+        SceneManager.LoadScene("MainMenu");
     }
 }
