@@ -68,9 +68,8 @@ public static class Coroutilities
     private static IEnumerator DoAfterDelayFrames(Action thingToDo, int frames)
     {
         for (int i = 0; i < frames; i++)
-        {
             yield return null;
-        }
+
         thingToDo();
     }
 
@@ -177,7 +176,7 @@ public static class Coroutilities
     }
 
     /// <inheritdoc cref="DoUntil(MonoBehaviour, Action, Func{bool}, float, bool)"/>
-    private static IEnumerator DoUntil(Action thingToDo, Func<bool> predicate, float interval, bool realTime = false)
+    private static IEnumerator DoUntil(Action thingToDo, Func<bool> predicate, float interval = 0, bool realTime = false)
     {
         float intervalTimer = 0;
         while (!predicate())
