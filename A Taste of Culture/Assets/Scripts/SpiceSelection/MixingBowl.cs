@@ -20,16 +20,10 @@ public class MixingBowl : MonoBehaviour
     void Start()
     {
         if (resetButton != null)
-        {
             resetButton.gameObject.SetActive(false);
-            resetButton.onClick.AddListener(ResetValues);
-        }
 
         if (doneButton != null)
-        {
             doneButton.gameObject.SetActive(false);
-            doneButton.onClick.AddListener(FinishSelecting);
-        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -54,6 +48,9 @@ public class MixingBowl : MonoBehaviour
             $"(Bit: {BitternessValue}, Sp: {SpicinessValue} Sw: {SweetnessValue})");
     }
 
+    /// <summary>
+    /// Called with <see cref="resetButton"/>'s OnClick via the inspector
+    /// </summary>
     public void ResetValues()
     {
         GameObject[] spices = GameObject.FindGameObjectsWithTag("Spice");
@@ -75,10 +72,14 @@ public class MixingBowl : MonoBehaviour
         SweetnessValue = 0;
     }
 
+    /// <summary>
+    /// Called with <see cref="doneButton"/>'s OnClick via the inspector
+    /// </summary>
     public void FinishSelecting()
     {
         /// TODO: save flavor profile...
 
+        SpiceBowl.CanDisplayTooltip = false;
         if (resetButton != null) { resetButton.gameObject.SetActive(false); }
         if (doneButton != null) { doneButton.gameObject.SetActive(false); }
 
