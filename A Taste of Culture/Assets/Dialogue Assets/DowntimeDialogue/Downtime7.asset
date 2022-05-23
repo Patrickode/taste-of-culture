@@ -19,7 +19,7 @@ MonoBehaviour:
   options:
   - text: 
     nextSentence: {fileID: 11400000, guid: faf4fc33d51b9234ebd575f4fefce4fd, type: 2}
-    consequence: {fileID: 0}
+    consequence: {fileID: 11400000, guid: 2f3ec3968b994e04ea48b7cf3f159dac, type: 2}
   - text: '[Add tomato]'
     nextSentence: {fileID: 11400000, guid: faf4fc33d51b9234ebd575f4fefce4fd, type: 2}
     consequence: {fileID: 11400000, guid: 2f3ec3968b994e04ea48b7cf3f159dac, type: 2}
