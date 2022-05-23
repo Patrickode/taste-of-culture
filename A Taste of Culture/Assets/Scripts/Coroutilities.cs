@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,8 +13,8 @@ public static class Coroutilities
     /// Calls the function <paramref name="thingToDo"/> in <paramref name="delay"/> seconds.
     /// </summary>
     /// <remarks>
-    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since
-    /// </i><see cref="MonoBehaviour.StartCoroutine(IEnumerator)"/><i> is<br/>a MonoBehavior function, and MonoBehaviours cannot be static.)</i>
+    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since </i><see cref="MonoBehaviour.StartCoroutine(IEnumerator)"/><i><br/> 
+    /// is a MonoBehavior function, and MonoBehaviours cannot be static.)</i>
     /// </remarks>
     /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that'll call the coroutine.</param>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="delay"/> seconds.</param>
@@ -137,7 +138,7 @@ public static class Coroutilities
     /// <param name="eachOfThese">A "<see langword="foreach"/>-able" collection of things. <paramref name="thingToDo"/> will happen once for each of them.</param>
     /// <param name="timeBetween">How long to wait between each call of <paramref name="thingToDo"/> in seconds.</param>
     /// <param name="realTime">Whether to <see langword="yield"/> in real time or scaled time; see <see cref="Time.timeScale"/>.</param>
-    /// <inheritdoc cref="DoForSeconds(MonoBehaviour, Action, float, float, bool)"/>
+    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoForEach(MonoBehaviour coroutineCaller, Action thingToDo, IEnumerable eachOfThese, float timeBetween = 0, bool realTime = false)
         => coroutineCaller.StartCoroutine(DoForEach(thingToDo, eachOfThese, timeBetween, realTime));
 
@@ -147,6 +148,29 @@ public static class Coroutilities
         foreach (var _ in eachOfThese)
         {
             thingToDo();
+
+            if (realTime)
+                yield return new WaitForSeconds(timeBetween);
+            else
+                yield return new WaitForSecondsRealtime(timeBetween);
+        }
+    }
+
+    /// <summary>
+    /// Calls the function <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.<br/> 
+    /// This overload takes in a type, so the iterator of the <see langword="foreach"/> 
+    /// can be used as a parameter in <paramref name="thingToDo"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of thing contained in <paramref name="eachOfThese"/>. Use</typeparam>
+    /// <inheritdoc cref="DoForEach(Action, IEnumerable, float, bool)"/>
+    public static Coroutine DoForEach<T>(MonoBehaviour coroutineCaller, Action<T> thingToDo, IEnumerable<T> eachOfThese, float timeBetween = 0, bool realTime = false)
+        => coroutineCaller.StartCoroutine(DoForEach(thingToDo, eachOfThese, timeBetween, realTime));
+
+    private static IEnumerator DoForEach<T>(Action<T> thingToDo, IEnumerable<T> eachOfThese, float timeBetween = 0, bool realTime = false)
+    {
+        foreach (var item in eachOfThese)
+        {
+            thingToDo(item);
 
             if (realTime)
                 yield return new WaitForSeconds(timeBetween);
@@ -224,9 +248,11 @@ public static class Coroutilities
         return false;
     }
 
+    /// <remarks>
+    /// <b>This overload will also nullify the reference to <paramref name="coroutine"/> if it isn't already null.</b><br/>
+    /// (A stopped coroutine reference generally isn't good for much, so this may save you an assignment outside of this function.)
+    /// </remarks>    
     /// <param name="coroutine">The coroutine to try to stop. <b>Will be set to null if succesfully stopped.</b></param>
-    /// <remarks><b>This overload will also nullify the reference to <paramref name="coroutine"/> if it isn't already null.</b><br/>
-    /// (A stopped coroutine reference generally isn't good for much, so this may save you an assignment outside of this function.)</remarks>    
     /// <inheritdoc cref="TryStopCoroutine(MonoBehaviour, Coroutine)"/>
     public static bool TryStopCoroutine(MonoBehaviour coroutineLocation, ref Coroutine coroutine)
     {
