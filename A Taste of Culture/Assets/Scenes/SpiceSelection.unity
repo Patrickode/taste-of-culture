@@ -322,7 +322,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2935,7 +2935,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3483,7 +3483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6fccf44905e6b4aae70e0215f5ab6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knife: {fileID: 1715652776}
+  cursorObj: {fileID: 1715652776}
   dialogueManager: {fileID: 1321017251}
   dialogueTrigger: {fileID: 1920461718}
   dialogue: {fileID: 1031464211}
@@ -4364,6 +4364,18 @@ PrefabInstance:
       propertyPath: dialogueTrigger
       value: 
       objectReference: {fileID: 8186237723322062363}
+    - target: {fileID: 5487744331305554281, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: buttonsToDisable.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487744331305554281, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: buttonsToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 1701473671}
+    - target: {fileID: 5487744331305554281, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
+      propertyPath: buttonsToDisable.Array.data[1]
+      value: 
+      objectReference: {fileID: 10635381}
     - target: {fileID: 5711306186731597365, guid: 4c5e7eb52d9b0aa4cb748512d14b18c0, type: 3}
       propertyPath: m_Name
       value: SpiceStation
