@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CookingSceneManager : MonoBehaviour
 {
-    public GameObject knife;
+    [UnityEngine.Serialization.FormerlySerializedAs("knife")] public GameObject cursorObj;
     public CookingDialogueManager dialogueManager;
     public CookingDialogueTrigger dialogueTrigger;
     public GameObject dialogue;
@@ -18,7 +18,7 @@ public class CookingSceneManager : MonoBehaviour
     void Start()
     {
         dialogue.SetActive(true);
-        knife.SetActive(false);
+        cursorObj.SetActive(false);
         dialogueString = "intro";
         StartCoroutine(TriggerIntro());
         Cursor.visible = true;
@@ -43,7 +43,7 @@ public class CookingSceneManager : MonoBehaviour
 
     public void GifEnded()
     {
-        knife.SetActive(true);
+        cursorObj.SetActive(true);
         Cursor.visible = false;
 
         SceneController sceneController = FindObjectOfType<SceneController>();
@@ -55,7 +55,7 @@ public class CookingSceneManager : MonoBehaviour
 
     public void CutOutsideMargins()
     {
-        knife.SetActive(false);
+        cursorObj.SetActive(false);
         Cursor.visible = true;
         dialogue.SetActive(true);
         dialogueString = "error";
@@ -65,7 +65,7 @@ public class CookingSceneManager : MonoBehaviour
     public void MarginsEnded()
     {
         dialogue.SetActive(false);
-        knife.SetActive(true);
+        cursorObj.SetActive(true);
         Cursor.visible = false;
     }
 
@@ -73,7 +73,7 @@ public class CookingSceneManager : MonoBehaviour
     {
         Debug.Log("CookingSceneManager's FinishedCutting called");
         dialogue.SetActive(true);
-        knife.SetActive(false);
+        cursorObj.SetActive(false);
         Cursor.visible = true;
         dialogueTrigger = gameObject.GetComponents<CookingDialogueTrigger>()[1];
         dialogueTrigger.TriggerDialogue();

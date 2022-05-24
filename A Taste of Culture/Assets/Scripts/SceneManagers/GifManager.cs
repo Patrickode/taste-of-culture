@@ -28,11 +28,11 @@ public class GifManager : MonoBehaviour
         }
 
         //demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
-        if (sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Chopping Knife"))
+        if (sceneManager.GetComponent<CookingSceneManager>().cursorObj.name.Equals("Chopping Knife"))
         {
             demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping.mp4");
         }
-        else if(sceneManager.GetComponent<CookingSceneManager>().knife.name.Equals("Cutting Knife"))
+        else if(sceneManager.GetComponent<CookingSceneManager>().cursorObj.name.Equals("Cutting Knife"))
         {
             demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Slicing Video.mp4");
         }
