@@ -6,56 +6,45 @@ public class HandController : MonoBehaviour
 {
     [SerializeField] Sprite openSprite;
     [SerializeField] Sprite pinchedSprite;
+    [SerializeField] Transform spiceSpawnPoint;
 
     SpriteRenderer spriteRenderer;
-    Rigidbody2D rigidbodyComponent;
+    Rigidbody2D rigidbodyRef;
 
     private GameObject spicePrefab;
     public GameObject SpicePrefab { set { spicePrefab = value; } }
 
     Vector2 spawnPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidbodyComponent = GetComponent<Rigidbody2D>();
-
-        // Cursor.visible = false;
+        rigidbodyRef = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        rigidbodyComponent.position =  mousePosition;               // Make hand move according to mouse location.
+        // Make hand move according to mouse location.
+        rigidbodyRef.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if(Input.GetMouseButtonDown(0))
+        if (!spriteRenderer)
+            return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            if(spriteRenderer != null && pinchedSprite != null) { spriteRenderer.sprite = pinchedSprite; }
+            TrySetSprite(pinchedSprite);
         }
-
-        if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
-            StartCoroutine(DropSpice());
+            TrySetSprite(openSprite);
 
-            if(spriteRenderer != null && openSprite != null) { spriteRenderer.sprite = openSprite; }
+            if (!spicePrefab)
+                return;
+
+            Instantiate(spicePrefab, spiceSpawnPoint.position, Quaternion.identity);
+            spicePrefab = null;
         }
     }
 
-    // Generate spice and have it fall into bowl
-    // TODO: Test -> Does this need to be a coroutine?
-    IEnumerator DropSpice()
-    {
-        spawnPosition = gameObject.transform.GetChild(0).gameObject.transform.position;
-
-        if(spicePrefab != null) 
-        { 
-            Instantiate(spicePrefab, spawnPosition, Quaternion.identity);
-        }
-
-        yield return new WaitForSeconds(.1f);
-
-        spicePrefab = null;
-    }
+    private void TrySetSprite(Sprite spr) { if (spr) spriteRenderer.sprite = spr; }
 }

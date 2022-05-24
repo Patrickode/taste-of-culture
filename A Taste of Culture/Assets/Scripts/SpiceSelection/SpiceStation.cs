@@ -15,6 +15,7 @@ public class SpiceStation : MonoBehaviour
         if (!other.gameObject.CompareTag("Spice"))
             return;
 
+        StopAllCoroutines();
         StartCoroutine(ScoldPlayer());
     }
 
@@ -27,16 +28,18 @@ public class SpiceStation : MonoBehaviour
                 : "...";
         }
 
+        //Trigger dialogue and prevent tooltips or early escape until it's disabled.
         dialogueTrigger.TriggerDialogue();
-        SpiceBowl.CanDisplayTooltip = false;    // Prevent new tooltip from being displayed while player is being scolded.
+        SpiceBowl.CanDisplayTooltip = false;
         TryToggleButtons(false);
 
-        timesScolded++;
         yield return new WaitForSeconds(2.5f);
 
         dialogueTrigger.DisableDialogue();
         SpiceBowl.CanDisplayTooltip = true;
         TryToggleButtons(true);
+
+        timesScolded++;
     }
 
     private void TryToggleButtons(bool enabled)
