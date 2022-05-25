@@ -93,7 +93,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Hand")) { return; }
 
-        //Note that we've stopped hovering over this spice bowk
+        //Note that we've stopped hovering over this spice bowl
         TriggerOccupiedStateChange?.Invoke(false);
         //If this spice bowl is also the one with a tooltip right now, since we just 
         //stopped hovering over it, discard ownership of that tooltip
