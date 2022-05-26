@@ -11,30 +11,38 @@ public static class UtilFunctions
         new Vector2(Screen.width, Screen.height);
 #endif
     /// <summary>
-    /// Returns whether the point <paramref name="coords"/> is offscreen or not.
+    /// Returns how many pixels the point <paramref name="coords"/> is offscreen, if at all.
     /// </summary>
     /// <param name="coords">Pixel coordinates representing a position on the screen.</param>
     /// <param name="conversionCam">If this isn't null, this method will convert <paramref name="coords"/> to pixel coords 
     /// itself using this camera,<br/>so the coords don't have to be converted beforehand.</param>
-    public static bool PixelCoordsOffScreen(Vector2 coords, Camera conversionCam = null)
+    public static Vector2 PixelCoordsOffScreen(Vector2 coords, Camera conversionCam = null)
     {
         Vector2 maxPixelPos = GameViewOrScreenSize();
+        Vector2 result = Vector2.zero;
 
         if (conversionCam)
             coords = conversionCam.WorldToScreenPoint(coords);
 
-        return coords.x <= 0 || coords.x >= maxPixelPos.x ||
-            coords.y <= 0 || coords.y >= maxPixelPos.y;
+        //If X or Y is out of bounds, put how far out of bounds they are (negative or positive) into result.
+        if (coords.x <= 0 || coords.x >= maxPixelPos.x)
+            result.x = coords.x - (coords.x > 0 ? maxPixelPos.x : 0);
+
+        if (coords.y <= 0 || coords.y >= maxPixelPos.y)
+            result.y = coords.y - (coords.y > 0 ? maxPixelPos.y : 0);
+
+        return result;
     }
     /// <remarks>
     /// This overload will use the <see cref="Bounds.min"/> and <see cref="Bounds.max"/> to check if the <i>entire</i>
-    /// bounding box is off-screen.
+    /// <br/>bounding box is off-screen before returning an amount.
     /// </remarks>
-    /// <param name="coords">An area </param>
+    /// <param name="coords">The function will check if this <i>entire</i> bounding box is offscreen.</param>
     /// <inheritdoc cref="PixelCoordsOffScreen(Vector2, Camera)"/>
-    public static bool PixelCoordsOffScreen(Bounds coords, Camera conversionCam)
+    public static Vector2 PixelCoordsOffScreen(Bounds coords, Camera conversionCam)
     {
         Vector2 maxPixelPos = GameViewOrScreenSize();
+        Vector2 result = Vector2.zero;
 
         if (conversionCam)
         {
@@ -44,8 +52,18 @@ public static class UtilFunctions
         else Debug.LogWarning("PixelCoordsOffScreen was passed some bounds without a conversion cam; the bounds likely " +
             "aren't in screen space already, so this function my return strange/incorrect results.");
 
-        return coords.max.x <= 0 || coords.min.x >= maxPixelPos.x ||
-            coords.max.y <= 0 || coords.min.y >= maxPixelPos.y;
+        //If X or Y is out of bounds, put how far out of bounds they are (negative or positive) into result.
+        if (coords.max.x <= 0)
+            result.x = coords.max.x;
+        else if (coords.min.x >= maxPixelPos.x)
+            result.x = coords.min.x - maxPixelPos.x;
+
+        if (coords.max.y <= 0)
+            result.y = coords.max.y;
+        else if (coords.min.y >= maxPixelPos.y)
+            result.y = coords.min.y - maxPixelPos.y;
+
+        return result;
     }
 
     /// <summary>
@@ -168,6 +186,7 @@ public static class UtilFunctions
         Debug.DrawLine(p4, p8, c, duration);
     }
 
+    //Comment included with function:
     // https://forum.unity.com/threads/debug-drawbox-function-is-direly-needed.1038499/
     public static void DrawBox(Vector3 pos, Quaternion rot, Vector3 scale, Color c)
     {
@@ -205,5 +224,13 @@ public static class UtilFunctions
         //Debug.DrawRay(m.GetPosition(), m.GetUp(), Color.yellow);
         //Debug.DrawRay(m.GetPosition(), m.GetRight(), Color.red);
     }
+    public static void DrawBox(Vector3 pos, Quaternion rot, float scale, Color c) => DrawBox(pos, rot, Vector3.one * scale, c);
     #endregion
+
+    /// <summary>
+    /// Checks to see if this float is equal to <paramref name="target"/>, within a 
+    /// given <paramref name="range"/>.
+    /// </summary>
+    public static bool EqualWithinRange(this float subject, float target, float range)
+        => subject >= target - range && subject <= target + range;
 }
