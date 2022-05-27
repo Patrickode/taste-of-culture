@@ -956,7 +956,7 @@ MonoBehaviour:
   sizzleCombined: {fileID: 1144676539}
   lowBoil: {fileID: 729253031}
   highBoil: {fileID: 952430045}
-  mixer: {fileID: 0}
+  mixer: {fileID: 24100000, guid: a7d2e93aa4b27874788588c70f64c001, type: 2}
 --- !u!4 &464302823
 Transform:
   m_ObjectHideFlags: 0
