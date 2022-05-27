@@ -8,19 +8,22 @@ public class HandController : MonoBehaviour
     [SerializeField] Sprite pinchedSprite;
     [SerializeField] Transform spiceSpawnPoint;
     [SerializeField] bool followMouseOffscreen;
+    [SerializeField] int startingSpiceOrder;
 
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigidbodyRef;
     Camera cachedCam;
+    int layerDropCounter;
 
-    private GameObject spicePrefab;
-    public GameObject SpicePrefab { set { spicePrefab = value; } }
+    private SpriteRenderer spicePrefab;
+    public SpriteRenderer SpicePrefab { set { spicePrefab = value; } }
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbodyRef = GetComponent<Rigidbody2D>();
         cachedCam = Camera.main;
+        layerDropCounter = startingSpiceOrder;
     }
 
     private void FixedUpdate()
@@ -61,7 +64,11 @@ public class HandController : MonoBehaviour
 
             //If the mouse and hand are desynced for whatever reason, don't drop any spice
             if (Vector2.Distance(rigidbodyRef.position, cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= 0.1)
-                Instantiate(spicePrefab, spiceSpawnPoint.position, Quaternion.identity);
+            {
+                //Spawn the spice, increment the drop counter, then set the new spice's sort order to the counter
+                SpriteRenderer newSpice = Instantiate(spicePrefab, spiceSpawnPoint.position, Quaternion.identity);
+                newSpice.sortingOrder = ++layerDropCounter;
+            }
 
             spicePrefab = null;
         }
@@ -80,7 +87,7 @@ public class HandController : MonoBehaviour
         Vector2 cornerClosestToScreen = Vector2.zero;
         cornerClosestToScreen.x = boundsOffscreen.x < 0 ? bnds.max.x : bnds.min.x;
         cornerClosestToScreen.y = boundsOffscreen.y < 0 ? bnds.max.y : bnds.min.y;
-        
+
         //Then get the direction/distance to the hand pivot from that corner.
         Vector2 cornerToPivot = cornerClosestToScreen - rigidbodyRef.position;
 

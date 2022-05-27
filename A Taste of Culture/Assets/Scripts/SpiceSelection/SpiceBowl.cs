@@ -7,7 +7,7 @@ public class SpiceBowl : MonoBehaviour
     enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
 
     [SerializeField] TypeOfSpice spiceCategory;
-    [SerializeField] GameObject pinchedSpicePrefab;
+    [SerializeField] SpriteRenderer pinchedSpicePrefab;
 
     public CookingDialogueTrigger dialogueTrigger;
     // public GameObject dialogue;

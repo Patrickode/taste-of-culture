@@ -153,7 +153,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 1747384934}
+      objectReference: {fileID: 1747384938}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cinnamon
@@ -776,7 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -829,9 +829,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 249461144}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &249461146 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &249461150 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 249461144}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &383471140
@@ -1251,7 +1251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1304,9 +1304,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 743979283}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &743979285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &743979289 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 743979283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &806216058
@@ -1335,7 +1335,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 1962849155}
+      objectReference: {fileID: 1962849160}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cayenne Pepper
@@ -1995,7 +1995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2048,9 +2048,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1027306175}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1027306177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &1027306181 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1027306175}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1031464206
@@ -2355,7 +2355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2408,9 +2408,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1058309390}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1058309392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &1058309396 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1058309390}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1082641501
@@ -2478,7 +2478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2531,9 +2531,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1085881060}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1085881062 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &1085881066 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1085881060}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1321017250
@@ -2614,7 +2614,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 1058309392}
+      objectReference: {fileID: 1058309396}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Nutmeg
@@ -2924,7 +2924,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 743979285}
+      objectReference: {fileID: 743979289}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Paprika
@@ -3377,7 +3377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3430,9 +3430,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1747384932}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1747384934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &1747384938 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1747384932}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1828211091
@@ -3619,7 +3619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3672,9 +3672,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1871038878}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1871038880 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+--- !u!212 &1871038884 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1871038878}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1906089969
@@ -3870,14 +3870,14 @@ MonoBehaviour:
     - Great job! I'll set this aside for us to use later...
     expressions:
     - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
---- !u!1 &1962849155 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
-  m_PrefabInstance: {fileID: 7780707156525860305}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1962849157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+  m_PrefabInstance: {fileID: 7780707156525860305}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1962849160 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 7780707156525860305}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1975970277
@@ -3910,7 +3910,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 1027306177}
+      objectReference: {fileID: 1027306181}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Ginger
@@ -4032,7 +4032,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 1085881062}
+      objectReference: {fileID: 1085881066}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Coriander
@@ -4326,14 +4326,14 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1962849157}
   - {fileID: 1871038879}
   - {fileID: 1027306176}
+  - {fileID: 249461145}
   - {fileID: 743979284}
   - {fileID: 1747384933}
-  - {fileID: 1962849157}
   - {fileID: 1058309391}
   - {fileID: 1085881061}
-  - {fileID: 249461145}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4367,7 +4367,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 1871038880}
+      objectReference: {fileID: 1871038884}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cumin
@@ -4488,7 +4488,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 249461146}
+      objectReference: {fileID: 249461150}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Garlic
@@ -4585,7 +4585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_LocalPosition.x
