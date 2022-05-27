@@ -38,8 +38,9 @@ public class MixingBowl : MonoBehaviour
         SpicinessValue += spice.Spiciness;
         SweetnessValue += spice.Sweetness;
 
-        Debug.Log($"{name}: Added spice \"{spice.name}\" with flavor profile " +
-            $"(Bit: {BitternessValue}, Sp: {SpicinessValue} Sw: {SweetnessValue})");
+        Debug.Log($"<color=#888>{name}: Added spice \"{spice.name}\" with flavor profile " +
+            $"(Bit: {spice.Bitterness}, Sp: {spice.Spiciness} Sw: {spice.Sweetness}).</color>\n" +
+            $"\t<color=#777>Total profile is now (Bit: {BitternessValue}, Sp: {SpicinessValue} Sw: {SweetnessValue})</color>");
     }
 
     /// <summary>

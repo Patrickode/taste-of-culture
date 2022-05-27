@@ -69,14 +69,14 @@ public class CookingSceneManager : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void FinishedCutting()
+    public void FinishedSliceOrSpice()
     {
-        Debug.Log("CookingSceneManager's FinishedCutting called");
+        Debug.Log("CookingSceneManager's FinishedSliceOrSpice called");
         dialogue.SetActive(true);
         cursorObj.SetActive(false);
         Cursor.visible = true;
-        dialogueTrigger = gameObject.GetComponents<CookingDialogueTrigger>()[1];
-        dialogueTrigger.TriggerDialogue();
+        
+        gameObject.GetComponents<CookingDialogueTrigger>()[1].TriggerDialogue();
         GameObject.Find("ContinueButton").SetActive(false);
     }
 }
