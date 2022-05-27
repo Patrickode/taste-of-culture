@@ -259,6 +259,111 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3468540}
   m_CullTransparentMesh: 1
+--- !u!1001 &50018640
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3261151731629286498, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_Name
+      value: RecipeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4618188587653644391, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231451589119995397, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216370653373342919, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
 --- !u!1 &90323561
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +956,7 @@ MonoBehaviour:
   sizzleCombined: {fileID: 1144676539}
   lowBoil: {fileID: 729253031}
   highBoil: {fileID: 952430045}
+  mixer: {fileID: 0}
 --- !u!4 &464302823
 Transform:
   m_ObjectHideFlags: 0
@@ -2347,6 +2453,7 @@ GameObject:
   - component: {fileID: 1703857006}
   - component: {fileID: 1703857005}
   - component: {fileID: 1703857007}
+  - component: {fileID: 1703857008}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: GameController
@@ -2686,6 +2793,46 @@ MonoBehaviour:
       - m_Target: {fileID: 1703856999}
         m_TargetAssemblyTypeName: DowntimeSceneManager, Assembly-CSharp
         m_MethodName: DialogueEnded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: b3b816a0251c7f04ab6f22274e05b955, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1703857008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703856996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: db94d12f5ba90254fa730de5968519cf, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1703856999}
+        m_TargetAssemblyTypeName: DowntimeSceneManager, Assembly-CSharp
+        m_MethodName: RecipeDismissed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
