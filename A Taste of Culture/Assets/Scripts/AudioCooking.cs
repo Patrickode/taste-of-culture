@@ -20,7 +20,7 @@ public class AudioCooking : MonoBehaviour
         {
             mixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume")) * 20);
             mixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
-            mixer.SetFloat("SoundsFX", Mathf.Log10(PlayerPrefs.GetFloat("SoundFXVolume")) * 20);
+            mixer.SetFloat("SoundFX", Mathf.Log10(PlayerPrefs.GetFloat("SoundFXVolume")) * 20);
         }
     }
 
