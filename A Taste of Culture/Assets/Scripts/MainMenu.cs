@@ -26,6 +26,8 @@ public class MainMenu : MonoBehaviour
             musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
             sfxSlider.value = PlayerPrefs.GetFloat("SoundFXVolume");
         }
+
+        Cursor.visible = true;
     }
 
     public void OptionsSwitch()

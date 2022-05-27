@@ -158,14 +158,16 @@ public static class Coroutilities
 
     /// <summary>
     /// Calls the function <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.<br/> 
-    /// This overload takes in a type, so the iterator of the <see langword="foreach"/> 
-    /// can be used as a parameter in <paramref name="thingToDo"/>.
+    /// This overload takes in a type, so the <see langword="foreach"/> iteration variable can be used as a 
+    /// parameter in <paramref name="thingToDo"/>.
     /// </summary>
-    /// <typeparam name="T">The type of thing contained in <paramref name="eachOfThese"/>. Use</typeparam>
+    /// <typeparam name="T">The type of thing contained in <paramref name="eachOfThese"/>. <paramref name="thingToDo"/> takes
+    /// one argument of type <typeparamref name="T"/>,<br/>i.e., the the <see langword="foreach"/> iteration variable.</typeparam>
     /// <inheritdoc cref="DoForEach(Action, IEnumerable, float, bool)"/>
     public static Coroutine DoForEach<T>(MonoBehaviour coroutineCaller, Action<T> thingToDo, IEnumerable<T> eachOfThese, float timeBetween = 0, bool realTime = false)
         => coroutineCaller.StartCoroutine(DoForEach(thingToDo, eachOfThese, timeBetween, realTime));
 
+    /// <remarks></remarks> <inheritdoc cref="DoForEach{T}(MonoBehaviour, Action{T}, IEnumerable{T}, float, bool)"/>
     private static IEnumerator DoForEach<T>(Action<T> thingToDo, IEnumerable<T> eachOfThese, float timeBetween = 0, bool realTime = false)
     {
         foreach (var item in eachOfThese)

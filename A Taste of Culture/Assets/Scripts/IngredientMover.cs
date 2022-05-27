@@ -6,10 +6,15 @@ using UnityEngine;
 public class IngredientMover : MonoBehaviour
 {
     [SerializeField] float movementDistance = 2f;
+    [SerializeField] float budgeDistance = 0.25f;
+    [SerializeField] float budgeDuration = 0.125f;
+    [Space(5)]
     [SerializeField] float rotateXPosition;
     [SerializeField] float finalXPosition;
+    [Space(5)]
     [SerializeField] GameObject choppedPrefab;
     [SerializeField] Vector2 choppedPosition;
+    [Space(5)]
     [SerializeField] GameObject spriteMask;
     [SerializeField] Vector2 spriteMaskPosition;
 
@@ -21,52 +26,31 @@ public class IngredientMover : MonoBehaviour
     private bool allowRotation = false;
     public bool AllowRotation { set { allowRotation = value; } }
 
-    Rigidbody2D rigidbodyComponent;
     Vector2 originalPosition;
+    Vector2 cachedIngrPosition;
 
     bool hasBeenRotated = false;
     bool taskComplete = false;
 
     GameObject mask;
 
-    // Start is called before the first frame update
     void Start()
     {
-        rigidbodyComponent = GetComponent<Rigidbody2D>();
-
-        originalPosition = gameObject.transform.position;
+        originalPosition = transform.position;
+        cachedIngrPosition = originalPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (taskComplete) { return; }
-        Vector2 ingredientPosition = gameObject.transform.position;
-
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
-            if (allowMovement)
-            {
-                ingredientPosition.x += movementDistance;
-                gameObject.transform.position = ingredientPosition;
+            DoMoveOrBudge();
 
-                allowMovement = false;
-            }
-            else
-            {
-                // TODO: Prompt mentor to tell player to make a cut before moving ingredient.
-                Debug.Log("IngredientMover: Attempted to make a cut before moving the ingredient" +
-                    "\n<color=#FDCE2A>TODO:</color> Prompt mentor to tell player about making cuts before moving ingredients?");
-            }
-        }
+        if (taskComplete)
+            return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (allowRotation) { RotateIngredient(); }
-        }
+        TryRotateIngredient();
 
-        if (!allowRotation && (gameObject.transform.position.x >= rotateXPosition))
+        if (!allowRotation && (transform.position.x >= rotateXPosition))
         {
             allowRotation = true;
 
@@ -75,22 +59,60 @@ public class IngredientMover : MonoBehaviour
             if (tooltips != null) { tooltips.ToggleRotationInstructions(); }
         }
 
-        if (hasBeenRotated && (gameObject.transform.position.x >= finalXPosition)) { BroadcastTaskCompletion(); }
+        TryBroadcastTaskCompletion();
+    }
+
+    void DoMoveOrBudge()
+    {
+        // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
+        if (allowMovement)
+        {
+            transform.position += Vector3.right * movementDistance;
+            cachedIngrPosition = transform.position;
+
+            allowMovement = false;
+            return;
+        }
+
+        //Stop and reset any budges currently going right now, so the player can't mash and move the ingredient when
+        //they shouldn't.
+        StopAllCoroutines();
+        transform.position = cachedIngrPosition;
+
+        float progress = Mathf.Epsilon;
+        int direction = 1;
+        Vector2 budgePos = cachedIngrPosition + Vector2.right * budgeDistance;
+        Coroutilities.DoUntil(this,
+            () =>
+            {
+                //Lerp between the initial position since the last chop and the budge distance.
+                progress += Time.deltaTime / (budgeDuration / 2) * direction;
+                transform.position = Vector3.Lerp(cachedIngrPosition, budgePos, progress);
+
+                //Once we've lerped from init to budge, switch direction and lerp back again.
+                if (progress >= 1)
+                    direction = -1;
+            },
+            () => progress <= 0);
     }
 
     // Rotate ingredient and reset it's position
-    void RotateIngredient()
+    void TryRotateIngredient()
     {
-        gameObject.transform.position = originalPosition;
+        if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
+            return;
+
+        transform.position = originalPosition;
+        cachedIngrPosition = originalPosition;
 
         // Instantiate mask that will allow chunks to become visible
         mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
         GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPosition, Quaternion.identity);
-        choppedIngredient.transform.parent = gameObject.transform;
+        choppedIngredient.transform.parent = transform;
 
-        gameObject.transform.Rotate(0, 0, 90);
+        transform.Rotate(0, 0, 90);
 
         allowRotation = false;
         hasBeenRotated = true;
@@ -100,8 +122,11 @@ public class IngredientMover : MonoBehaviour
     }
 
     // Disable knife interaction and inform scene controller that the task has been completed.
-    void BroadcastTaskCompletion()
+    void TryBroadcastTaskCompletion()
     {
+        if (!hasBeenRotated || transform.position.x < finalXPosition)
+            return;
+
         taskComplete = true;
 
         Vector3 scale = new Vector3(1, 1, 0);
