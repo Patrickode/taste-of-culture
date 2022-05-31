@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MoveWithMousePos : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rbToMove;
+    [SerializeField] private bool moveWithPhysics;
+    [SerializeField] private GameObject thingToMove;
+    [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
     [SerializeField] private Collider2D moveZone;
+    private Rigidbody2D rbToMove;
 
     private Camera _cachedCam;
     private Camera CachedCam
@@ -19,22 +22,31 @@ public class MoveWithMousePos : MonoBehaviour
 
     public bool CanMove { get; set; } = true;
 
+    private void Start()
+    {
+        if (!thingToMove)
+            thingToMove = gameObject;
+
+        if (moveWithPhysics)
+            if (!thingToMove.TryGetComponent(out rbToMove))
+            {
+                Debug.LogError($"{name} was told to {thingToMove} with physics, but no rigidbody was found." +
+                    $"Defaulting to non-physics movement.");
+                moveWithPhysics = false;
+            }
+    }
+
     private void Update()
     {
         if (!CanMove) return;
-
-        Rigidbody2D moved = rbToMove;
-        if (!moved && !TryGetComponent(out moved))
-        {
-            Debug.LogError(name + "'s MoveWithMousePos was not given a Rigidbody to move, nor was one attached.");
-            CanMove = false;
-            return;
-        }
 
         Vector2 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition);
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
 
-        moved.MovePosition(destination);
+        if (moveWithPhysics)
+            rbToMove.MovePosition(destination);
+        else
+            thingToMove.transform.position = destination;
     }
 }
