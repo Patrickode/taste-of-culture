@@ -23,8 +23,6 @@ public class ClampVelocity : MonoBehaviour
         if (speed > maxSpeed)
         {
             Vector3 brakingForce = -velToClamp.normalized * (speed - maxSpeed);
-            Debug.Log($"Speed > maxSpeed = {speed > maxSpeed} ({speed} > {maxSpeed})\n" +
-                $"Applying counteractive force {brakingForce}");
 
             if (rb3D)
                 rb3D.AddForce(brakingForce, ForceMode.Impulse);
