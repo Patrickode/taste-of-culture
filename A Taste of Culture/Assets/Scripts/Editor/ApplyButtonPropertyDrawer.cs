@@ -60,7 +60,7 @@ public class ApplyButtonPropertyDrawer : PropertyDrawer
         }
         else
         {
-            fieldRect.width = thirdWidth * 2 - xSpacing;
+            fieldRect.width = thirdWidth * 2;
             buttonRect.width = thirdWidth - xSpacing;
             buttonRect.x += fieldRect.width + xSpacing;
         }

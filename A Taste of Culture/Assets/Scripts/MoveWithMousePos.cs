@@ -36,7 +36,7 @@ public class MoveWithMousePos : MonoBehaviour
             }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!CanMove) return;
 
