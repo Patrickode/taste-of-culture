@@ -422,11 +422,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5841c406b24955d4c9876c10ff4fe89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRadius: 2
+  lineWidth: 0.25
+  lineSpacing: 0.125
   bitterness: 8
   spiciness: 18
   sweetness: 13
   saltiness: 0
-  flavorVisualizerPrefab: {fileID: 7522415321592093980, guid: 0fb79903029a2da43af163c6b6dea0e3, type: 3}
+  bitternessColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  spicinessColor: {r: 1, g: 0.24905658, b: 0.24905658, a: 1}
+  sweetnessColor: {r: 1, g: 0.8505145, b: 0.24905658, a: 1}
+  saltinessColor: {r: 1, g: 1, b: 1, a: 1}
+  flavorVisualizerPrefab: {fileID: 5609292886739406050, guid: b22505569eeea5e4ba624a4a9945e37b, type: 3}
 --- !u!1 &900308628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,10 +1033,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5841c406b24955d4c9876c10ff4fe89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRadius: 4
+  lineWidth: 0.05
+  lineSpacing: 0.05
   bitterness: 0
   spiciness: 0
   sweetness: 0
   saltiness: 0
+  bitternessColor: {r: 0, g: 0, b: 0, a: 0}
+  spicinessColor: {r: 0, g: 0, b: 0, a: 0}
+  sweetnessColor: {r: 0, g: 0, b: 0, a: 0}
+  saltinessColor: {r: 0, g: 0, b: 0, a: 0}
   flavorVisualizerPrefab: {fileID: 0}
 --- !u!120 &1927332402
 LineRenderer:

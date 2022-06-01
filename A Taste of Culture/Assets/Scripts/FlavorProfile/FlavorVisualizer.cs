@@ -5,24 +5,32 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class FlavorVisualizer : MonoBehaviour
 {
-    [SerializeField] [Range(.3f, 5f)] float radius = 1f;
-    [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
-
-    public void DrawCircle(int value)
+    public void DrawCircle(float radius, float lineWidth, int value, Color flavorColor)
     {
+        if(value == 0) { return; }
+
         LineRenderer line = gameObject.GetComponent<LineRenderer>();
         int segments = 360;
         
         line.useWorldSpace = false;
         line.startWidth = lineWidth;
         line.endWidth = lineWidth;
+        line.startColor = flavorColor;
+        line.endColor = flavorColor;
         line.positionCount = segments + 1;
 
-        int pointCount = segments + 1;                              // Add extra point to close circle
+        // Material whiteDiffuseMat = new Material(Shader.Find("Unlit/Texture"));
+        // line.material = whiteDiffuseMat;
+        line.material.color = flavorColor;
+
+        // int pointCount = segments + 1;                              // Add extra point to close circle
+        int pointCount = value;
         Vector3[] points = new Vector3[pointCount];
 
-        // for (int i = 0; i < pointCount; i++)
-        for (int i = 0; i < value; i++)
+        // Vector3[] points = new Vector3[value];
+
+        for (int i = 0; i < pointCount; i++)
+        // for (int i = 0; i < value; i++)
         {
             var rad = Mathf.Deg2Rad * (i * 360f / segments);
             points[i] = new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0);

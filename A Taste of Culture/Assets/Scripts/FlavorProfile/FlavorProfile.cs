@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class FlavorProfile : MonoBehaviour
 {
-    // [SerializeField] GameObject spiceBreakdown;
-    // [SerializeField] GameObject flavorBreakdown;
-    
-    // [SerializeField] bool displaySpices = true;
-    // [SerializeField] bool displayFlavors = true;
+    [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
+    [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
+    [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
 
     [SerializeField] int bitterness;
     [SerializeField] int spiciness;
     [SerializeField] int sweetness;
     [SerializeField] int saltiness;
 
-    int[] flavors = new int[4];
-    FlavorVisualizer[] flavorVisualizers = new FlavorVisualizer[4];
+    [SerializeField] Color bitternessColor;
+    [SerializeField] Color spicinessColor;
+    [SerializeField] Color sweetnessColor;
+    [SerializeField] Color saltinessColor;
+
+    Dictionary<int, Color> flavors = new Dictionary<int, Color>();
 
     [SerializeField] GameObject flavorVisualizerPrefab;
     
     private void Start() 
     {
-        // if(displaySpices && spiceBreakdown != null) { spiceBreakdown.SetActive(true); }
-        // else { spiceBreakdown.SetActive(false); } 
-
-        // if(displayFlavors && flavorBreakdown != null) { flavorBreakdown.SetActive(true); }
-        // else { flavorBreakdown.SetActive(false); } 
-
-        flavors[0] = bitterness;
-        flavors[1] = spiciness;
-        flavors[2] = sweetness;
-        flavors[3] = saltiness;
+        flavors.Add(bitterness, bitternessColor);
+        flavors.Add(spiciness, spicinessColor);
+        flavors.Add(sweetness, sweetnessColor);
+        flavors.Add(saltiness, saltinessColor);
 
         VisualizeFlavors();
     }
@@ -41,17 +37,24 @@ public class FlavorProfile : MonoBehaviour
         // TODO: Get flavor values from save...
         int totalFlavors = bitterness + spiciness + sweetness + saltiness;
 
-        foreach(int flavor in flavors)
+        float radius = maxRadius;
+
+        foreach(int flavor in flavors.Keys)
         {
-            float flavorFraction = flavor / totalFlavors;
+            float flavorFraction = (float)flavor / (float)totalFlavors;
             int segments = Mathf.RoundToInt(360 * flavorFraction);
 
             Debug.Log("Flavor Value: " + flavor + " Total Flavor: " + totalFlavors + " Fraction: " + flavorFraction);
-            // Debug.Log("Segments: " + segments);
+            Debug.Log("Segments: " + segments);
 
-            GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab, gameObject.transform);
-            // flavorVisualizer.GetComponent<FlavorVisualizer>().DrawCircle(segments);
+            GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab);
+            flavorVisualizer.transform.parent = gameObject.transform;
+            flavorVisualizer.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.05f);
+            flavorVisualizer.transform.rotation = gameObject.transform.rotation;
+
+            flavorVisualizer.GetComponent<FlavorVisualizer>().DrawCircle(radius, lineWidth, segments, flavors[flavor]);
+        
+            radius -= lineWidth + lineSpacing;
         }
-
     }
 }
