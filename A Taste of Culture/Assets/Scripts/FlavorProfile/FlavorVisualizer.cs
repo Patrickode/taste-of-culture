@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(LineRenderer))]
 public class FlavorVisualizer : MonoBehaviour
 {
+    public GameObject label;
+    public TextMeshProUGUI labelText;
+
     public void DrawCircle(float radius, float lineWidth, int value, Color flavorColor)
     {
         if(value == 0) { return; }
@@ -15,26 +19,23 @@ public class FlavorVisualizer : MonoBehaviour
         line.useWorldSpace = false;
         line.startWidth = lineWidth;
         line.endWidth = lineWidth;
+        line.positionCount = value;
+
         line.startColor = flavorColor;
         line.endColor = flavorColor;
-        line.positionCount = segments + 1;
-
-        // Material whiteDiffuseMat = new Material(Shader.Find("Unlit/Texture"));
-        // line.material = whiteDiffuseMat;
         line.material.color = flavorColor;
 
-        // int pointCount = segments + 1;                              // Add extra point to close circle
         int pointCount = value;
         Vector3[] points = new Vector3[pointCount];
 
-        // Vector3[] points = new Vector3[value];
-
         for (int i = 0; i < pointCount; i++)
-        // for (int i = 0; i < value; i++)
         {
             var rad = Mathf.Deg2Rad * (i * 360f / segments);
             points[i] = new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0);
         }
+
+        label.transform.position = new Vector2(label.transform.position.x, points[0].y);         // Place label at same height as circle
+        label.transform.localScale = new Vector2(label.transform.localScale.x, lineWidth);
 
         line.SetPositions(points);
     }

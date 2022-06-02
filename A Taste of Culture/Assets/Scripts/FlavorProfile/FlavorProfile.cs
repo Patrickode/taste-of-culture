@@ -41,6 +41,8 @@ public class FlavorProfile : MonoBehaviour
 
         foreach(int flavor in flavors.Keys)
         {
+            if(flavor == 0) { continue; }
+
             float flavorFraction = (float)flavor / (float)totalFlavors;
             int segments = Mathf.RoundToInt(360 * flavorFraction);
 
@@ -52,8 +54,10 @@ public class FlavorProfile : MonoBehaviour
             flavorVisualizer.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.05f);
             flavorVisualizer.transform.rotation = gameObject.transform.rotation;
 
-            flavorVisualizer.GetComponent<FlavorVisualizer>().DrawCircle(radius, lineWidth, segments, flavors[flavor]);
-        
+            FlavorVisualizer visualizer = flavorVisualizer.GetComponent<FlavorVisualizer>();
+            visualizer.DrawCircle(radius, lineWidth, segments, flavors[flavor]);
+            visualizer.labelText.text = "Flavor " + Mathf.RoundToInt(flavorFraction * 100) + "%";
+
             radius -= lineWidth + lineSpacing;
         }
     }
