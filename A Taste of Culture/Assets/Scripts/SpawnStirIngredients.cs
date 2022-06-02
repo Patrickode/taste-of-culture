@@ -13,9 +13,15 @@ public class SpawnStirIngredients : MonoBehaviour
 
         float xRadius = transform.localScale.x / 2;
         float yRadius = transform.localScale.y / 2;
+
+        Transform container = new GameObject("Stir Ingredients").transform;
+        container.SetPositionAndRotation(transform.position, transform.rotation);
+
         for (int i = 0; i < numIngredients; i++)
         {
-            var spawnedIng = Instantiate(possibleIngredients[Random.Range(0, possibleIngredients.Length)]);
+            var spawnedIng = Instantiate(
+                possibleIngredients[Random.Range(0, possibleIngredients.Length)],
+                container);
 
             Vector3 spawnPos = Vector3.zero;
             while (spawnPos.normalized == Vector3.zero)
@@ -23,7 +29,7 @@ public class SpawnStirIngredients : MonoBehaviour
 
             spawnPos.x *= xRadius;
             spawnPos.y *= yRadius;
-            spawnedIng.position = transform.position + spawnPos;
+            spawnedIng.localPosition = spawnPos;
         }
     }
 }

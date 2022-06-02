@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 7970102196557702234}
   - component: {fileID: 1936748734100482165}
   - component: {fileID: 82846622189775622}
+  - component: {fileID: -2625154338573396824}
   m_Layer: 6
   m_Name: Onion Piece
   m_TagString: Untagged
@@ -295,3 +296,18 @@ MonoBehaviour:
   maxSpeed: 5
   clampAngular: 1
   maxAngSpeed: 1250
+--- !u!114 &-2625154338573396824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970102196557702180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3baef96eac24ce4e8d9465435572b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uncookedSprite: {fileID: 7970102196461243894}
+  cookedSprite: {fileID: 7970102196303914695}
+  cookDuration: 20
