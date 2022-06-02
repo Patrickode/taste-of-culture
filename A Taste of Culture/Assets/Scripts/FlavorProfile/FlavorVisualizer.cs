@@ -35,7 +35,7 @@ public class FlavorVisualizer : MonoBehaviour
         }
 
         label.transform.position = new Vector2(label.transform.position.x, points[0].y);         // Place label at same height as circle
-        label.transform.localScale = new Vector2(label.transform.localScale.x, lineWidth);
+        // label.transform.localScale = new Vector2(label.transform.localScale.x, lineWidth);
 
         line.SetPositions(points);
     }
