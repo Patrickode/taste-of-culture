@@ -6,25 +6,40 @@ public class CookStirIngredients : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer uncookedSprite;
     [SerializeField] private SpriteRenderer cookedSprite;
+    [SerializeField] private SpriteRenderer burnedSprite;
+    [Space(5)]
     [SerializeField] private float cookDuration;
+    [SerializeField] private float burnDuration;
 
     public float CookProgress { get; private set; }
     public bool DoneCooking { get => CookProgress >= 1; }
 
-    private void Update()
+    private static float _maxCookProgress = Mathf.NegativeInfinity;
+    public static float MaxCookProgress
     {
-        if (!DoneCooking)
+        get => _maxCookProgress;
+        private set
         {
-            IncrementCookProgress();
+            if (value > _maxCookProgress)
+                _maxCookProgress = value;
         }
     }
 
-    private void IncrementCookProgress()
+    private void Update()
     {
-        CookProgress += Time.deltaTime / cookDuration;
+        if (!DoneCooking)
+            IncrementProgress(cookDuration, ref uncookedSprite);
+        else
+            IncrementProgress(burnDuration, ref cookedSprite, -1);
+    }
 
-        Color newC = uncookedSprite.color;
-        newC.a = Mathf.Lerp(1, 0, CookProgress);
-        uncookedSprite.color = newC;
+    private void IncrementProgress(float duration, ref SpriteRenderer rendToChange, float lerpOffset = 0)
+    {
+        CookProgress += Time.deltaTime / duration;
+        MaxCookProgress = CookProgress;
+
+        Color newC = rendToChange.color;
+        newC.a = Mathf.Lerp(1, 0, CookProgress + lerpOffset);
+        rendToChange.color = newC;
     }
 }
