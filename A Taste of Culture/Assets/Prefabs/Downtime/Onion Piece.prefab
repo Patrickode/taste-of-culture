@@ -291,4 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb3D: {fileID: 0}
   rb2D: {fileID: 1936748734100482165}
+  clampLinear: 1
   maxSpeed: 5
+  clampAngular: 1
+  maxAngSpeed: 1250
