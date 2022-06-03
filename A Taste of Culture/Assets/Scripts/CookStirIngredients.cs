@@ -60,13 +60,15 @@ public class CookStirIngredients : MonoBehaviour
 
         UpdateStirState();
 
-        if (steamPSystem)
+        if (steamPSystem && steamPSystem.gameObject.activeInHierarchy)
         {
             var pSysMain = steamPSystem.main;
             pSysMain.startColor = Color.Lerp(originalSteamColor, unstirredParticleColor, unstirredProgress);
         }
 
-        if (donePSystem && CookProgress >= 1)
+        //Once cook progress reaches 1, play the done p system and discard our reference to it (it'll destroy
+        //itself when the effect is done)
+        if (donePSystem && donePSystem.gameObject.activeInHierarchy && CookProgress >= 1)
         {
             donePSystem.Play();
             donePSystem = null;
