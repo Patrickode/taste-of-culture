@@ -391,8 +391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3baef96eac24ce4e8d9465435572b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rbRef: {fileID: 1936748734100482165}
   uncookedSprite: {fileID: 7970102196461243894}
   cookedSprite: {fileID: 7970102196303914695}
   burnedSprite: {fileID: 6565254045885059460}
   cookDuration: 20
   burnDuration: 10
+  speedAtWhichStirred: 0.1
+  unstirredPeakFactor: 1.5
+  unstirredStartTime: 1.5
+  unstirredPeakTime: 1

@@ -4,17 +4,33 @@ using UnityEngine;
 
 public class CookStirIngredients : MonoBehaviour
 {
+    [SerializeField] private Rigidbody2D rbRef;
     [SerializeField] private SpriteRenderer uncookedSprite;
     [SerializeField] private SpriteRenderer cookedSprite;
     [SerializeField] private SpriteRenderer burnedSprite;
     [Space(5)]
     [SerializeField] private float cookDuration;
     [SerializeField] private float burnDuration;
+    [Space(5)]
+    [Tooltip("The speed this ingredient needs to be moving at to be considered \"stirred.\"")]
+    [SerializeField] [Min(0)] private float speedAtWhichStirred;
+    [SerializeField] private float unstirredPeakFactor;
+    [SerializeField] [Min(0)] private float unstirredStartTime;
+    [Tooltip("The time it'll take to go from a factor of 1 to `unstirredPeakFactor`, after `unstirredStartTime`" +
+        " seconds of not being stirred.")]
+    [SerializeField] [Min(0)] private float unstirredPeakTime;
+
+    private Coroutine unstirredCorout = null;
+    private bool isUnstirred = false;
+    private float unstirredProgress = 0;
+    private float unstirFactor = 1;
 
     public float CookProgress { get; private set; }
     public bool DoneCooking { get => CookProgress >= 1; }
 
-    private static Dictionary<CookStirIngredients, float> progressDict = new Dictionary<CookStirIngredients, float>();
+    private static Dictionary<CookStirIngredients, float> progressDict
+        = new Dictionary<CookStirIngredients, float>();
+
     private static List<float> _progressList = new List<float>();
     public static List<float> AllProgress
     {
@@ -29,14 +45,37 @@ public class CookStirIngredients : MonoBehaviour
     private void Update()
     {
         if (!DoneCooking)
-            IncrementProgress(cookDuration, ref uncookedSprite);
+            IncrementCookProgress(cookDuration, ref uncookedSprite);
         else
-            IncrementProgress(burnDuration, ref cookedSprite, -1);
+            IncrementCookProgress(burnDuration, ref cookedSprite, -1);
+
+        //If there's not a timer for how long this ingredient's been left unstirred, start one.
+        if (unstirredCorout == null)
+        {
+            unstirredCorout = Coroutilities.DoAfterDelay(this,
+                () => isUnstirred = true,
+                unstirredStartTime);
+        }
+
+        //If this ingredient moves fast enough, we consider it stirred. Reset the unstirred timer + related vars.
+        if (rbRef.velocity.sqrMagnitude >= speedAtWhichStirred * speedAtWhichStirred)
+        {
+            Coroutilities.TryStopCoroutine(this, ref unstirredCorout);
+            isUnstirred = false;
+            unstirredProgress = 0;
+        }
+        //Otherwise, climb towards the peak cook progress multiplier while unstirred.
+        else if (isUnstirred)
+        {
+            unstirredProgress += Time.deltaTime / unstirredPeakTime;
+        }
+
+        unstirFactor = Mathf.Lerp(1, unstirredPeakFactor, unstirredProgress);
     }
 
-    private void IncrementProgress(float duration, ref SpriteRenderer rendToChange, float lerpOffset = 0)
+    private void IncrementCookProgress(float duration, ref SpriteRenderer rendToChange, float lerpOffset = 0)
     {
-        CookProgress += Time.deltaTime / duration;
+        CookProgress += (Time.deltaTime / duration) * unstirFactor;
         progressDict[this] = CookProgress;
 
         Color newC = rendToChange.color;
