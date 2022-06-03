@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MixingBowl : MonoBehaviour
 {
+    // public GameObject flavorProfile;
+
     public Button resetButton;
     public Button doneButton;
 
@@ -27,6 +29,8 @@ public class MixingBowl : MonoBehaviour
 
         if (doneButton != null)
             doneButton.gameObject.SetActive(false);
+
+        // flavorProfile.SetActive(false);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -103,5 +107,8 @@ public class MixingBowl : MonoBehaviour
 
         Debug.Log("Saved flavor profile: " + $"(Bit: {flavorData.Bitterness}, Sp: {flavorData.Spiciness}, " +
             $"Sw: {flavorData.Sweetness}, Sa: {flavorData.Saltiness})");
+
+        // Instantiate(flavorProfile);
+        // flavorProfile.SetActive(true);
     }
 } 
