@@ -14,14 +14,15 @@ public class CookStirIngredients : MonoBehaviour
     public float CookProgress { get; private set; }
     public bool DoneCooking { get => CookProgress >= 1; }
 
-    private static float _maxCookProgress = Mathf.NegativeInfinity;
-    public static float MaxCookProgress
+    private static Dictionary<CookStirIngredients, float> progressDict = new Dictionary<CookStirIngredients, float>();
+    private static List<float> _progressList = new List<float>();
+    public static List<float> AllProgress
     {
-        get => _maxCookProgress;
-        private set
+        get
         {
-            if (value > _maxCookProgress)
-                _maxCookProgress = value;
+            _progressList.Clear();
+            _progressList.AddRange(progressDict.Values);
+            return _progressList;
         }
     }
 
@@ -36,7 +37,7 @@ public class CookStirIngredients : MonoBehaviour
     private void IncrementProgress(float duration, ref SpriteRenderer rendToChange, float lerpOffset = 0)
     {
         CookProgress += Time.deltaTime / duration;
-        MaxCookProgress = CookProgress;
+        progressDict[this] = CookProgress;
 
         Color newC = rendToChange.color;
         newC.a = Mathf.Lerp(1, 0, CookProgress + lerpOffset);

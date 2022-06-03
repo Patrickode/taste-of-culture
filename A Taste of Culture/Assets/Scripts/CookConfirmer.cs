@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CookConfirmer : MonoBehaviour
 {
@@ -12,20 +13,20 @@ public class CookConfirmer : MonoBehaviour
     {
         if (Input.GetKeyDown(confirmKey))
         {
-            if (CookStirIngredients.MaxCookProgress < 1 - undercookedLeeway)
+            List<float> progress = CookStirIngredients.AllProgress;
+            string debugVals = $"\n<color=#999>(Min Progress = {progress.Min()}, Max Progress = {progress.Max()})</color>";
+
+            if (progress.Min() < 1 - undercookedLeeway)
             {
-                Debug.Log("yain't done cooking dingus " +
-                    $"(Progress = {CookStirIngredients.MaxCookProgress})");
+                Debug.Log("yain't done cooking dingus " + debugVals);
             }
-            else if (CookStirIngredients.MaxCookProgress > 1 + burnedLeeway)
+            else if (progress.Max() > 1 + burnedLeeway)
             {
-                Debug.Log("Some of it's a little burnt but good job I guess " +
-                    $"(Progress = {CookStirIngredients.MaxCookProgress})");
+                Debug.Log("Some of it's a little burnt but good job I guess " + debugVals);
             }
             else
             {
-                Debug.Log("You doed it!!" +
-                    $"(Progress = {CookStirIngredients.MaxCookProgress})");
+                Debug.Log("You doed it!!" + debugVals);
             }
         }
     }
