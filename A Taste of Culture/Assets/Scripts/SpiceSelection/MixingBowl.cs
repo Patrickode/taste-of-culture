@@ -12,9 +12,12 @@ public class MixingBowl : MonoBehaviour
     int BitternessValue;
     int SpicinessValue;
     int SweetnessValue;
+    int SaltinessValue;
 
     // Used to toggle reset button after first spice added to bowl
     bool firstSpiceAdded;
+
+    // FlavorProfileData flavorData = FlavorProfileData.Instance;
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +46,10 @@ public class MixingBowl : MonoBehaviour
         BitternessValue += spice.Bitterness;
         SpicinessValue += spice.Spiciness;
         SweetnessValue += spice.Sweetness;
+        SaltinessValue += spice.Saltiness;
 
         Debug.Log($"{name}: Added spice \"{spice.name}\" with flavor profile " +
-            $"(Bit: {BitternessValue}, Sp: {SpicinessValue} Sw: {SweetnessValue})");
+            $"(Bit: {BitternessValue}, Sp: {SpicinessValue}, Sw: {SweetnessValue}, Sa: {SaltinessValue})");
     }
 
     /// <summary>
@@ -70,6 +74,7 @@ public class MixingBowl : MonoBehaviour
         BitternessValue = 0;
         SpicinessValue = 0;
         SweetnessValue = 0;
+        SaltinessValue = 0;
     }
 
     /// <summary>
@@ -77,7 +82,7 @@ public class MixingBowl : MonoBehaviour
     /// </summary>
     public void FinishSelecting()
     {
-        /// TODO: save flavor profile...
+        SaveFavorProfile();
 
         SpiceBowl.CanDisplayTooltip = false;
         if (resetButton != null) { resetButton.gameObject.SetActive(false); }
@@ -86,4 +91,17 @@ public class MixingBowl : MonoBehaviour
         SceneController sceneController = FindObjectOfType<SceneController>();
         if (sceneController != null) { sceneController.TaskComplete(); }
     }
-}
+
+    private void SaveFavorProfile()
+    {              
+        FlavorProfileData flavorData = FlavorProfileData.Instance;
+
+        flavorData.Bitterness = BitternessValue;
+        flavorData.Spiciness = SpicinessValue;
+        flavorData.Sweetness = SweetnessValue;
+        flavorData.Saltiness = SaltinessValue;
+
+        Debug.Log("Saved flavor profile: " + $"(Bit: {flavorData.Bitterness}, Sp: {flavorData.Spiciness}, " +
+            $"Sw: {flavorData.Sweetness}, Sa: {flavorData.Saltiness})");
+    }
+} 

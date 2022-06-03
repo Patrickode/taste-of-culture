@@ -8,46 +8,49 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
 
-    [SerializeField] int bitterness;
-    [SerializeField] int spiciness;
-    [SerializeField] int sweetness;
-    [SerializeField] int saltiness;
-
     [SerializeField] Color bitternessColor;
     [SerializeField] Color spicinessColor;
     [SerializeField] Color sweetnessColor;
     [SerializeField] Color saltinessColor;
 
-    Dictionary<int, Color> flavors = new Dictionary<int, Color>();
-
     [SerializeField] GameObject flavorVisualizerPrefab;
+
+    List<KeyValuePair<int, Color>> flavors = new List<KeyValuePair<int, Color>>();
+
+    int bitterness;
+    int spiciness;
+    int sweetness;
+    int saltiness;
     
     private void Start() 
     {
-        flavors.Add(bitterness, bitternessColor);
-        flavors.Add(spiciness, spicinessColor);
-        flavors.Add(sweetness, sweetnessColor);
-        flavors.Add(saltiness, saltinessColor);
+        FlavorProfileData flavorData = FlavorProfileData.Instance;
+
+        bitterness = flavorData.Bitterness;
+        spiciness = flavorData.Spiciness;
+        sweetness = flavorData.Sweetness;
+        saltiness = flavorData.Saltiness;
+
+        flavors.Add(new KeyValuePair<int, Color>(bitterness, bitternessColor));
+        flavors.Add(new KeyValuePair<int, Color>(spiciness, spicinessColor));
+        flavors.Add(new KeyValuePair<int, Color>(sweetness, sweetnessColor));
+        flavors.Add(new KeyValuePair<int, Color>(saltiness, saltinessColor));
 
         VisualizeFlavors();
     }
 
     private void VisualizeFlavors()
     {
-        // TODO: Get flavor values from save...
         int totalFlavors = bitterness + spiciness + sweetness + saltiness;
 
         float radius = maxRadius;
 
-        foreach(int flavor in flavors.Keys)
+        foreach(KeyValuePair<int, Color> flavor in flavors)
         {
-            if(flavor == 0) { continue; }
+            if(flavor.Key == 0) { continue; }
 
-            float flavorFraction = (float)flavor / (float)totalFlavors;
+            float flavorFraction = (float)flavor.Key / (float)totalFlavors;
             int segments = Mathf.RoundToInt(360 * flavorFraction);
-
-            Debug.Log("Flavor Value: " + flavor + " Total Flavor: " + totalFlavors + " Fraction: " + flavorFraction);
-            Debug.Log("Segments: " + segments);
 
             GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab);
             flavorVisualizer.transform.parent = gameObject.transform;
@@ -55,10 +58,21 @@ public class FlavorProfile : MonoBehaviour
             flavorVisualizer.transform.rotation = gameObject.transform.rotation;
 
             FlavorVisualizer visualizer = flavorVisualizer.GetComponent<FlavorVisualizer>();
-            visualizer.DrawCircle(radius, lineWidth, segments, flavors[flavor]);
-            visualizer.labelText.text = "Flavor " + Mathf.RoundToInt(flavorFraction * 100) + "%";
+            visualizer.DrawCircle(radius, lineWidth, segments, flavor.Value);
+            visualizer.labelText.text = GetFlavorName(flavor) + " " + Mathf.RoundToInt(flavorFraction * 100) + "%";
 
             radius -= lineWidth + lineSpacing;
         }
+    }
+
+    string GetFlavorName(KeyValuePair<int, Color> flavor)
+    {
+        string flavorName = "Saltiness";
+
+        if(flavor.Key == bitterness) { flavorName = "Bitterness"; }
+        else if(flavor.Key == spiciness) { flavorName = "Spiciness"; }
+        else if(flavor.Key == sweetness) { flavorName = "Sweetness"; }
+
+        return flavorName;
     }
 }

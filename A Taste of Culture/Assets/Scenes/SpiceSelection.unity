@@ -4432,6 +4432,14 @@ PrefabInstance:
       propertyPath: resetButton
       value: 
       objectReference: {fileID: 1701473671}
+    - target: {fileID: 5324701546484046400, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
+      propertyPath: flavorProfileData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324701546484046400, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
+      propertyPath: flavorProfilePrefab
+      value: 
+      objectReference: {fileID: 7193969821761433139, guid: e23ab4ac3381a594e9a7ec95a44e657a, type: 3}
     - target: {fileID: 7070841883206164393, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_RootOrder
       value: 10
