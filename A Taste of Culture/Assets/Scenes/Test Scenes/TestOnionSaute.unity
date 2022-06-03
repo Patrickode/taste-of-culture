@@ -694,8 +694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   confirmKey: 32
-  undercookedLeeway: 0.1
-  burnedLeeway: 0.1
+  undercookedLeeway: 0.15
+  burnedLeeway: 0.25
 --- !u!1 &1080620647
 GameObject:
   m_ObjectHideFlags: 0

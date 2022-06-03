@@ -8,6 +8,8 @@ public class CookStirIngredients : MonoBehaviour
     [SerializeField] private SpriteRenderer uncookedSprite;
     [SerializeField] private SpriteRenderer cookedSprite;
     [SerializeField] private SpriteRenderer burnedSprite;
+    [SerializeField] private ParticleSystem steamPSystem;
+    [SerializeField] private ParticleSystem donePSystem;
     [Space(5)]
     [SerializeField] private float cookDuration;
     [SerializeField] private float burnDuration;
@@ -19,11 +21,13 @@ public class CookStirIngredients : MonoBehaviour
     [Tooltip("The time it'll take to go from a factor of 1 to `unstirredPeakFactor`, after `unstirredStartTime`" +
         " seconds of not being stirred.")]
     [SerializeField] [Min(0)] private float unstirredPeakTime;
+    [SerializeField] private Color unstirredParticleColor;
 
     private Coroutine unstirredCorout = null;
     private bool isUnstirred = false;
     private float unstirredProgress = 0;
     private float unstirFactor = 1;
+    private Color originalSteamColor;
 
     public float CookProgress { get; private set; }
     public bool DoneCooking { get => CookProgress >= 1; }
@@ -42,6 +46,11 @@ public class CookStirIngredients : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        originalSteamColor = steamPSystem.main.startColor.color;
+    }
+
     private void Update()
     {
         if (!DoneCooking)
@@ -49,28 +58,19 @@ public class CookStirIngredients : MonoBehaviour
         else
             IncrementCookProgress(burnDuration, ref cookedSprite, -1);
 
-        //If there's not a timer for how long this ingredient's been left unstirred, start one.
-        if (unstirredCorout == null)
+        UpdateStirState();
+
+        if (steamPSystem)
         {
-            unstirredCorout = Coroutilities.DoAfterDelay(this,
-                () => isUnstirred = true,
-                unstirredStartTime);
+            var pSysMain = steamPSystem.main;
+            pSysMain.startColor = Color.Lerp(originalSteamColor, unstirredParticleColor, unstirredProgress);
         }
 
-        //If this ingredient moves fast enough, we consider it stirred. Reset the unstirred timer + related vars.
-        if (rbRef.velocity.sqrMagnitude >= speedAtWhichStirred * speedAtWhichStirred)
+        if (donePSystem && CookProgress >= 1)
         {
-            Coroutilities.TryStopCoroutine(this, ref unstirredCorout);
-            isUnstirred = false;
-            unstirredProgress = 0;
+            donePSystem.Play();
+            donePSystem = null;
         }
-        //Otherwise, climb towards the peak cook progress multiplier while unstirred.
-        else if (isUnstirred)
-        {
-            unstirredProgress += Time.deltaTime / unstirredPeakTime;
-        }
-
-        unstirFactor = Mathf.Lerp(1, unstirredPeakFactor, unstirredProgress);
     }
 
     private void IncrementCookProgress(float duration, ref SpriteRenderer rendToChange, float lerpOffset = 0)
@@ -81,5 +81,32 @@ public class CookStirIngredients : MonoBehaviour
         Color newC = rendToChange.color;
         newC.a = Mathf.Lerp(1, 0, CookProgress + lerpOffset);
         rendToChange.color = newC;
+    }
+
+    private void UpdateStirState()
+    {
+        //If there's not a timer for how long this ingredient's been left unstirred, start one.
+        if (unstirredCorout == null)
+        {
+            unstirredCorout = Coroutilities.DoAfterDelay(this,
+                () => isUnstirred = true,
+                unstirredStartTime);
+        }
+
+        //If this ingredient moves fast enough, we consider it stirred. Reset the unstirred timer + related vars.
+        if (CookProgress < 2 && rbRef.velocity.sqrMagnitude >= speedAtWhichStirred * speedAtWhichStirred)
+        {
+            Coroutilities.TryStopCoroutine(this, ref unstirredCorout);
+            isUnstirred = false;
+            unstirredProgress = 0;
+        }
+        //Otherwise, climb towards the peak cook progress multiplier while unstirred.
+        //Also consider it unstirred if cook progress is at the max, for cosmetic burned effect.
+        else if (CookProgress >= 2 || isUnstirred)
+        {
+            unstirredProgress += Time.deltaTime / unstirredPeakTime;
+        }
+
+        unstirFactor = Mathf.Lerp(1, unstirredPeakFactor, unstirredProgress);
     }
 }

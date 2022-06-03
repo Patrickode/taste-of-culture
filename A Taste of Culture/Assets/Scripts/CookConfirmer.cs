@@ -14,15 +14,21 @@ public class CookConfirmer : MonoBehaviour
         if (Input.GetKeyDown(confirmKey))
         {
             List<float> progress = CookStirIngredients.AllProgress;
-            string debugVals = $"\n<color=#999>(Min Progress = {progress.Min()}, Max Progress = {progress.Max()})</color>";
+            Vector2 minMaxProg = new Vector2(progress.Min(), progress.Max());
 
-            if (progress.Min() < 1 - undercookedLeeway)
+            string debugVals = $"\n<color=#999>(Min Progress = {minMaxProg.x}, Max Progress = {minMaxProg.y})</color>";
+
+            if (minMaxProg.x < 1 - undercookedLeeway)
             {
-                Debug.Log("yain't done cooking dingus " + debugVals);
+                Debug.Log("yain't done cooking dingus" + debugVals);
             }
-            else if (progress.Max() > 1 + burnedLeeway)
+            else if (minMaxProg.y > 2)
             {
-                Debug.Log("Some of it's a little burnt but good job I guess " + debugVals);
+                Debug.Log("They're burnt to high hell and it's all your fault. How could you" + debugVals);
+            }
+            else if (minMaxProg.y > 1 + burnedLeeway)
+            {
+                Debug.Log("Some of it's a little burnt but good job I guess" + debugVals);
             }
             else
             {
