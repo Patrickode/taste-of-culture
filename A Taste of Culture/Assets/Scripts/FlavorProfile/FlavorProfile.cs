@@ -7,6 +7,7 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
+    [SerializeField] float GradualDisplaySpeed = 0.05f;
 
     [SerializeField] Color bitternessColor;
     [SerializeField] Color spicinessColor;
@@ -52,13 +53,12 @@ public class FlavorProfile : MonoBehaviour
             float flavorFraction = (float)flavor.Key / (float)totalFlavors;
             int segments = Mathf.RoundToInt(360 * flavorFraction);
 
-            GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab);
+            Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.25f, gameObject.transform.position.z - 0.05f);;
+            GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab, position, gameObject.transform.rotation);
             flavorVisualizer.transform.parent = gameObject.transform;
-            flavorVisualizer.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 0.05f);
-            flavorVisualizer.transform.rotation = gameObject.transform.rotation;
 
             FlavorVisualizer visualizer = flavorVisualizer.GetComponent<FlavorVisualizer>();
-            visualizer.DrawCircle(radius, lineWidth, segments, flavor.Value);
+            visualizer.DisplayFlavorValue(radius, lineWidth, segments, flavor.Value, GradualDisplaySpeed);
             visualizer.labelText.text = GetFlavorName(flavor) + " " + Mathf.RoundToInt(flavorFraction * 100) + "%";
 
             radius -= lineWidth + lineSpacing;

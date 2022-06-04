@@ -10,6 +10,7 @@ public class DowntimeSceneManager : MonoBehaviour
     public GameObject dialogue;
     public DialogueTrigger trigger;
     public GameObject mentor;
+    public GameObject flavorProfile;
 
     public GameObject[] backgrounds;
 
@@ -93,6 +94,7 @@ public class DowntimeSceneManager : MonoBehaviour
         mentor.SetActive(false);
         backgrounds[10].SetActive(true);
         yield return new WaitForSeconds(3.0f);
+        // DisplayFlavorProfile();
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
     }
@@ -127,5 +129,18 @@ public class DowntimeSceneManager : MonoBehaviour
         Cursor.visible = false;
         dialogue.SetActive(false);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void DisplayFlavorProfile()
+    {
+        StartCoroutine(DisplayProfile());
+    }
+
+    IEnumerator DisplayProfile()
+    {
+        flavorProfile.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        backgrounds[11].SetActive(true);
+        mentor.SetActive(true);
     }
 }
