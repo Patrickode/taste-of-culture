@@ -46,6 +46,8 @@ public class CookStirIngredients : MonoBehaviour
         }
     }
 
+    public static bool CookingPaused { get; set; }
+
     private void Start()
     {
         originalSteamColor = steamPSystem.main.startColor.color;
@@ -53,6 +55,8 @@ public class CookStirIngredients : MonoBehaviour
 
     private void Update()
     {
+        if (CookingPaused) return;
+
         if (!DoneCooking)
             IncrementCookProgress(cookDuration, ref uncookedSprite);
         else
