@@ -9,40 +9,42 @@ public class CookStirIngredients : MonoBehaviour
     [SerializeField] private SpriteRenderer cookedSprite;
     [SerializeField] private SpriteRenderer burnedSprite;
     [SerializeField] private ParticleSystem steamPSystem;
-    [SerializeField] private ParticleSystem donePSystem;
     [Space(5)]
     [SerializeField] private float cookDuration;
-    [SerializeField] private float burnDuration;
     [Space(5)]
+    [SerializeField] [Min(0)] private float timeUntilUnstirred;
     [Tooltip("The speed this ingredient needs to be moving at to be considered \"stirred.\"")]
-    [SerializeField] [Min(0)] private float speedAtWhichStirred;
-    [SerializeField] private float unstirredPeakFactor;
-    [SerializeField] [Min(0)] private float unstirredStartTime;
-    [Tooltip("The time it'll take to go from a factor of 1 to `unstirredPeakFactor`, after `unstirredStartTime`" +
-        " seconds of not being stirred.")]
-    [SerializeField] [Min(0)] private float unstirredPeakTime;
-    [SerializeField] private Color unstirredParticleColor;
+    [SerializeField] [Min(0)] private float speedToBeStirred;
+    [Tooltip("How long it'll take for the ingredient to start burning when sitting unstirred.")]
+    [SerializeField] [Min(0)] private float burnStartup;
+    [Tooltip("Measured in percentage points per second. Duration = 1/this.")]
+    [SerializeField] [Range(0, 1)] private float burnPerSecond;
+    [UnityEngine.Serialization.FormerlySerializedAs("unstirredParticleColor")]
+    [SerializeField] private Color burningParticleColor;
+
+    private float cookProgress;
+    private static bool cookingStopped;
 
     private Coroutine unstirredCorout = null;
+    private float burnStartupPercent;
     private bool isUnstirred = false;
-    private float unstirredProgress = 0;
-    private float unstirFactor = 1;
     private Color originalSteamColor;
 
-    public float CookProgress { get; private set; }
-    public bool DoneCooking { get => CookProgress >= 1; }
+    public static System.Action DoneCooking;
 
-    private static Dictionary<CookStirIngredients, float> progressDict
+    public float BurnPercent { get; private set; }
+
+    private static Dictionary<CookStirIngredients, float> burnAmountDict
         = new Dictionary<CookStirIngredients, float>();
 
-    private static List<float> _progressList = new List<float>();
-    public static List<float> AllProgress
+    private static List<float> _burnAmountList = new List<float>();
+    public static List<float> BurnAmounts
     {
         get
         {
-            _progressList.Clear();
-            _progressList.AddRange(progressDict.Values);
-            return _progressList;
+            _burnAmountList.Clear();
+            _burnAmountList.AddRange(burnAmountDict.Values);
+            return _burnAmountList;
         }
     }
 
@@ -57,36 +59,27 @@ public class CookStirIngredients : MonoBehaviour
     {
         if (CookingPaused) return;
 
-        if (!DoneCooking)
-            IncrementCookProgress(cookDuration, ref uncookedSprite);
-        else
-            IncrementCookProgress(burnDuration, ref cookedSprite, -1);
+        if (!cookingStopped)
+        {
+            cookProgress += Time.deltaTime / cookDuration;
+            if (cookProgress >= 1)
+            {
+                DoneCooking?.Invoke();
+                cookingStopped = true;
+            }
+
+            LerpAlphaByProgress(ref uncookedSprite, 1, 0, cookProgress);
+        }
 
         UpdateStirState();
-
-        if (steamPSystem && steamPSystem.gameObject.activeInHierarchy)
-        {
-            var pSysMain = steamPSystem.main;
-            pSysMain.startColor = Color.Lerp(originalSteamColor, unstirredParticleColor, unstirredProgress);
-        }
-
-        //Once cook progress reaches 1, play the done p system and discard our reference to it (it'll destroy
-        //itself when the effect is done)
-        if (donePSystem && donePSystem.gameObject.activeInHierarchy && CookProgress >= 1)
-        {
-            donePSystem.Play();
-            donePSystem = null;
-        }
     }
 
-    private void IncrementCookProgress(float duration, ref SpriteRenderer rendToChange, float lerpOffset = 0)
+    private void LerpAlphaByProgress(ref SpriteRenderer rendToHide,
+        float start, float end, float t, float tOffset = 0)
     {
-        CookProgress += (Time.deltaTime / duration) * unstirFactor;
-        progressDict[this] = CookProgress;
-
-        Color newC = rendToChange.color;
-        newC.a = Mathf.Lerp(1, 0, CookProgress + lerpOffset);
-        rendToChange.color = newC;
+        Color newC = rendToHide.color;
+        newC.a = Mathf.Lerp(start, end, t + tOffset);
+        rendToHide.color = newC;
     }
 
     private void UpdateStirState()
@@ -96,23 +89,36 @@ public class CookStirIngredients : MonoBehaviour
         {
             unstirredCorout = Coroutilities.DoAfterDelay(this,
                 () => isUnstirred = true,
-                unstirredStartTime);
+                timeUntilUnstirred);
         }
 
-        //If this ingredient moves fast enough, we consider it stirred. Reset the unstirred timer + related vars.
-        if (CookProgress < 2 && rbRef.velocity.sqrMagnitude >= speedAtWhichStirred * speedAtWhichStirred)
+        //If this ingredient moves fast enough, we consider it stirred. Reset the burn startup + related vars.
+        if (rbRef.velocity.sqrMagnitude >= speedToBeStirred * speedToBeStirred)
         {
             Coroutilities.TryStopCoroutine(this, ref unstirredCorout);
             isUnstirred = false;
-            unstirredProgress = 0;
+            burnStartupPercent = 0;
         }
-        //Otherwise, climb towards the peak cook progress multiplier while unstirred.
-        //Also consider it unstirred if cook progress is at the max, for cosmetic burned effect.
-        else if (CookProgress >= 2 || isUnstirred)
+        //Otherwise, start burning; once burning has started (startup >= 1), add to burn percent.
+        else if (isUnstirred)
         {
-            unstirredProgress += Time.deltaTime / unstirredPeakTime;
+            burnStartupPercent += Time.deltaTime / burnStartup;
+
+            if (burnStartupPercent >= 1)
+            {
+                BurnPercent += burnPerSecond * Time.deltaTime;
+                burnAmountDict[this] = BurnPercent;
+                LerpAlphaByProgress(ref burnedSprite, 0, 1, BurnPercent);
+            }
         }
 
-        unstirFactor = Mathf.Lerp(1, unstirredPeakFactor, unstirredProgress);
+        //If we've got an active steam p system, make it reflect the amount of burnination happening.
+        if (steamPSystem && steamPSystem.gameObject.activeInHierarchy)
+        {
+            //pSystem.main is read only, so it *must* be set indirectly like this.
+            //This isn't a hack, it's intended.
+            var pSysMain = steamPSystem.main;
+            pSysMain.startColor = Color.Lerp(originalSteamColor, burningParticleColor, burnStartupPercent);
+        }
     }
 }

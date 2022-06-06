@@ -5,51 +5,68 @@ using System.Linq;
 
 public class CookConfirmer : MonoBehaviour
 {
-    [SerializeField] private KeyCode confirmKey;
-    [SerializeField] [Range(0, 1)] private float undercookedLeeway;
-    [SerializeField] [Range(0, 1)] private float burnedLeeway;
+    [SerializeField] [Range(0, 1)] private float minorBurn;
+    [SerializeField] [Range(0, 1)] private float fullyBurned;
+    [Space(5)]
+    [SerializeField] [Range(0, 1)] private float minorityThreshold = 0.25f;
+    [SerializeField] [Range(0, 1)] private float majorityThreshold = 0.5f;
 
-    private List<float> cachedProgress = null;
-
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(confirmKey))
+        fullyBurned = Mathf.Max(fullyBurned, minorBurn);
+        majorityThreshold = Mathf.Max(majorityThreshold, minorityThreshold);
+
+        CookStirIngredients.DoneCooking += ConfirmCooking;
+    }
+    private void OnDestroy()
+    {
+        CookStirIngredients.DoneCooking -= ConfirmCooking;
+    }
+
+    private void ConfirmCooking()
+    {
+        List<float> burnAmounts = CookStirIngredients.BurnAmounts;
+        int numBurned = burnAmounts.Count((value) => value > minorBurn);
+
+        string msg = "<color=#E05E00>";
+        if (numBurned < 2)
         {
-            //If we don't have any progress cached, cache some. This prevents excessive property calls if the
-            //player button mashes absurdly fast
-            if (cachedProgress == null)
-            {
-                cachedProgress = CookStirIngredients.AllProgress;
-                Coroutilities.DoAfterDelay(this, () => cachedProgress = null, 0.05f);
-            }
-            Vector2 minMaxProg = new Vector2(cachedProgress.Min(), cachedProgress.Max());
-
-            string debugVals = $"\n<color=#999>(Min Progress = {minMaxProg.x}, " +
-                $"Max Progress = {minMaxProg.y})</color>";
-
-            if (minMaxProg.x < 1 - undercookedLeeway)
-            {
-                Debug.Log("yain't done cooking dingus" + debugVals);
-            }
-            else
-            {
-                if (minMaxProg.y > 2)
-                {
-                    Debug.Log("They're burnt to high hell and it's all your fault. " +
-                        "How could you" + debugVals);
-                }
-                else if (minMaxProg.y > 1 + burnedLeeway)
-                {
-                    Debug.Log("Some of it's a little burnt but good job I guess" + debugVals);
-                }
-                else
-                {
-                    Debug.Log("You doed it!!" + debugVals);
-                }
-
-                CookStirIngredients.CookingPaused = true;
-                //Transition to next scene
-            }
+            msg += "Great job! Let's move on.";
         }
+        else
+        {
+            float mostBurned = burnAmounts.Max();
+
+            if (numBurned < Mathf.RoundToInt(burnAmounts.Count * minorityThreshold))
+                msg += "A few";
+            else if (numBurned < Mathf.RoundToInt(burnAmounts.Count * majorityThreshold))
+                msg += "Some";
+            else
+                msg += "Most";
+
+            msg += " of them are";
+
+            if (mostBurned < fullyBurned)
+                msg += " a little";
+
+            msg += " burned, but don't worry, I can make some more";
+
+            if (numBurned < Mathf.RoundToInt(burnAmounts.Count * minorityThreshold)
+                || mostBurned < fullyBurned)
+            {
+                msg += " if we need to";
+            }
+
+            msg += ". Let's move on.";
+        }
+        msg += "</color>";
+
+#if UNITY_EDITOR
+        msg += $"\n<color=#999>Burned count = {numBurned}; Most burned = {burnAmounts.Max()}</color>";
+#endif
+
+        Debug.Log(msg);
+        CookStirIngredients.CookingPaused = true;
+        //Transition to next scene
     }
 }

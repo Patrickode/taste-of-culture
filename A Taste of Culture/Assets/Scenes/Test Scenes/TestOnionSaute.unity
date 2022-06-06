@@ -780,9 +780,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d22777c94e0104c8ed31a862b5a250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confirmKey: 32
-  undercookedLeeway: 0.15
-  burnedLeeway: 0.26
+  minorBurn: 0.25
+  fullyBurned: 0.5
+  minorityThreshold: 0.25
+  majorityThreshold: 0.5
 --- !u!1 &1080620647
 GameObject:
   m_ObjectHideFlags: 0

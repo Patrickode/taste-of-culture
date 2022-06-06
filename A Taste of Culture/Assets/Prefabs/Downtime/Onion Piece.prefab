@@ -9857,9 +9857,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2011137939
   m_SortingLayer: 3
-  m_SortingOrder: -2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 5516361b9d51ba642a9a7d1c6af1edde, type: 3}
-  m_Color: {r: 0.32799998, g: 0.28731778, b: 0.26189145, a: 1}
+  m_Color: {r: 0.32799998, g: 0.28731778, b: 0.26189145, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10185,11 +10185,9 @@ MonoBehaviour:
   cookedSprite: {fileID: 7970102196303914695}
   burnedSprite: {fileID: 6565254045885059460}
   steamPSystem: {fileID: 5514650863477619499}
-  donePSystem: {fileID: 2404252195402375634}
   cookDuration: 30
-  burnDuration: 15
-  speedAtWhichStirred: 0.1
-  unstirredPeakFactor: 2
-  unstirredStartTime: 5
-  unstirredPeakTime: 5
-  unstirredParticleColor: {r: 0, g: 0, b: 0, a: 0.32941177}
+  timeUntilUnstirred: 5
+  speedToBeStirred: 0.1
+  burnStartup: 3
+  burnPerSecond: 0.2
+  burningParticleColor: {r: 0, g: 0, b: 0, a: 0.32941177}
