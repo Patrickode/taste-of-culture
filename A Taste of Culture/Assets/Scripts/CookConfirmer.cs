@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class CookConfirmer : MonoBehaviour
@@ -72,6 +73,8 @@ public class CookConfirmer : MonoBehaviour
 
         Debug.Log(msg);
         CookStirIngredients.CookingPaused = true;
-        //Transition to next scene
+
+        //TODO: Better scene transition?
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
