@@ -31,7 +31,7 @@ public class CookConfirmer : MonoBehaviour
         int numBurned = burnAmounts.Count((value) => value > minorBurn);
 
         string msg = "<color=#E05E00>";
-        if (numBurned < 2)
+        if (numBurned < 1)
         {
             msg += "Great job! Let's move on.";
         }
@@ -39,7 +39,9 @@ public class CookConfirmer : MonoBehaviour
         {
             float mostBurned = burnAmounts.Max();
 
-            if (numBurned < Mathf.RoundToInt(burnAmounts.Count * minorityThreshold))
+            if (numBurned < 2)
+                msg += "One of them's";
+            else if (numBurned < Mathf.RoundToInt(burnAmounts.Count * minorityThreshold))
                 msg += "A few of them are";
             else if (numBurned < Mathf.RoundToInt(burnAmounts.Count * majorityThreshold))
                 msg += "Some of them are";
@@ -51,7 +53,7 @@ public class CookConfirmer : MonoBehaviour
             if (mostBurned < fullyBurned)
                 msg += " a little";
 
-            msg += " burned, but don't worry, I can make some more";
+            msg += " burned, but don't worry, I can make more";
 
             if (numBurned < Mathf.RoundToInt(burnAmounts.Count * majorityThreshold)
                 || mostBurned < fullyBurned)
