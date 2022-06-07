@@ -57,18 +57,15 @@ public class CookStirIngredients : MonoBehaviour
 
     private void Update()
     {
-        if (CookingPaused) return;
+        if (CookingPaused || cookingStopped) return;
 
-        if (!cookingStopped)
+        cookProgress += Time.deltaTime / cookDuration;
+        LerpAlphaByProgress(ref uncookedSprite, 1, 0, cookProgress);
+
+        if (cookProgress >= 1)
         {
-            cookProgress += Time.deltaTime / cookDuration;
-            if (cookProgress >= 1)
-            {
-                DoneCooking?.Invoke();
-                cookingStopped = true;
-            }
-
-            LerpAlphaByProgress(ref uncookedSprite, 1, 0, cookProgress);
+            DoneCooking?.Invoke();
+            cookingStopped = true;
         }
 
         UpdateStirState();

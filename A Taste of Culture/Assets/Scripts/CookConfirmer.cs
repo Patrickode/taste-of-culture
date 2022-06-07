@@ -25,6 +25,8 @@ public class CookConfirmer : MonoBehaviour
 
     private void ConfirmCooking()
     {
+        CookStirIngredients.DoneCooking -= ConfirmCooking;
+
         List<float> burnAmounts = CookStirIngredients.BurnAmounts;
         int numBurned = burnAmounts.Count((value) => value > minorBurn);
 
@@ -62,7 +64,8 @@ public class CookConfirmer : MonoBehaviour
         msg += "</color>";
 
 #if UNITY_EDITOR
-        msg += $"\n<color=#999>Burned count = {numBurned}; Most burned = {burnAmounts.Max()}</color>";
+        msg += $"\n<color=#999>Burned count = {numBurned}; " +
+            $"Most burned = {(burnAmounts.Count > 0 ? burnAmounts.Max() : 0)}</color>";
 #endif
 
         Debug.Log(msg);
