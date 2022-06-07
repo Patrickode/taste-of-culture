@@ -16,16 +16,16 @@ public class CookConfirmer : MonoBehaviour
         fullyBurned = Mathf.Max(fullyBurned, minorBurn);
         majorityThreshold = Mathf.Max(majorityThreshold, minorityThreshold);
 
-        CookStirIngredients.DoneCooking += ConfirmCooking;
+        CookStirIngredients.DoneCooking += ConfirmOnionSaute;
     }
     private void OnDestroy()
     {
-        CookStirIngredients.DoneCooking -= ConfirmCooking;
+        CookStirIngredients.DoneCooking -= ConfirmOnionSaute;
     }
 
-    private void ConfirmCooking()
+    private void ConfirmOnionSaute()
     {
-        CookStirIngredients.DoneCooking -= ConfirmCooking;
+        CookStirIngredients.DoneCooking -= ConfirmOnionSaute;
 
         List<float> burnAmounts = CookStirIngredients.BurnAmounts;
         int numBurned = burnAmounts.Count((value) => value > minorBurn);
@@ -40,20 +40,20 @@ public class CookConfirmer : MonoBehaviour
             float mostBurned = burnAmounts.Max();
 
             if (numBurned < Mathf.RoundToInt(burnAmounts.Count * minorityThreshold))
-                msg += "A few";
+                msg += "A few of them are";
             else if (numBurned < Mathf.RoundToInt(burnAmounts.Count * majorityThreshold))
-                msg += "Some";
+                msg += "Some of them are";
+            else if (numBurned < burnAmounts.Count)
+                msg += "Most of them are";
             else
-                msg += "Most";
-
-            msg += " of them are";
+                msg += "They're all";
 
             if (mostBurned < fullyBurned)
                 msg += " a little";
 
             msg += " burned, but don't worry, I can make some more";
 
-            if (numBurned < Mathf.RoundToInt(burnAmounts.Count * minorityThreshold)
+            if (numBurned < Mathf.RoundToInt(burnAmounts.Count * majorityThreshold)
                 || mostBurned < fullyBurned)
             {
                 msg += " if we need to";
@@ -64,8 +64,8 @@ public class CookConfirmer : MonoBehaviour
         msg += "</color>";
 
 #if UNITY_EDITOR
-        msg += $"\n<color=#999>Burned count = {numBurned}; " +
-            $"Most burned = {(burnAmounts.Count > 0 ? burnAmounts.Max() : 0)}</color>";
+        msg += $"\n<color=#999>Burned count = {numBurned} out of {burnAmounts.Count}; " +
+            $"Most burned = {burnAmounts.Max()}</color>";
 #endif
 
         Debug.Log(msg);

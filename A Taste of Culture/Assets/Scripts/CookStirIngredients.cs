@@ -19,7 +19,7 @@ public class CookStirIngredients : MonoBehaviour
     [SerializeField] [Min(0)] private float burnStartup;
     [Tooltip("Measured in percentage points per second. Duration = 1/this.")]
     [SerializeField] [Range(0, 1)] private float burnPerSecond;
-    [UnityEngine.Serialization.FormerlySerializedAs("unstirredParticleColor")]
+    [SerializeField] [Range(0, 1)] private float burnSpriteMaxAlpha = 1;
     [SerializeField] private Color burningParticleColor;
 
     private float cookProgress;
@@ -53,6 +53,7 @@ public class CookStirIngredients : MonoBehaviour
     private void Start()
     {
         originalSteamColor = steamPSystem.main.startColor.color;
+        burnAmountDict[this] = 0;
     }
 
     private void Update()
@@ -105,7 +106,7 @@ public class CookStirIngredients : MonoBehaviour
             {
                 BurnPercent += burnPerSecond * Time.deltaTime;
                 burnAmountDict[this] = BurnPercent;
-                LerpAlphaByProgress(ref burnedSprite, 0, 1, BurnPercent);
+                LerpAlphaByProgress(ref burnedSprite, 0, burnSpriteMaxAlpha, BurnPercent);
             }
         }
 
@@ -115,7 +116,9 @@ public class CookStirIngredients : MonoBehaviour
             //pSystem.main is read only, so it *must* be set indirectly like this.
             //This isn't a hack, it's intended.
             var pSysMain = steamPSystem.main;
-            pSysMain.startColor = Color.Lerp(originalSteamColor, burningParticleColor, burnStartupPercent);
+            pSysMain.startColor = BurnPercent < 1
+                ? Color.Lerp(originalSteamColor, burningParticleColor, burnStartupPercent)
+                : burningParticleColor;
         }
     }
 }
