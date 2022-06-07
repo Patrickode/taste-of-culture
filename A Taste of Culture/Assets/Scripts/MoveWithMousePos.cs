@@ -11,6 +11,8 @@ public class MoveWithMousePos : MonoBehaviour
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
 
+    public bool CanMove { get; set; } = true;
+
     private Camera _cachedCam;
     private Camera CachedCam
     {
@@ -20,8 +22,6 @@ public class MoveWithMousePos : MonoBehaviour
             return _cachedCam;
         }
     }
-
-    public bool CanMove { get; set; } = true;
 
     private void Start()
     {
@@ -35,6 +35,19 @@ public class MoveWithMousePos : MonoBehaviour
                     $"Defaulting to non-physics movement.");
                 moveWithPhysics = false;
             }
+
+        CookStirIngredients.DoneCooking += OnStirringComplete;
+    }
+
+    private void OnDestroy()
+    {
+        CookStirIngredients.DoneCooking -= OnStirringComplete;
+    }
+
+    private void OnStirringComplete()
+    {
+        CookStirIngredients.DoneCooking -= OnStirringComplete;
+        CanMove = false;
     }
 
     private void FixedUpdate()
