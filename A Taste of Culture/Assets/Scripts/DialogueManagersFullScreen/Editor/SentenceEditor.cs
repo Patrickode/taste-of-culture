@@ -68,7 +68,7 @@ public class SentenceEditor : Editor
 
         if (!currentSentence.HasOptions())
         {
-            currentSentence.text = EditorGUILayout.TextArea(currentSentence.text, EditorStyles.textArea, GUILayout.MinHeight(40));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("text"), GUILayout.MinHeight(40), GUILayout.ExpandHeight(true));
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
