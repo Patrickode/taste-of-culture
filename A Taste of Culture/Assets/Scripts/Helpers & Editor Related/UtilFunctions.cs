@@ -285,4 +285,19 @@ public static class UtilFunctions
         Color.RGBToHSV(c, out result.x, out result.y, out result.z);
         return result;
     }
+
+    public static Vector3 ClampComponents(Vector3 v,
+        float xMin, float xMax,
+        float yMin, float yMax,
+        float zMin, float zMax)
+    {
+        v.x = Mathf.Clamp(v.x, xMin, xMax);
+        v.y = Mathf.Clamp(v.y, yMin, yMax);
+        v.z = Mathf.Clamp(v.z, zMin, zMax);
+        return v;
+    }
+    public static Vector3 ClampComponents(Vector3 v, Vector3 minComponents, Vector3 maxComponents) =>
+        ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
+    public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
+        ClampComponents(v, min, max, min, max, min, max);
 }
