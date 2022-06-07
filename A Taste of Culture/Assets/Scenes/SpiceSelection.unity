@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: Sweetness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Garlic
@@ -1079,6 +1083,10 @@ PrefabInstance:
       propertyPath: Sweetness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Salt
@@ -1252,6 +1260,10 @@ PrefabInstance:
     - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: Sweetness
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
@@ -1997,6 +2009,10 @@ PrefabInstance:
       propertyPath: Sweetness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Ginger
@@ -2357,6 +2373,10 @@ PrefabInstance:
       propertyPath: Sweetness
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Nutmeg
@@ -2479,6 +2499,10 @@ PrefabInstance:
     - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: Sweetness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
@@ -3379,6 +3403,10 @@ PrefabInstance:
       propertyPath: Sweetness
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Cinnamon
@@ -3615,6 +3643,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: Spiciness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: spiceType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4430552482913984768, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
