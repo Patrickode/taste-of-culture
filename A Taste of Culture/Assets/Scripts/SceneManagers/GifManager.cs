@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
 
-public class GifManager : MonoBehaviour
+public class GIFManager : MonoBehaviour
 {
     //[SerializeField] GameObject ingredient1Instruction;
     //[SerializeField] GameObject ingredient2Instruction;
@@ -13,10 +13,11 @@ public class GifManager : MonoBehaviour
     public RawImage demoVideo;
     public Button closeButton;
     public VideoPlayer demoPlayer;
+    public string videoFilename;
 
     //bool hasBeenPlayed = false;
 
-    void Start() 
+    void Start()
     {
         //demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
         //closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
@@ -27,22 +28,10 @@ public class GifManager : MonoBehaviour
             closeButton.onClick.AddListener(ButtonClicked);
         }
 
-        //demoPlayer = GameObject.Find("VideoPlayer").GetComponent<VideoPlayer>();
-        if (sceneManager.GetComponent<CookingSceneManager>().cursorObj.name.Equals("Chopping Knife"))
-        {
-            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Chopping.mp4");
-        }
-        else if(sceneManager.GetComponent<CookingSceneManager>().cursorObj.name.Equals("Cutting Knife"))
-        {
-            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Slicing Video.mp4");
-        }
-        else
-        {
-            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Spice Picking.mp4");
-        }
-
+        demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFilename);
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
+        demoVideo.color = Color.clear;
 
         demoPlayer.loopPointReached += LoopedOnce;
     }
@@ -52,12 +41,15 @@ public class GifManager : MonoBehaviour
     {
         // if(hasBeenPlayed) { return; }               // Fixes bug where slicing scene restarts video.
 
-        if(demoVideo != null) 
-        { 
+        if (demoVideo != null)
+        {
             Cursor.visible = true;
 
             demoPlayer.gameObject.SetActive(true);
             demoVideo.gameObject.SetActive(true);
+            //TODO: Move this to before the dialogue is removed from the screen after continue is clicked, to
+            //prevent flickering even better
+            Coroutilities.DoWhen(this, () => demoVideo.color = Color.white, () => demoPlayer.isPrepared);
         }
 
         // hasBeenPlayed = true;

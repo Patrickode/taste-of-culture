@@ -9,7 +9,7 @@ public class CookingSceneManager : MonoBehaviour
     public CookingDialogueManager dialogueManager;
     public CookingDialogueTrigger dialogueTrigger;
     public GameObject dialogue;
-    public GifManager gifManager;
+    public GIFManager gifManager;
     public string dialogueString;
 
     bool gifHasPlayed = false;
