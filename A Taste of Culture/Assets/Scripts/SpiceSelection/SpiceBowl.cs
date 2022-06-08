@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class SpiceBowl : MonoBehaviour
 {
-    enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
+    public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
 
     [SerializeField] TypeOfSpice spiceCategory;
+    [Tooltip("The max distance a spice's center can be from this bowl's center and still be destroyed (put back " +
+        "in the bowl, reclaimed)")]
+    [SerializeField] [Min(0)] float maxReclaimDistance;
+    [SerializeField] Collider2D triggerRef;
+    [Space(5)]
     [SerializeField] SpriteRenderer pinchedSpicePrefab;
-
     public CookingDialogueTrigger dialogueTrigger;
     // public GameObject dialogue;
 
     HandController hand;
-    SpiceStation spiceStation;
+    SpiceOnCountertop spiceStation;
 
     public static bool CanDisplayTooltip { get; set; } = true;
 
@@ -37,7 +41,7 @@ public class SpiceBowl : MonoBehaviour
     {
         hand = FindObjectOfType<HandController>();
 
-        spiceStation = FindObjectOfType<SpiceStation>();
+        spiceStation = FindObjectOfType<SpiceOnCountertop>();
 
         TooltipOwnerStateChange += OnSpiceTooltipStateChange;
         TriggerOccupiedStateChange += OnTriggerOccupiedStateChange;
@@ -61,6 +65,17 @@ public class SpiceBowl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Spice")
+            && other.TryGetComponent(out Spice spi) && spi.spiceType == spiceCategory)
+        {
+            Vector3 oCenter = other.transform.TransformPoint(other.offset);
+            Vector3 thisCenter = transform.TransformPoint(triggerRef.offset);
+
+            if ((thisCenter - oCenter).sqrMagnitude <= maxReclaimDistance * maxReclaimDistance)
+                Destroy(other.gameObject);
+            return;
+        }
+
         if (!other.gameObject.CompareTag("Hand")) { return; }
 
         //Once when first hovering, note that we're hovering
