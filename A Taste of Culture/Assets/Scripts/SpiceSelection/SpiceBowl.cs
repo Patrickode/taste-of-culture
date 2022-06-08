@@ -13,7 +13,7 @@ public class SpiceBowl : MonoBehaviour
     // public GameObject dialogue;
 
     HandController hand;
-    SpiceStation spiceStation;
+    SpiceOnCountertop spiceStation;
 
     public static bool CanDisplayTooltip { get; set; } = true;
 
@@ -37,7 +37,7 @@ public class SpiceBowl : MonoBehaviour
     {
         hand = FindObjectOfType<HandController>();
 
-        spiceStation = FindObjectOfType<SpiceStation>();
+        spiceStation = FindObjectOfType<SpiceOnCountertop>();
 
         TooltipOwnerStateChange += OnSpiceTooltipStateChange;
         TriggerOccupiedStateChange += OnTriggerOccupiedStateChange;

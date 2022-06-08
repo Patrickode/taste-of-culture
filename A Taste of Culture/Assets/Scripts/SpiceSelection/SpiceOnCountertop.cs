@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiceStation : MonoBehaviour
+public class SpiceOnCountertop : MonoBehaviour
 {
     public CookingDialogueTrigger dialogueTrigger;
     public float dialogueTimer = 2.5f;
