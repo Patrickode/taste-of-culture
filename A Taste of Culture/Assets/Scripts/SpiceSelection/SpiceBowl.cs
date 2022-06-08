@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiceBowl : MonoBehaviour
 {
-    enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
+    public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
 
     [SerializeField] TypeOfSpice spiceCategory;
     [SerializeField] SpriteRenderer pinchedSpicePrefab;
@@ -61,6 +61,13 @@ public class SpiceBowl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Spice") 
+            && other.TryGetComponent(out Spice spi) && spi.spiceType == spiceCategory)
+        {
+            Destroy(other.gameObject);
+            return;
+        }
+
         if (!other.gameObject.CompareTag("Hand")) { return; }
 
         //Once when first hovering, note that we're hovering
