@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showContinueButton: 1
   dialogue:
     name: 
     sentences: []
@@ -140,5 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spiceCategory: 0
+  maxReclaimDistance: 1.25
+  triggerRef: {fileID: 2846882559174446741}
   pinchedSpicePrefab: {fileID: 0}
   dialogueTrigger: {fileID: 0}

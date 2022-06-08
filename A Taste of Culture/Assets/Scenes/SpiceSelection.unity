@@ -131,6 +131,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
       objectReference: {fileID: 0}
@@ -1442,6 +1458,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
       objectReference: {fileID: 0}
@@ -2729,6 +2761,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
       objectReference: {fileID: 0}
@@ -3038,6 +3086,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
@@ -4255,6 +4319,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
       objectReference: {fileID: 0}
@@ -4376,6 +4456,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
@@ -4712,6 +4808,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
       objectReference: {fileID: 0}
@@ -4858,6 +4970,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1747057741}
     m_Modifications:
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.x
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Size.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2846882559174446741, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 19.2
