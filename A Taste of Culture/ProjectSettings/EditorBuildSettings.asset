@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chopping.unity
     guid: 64b0c19ad6c39304e92f61e46dd93019
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ClosingDialogue.unity
     guid: 61bde242c657792448f46c00a213d319
   - enabled: 1
