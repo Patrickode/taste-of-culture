@@ -10177,7 +10177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7970102196557702180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3baef96eac24ce4e8d9465435572b11, type: 3}
+  m_Script: {fileID: 11500000, guid: e4bca6607fce54949a9f1cc875428cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rbRef: {fileID: 1936748734100482165}
@@ -10185,6 +10185,7 @@ MonoBehaviour:
   cookedSprite: {fileID: 7970102196303914695}
   burnedSprite: {fileID: 6565254045885059460}
   steamPSystem: {fileID: 5514650863477619499}
+  startPaused: 1
   cookDuration: 30
   timeUntilUnstirred: 5
   speedToBeStirred: 0.1

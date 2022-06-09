@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GIFManager : MonoBehaviour
 {
-    public CookingSceneManager sceneManager;
+    public bool startActive;
     public RawImage demoVideo;
     public Button closeButton;
     public VideoPlayer demoPlayer;
@@ -26,6 +26,8 @@ public class GIFManager : MonoBehaviour
         demoVideo.color = Color.clear;
 
         demoPlayer.loopPointReached += LoopedOnce;
+        if (startActive)
+            Coroutilities.DoAfterDelay(this, StartVideo, 1.5f);
     }
 
     public void StartVideo()
@@ -53,7 +55,6 @@ public class GIFManager : MonoBehaviour
         demoVideo.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
         demoPlayer.gameObject.SetActive(false);
-        sceneManager.GifEnded();
 
         // Start timer for toggling instruction tooltips
         InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CookStirIngredients : MonoBehaviour
+public class CookStirIngredient : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rbRef;
     [SerializeField] private SpriteRenderer uncookedSprite;
@@ -32,10 +32,12 @@ public class CookStirIngredients : MonoBehaviour
 
     public static System.Action DoneCooking;
 
+    public static bool CookingPaused { get; set; }
+
     public float BurnPercent { get; private set; }
 
-    private static Dictionary<CookStirIngredients, float> burnAmountDict
-        = new Dictionary<CookStirIngredients, float>();
+    private static Dictionary<CookStirIngredient, float> burnAmountDict
+        = new Dictionary<CookStirIngredient, float>();
 
     private static List<float> _burnAmountList = new List<float>();
     public static List<float> BurnAmounts
@@ -47,8 +49,6 @@ public class CookStirIngredients : MonoBehaviour
             return _burnAmountList;
         }
     }
-
-    public static bool CookingPaused { get; set; }
 
     private void Start()
     {
