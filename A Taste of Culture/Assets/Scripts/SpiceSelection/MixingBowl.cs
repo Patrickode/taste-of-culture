@@ -11,6 +11,7 @@ public class MixingBowl : MonoBehaviour
     int BitternessValue;
     int SpicinessValue;
     int SweetnessValue;
+    int SaltinessValue;
 
     // Used to toggle reset button after first spice added to bowl
     bool firstSpiceAdded;
@@ -37,10 +38,13 @@ public class MixingBowl : MonoBehaviour
         BitternessValue += spice.Bitterness;
         SpicinessValue += spice.Spiciness;
         SweetnessValue += spice.Sweetness;
+        SaltinessValue += spice.Saltiness;
 
         Debug.Log($"<color=#888>{name}: Added spice \"{spice.name}\" with flavor profile " +
-            $"(Bit: {spice.Bitterness}, Sp: {spice.Spiciness} Sw: {spice.Sweetness}).</color>\n" +
-            $"\t<color=#777>Total profile is now (Bit: {BitternessValue}, Sp: {SpicinessValue} Sw: {SweetnessValue})</color>");
+            $"(Bit: {spice.Bitterness}, Sp: {spice.Spiciness} " +
+            $"Sw: {spice.Sweetness}, Sa: {spice.Saltiness}).</color>\n" +
+            $"\t<color=#777>Total profile is now (Bit: {BitternessValue}, Sp: {SpicinessValue}, " +
+            $"Sw: {SweetnessValue}, Sa: {SaltinessValue})</color>");
     }
 
     /// <summary>
@@ -63,6 +67,7 @@ public class MixingBowl : MonoBehaviour
         BitternessValue = 0;
         SpicinessValue = 0;
         SweetnessValue = 0;
+        SaltinessValue = 0;
     }
 
     /// <summary>
@@ -70,7 +75,7 @@ public class MixingBowl : MonoBehaviour
     /// </summary>
     public void FinishSelecting()
     {
-        /// TODO: save flavor profile...
+        SaveFavorProfile();
 
         SpiceBowl.CanDisplayTooltip = false;
         ToggleAllActive(false, hideUntilSpiceAdded);
@@ -86,4 +91,17 @@ public class MixingBowl : MonoBehaviour
             if (obj)
                 obj.SetActive(active);
     }
-}
+
+    private void SaveFavorProfile()
+    {              
+        FlavorProfileData flavorData = FlavorProfileData.Instance;
+
+        flavorData.Bitterness = BitternessValue;
+        flavorData.Spiciness = SpicinessValue;
+        flavorData.Sweetness = SweetnessValue;
+        flavorData.Saltiness = SaltinessValue;
+
+        Debug.Log("Saved flavor profile: " + $"(Bit: {flavorData.Bitterness}, Sp: {flavorData.Spiciness}, " +
+            $"Sw: {flavorData.Sweetness}, Sa: {flavorData.Saltiness})");
+    }
+} 
