@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class MixingBowl : MonoBehaviour
 {
-    public Button resetButton;
-    public Button doneButton;
+    [SerializeField] private GameObject[] hideUntilSpiceAdded;
 
     // Flavor Profile values
     int BitternessValue;
@@ -20,11 +19,7 @@ public class MixingBowl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (resetButton != null)
-            resetButton.gameObject.SetActive(false);
-
-        if (doneButton != null)
-            doneButton.gameObject.SetActive(false);
+        ToggleAllActive(false, hideUntilSpiceAdded);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -33,11 +28,10 @@ public class MixingBowl : MonoBehaviour
         if (spice == null) { return; }
 
         // Toggle reset button
-        if (!firstSpiceAdded && other.gameObject.tag == "Spice")
+        if (!firstSpiceAdded && other.gameObject.CompareTag("Spice"))
         {
             firstSpiceAdded = true;
-            if (resetButton != null) { resetButton.gameObject.SetActive(true); }
-            if (doneButton != null) { doneButton.gameObject.SetActive(true); }
+            ToggleAllActive(true, hideUntilSpiceAdded);
         }
 
         // Add to flavor profile
@@ -46,8 +40,9 @@ public class MixingBowl : MonoBehaviour
         SweetnessValue += spice.Sweetness;
         SaltinessValue += spice.Saltiness;
 
-        Debug.Log($"{name}: Added spice \"{spice.name}\" with flavor profile " +
-            $"(Bit: {BitternessValue}, Sp: {SpicinessValue}, Sw: {SweetnessValue}, Sa: {SaltinessValue})");
+        Debug.Log($"<color=#888>{name}: Added spice \"{spice.name}\" with flavor profile " +
+            $"(Bit: {spice.Bitterness}, Sp: {spice.Spiciness} Sw: {spice.Sweetness}, Sa: {spice.Saltiness}).</color>\n" +
+            $"\t<color=#777>Total profile is now (Bit: {BitternessValue}, Sp: {SpicinessValue}, Sw: {SweetnessValue}, Sa: {SaltinessValue})</color>");
     }
 
     /// <summary>
@@ -58,12 +53,10 @@ public class MixingBowl : MonoBehaviour
         GameObject[] spices = GameObject.FindGameObjectsWithTag("Spice");
 
         foreach (GameObject spice in spices)
-        {
-            Destroy(spice);
-        }
+            if (spice)
+                Destroy(spice);
 
-        resetButton.gameObject.SetActive(false);
-        doneButton.gameObject.SetActive(false);
+        ToggleAllActive(false, hideUntilSpiceAdded);
         firstSpiceAdded = false;
 
         // Ensures cursor isn't visible after clicking button
@@ -83,11 +76,18 @@ public class MixingBowl : MonoBehaviour
         SaveFavorProfile();
 
         SpiceBowl.CanDisplayTooltip = false;
-        if (resetButton != null) { resetButton.gameObject.SetActive(false); }
-        if (doneButton != null) { doneButton.gameObject.SetActive(false); }
+        ToggleAllActive(false, hideUntilSpiceAdded);
 
         SceneController sceneController = FindObjectOfType<SceneController>();
-        if (sceneController != null) { sceneController.TaskComplete(); }
+        if (sceneController)
+            sceneController.TaskComplete();
+    }
+
+    private void ToggleAllActive(bool active, params GameObject[] objsToToggle)
+    {
+        foreach (var obj in objsToToggle)
+            if (obj)
+                obj.SetActive(active);
     }
 
     private void SaveFavorProfile()

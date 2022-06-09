@@ -26,7 +26,6 @@ public class IngredientMover : MonoBehaviour
     private bool allowRotation = false;
     public bool AllowRotation { set { allowRotation = value; } }
 
-    Rigidbody2D rigidbodyComponent;
     Vector2 originalPosition;
     Vector2 cachedIngrPosition;
 
@@ -35,23 +34,19 @@ public class IngredientMover : MonoBehaviour
 
     GameObject mask;
 
-    // Start is called before the first frame update
     void Start()
     {
-        rigidbodyComponent = GetComponent<Rigidbody2D>();
-
         originalPosition = transform.position;
         cachedIngrPosition = originalPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (taskComplete)
-            return;
-
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             DoMoveOrBudge();
+
+        if (taskComplete)
+            return;
 
         TryRotateIngredient();
 

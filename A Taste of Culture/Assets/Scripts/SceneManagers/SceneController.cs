@@ -114,7 +114,7 @@ public class SceneController : MonoBehaviour
 
         else 
         {
-            sceneManager.FinishedCutting();
+            sceneManager.FinishedSliceOrSpice();
             // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
             // {
             //     sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
