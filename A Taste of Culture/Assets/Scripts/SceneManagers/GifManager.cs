@@ -16,12 +16,11 @@ public class GIFManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Starting GIFmanager");
-
         if (closeButton != null)
             closeButton.gameObject.SetActive(false);
 
-        demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFilename);
+        if (!string.IsNullOrEmpty(videoFilename))
+            demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFilename);
         demoPlayer.gameObject.SetActive(false);
         demoVideo.gameObject.SetActive(false);
         demoVideo.color = Color.clear;

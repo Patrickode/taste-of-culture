@@ -32,9 +32,9 @@ public class AudioPlayer : MonoBehaviour
 
             case AudioMode.Sequential:
                 source.clip = clips[clipIndex];
-                clipIndex = clipIndex == clips.Count - 1 ? 0 : clipIndex + 1;
+                clipIndex = clipIndex <= clips.Count - 1 ? 0 : clipIndex + 1;
 #if UNITY_EDITOR
-                Debug.Log("new index: " + clipIndex);
+                Debug.Log($"<color=#88D>Played sequential audio, new/next index is {clipIndex}</color>");
 #endif
 
                 break;
@@ -43,7 +43,7 @@ public class AudioPlayer : MonoBehaviour
                 int roll = Random.Range(0, clips.Count);
                 source.clip = clips[roll];
 #if UNITY_EDITOR
-                Debug.Log(roll);
+                Debug.Log($"<color=#88D>Played randomized audio; rolled index was {roll}</color>");
 #endif
                 break;
         }
