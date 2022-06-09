@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class GIFManager : MonoBehaviour
 {
-    //[SerializeField] GameObject ingredient1Instruction;
-    //[SerializeField] GameObject ingredient2Instruction;
-
     public CookingSceneManager sceneManager;
     public RawImage demoVideo;
     public Button closeButton;
@@ -19,14 +16,10 @@ public class GIFManager : MonoBehaviour
 
     void Start()
     {
-        //demoVideo = GameObject.Find("VideoTexture").GetComponent<RawImage>();
-        //closeButton = GameObject.Find("CloseButton").GetComponent<Button>();
+        Debug.Log("Starting GIFmanager");
 
         if (closeButton != null)
-        {
             closeButton.gameObject.SetActive(false);
-            closeButton.onClick.AddListener(ButtonClicked);
-        }
 
         demoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoFilename);
         demoPlayer.gameObject.SetActive(false);
@@ -36,7 +29,6 @@ public class GIFManager : MonoBehaviour
         demoPlayer.loopPointReached += LoopedOnce;
     }
 
-    // Start is called before the first frame update
     public void StartVideo()
     {
         // if(hasBeenPlayed) { return; }               // Fixes bug where slicing scene restarts video.
@@ -55,16 +47,7 @@ public class GIFManager : MonoBehaviour
         // hasBeenPlayed = true;
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if (closeButton.gameObject.activeInHierarchy == false && demoVideo.gameObject.activeInHierarchy == true)
-    //    {
-    //        closeButton.gameObject.SetActive(true);
-    //    }
-    //}
-
-    void ButtonClicked()
+    public void CloseManager()
     {
         if (demoVideo == null) { return; }
 
