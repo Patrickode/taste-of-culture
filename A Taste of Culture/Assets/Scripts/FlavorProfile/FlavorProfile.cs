@@ -22,8 +22,8 @@ public class FlavorProfile : MonoBehaviour
     int spiciness;
     int sweetness;
     int saltiness;
-    
-    private void Start() 
+
+    private void Start()
     {
         FlavorProfileData flavorData = FlavorProfileData.Instance;
 
@@ -46,14 +46,14 @@ public class FlavorProfile : MonoBehaviour
 
         float radius = maxRadius;
 
-        foreach(KeyValuePair<int, Color> flavor in flavors)
+        foreach (KeyValuePair<int, Color> flavor in flavors)
         {
-            if(flavor.Key == 0) { continue; }
+            if (flavor.Key == 0) { continue; }
 
             float flavorFraction = (float)flavor.Key / (float)totalFlavors;
             int segments = Mathf.RoundToInt(360 * flavorFraction);
 
-            Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.25f, gameObject.transform.position.z - 0.05f);;
+            Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.25f, gameObject.transform.position.z - 0.05f); ;
             GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab, position, gameObject.transform.rotation);
             flavorVisualizer.transform.parent = gameObject.transform;
 
@@ -69,9 +69,9 @@ public class FlavorProfile : MonoBehaviour
     {
         string flavorName = "Saltiness";
 
-        if(flavor.Key == bitterness) { flavorName = "Bitterness"; }
-        else if(flavor.Key == spiciness) { flavorName = "Spiciness"; }
-        else if(flavor.Key == sweetness) { flavorName = "Sweetness"; }
+        if (flavor.Key == bitterness) { flavorName = "Bitterness"; }
+        else if (flavor.Key == spiciness) { flavorName = "Spiciness"; }
+        else if (flavor.Key == sweetness) { flavorName = "Sweetness"; }
 
         return flavorName;
     }
