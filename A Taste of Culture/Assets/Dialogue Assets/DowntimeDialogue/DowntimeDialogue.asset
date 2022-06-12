@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f63509f81a10264fb98ee5e6a2be154, type: 3}
   m_Name: DowntimeDialogue
   m_EditorClassIdentifier: 
-  startingSentence: {fileID: 11400000, guid: 44b2d603d538dc94c9f64336b05f4d97, type: 2}
+  startingSentence: {fileID: 11400000, guid: 6e17662f73f58b54db369dceb59fee3b, type: 2}
   isAvailable: 1

@@ -8,7 +8,10 @@ public class MoveWithMousePos : MonoBehaviour
     [SerializeField] private GameObject thingToMove;
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
     [SerializeField] private Collider2D moveZone;
-    private Rigidbody2D rbToMove;
+    private Rigidbody2D movedRb2D;
+    private Rigidbody movedRb3D;
+
+    public bool CanMove { get; set; } = true;
 
     private Camera _cachedCam;
     private Camera CachedCam
@@ -20,23 +23,34 @@ public class MoveWithMousePos : MonoBehaviour
         }
     }
 
-    public bool CanMove { get; set; } = true;
-
     private void Start()
     {
         if (!thingToMove)
             thingToMove = gameObject;
 
         if (moveWithPhysics)
-            if (!thingToMove.TryGetComponent(out rbToMove))
+            if (!thingToMove.TryGetComponent(out movedRb2D) && !thingToMove.TryGetComponent(out movedRb3D))
             {
-                Debug.LogError($"{name} was told to {thingToMove} with physics, but no rigidbody was found." +
+                Debug.LogWarning($"{name} was told to move {thingToMove.name} with physics, but no 2D rigidbody was found. " +
                     $"Defaulting to non-physics movement.");
                 moveWithPhysics = false;
             }
+
+        CookStirIngredient.DoneCooking += OnStirringComplete;
     }
 
-    private void Update()
+    private void OnDestroy()
+    {
+        CookStirIngredient.DoneCooking -= OnStirringComplete;
+    }
+
+    private void OnStirringComplete()
+    {
+        CookStirIngredient.DoneCooking -= OnStirringComplete;
+        CanMove = false;
+    }
+
+    private void FixedUpdate()
     {
         if (!CanMove) return;
 
@@ -45,7 +59,12 @@ public class MoveWithMousePos : MonoBehaviour
             destination = moveZone.ClosestPoint(destination);
 
         if (moveWithPhysics)
-            rbToMove.MovePosition(destination);
+        {
+            if (movedRb2D)
+                movedRb2D.MovePosition(destination);
+            else
+                movedRb3D.MovePosition(destination);
+        }
         else
             thingToMove.transform.position = destination;
     }
