@@ -135,6 +135,14 @@ namespace DialogueEditor
                     TransitioningDialogueBoxOff_Update();
                     break;
             }
+
+            // Allow player to click through scrolling text
+            if (m_state == eState.ScrollingText && Input.GetMouseButtonDown(0))
+            {
+                DialogueText.text = m_currentSpeech.Text;
+                DialogueText.maxVisibleCharacters = m_currentSpeech.Text.Length;
+                SetState(eState.TransitioningOptionsOn);
+            }
         }
 
 
