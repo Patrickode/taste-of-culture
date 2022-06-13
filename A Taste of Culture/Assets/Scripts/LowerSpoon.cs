@@ -11,16 +11,24 @@ public class LowerSpoon : MonoBehaviour
     [SerializeField] private Vector3 raisedOffset;
     private Vector3 originalPos;
     [SerializeField] private AudioPlayer audioPlayer;
+    private bool wasRaised;
+    private bool isRaised;
 
     private void Start()
     {
         originalPos = visuals.localPosition;
         ToggleLower(false);
+        wasRaised = true;
     }
 
     private void Update()
     {
         ToggleLower(Input.GetKey(KeyCode.Mouse0));
+        if (wasRaised && !isRaised)
+        {
+            audioPlayer.TriggerSFX();
+        }
+        wasRaised = isRaised;
     }
 
     private void ToggleLower(bool lowered)
@@ -28,6 +36,6 @@ public class LowerSpoon : MonoBehaviour
         visuals.localPosition = originalPos + (lowered ? Vector3.zero : raisedOffset);
         shadow.SetActive(!lowered);
         spoonCollider.enabled = lowered;
-        audioPlayer.Play();
+        isRaised = !lowered;
     }
 }
