@@ -56,7 +56,7 @@ public class AudioPlayer : MonoBehaviour
 
             case AudioMode.Sequential:
                 source.clip = clips[clipIndex];
-                clipIndex = clipIndex <= clips.Count - 1 ? 0 : clipIndex + 1;
+                clipIndex = (clipIndex + 1) % clips.Count;
 #if UNITY_EDITOR
                 Debug.Log($"<color=#88D>Played sequential audio, new/next index is {clipIndex}</color>");
 #endif

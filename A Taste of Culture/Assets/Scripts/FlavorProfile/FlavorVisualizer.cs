@@ -6,14 +6,14 @@ using TMPro;
 [RequireComponent(typeof(LineRenderer))]
 public class FlavorVisualizer : MonoBehaviour
 {
-    public GameObject label;
-    public TextMeshProUGUI labelText;
+    [HideInInspector] public TextMeshProUGUI labelText;
+    [SerializeField] [Range(-2, 2)] private float labelXSpacing;
 
     float displaySpeed;
 
     public void DisplayFlavorValue(float radius, float lineWidth, int value, Color flavorColor, float gradualDisplaySpeed)
     {
-        if(value == 0) { return; }
+        if (value == 0) { return; }
 
         displaySpeed = gradualDisplaySpeed;
 
@@ -29,19 +29,21 @@ public class FlavorVisualizer : MonoBehaviour
 
         int segments = 360;
         List<Vector3> points = new List<Vector3>();
+        points.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
 
-        var rad = Mathf.Deg2Rad * (0 * 360f / segments);
-        points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
-        label.transform.position = new Vector2(label.transform.position.x, (label.transform.position.y / 2) + points[0].y);         // Place label at same height as circle
+        Vector3 labelDest = transform.position;
+        labelDest.x += labelXSpacing;
+        labelDest.y += radius;
+        labelText.transform.position = labelDest;
 
         StartCoroutine(GraduallyDisplayFlavor(line, radius, segments, points, value));
     }
 
     IEnumerator GraduallyDisplayFlavor(LineRenderer line, float radius, int segments, List<Vector3> points, int value)
     {
-        int pointCount = 1; 
+        int pointCount = 1;
 
-        while(pointCount < value)
+        while (pointCount < value)
         {
             var rad = Mathf.Deg2Rad * (pointCount * 360f / segments);
             points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
