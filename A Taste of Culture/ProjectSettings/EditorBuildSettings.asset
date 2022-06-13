@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ClosingDialogue.unity
     guid: 61bde242c657792448f46c00a213d319
   - enabled: 1
+    path: Assets/Scenes/OnionSauteing.unity
+    guid: 6eb45561059d90943aab5f259e92112a
+  - enabled: 1
     path: Assets/Scenes/Downtime.unity
     guid: 62fdba8951283854398098e0e13b45c5
   m_configObjects: {}

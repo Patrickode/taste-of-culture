@@ -18,7 +18,9 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         Cursor.visible = true;
         dialogue.SetActive(true);
-        backgrounds[11].SetActive(true);
+        //backgrounds[11].SetActive(true);
+        AddOnions();
+        CookOnions();
         trigger.StartDialogue();
     }
 
