@@ -36,17 +36,25 @@ public class AudioPlayer : MonoBehaviour
             mixer.SetFloat("SoundFX", Mathf.Log10(PlayerPrefs.GetFloat("SoundFXVolume")) * 20);
         }
 
-        bgSource.clip = bgClip;
-        bgSource.loop = loopBackground;
-        bgSource.Play();
+        if (bgSource)
+        {
+            bgSource.clip = bgClip;
+            bgSource.loop = loopBackground;
+            bgSource.Play();
+        }
 
-        //musicSource.clip = musicClip;
-        //musicSource.loop = loopMusic;
-        //musicSource.Play();
+        //if (musicSource)
+        //{
+        //    musicSource.clip = musicClip;
+        //    musicSource.loop = loopMusic;
+        //    musicSource.Play(); 
+        //}
     }
 
     public void TriggerSFX()
     {
+        if (!source) return;
+
         switch (mode)
         {
             case AudioMode.SingleLoop:
