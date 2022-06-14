@@ -296,6 +296,7 @@ MonoBehaviour:
   npcNameTextUI: {fileID: 1447699969}
   playerTextUI: {fileID: 1447699968}
   npcTextUI: {fileID: 1447699968}
+  continueButton: {fileID: 1232876760}
   playerSprite: {fileID: 1447699972}
   npcSprite: {fileID: 1447699972}
   DialogueUI: {fileID: 1447699970}
@@ -1869,6 +1870,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1232876760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2288599736332118261, guid: 43e75156c129a6c43857344bb53b446f, type: 3}
+  m_PrefabInstance: {fileID: 1447699964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1262779456
 GameObject:
   m_ObjectHideFlags: 0
