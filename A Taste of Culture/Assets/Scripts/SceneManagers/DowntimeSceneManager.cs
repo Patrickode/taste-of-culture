@@ -12,10 +12,12 @@ public class DowntimeSceneManager : MonoBehaviour
     public GameObject mentor;
 
     public GameObject[] backgrounds;
+    private FlavorProfile flavorPfile;
 
     // Start is called before the first frame update
     void Start()
     {
+        flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
         Cursor.visible = true;
         dialogue.SetActive(true);
 
@@ -98,7 +100,11 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         mentor.SetActive(false);
         backgrounds[10].SetActive(true);
+        if (flavorPfile)
+            flavorPfile.VisualizeFlavors();
+
         yield return new WaitForSeconds(4.5f);
+
         backgrounds[10].SetActive(false);
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);

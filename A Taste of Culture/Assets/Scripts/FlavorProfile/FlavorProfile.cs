@@ -39,11 +39,9 @@ public class FlavorProfile : MonoBehaviour
         flavors.Add(new KeyValuePair<int, Color>(spiciness, spicinessColor));
         flavors.Add(new KeyValuePair<int, Color>(sweetness, sweetnessColor));
         flavors.Add(new KeyValuePair<int, Color>(saltiness, saltinessColor));
-
-        VisualizeFlavors();
     }
 
-    private void VisualizeFlavors()
+    public void VisualizeFlavors()
     {
         int totalFlavors = bitterness + spiciness + sweetness + saltiness;
 
@@ -51,9 +49,9 @@ public class FlavorProfile : MonoBehaviour
 
         foreach (KeyValuePair<int, Color> flavor in flavors)
         {
-            if (flavor.Key == 0) { continue; }
-
-            float flavorFraction = (float)flavor.Key / (float)totalFlavors;
+            float flavorFraction = flavor.Key > 0
+                ? (float)flavor.Key / totalFlavors
+                : 0.005f;
             int segments = Mathf.RoundToInt(maxAngle * flavorFraction);
 
             //Create a container object and move it to the right spot, then parent it to this for organization's sake.
@@ -70,11 +68,12 @@ public class FlavorProfile : MonoBehaviour
             //Label text will be further positioned by the visualizer.
             visualizer.labelText = Instantiate(labelPrefab, container);
             visualizer.labelText.name = "Label";
-
             visualizer.DisplayFlavorValue(radius, lineWidth, segments, flavor.Value, GradualDisplaySpeed);
-            int roundPercent = Mathf.RoundToInt(flavorFraction * 100);
-            visualizer.labelText.text = $"{GetFlavorName(flavor)} " +
-                $"{(roundPercent < 10 ? " " + roundPercent : roundPercent.ToString())}%";
+
+            int roundPercent = Mathf.RoundToInt((float)flavor.Key / totalFlavors * 100);
+            string separator = "<color=#00000000>X</color>";
+            visualizer.labelText.text = $"{GetFlavorName(flavor)}{separator}" +
+                $"{(roundPercent < 10 ? separator + roundPercent : roundPercent.ToString())}%";
 
             radius -= lineWidth + lineSpacing;
         }
