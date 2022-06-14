@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public Text npcNameTextUI;
     public Text playerTextUI;
     public Text npcTextUI;
+    public GameObject continueButton;
     public SpriteRenderer playerSprite;
     public SpriteRenderer npcSprite;
 
@@ -150,6 +151,8 @@ public class DialogueManager : MonoBehaviour
             option.gameObject.SetActive(false);
         }
     }
+
+    public void ToggleContinue(bool active) => continueButton.SetActive(active);
 
     public void EndDialogue()
     {

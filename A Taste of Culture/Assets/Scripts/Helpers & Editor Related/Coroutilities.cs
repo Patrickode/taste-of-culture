@@ -83,7 +83,7 @@ public static class Coroutilities
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="yielder"/>.</param>
     /// <param name="yielder">The thing that comes before <paramref name="thingToDo"/>. This could be a <see cref="Coroutine"/>, 
-    /// an <see cref="AsyncOperation"/>, or anything else that inherits <see cref="YieldInstruction"/>.</param>
+    /// an <see cref="AsyncOperation"/>, or any other child of <see cref="YieldInstruction"/>.</param>
     /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoAfter(MonoBehaviour coroutineCaller, Action thingToDo, YieldInstruction yielder)
         => coroutineCaller.StartCoroutine(DoAfter(thingToDo, yielder));
@@ -93,6 +93,24 @@ public static class Coroutilities
     {
         yield return yielder;
         thingToDo();
+    }
+
+    /// <summary>
+    /// Calls the function <paramref name="thingToDo"/> after all <paramref name="yielders"/> (run in parallel) are done.
+    /// </summary>
+    /// <param name="yielders">The things that come before <paramref name="thingToDo"/>. They could be 
+    /// <see cref="Coroutine"/>s, <see cref="AsyncOperation"/>s, or any other child of <see cref="YieldInstruction"/>.</param>
+    /// <inheritdoc cref="DoAfter(MonoBehaviour, Action, YieldInstruction)"/>
+    public static Coroutine DoAfter(MonoBehaviour coroutineCaller, Action thingToDo, params YieldInstruction[] yielders)
+    {
+        List<YieldInstruction> activeYielders = new List<YieldInstruction>();
+        foreach (var yielder in yielders)
+        {
+            activeYielders.Add(yielder);
+            coroutineCaller.StartCoroutine(DoAfter(() => activeYielders.Remove(yielder), yielder));
+        }
+
+        return coroutineCaller.StartCoroutine(DoWhen(thingToDo, () => activeYielders.Count <= 0));
     }
 
 

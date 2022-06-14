@@ -48,7 +48,10 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[3].SetActive(false);
         backgrounds[4].SetActive(true);
-        StartCoroutine(PutOnLid());
+        dialogueManager.ToggleContinue(false);
+
+        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(PutOnLid()));
     }
 
     public void AddButter()
@@ -56,9 +59,12 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
         mentor.SetActive(false);
-        StartCoroutine(TakeOffLid());
-        StartCoroutine(ButterInPot());
-        StartCoroutine(BackgroundToSchool());
+        dialogueManager.ToggleContinue(false);
+
+        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(TakeOffLid()),
+            StartCoroutine(ButterInPot()),
+            StartCoroutine(BackgroundToSchool()));
     }
 
     IEnumerator ButterInPot()
@@ -72,9 +78,12 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[11].SetActive(false);
         backgrounds[7].SetActive(true);
         mentor.SetActive(false);
-        StartCoroutine(TakeOffLid());
-        StartCoroutine(ProteinInPot());
-        StartCoroutine(BackgroundToSchool());
+        dialogueManager.ToggleContinue(false);
+
+        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(TakeOffLid()),
+            StartCoroutine(ProteinInPot()),
+            StartCoroutine(BackgroundToSchool()));
     }
 
     IEnumerator ProteinInPot()
@@ -88,12 +97,18 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[11].SetActive(false);
         backgrounds[8].SetActive(true);
         backgrounds[9].SetActive(true);
-        StartCoroutine(TakeOffLid());
+        dialogueManager.ToggleContinue(false);
+
+        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(TakeOffLid()));
     }
 
     public void PlateCurry()
     {
-        StartCoroutine(ShowPlate());
+        dialogueManager.DialogueUI.SetActive(false);
+
+        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(ShowPlate()));
     }
 
     IEnumerator ShowPlate()

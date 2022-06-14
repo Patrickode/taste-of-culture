@@ -2246,6 +2246,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
   m_PrefabInstance: {fileID: 1031464206}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1031464212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8514143426531067260, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 1031464206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1054445500 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
@@ -2653,6 +2658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1031464209}
   dialogueText: {fileID: 1031464208}
+  continueButton: {fileID: 1031464212}
   animator: {fileID: 1031464210}
   spriteRenderer: {fileID: 1031464207}
   sceneManager: {fileID: 1920461719}

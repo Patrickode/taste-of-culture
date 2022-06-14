@@ -8,6 +8,7 @@ public class CookingDialogueManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
+    public GameObject continueButton;
 
     public Animator animator;
     public SpriteRenderer spriteRenderer;
@@ -16,14 +17,11 @@ public class CookingDialogueManager : MonoBehaviour
     private Queue<string> sentences;
     private Queue<Sprite> expressions;
 
-    private GameObject continueButton;
-
     // Initializations. Make sure all the text fields and mentor are not visible yet.
     void Start()
     {
         sentences = new Queue<string>();
         expressions = new Queue<Sprite>();
-        continueButton = GameObject.Find("ContinueButton");
 
         nameText.enabled = false;
         dialogueText.enabled = false;
