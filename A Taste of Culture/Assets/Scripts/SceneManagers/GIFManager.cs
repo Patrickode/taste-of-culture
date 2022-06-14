@@ -25,7 +25,9 @@ public class GIFManager : MonoBehaviour
         demoVideo.gameObject.SetActive(false);
         demoVideo.color = Color.clear;
 
-        demoPlayer.loopPointReached += LoopedOnce;
+#if !UNITY_EDITOR
+        demoPlayer.loopPointReached += LoopedOnce; 
+#endif
         if (startActive)
             Coroutilities.DoAfterDelay(this, StartVideo, 1.5f);
     }
@@ -40,9 +42,17 @@ public class GIFManager : MonoBehaviour
 
             demoPlayer.gameObject.SetActive(true);
             demoVideo.gameObject.SetActive(true);
-            //TODO: Move this to before the dialogue is removed from the screen after continue is clicked, to
+            //TODO(?): Move this to before the dialogue is removed from the screen after continue is clicked, to
             //prevent flickering even better
-            Coroutilities.DoWhen(this, () => demoVideo.color = Color.white, () => demoPlayer.isPrepared);
+            Coroutilities.DoWhen(this,
+                () =>
+                {
+                    demoVideo.color = Color.white;
+#if UNITY_EDITOR
+                    closeButton.gameObject.SetActive(true);
+#endif
+                },
+                () => demoPlayer.isPrepared);
         }
 
         // hasBeenPlayed = true;

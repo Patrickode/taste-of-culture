@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class FlavorProfile : MonoBehaviour
 {
+    [SerializeField] FlavorVisualizer flavorVisualizerPrefab;
+    [SerializeField] TMPro.TextMeshProUGUI labelPrefab;
+    [Space(5)]
+    [SerializeField] Vector3 visualizerOffset;
+    [SerializeField] [Range(1, 360)] float maxAngle = 360;
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
     [SerializeField] float GradualDisplaySpeed = 0.05f;
-
+    [Space(10)]
     [SerializeField] Color bitternessColor;
     [SerializeField] Color spicinessColor;
     [SerializeField] Color sweetnessColor;
     [SerializeField] Color saltinessColor;
-
-    [SerializeField] GameObject flavorVisualizerPrefab;
 
     List<KeyValuePair<int, Color>> flavors = new List<KeyValuePair<int, Color>>();
 
@@ -36,11 +39,9 @@ public class FlavorProfile : MonoBehaviour
         flavors.Add(new KeyValuePair<int, Color>(spiciness, spicinessColor));
         flavors.Add(new KeyValuePair<int, Color>(sweetness, sweetnessColor));
         flavors.Add(new KeyValuePair<int, Color>(saltiness, saltinessColor));
-
-        VisualizeFlavors();
     }
 
-    private void VisualizeFlavors()
+    public void VisualizeFlavors()
     {
         int totalFlavors = bitterness + spiciness + sweetness + saltiness;
 
@@ -48,18 +49,31 @@ public class FlavorProfile : MonoBehaviour
 
         foreach (KeyValuePair<int, Color> flavor in flavors)
         {
-            if (flavor.Key == 0) { continue; }
+            float flavorFraction = flavor.Key > 0
+                ? (float)flavor.Key / totalFlavors
+                : 0.005f;
+            int segments = Mathf.RoundToInt(maxAngle * flavorFraction);
 
-            float flavorFraction = (float)flavor.Key / (float)totalFlavors;
-            int segments = Mathf.RoundToInt(360 * flavorFraction);
+            //Create a container object and move it to the right spot, then parent it to this for organization's sake.
+            //  NOTE: "worldPositionStays" doesn't just affect position, at least for RectTransform objs. Passing false
+            //  prevents the object from having a scale of ~100.
+            Transform container = new GameObject(GetFlavorName(flavor), typeof(RectTransform)).transform;
+            container.position = transform.position + visualizerOffset;
+            container.SetParent(transform, false);
 
-            Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.25f, gameObject.transform.position.z - 0.05f); ;
-            GameObject flavorVisualizer = Instantiate(flavorVisualizerPrefab, position, gameObject.transform.rotation);
-            flavorVisualizer.transform.parent = gameObject.transform;
+            FlavorVisualizer visualizer = Instantiate(flavorVisualizerPrefab, container.position, container.rotation);
+            visualizer.transform.parent = container;
+            visualizer.name = "Visualizer";
 
-            FlavorVisualizer visualizer = flavorVisualizer.GetComponent<FlavorVisualizer>();
+            //Label text will be further positioned by the visualizer.
+            visualizer.labelText = Instantiate(labelPrefab, container);
+            visualizer.labelText.name = "Label";
             visualizer.DisplayFlavorValue(radius, lineWidth, segments, flavor.Value, GradualDisplaySpeed);
-            visualizer.labelText.text = GetFlavorName(flavor) + " " + Mathf.RoundToInt(flavorFraction * 100) + "%";
+
+            int roundPercent = Mathf.RoundToInt((float)flavor.Key / totalFlavors * 100);
+            string separator = "<color=#00000000>X</color>";
+            visualizer.labelText.text = $"{GetFlavorName(flavor)}{separator}" +
+                $"{(roundPercent < 10 ? separator + roundPercent : roundPercent.ToString())}%";
 
             radius -= lineWidth + lineSpacing;
         }

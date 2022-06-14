@@ -300,4 +300,27 @@ public static class UtilFunctions
         ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
     public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
         ClampComponents(v, min, max, min, max, min, max);
+
+    /// <summary>
+    /// Divides two vectors component-wise.
+    /// </summary>
+    public static Vector3 InverseScale(Vector3 a, Vector3 b) => new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
+
+    /// <summary>
+    /// Scales this transform so that it's sized as if its parent had a scale of (1,1,1).
+    /// </summary>
+    /// <param name="parentLevel">The number of parents to go up by. 0 = parent, 1 = grandparent (parent.parent), etc.</param>
+    public static void NegateParentScale(this Transform tform, int parentLevel = 0)
+    {
+        Transform targetParent = tform.parent;
+        for (int i = 0; i < parentLevel; i++)
+        {
+            if (!targetParent.parent)
+                break;
+
+            targetParent = targetParent.parent;
+        }
+
+        tform.localScale = InverseScale(tform.localScale, targetParent.localScale);
+    }
 }

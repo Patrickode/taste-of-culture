@@ -5200,26 +5200,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
-      propertyPath: m_Size.x
-      value: 9.397394
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
-      propertyPath: m_Size.y
-      value: 2.0008001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.32909298
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545689923576313490, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
-      propertyPath: m_Offset.y
-      value: -1.7974491
-      objectReference: {fileID: 0}
     - target: {fileID: 2495087547573679144, guid: 3cd13876f8113a54e811364f92b69783, type: 3}
       propertyPath: m_SortingLayer
       value: 3
