@@ -161,4 +161,10 @@ public class DialogueManager : MonoBehaviour
         if (ConversationEnded != null)
             ConversationEnded.Raise();
     }
+
+    public void ToggleDialogue(bool active)
+    {
+        animator.SetTrigger(active ? "StartDialogue" : "EndDialogue");
+        DialogueUI.SetActive(active);
+    }
 }
