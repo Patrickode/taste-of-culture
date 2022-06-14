@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2495087547573679144}
   - component: {fileID: 1545689923576313490}
   - component: {fileID: 5324701546484046400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpiceBowl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 7763328748856918285}
   - component: {fileID: 4548314517561191504}
   - component: {fileID: 2728650554163562791}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Static Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 2238735888660053228}
   - component: {fileID: 3235560947583516980}
   - component: {fileID: 1362019605826892913}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Static Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
