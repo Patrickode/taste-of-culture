@@ -12,13 +12,21 @@ public class DowntimeSceneManager : MonoBehaviour
     public GameObject mentor;
 
     public GameObject[] backgrounds;
+    private FlavorProfile flavorPfile;
 
     // Start is called before the first frame update
     void Start()
     {
+        flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
         Cursor.visible = true;
         dialogue.SetActive(true);
-        backgrounds[11].SetActive(true);
+
+        foreach (var bg in backgrounds)
+            bg.SetActive(false);
+        backgrounds[backgrounds.Length - 1].SetActive(true);
+
+        AddOnions();
+        CookOnions();
         trigger.StartDialogue();
     }
 
@@ -92,7 +100,12 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         mentor.SetActive(false);
         backgrounds[10].SetActive(true);
-        yield return new WaitForSeconds(3.0f);
+        if (flavorPfile)
+            flavorPfile.VisualizeFlavors();
+
+        yield return new WaitForSeconds(4.5f);
+
+        backgrounds[10].SetActive(false);
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
     }
