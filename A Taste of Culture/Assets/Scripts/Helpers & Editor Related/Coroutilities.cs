@@ -10,7 +10,7 @@ using UnityEngine;
 public static class Coroutilities
 {
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> in <paramref name="delay"/> seconds.
+    /// Calls <paramref name="thingToDo"/> in <paramref name="delay"/> seconds.
     /// </summary>
     /// <remarks>
     /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since </i><see cref="MonoBehaviour.StartCoroutine(IEnumerator)"/><i><br/> 
@@ -50,7 +50,7 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> after a given number of <paramref name="frames"/>.
+    /// Calls <paramref name="thingToDo"/> after a given number of <paramref name="frames"/>.
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="frames"/> frames.</param>
     /// <param name="frames">How many frames to wait before calling <paramref name="thingToDo"/>.</param>
@@ -79,44 +79,65 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> after <paramref name="yielder"/>, whatever it is, is done.
+    /// Calls <paramref name="thingToDo"/> after <paramref name="yielder"/>, whatever it is, is done.
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="yielder"/>.</param>
     /// <param name="yielder">The thing that comes before <paramref name="thingToDo"/>. This could be a <see cref="Coroutine"/>, 
     /// an <see cref="AsyncOperation"/>, or any other child of <see cref="YieldInstruction"/>.</param>
     /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
-    public static Coroutine DoAfter(MonoBehaviour coroutineCaller, Action thingToDo, YieldInstruction yielder)
-        => coroutineCaller.StartCoroutine(DoAfter(thingToDo, yielder));
+    public static Coroutine DoAfterYielder(MonoBehaviour coroutineCaller, Action thingToDo, YieldInstruction yielder)
+        => coroutineCaller.StartCoroutine(DoAfterYielder(thingToDo, yielder));
 
-    /// <remarks></remarks> <inheritdoc cref="DoAfter(MonoBehaviour, Action, YieldInstruction)"/>
-    private static IEnumerator DoAfter(Action thingToDo, YieldInstruction yielder)
+    /// <remarks></remarks> <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction)"/>
+    private static IEnumerator DoAfterYielder(Action thingToDo, YieldInstruction yielder)
     {
         yield return yielder;
         thingToDo();
     }
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> after all <paramref name="yielders"/> (run in parallel) are done.
+    /// Calls <paramref name="thingToDo"/> after all <paramref name="yielders"/> <b>(run in parallel)</b> are done.
     /// </summary>
     /// <param name="yielders">The things that come before <paramref name="thingToDo"/>. They could be 
     /// <see cref="Coroutine"/>s, <see cref="AsyncOperation"/>s, or any other child of <see cref="YieldInstruction"/>.</param>
-    /// <inheritdoc cref="DoAfter(MonoBehaviour, Action, YieldInstruction)"/>
-    public static Coroutine DoAfter(MonoBehaviour coroutineCaller, Action thingToDo, params YieldInstruction[] yielders)
+    /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction)"/>
+    public static Coroutine DoAfterYielder(MonoBehaviour coroutineCaller, Action thingToDo, params YieldInstruction[] yielders)
     {
-        List<YieldInstruction> activeYielders = new List<YieldInstruction>();
+        HashSet<YieldInstruction> activeYielders = new HashSet<YieldInstruction>();
         foreach (var yielder in yielders)
         {
+            //Add this yielder to our set of active ones. When it's done, remove it.
             activeYielders.Add(yielder);
-            coroutineCaller.StartCoroutine(DoAfter(() => activeYielders.Remove(yielder), yielder));
+            DoAfterYielder(coroutineCaller, () => activeYielders.Remove(yielder), yielder);
         }
 
-        return coroutineCaller.StartCoroutine(DoWhen(thingToDo, () => activeYielders.Count <= 0));
+        return coroutineCaller.StartCoroutine(DoWhen(thingToDo, () => activeYielders.Count < 1));
     }
 
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds for <paramref name="duration"/> seconds.
+    /// Calls <paramref name="thingToDo"/> after a sequence of <paramref name="yielders"/>, called one by one in the order they were passed.
+    /// </summary>
+    /// <param name="yielders">Any number of functions or lambdas that return <see cref="YieldInstruction"/>s; for example,<br/>
+    /// <c>() =&gt; <see cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/></c>.</param>
+    /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction[])"/>
+    public static Coroutine DoAfterSequence(MonoBehaviour coroutineCaller, Action thingToDo, params Func<object>[] yielders)
+        => coroutineCaller.StartCoroutine(DoAfterSequence(thingToDo, yielders));
+
+    private static IEnumerator DoAfterSequence(Action thingToDo, params Func<object>[] yielders)
+    {
+        //Call each of the yielders and wait on the YieldInstruction they return.
+        foreach (var yielder in yielders)
+            yield return yielder();
+
+        thingToDo();
+    }
+
+
+
+    /// <summary>
+    /// Calls <paramref name="thingToDo"/> every <paramref name="interval"/> seconds for <paramref name="duration"/> seconds.
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called for <paramref name="delay"/> seconds.</param>
     /// <param name="duration">How many seconds <paramref name="thingToDo"/> should happen for.</param>
@@ -150,7 +171,7 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.
+    /// Calls <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.
     /// </summary>
     /// <param name="thingToDo">The thing to do for <paramref name="eachOfThese"/>.</param>
     /// <param name="eachOfThese">A "<see langword="foreach"/>-able" collection of things. <paramref name="thingToDo"/> will happen once for each of them.</param>
@@ -175,7 +196,7 @@ public static class Coroutilities
     }
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.<br/> 
+    /// Calls <paramref name="thingToDo"/> for each thing in <paramref name="eachOfThese"/>.<br/> 
     /// This overload takes in a type, so the <see langword="foreach"/> iteration variable can be used as a 
     /// parameter in <paramref name="thingToDo"/>.
     /// </summary>
@@ -202,7 +223,7 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> once <paramref name="predicate"/> evaluates to true.
+    /// Calls <paramref name="thingToDo"/> once <paramref name="predicate"/> evaluates to true.
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called once <paramref name="predicate"/> evaluates to true.</param>
     /// <param name="predicate">Delegate or lambda that will be evaluated every frame. Once it evaluates to true, call <paramref name="thingToDo"/>.</param>
@@ -222,7 +243,7 @@ public static class Coroutilities
 
 
     /// <summary>
-    /// Calls the function <paramref name="thingToDo"/> every <paramref name="interval"/> seconds, until <paramref name="predicate"/> evaluates to true.
+    /// Calls <paramref name="thingToDo"/> every <paramref name="interval"/> seconds, until <paramref name="predicate"/> evaluates to true.
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called until <paramref name="predicate"/> evaluates to true.</param>
     /// <param name="predicate">Delegate or lambda that will be evaluated every frame. Once it evaluates to true, stop calling <paramref name="thingToDo"/>.</param>

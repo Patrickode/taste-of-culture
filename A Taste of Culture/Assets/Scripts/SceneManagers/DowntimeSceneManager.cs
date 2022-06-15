@@ -50,7 +50,7 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(true);
         dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
             StartCoroutine(PutOnLid()));
     }
 
@@ -61,7 +61,7 @@ public class DowntimeSceneManager : MonoBehaviour
         mentor.SetActive(false);
         dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
             StartCoroutine(TakeOffLid()),
             StartCoroutine(ButterInPot()),
             StartCoroutine(BackgroundToSchool()));
@@ -80,7 +80,7 @@ public class DowntimeSceneManager : MonoBehaviour
         mentor.SetActive(false);
         Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
 
-        Coroutilities.DoAfter(this, () => dialogueManager.ToggleDialogue(true),
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
             StartCoroutine(TakeOffLid()),
             StartCoroutine(ProteinInPot()),
             StartCoroutine(BackgroundToSchool()));
@@ -99,7 +99,7 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[9].SetActive(true);
         Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
 
-        Coroutilities.DoAfter(this, () => dialogueManager.ToggleDialogue(true),
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
             StartCoroutine(TakeOffLid()));
     }
 
@@ -107,7 +107,7 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         dialogueManager.DialogueUI.SetActive(false);
 
-        Coroutilities.DoAfter(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
             StartCoroutine(ShowPlate()));
     }
 
