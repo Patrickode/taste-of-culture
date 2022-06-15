@@ -862,6 +862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 777324153}
   dialogueText: {fileID: 777324152}
+  continueButton: {fileID: 777324155}
   animator: {fileID: 777324154}
   spriteRenderer: {fileID: 777324151}
   sceneManager: {fileID: 1749865173}
@@ -1023,6 +1024,11 @@ MonoBehaviour:
 --- !u!95 &777324154 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8514143426733039806, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
+  m_PrefabInstance: {fileID: 777324149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &777324155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8514143426531067260, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
   m_PrefabInstance: {fileID: 777324149}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &991646412
