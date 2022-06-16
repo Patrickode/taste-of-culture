@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 4454847}
   - component: {fileID: 4454846}
   - component: {fileID: 4454845}
-  - component: {fileID: 4454848}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,19 +206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4454848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4454844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea73b0c52912a0543a7fe13221585bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: {fileID: 319240781}
 --- !u!1 &23967090
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 23967094}
+  bgSource: {fileID: 0}
+  musicSource: {fileID: 0}
   mixer: {fileID: 24100000, guid: a7d2e93aa4b27874788588c70f64c001, type: 2}
   clips:
   - {fileID: 8300000, guid: a2f94b17637f19b49bf1b4eb17a75c3c, type: 3}
@@ -414,6 +402,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5cffde313b68ed54e8e97df168b7ae6c, type: 3}
   - {fileID: 8300000, guid: 59413fb6a99b7d14a987b99d67f814fd, type: 3}
   mode: 0
+  bgClip: {fileID: 0}
+  musicClip: {fileID: 0}
+  loopBackground: 0
+  loopMusic: 0
 --- !u!1 &148958236
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +691,7 @@ GameObject:
   - component: {fileID: 319240781}
   m_Layer: 0
   m_Name: TestDialogue
-  m_TagString: Untagged
+  m_TagString: Dialogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
