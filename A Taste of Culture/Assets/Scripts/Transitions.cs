@@ -1,23 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Transitions : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particles;
-    [SerializeField] private float screenToEmitterRatio = 1.1236f;
+    [SerializeField] private Canvas backingCanv;
+    [SerializeField] private UnityEngine.UI.Image backingImg;
+    [Space(5)]
+    [SerializeField] private float defaultSpeedMult = 1;
+    [SerializeField] private float screenToRateRatio = 1.1236f;
     [SerializeField] private float zPosition = 10;
+
+    ParticleSystem.MainModule mainCache;
+    ParticleSystem.ShapeModule shapeCache;
+    ParticleSystem.EmissionModule emitCache;
 
     private Camera mainCam;
     private Keyframe startOfPeakKey;
     private Keyframe endOfPeakKey;
+    private float rateForSize;
     private bool midpointPause;
+
+    private static Transitions duplicationPreventer = null;
 
     /// <summary>
     /// <b>Arguments:</b><br/>
-    /// - <see cref="bool"/>: Should we pause when we hit the midpoint?
+    /// - <see cref="int"/>: The index of the scene to load.<br/>
+    /// - <see cref="float"/>: The speed of the transition. Pass &lt;= 0 to use default speed 
+    /// (as set in the inspector).
     /// </summary>
-    public static System.Action<bool> TransitionStart;
+    public static System.Action<int, float> LoadWithTransition;
+    /// <summary>
+    /// <b>Arguments:</b><br/>
+    /// - <see cref="bool"/>: Should we pause when we hit the midpoint?<br/>
+    /// - <see cref="float"/>: The speed of the transition. Pass &lt;= 0 to use default speed 
+    /// (as set in the inspector).
+    /// </summary>
+    public static System.Action<bool, float> TransitionStart;
     /// <summary>
     /// <b>Arguments:</b><br/>
     /// - <see cref="bool"/>: Are we paused now that we've hit the midpoint?
@@ -29,43 +50,89 @@ public class Transitions : MonoBehaviour
 
     private void Start()
     {
-        InitPeakKeys();
-        SetValsBasedOnCam();
+        if (!duplicationPreventer)
+        {
+            duplicationPreventer = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
 
-        //Demonstration
-        /*Coroutilities.DoAfterSequence(this, () => ContinueTransition?.Invoke(),
-            () => Coroutilities.DoAfterDelay(this, () => TransitionStart?.Invoke(true), 2),
+        mainCam = Camera.main;
+        backingCanv.worldCamera = mainCam;
+        backingCanv.gameObject.SetActive(false);
+
+        GetPeakKeys();
+        InitParticleValues();
+
+#if false
+        //Demo with no pause
+        Coroutilities.DoAfterDelay(this, () => TransitionStart?.Invoke(false, -1), 2);
+
+#else
+        //Demo with mid pause
+        Coroutilities.DoAfterSequence(this, () => ContinueTransition?.Invoke(),
+            () => Coroutilities.DoAfterDelay(this, () => TransitionStart?.Invoke(true, -1), 2),
             () => new WaitUntil(() => midpointPause),
-            () => new WaitForSeconds(3));*/
+            () => new WaitForSeconds(2));
+#endif
     }
 
     private void OnEnable()
     {
+        LoadWithTransition += OnLoadWithTransition;
         TransitionStart += OnTransitionStart;
         ContinueTransition += OnContinueTransition;
     }
     private void OnDisable()
     {
+        LoadWithTransition -= OnLoadWithTransition;
         TransitionStart -= OnTransitionStart;
         ContinueTransition -= OnContinueTransition;
     }
     private void OnParticleSystemStopped() => TransitionEnd?.Invoke();
 
-    private void OnTransitionStart(bool pauseOnMid)
+    private void OnLoadWithTransition(int index, float speed = 0)
     {
+        TransitionStart?.Invoke(true, speed);
+
+        TransitionMid += LoadOnMidpoint;
+        void LoadOnMidpoint(bool _)
+        {
+            TransitionMid -= LoadOnMidpoint;
+            SceneManager.LoadScene(index);
+            SceneManager.sceneLoaded += ContinueWhenDone;
+        }
+
+        void ContinueWhenDone(Scene dontCare, LoadSceneMode didntAsk)
+        {
+            SceneManager.sceneLoaded -= ContinueWhenDone;
+            ContinueTransition?.Invoke();
+        }
+    }
+
+    private void OnTransitionStart(bool pauseOnMid, float speed = 0)
+    {
+        SetSpeed(speed);
         particles.Play();
+
+        //Wait until we hit the midpoint of the transition (not just the middle of the system
+        //duration; give the midpoint particles a chance to get onscreen)
+        float midTime = mainCache.duration / 2 + mainCache.startLifetime.constant / 2;
 
         Coroutilities.TryStopCoroutine(this, ref waitForMid);
         waitForMid = Coroutilities.DoAfterDelay(this,
             () =>
             {
+                //then note that we got there to everyone who's listening.
                 TransitionMid?.Invoke(pauseOnMid);
                 midpointPause = pauseOnMid;
 
                 if (pauseOnMid)
                     particles.Pause();
             },
-            particles.main.duration / 2 + particles.main.startLifetime.constant / 2);
+            midTime);
+
+        FadeBackingImg(pauseOnMid, midTime);
     }
 
     private void OnContinueTransition()
@@ -73,7 +140,7 @@ public class Transitions : MonoBehaviour
         if (!midpointPause)
         {
             Debug.LogWarning("Attempted to continue a transition when there isn't one in progress; " +
-                "starting a transition instead.");
+                "starting a no-pause transition instead (TransitionStart will not be invoked).");
             OnTransitionStart(false);
             return;
         }
@@ -81,7 +148,55 @@ public class Transitions : MonoBehaviour
         particles.Play();
     }
 
-    private void InitPeakKeys()
+    private void FadeBackingImg(bool pauseOnMid, float midTime)
+    {
+        backingCanv.gameObject.SetActive(true);
+
+        //First, set up a progress tracker, then get the duration between the particle size peaks
+        float fadeProgress = 0;
+        float duration = mainCache.duration + mainCache.startLifetime.constant / 2 -
+            Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time);
+        Debug.Log(duration);
+
+        //Once we get to the start of the particle size peak, start the fade process.
+        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time));
+
+        //Disable the backing canvas when the fading's done.
+        Coroutilities.DoWhen(this, () => backingCanv.gameObject.SetActive(false), () => fadeProgress >= 1);
+
+        void FadeBasedOnPause()
+        {
+            //If we're pausing at the mid point,
+            if (pauseOnMid)
+            {
+                //fade to white (the middle of the fade process), then wait till the transition resumes.
+                FadeTillValue(0.5f);
+                ContinueTransition += ResumeFade;
+                return;
+            }
+
+            //If not, no need to wait, just go all the way through.
+            FadeTillValue(1);
+        }
+
+        void FadeTillValue(float until) => Coroutilities.DoUntil(this, FadeImgColor, () => fadeProgress >= until);
+
+        void FadeImgColor()
+        {
+            fadeProgress += Time.deltaTime / duration;
+            Color newColor = backingImg.color;
+            newColor.a = UtilFunctions.Lerp3Point(0, 1, 0, fadeProgress);
+            backingImg.color = newColor;
+        }
+
+        void ResumeFade()
+        {
+            ContinueTransition -= ResumeFade;
+            FadeTillValue(1);
+        }
+    }
+
+    private void GetPeakKeys()
     {
         //Init the peak keys to low values so they can be overwritten
         startOfPeakKey = endOfPeakKey = new Keyframe(0, float.MinValue);
@@ -98,9 +213,8 @@ public class Transitions : MonoBehaviour
         }
     }
 
-    private void SetValsBasedOnCam()
+    private void InitParticleValues()
     {
-        mainCam = Camera.main;
         Vector3 destination = mainCam.ScreenToWorldPoint(Vector3.zero);
         Vector3 camCenterToMin = destination - mainCam.transform.position;
 
@@ -109,11 +223,26 @@ public class Transitions : MonoBehaviour
         destination.z = zPosition;
         transform.position = destination;
 
-        var shapeCache = particles.shape;
+        shapeCache = particles.shape;
         float sizeToRate = particles.emission.rateOverTime.constant / shapeCache.scale.x;
-        shapeCache.scale = new Vector3(Mathf.Abs(camCenterToMin.x) * screenToEmitterRatio, 1, 1);
+        shapeCache.scale = new Vector3(Mathf.Abs(camCenterToMin.x) * screenToRateRatio, 1, 1);
 
-        var emissionCache = particles.emission;
-        emissionCache.rateOverTime = shapeCache.scale.x * sizeToRate;
+        emitCache = particles.emission;
+        emitCache.rateOverTime = shapeCache.scale.x * sizeToRate;
+        rateForSize = emitCache.rateOverTime.constant;
+
+        mainCache = particles.main;
+        SetSpeed();
+    }
+    private void SetSpeed(float newSpeed = 0)
+    {
+        if (newSpeed <= 0)
+            newSpeed = defaultSpeedMult;
+
+        mainCache.startSpeed = mainCache.startSpeed.constant * newSpeed;
+        emitCache.rateOverTime = rateForSize * newSpeed;
+
+        mainCache.startLifetimeMultiplier /= newSpeed;
+        mainCache.duration /= newSpeed;
     }
 }

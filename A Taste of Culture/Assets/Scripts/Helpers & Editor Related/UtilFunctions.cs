@@ -323,4 +323,12 @@ public static class UtilFunctions
 
         tform.localScale = InverseScale(tform.localScale, targetParent.localScale);
     }
+
+    public static float Lerp3Point(float from, float mid, float to, float t)
+    {
+        if (t <= 0.5f)
+            return Mathf.Lerp(from, mid, t * 2);
+        else
+            return Mathf.Lerp(mid, to, (t - 0.5f) * 2);
+    }
 }
