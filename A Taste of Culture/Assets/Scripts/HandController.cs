@@ -61,10 +61,10 @@ public class HandController : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            TrySetSprite(openSprite);
+
             if (handSynced)
             {
-                TrySetSprite(openSprite);
-
                 if (!spicePrefab)
                     return;
                 //Spawn the spice, increment the drop counter, then set the new spice's sort order to the counter
