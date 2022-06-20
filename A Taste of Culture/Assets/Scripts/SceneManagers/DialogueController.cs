@@ -8,10 +8,8 @@ public class DialogueController : MonoBehaviour
     private NPCConversation initConversation;
     [SerializeField]
     private string nextScene;
-
-    private Protein protein;
-
-    public enum Protein { chicken, tofu };
+    [SerializeField]
+    private StringVariable protein;
 
     void Start()
     {
@@ -21,28 +19,29 @@ public class DialogueController : MonoBehaviour
     private void TriggerConversation(NPCConversation conversation)
     {
         ConversationManager.Instance.StartConversation(conversation);
-        ConversationManager.OnConversationEnded += ConversationEnd;
     }
 
-    public Protein getProtein()
+    public string getProtein()
     {
-        return protein;
+        return protein.value;
     }
 
-    public void setProtein(int numCode)
+    public void setProtein(string proteinString)
     {
-        switch (numCode)
-        {
-            case 0:
-                protein = Protein.chicken;
-                break;
-            case 1:
-                protein = Protein.tofu;
-                break;
-        }
+        protein.SetValue(proteinString);
     }
 
-    private void ConversationEnd()
+    public void ConversationEndNextScene()
+    {
+        ConversationManager.OnConversationEnded += LoadNextScene;
+    }
+
+    public void EnableControls(bool enabled)
+    {
+
+    }
+
+    private void LoadNextScene()
     {
         SceneManager.LoadScene(nextScene);
     }
