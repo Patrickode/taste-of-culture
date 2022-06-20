@@ -154,6 +154,6 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         Cursor.visible = false;
         dialogue.SetActive(false);
-        SceneManager.LoadScene("MainMenu");
+        Transitions.LoadWithTransition(0, -1);
     }
 }
