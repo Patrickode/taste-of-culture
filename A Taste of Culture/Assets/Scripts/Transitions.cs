@@ -63,18 +63,6 @@ public class Transitions : MonoBehaviour
 
         GetPeakKeys();
         InitParticleValues();
-
-#if false
-        //Demo with no pause
-        Coroutilities.DoAfterDelay(this, () => TransitionStart?.Invoke(false, -1), 2);
-
-#else
-        //Demo with mid pause
-        Coroutilities.DoAfterSequence(this, () => ContinueTransition?.Invoke(),
-            () => Coroutilities.DoAfterDelay(this, () => TransitionStart?.Invoke(true, -1), 2),
-            () => new WaitUntil(() => midpointPause),
-            () => new WaitForSeconds(2));
-#endif
     }
 
     private void OnEnable()
@@ -152,14 +140,15 @@ public class Transitions : MonoBehaviour
     {
         backingCanv.gameObject.SetActive(true);
 
-        //First, set up a progress tracker, then get the duration between the particle size peaks
+        //First, set up a progress tracker, then determine the duration (end time - start time).
+        //  End = duration of the transition p system, plus some time for the last particles to leave the screen
+        //  Start = the time when the particle sizes peak, plus some time for those peak particles to get on screen
         float fadeProgress = 0;
         float duration = mainCache.duration + mainCache.startLifetime.constant / 2 -
-            Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time);
-        Debug.Log(duration);
+            (Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4);
 
         //Once we get to the start of the particle size peak, start the fade process.
-        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time));
+        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4);
 
         //Disable the backing canvas when the fading's done.
         Coroutilities.DoWhen(this, () => backingCanv.gameObject.SetActive(false), () => fadeProgress >= 1);
