@@ -21,7 +21,7 @@ public class Transitions : MonoBehaviour
     private Keyframe startOfPeakKey;
     private Keyframe endOfPeakKey;
     private float rateForSize;
-    private bool midpointPause;
+    private bool pausedAtMidpoint;
 
     private static Transitions duplicationPreventer = null;
 
@@ -38,15 +38,16 @@ public class Transitions : MonoBehaviour
     /// - <see cref="float"/>: The speed of the transition. Pass &lt;= 0 to use default speed 
     /// (as set in the inspector).
     /// </summary>
-    public static System.Action<bool, float> TransitionStart;
+    public static System.Action<bool, float> StartTransition;
     /// <summary>
     /// <b>Arguments:</b><br/>
     /// - <see cref="bool"/>: Are we paused now that we've hit the midpoint?
     /// </summary>
-    public static System.Action<bool> TransitionMid;
-    public static System.Action TransitionEnd;
+    public static System.Action<bool> MidTransition;
+    public static System.Action EndTransition;
     public static System.Action ContinueTransition;
-    private Coroutine waitForMid;
+    private Coroutine waitForMidCorout;
+    private Coroutine midPauseCorout;
 
     private void Start()
     {
@@ -68,25 +69,27 @@ public class Transitions : MonoBehaviour
     private void OnEnable()
     {
         LoadWithTransition += OnLoadWithTransition;
-        TransitionStart += OnTransitionStart;
+        StartTransition += OnStartTransition;
+        MidTransition += OnMidTransition;
         ContinueTransition += OnContinueTransition;
     }
     private void OnDisable()
     {
         LoadWithTransition -= OnLoadWithTransition;
-        TransitionStart -= OnTransitionStart;
+        StartTransition -= OnStartTransition;
+        MidTransition -= OnMidTransition;
         ContinueTransition -= OnContinueTransition;
     }
-    private void OnParticleSystemStopped() => TransitionEnd?.Invoke();
+    private void OnParticleSystemStopped() => EndTransition?.Invoke();
 
     private void OnLoadWithTransition(int index, float speed = 0)
     {
-        TransitionStart?.Invoke(true, speed);
+        StartTransition?.Invoke(true, speed);
 
-        TransitionMid += LoadOnMidpoint;
+        MidTransition += LoadOnMidpoint;
         void LoadOnMidpoint(bool _)
         {
-            TransitionMid -= LoadOnMidpoint;
+            MidTransition -= LoadOnMidpoint;
             SceneManager.LoadScene(index);
             SceneManager.sceneLoaded += ContinueWhenDone;
         }
@@ -98,7 +101,7 @@ public class Transitions : MonoBehaviour
         }
     }
 
-    private void OnTransitionStart(bool pauseOnMid, float speed = 0)
+    private void OnStartTransition(bool pauseOnMid, float speed = 0)
     {
         SetSpeed(speed);
         particles.Play();
@@ -107,13 +110,13 @@ public class Transitions : MonoBehaviour
         //duration; give the midpoint particles a chance to get onscreen)
         float midTime = mainCache.duration / 2 + mainCache.startLifetime.constant / 2;
 
-        Coroutilities.TryStopCoroutine(this, ref waitForMid);
-        waitForMid = Coroutilities.DoAfterDelay(this,
+        Coroutilities.TryStopCoroutine(this, ref waitForMidCorout);
+        waitForMidCorout = Coroutilities.DoAfterDelay(this,
             () =>
             {
                 //then note that we got there to everyone who's listening.
-                TransitionMid?.Invoke(pauseOnMid);
-                midpointPause = pauseOnMid;
+                MidTransition?.Invoke(pauseOnMid);
+                pausedAtMidpoint = pauseOnMid;
 
                 if (pauseOnMid)
                     particles.Pause();
@@ -123,18 +126,15 @@ public class Transitions : MonoBehaviour
         FadeBackingImg(pauseOnMid, midTime);
     }
 
-    private void OnContinueTransition()
+    private void OnMidTransition(bool pauseOnMid)
     {
-        if (!midpointPause)
-        {
-            Debug.LogWarning("Attempted to continue a transition when there isn't one in progress; " +
-                "starting a no-pause transition instead (TransitionStart will not be invoked).");
-            OnTransitionStart(false);
-            return;
-        }
+        if (!pauseOnMid) return;
 
-        particles.Play();
+        Coroutilities.TryStopCoroutine(this, ref midPauseCorout);
+        midPauseCorout = Coroutilities.DoWhen(this, () => particles.Play(), () => !pausedAtMidpoint);
     }
+
+    private void OnContinueTransition() => pausedAtMidpoint = false;
 
     private void FadeBackingImg(bool pauseOnMid, float midTime)
     {

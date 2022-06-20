@@ -48,9 +48,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartGame()
+    public void LoadIndex(int index)
     {
-        SceneManager.LoadScene("IntroDialogue");
+        Transitions.LoadWithTransition?.Invoke(index, -1);
     }
 
     /// <summary>
