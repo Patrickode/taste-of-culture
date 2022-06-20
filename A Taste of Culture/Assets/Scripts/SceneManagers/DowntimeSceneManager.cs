@@ -83,7 +83,7 @@ public class DowntimeSceneManager : MonoBehaviour
         Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
             StartCoroutine(TakeOffLid()),
             StartCoroutine(ProteinInPot()),
-            StartCoroutine(BackgroundToSchool()));
+            StartCoroutine(BackgroundToSchool(2.5f)));
     }
 
     IEnumerator ProteinInPot()
@@ -99,8 +99,9 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[9].SetActive(true);
         Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
 
-        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
-            StartCoroutine(TakeOffLid()));
+        Coroutilities.DoAfterSequence(this, () => dialogueManager.ToggleDialogue(true),
+            () => StartCoroutine(TakeOffLid()),
+            () => new WaitForSeconds(1));
     }
 
     public void PlateCurry()
@@ -137,9 +138,9 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[9].SetActive(false);
     }
 
-    IEnumerator BackgroundToSchool()
+    IEnumerator BackgroundToSchool(float waitLength = 3.5f)
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(waitLength);
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
     }
