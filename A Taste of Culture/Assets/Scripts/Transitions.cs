@@ -27,7 +27,7 @@ public class Transitions : MonoBehaviour
 
     /// <summary>
     /// <b>Arguments:</b><br/>
-    /// - <see cref="int"/>: The index of the scene to load.<br/>
+    /// - <see cref="int"/>: The index of the scene to load. (<i>Relative if negative; -2 = two scenes ahead of this one.</i>)<br/>
     /// - <see cref="float"/>: The speed of the transition. Pass &lt;= 0 to use default speed 
     /// (as set in the inspector).
     /// </summary>
@@ -84,6 +84,7 @@ public class Transitions : MonoBehaviour
 
     private void OnLoadWithTransition(int index, float speed = 0)
     {
+        index = index >= 0 ? index : SceneManager.GetActiveScene().buildIndex - index;
         StartTransition?.Invoke(true, speed);
 
         MidTransition += LoadOnMidpoint;
