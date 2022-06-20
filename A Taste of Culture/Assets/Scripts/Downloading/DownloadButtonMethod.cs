@@ -25,9 +25,6 @@ public class DownloadButtonMethod : MonoBehaviour
     /// <param name="byteArraySize">The length of <paramref name="byteArray"/>.</param>
     [DllImport("__Internal")]
     private static extern void DownloadFileImmediate(string filename, byte[] byteArray, int byteArraySize);
-
-    // Called by browser/DownloadFile, apparently the reason that DownloadFile needs a gameObjectName as a parameter
-    public void OnFileDownload() => Debug.Log("File successfully downloaded");
 #endif
 
     public void Download(string sourceFileName)

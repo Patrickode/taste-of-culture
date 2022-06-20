@@ -19,7 +19,7 @@ MonoBehaviour:
   options:
   - text: 
     nextSentence: {fileID: 11400000, guid: fd5b573510d3d794dbf6f6d5a63a34ba, type: 2}
-    consequence: {fileID: 0}
+    consequence: {fileID: 11400000, guid: 0824da154b7b75d4c925440b082f105d, type: 2}
   - text: '[Plate the curry]'
     nextSentence: {fileID: 11400000, guid: fd5b573510d3d794dbf6f6d5a63a34ba, type: 2}
     consequence: {fileID: 11400000, guid: 0824da154b7b75d4c925440b082f105d, type: 2}
