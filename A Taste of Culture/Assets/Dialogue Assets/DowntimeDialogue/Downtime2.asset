@@ -19,7 +19,7 @@ MonoBehaviour:
   options:
   - text: 
     nextSentence: {fileID: 11400000, guid: 40799c2aab9fa4346a764e364be1cc7f, type: 2}
-    consequence: {fileID: 0}
+    consequence: {fileID: 11400000, guid: 7bd9f8340c915ef41972c29ecbceb812, type: 2}
   - text: '[Add Onions]'
     nextSentence: {fileID: 11400000, guid: 40799c2aab9fa4346a764e364be1cc7f, type: 2}
     consequence: {fileID: 11400000, guid: 7bd9f8340c915ef41972c29ecbceb812, type: 2}

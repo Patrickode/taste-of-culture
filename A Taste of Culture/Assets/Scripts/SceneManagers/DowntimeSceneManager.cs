@@ -153,8 +153,11 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void DialogueEnded()
     {
-        Cursor.visible = false;
         dialogue.SetActive(false);
+    }
+
+    public void RecipeDismissed()
+    {
         Transitions.LoadWithTransition(0, -1);
     }
 }
