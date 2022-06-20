@@ -734,6 +734,11 @@ namespace DialogueEditor
                         node.Icon = (Sprite)EditorGUILayout.ObjectField(node.Icon, typeof(Sprite), false, GUILayout.ExpandWidth(true));
                         EditorGUILayout.Space();
 
+                        // Bool to select small or large icon
+                        GUILayout.Label("Large Icon", EditorStyles.boldLabel);
+                        node.LargeIcon = EditorGUILayout.Toggle("Large Icon On", node.LargeIcon);
+                        EditorGUILayout.Space();
+
                         GUILayout.Label("Audio Options", EditorStyles.boldLabel);
                         GUILayout.Label("Audio");
                         node.Audio = (AudioClip)EditorGUILayout.ObjectField(node.Audio, typeof(AudioClip), false);

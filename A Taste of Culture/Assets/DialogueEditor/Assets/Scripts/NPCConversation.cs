@@ -391,6 +391,7 @@ namespace DialogueEditor
             speech.TimeUntilAdvance = editableNode.TimeUntilAdvance;
             speech.TMPFont = editableNode.TMPFont;
             speech.Icon = editableNode.Icon;
+            speech.LargeIcon = editableNode.LargeIcon;
             speech.Audio = editableNode.Audio;
             speech.Volume = editableNode.Volume;
 

@@ -48,6 +48,7 @@ namespace DialogueEditor
         // Dialogue UI
         public Image DialogueBackground;
         public Image NpcIcon;
+        public Image NpcFullBody;
         public TMPro.TextMeshProUGUI NameText;
         public TMPro.TextMeshProUGUI DialogueText;
         // Components
@@ -98,6 +99,8 @@ namespace DialogueEditor
             m_uiOptions = new List<UIConversationButton>();
 
             NpcIcon.sprite = BlankSprite;
+            NpcFullBody = GameObject.Find("NPCFullBody").GetComponent<Image>();
+            NpcFullBody.sprite = BlankSprite;
             DialogueText.text = "";
             TurnOffUI();
         }
@@ -280,6 +283,7 @@ namespace DialogueEditor
                 case eState.TransitioningDialogueBoxOn:
                     SetColorAlpha(DialogueBackground, 1);
                     SetColorAlpha(NpcIcon, 1);
+                    SetColorAlpha(NpcFullBody, 1);
                     SetColorAlpha(NameText, 1);
                     break;
             }
@@ -294,11 +298,21 @@ namespace DialogueEditor
                     {
                         SetColorAlpha(DialogueBackground, 0);
                         SetColorAlpha(NpcIcon, 0);
+                        SetColorAlpha(NpcFullBody, 0);
                         SetColorAlpha(NameText, 0);
 
                         DialogueText.text = "";
                         NameText.text = m_currentSpeech.Name;
-                        NpcIcon.sprite = m_currentSpeech.Icon != null ? m_currentSpeech.Icon : BlankSprite;
+                        if (m_currentSpeech.LargeIcon)
+                        {
+                            NpcFullBody.sprite = m_currentSpeech.Icon != null ? m_currentSpeech.Icon : BlankSprite;
+                            NpcIcon.sprite = BlankSprite;
+                        }
+                        else
+                        {
+                            NpcIcon.sprite = m_currentSpeech.Icon != null ? m_currentSpeech.Icon : BlankSprite;
+                            NpcFullBody.sprite = BlankSprite;
+                        }
                     }
                     break;
 
@@ -341,6 +355,7 @@ namespace DialogueEditor
 
             SetColorAlpha(DialogueBackground, t);
             SetColorAlpha(NpcIcon, t);
+            SetColorAlpha(NpcFullBody, t);
             SetColorAlpha(NameText, t);
         }
 
@@ -451,6 +466,7 @@ namespace DialogueEditor
 
             SetColorAlpha(DialogueBackground, 1 - t);
             SetColorAlpha(NpcIcon, 1 - t);
+            SetColorAlpha(NpcFullBody, 1 - t);
             SetColorAlpha(NameText, 1 - t);
         }
 
@@ -478,11 +494,27 @@ namespace DialogueEditor
             // Set sprite
             if (speech.Icon == null)
             {
-                NpcIcon.sprite = BlankSprite;
+                if (speech.LargeIcon)
+                {
+                    NpcFullBody.sprite = BlankSprite;
+                }
+                else
+                {
+                    NpcIcon.sprite = BlankSprite;
+                }
             }
             else
             {
-                NpcIcon.sprite = speech.Icon;
+                if (speech.LargeIcon)
+                {
+                    NpcIcon.sprite = BlankSprite;
+                    NpcFullBody.sprite = speech.Icon;
+                }
+                else
+                {
+                    NpcIcon.sprite = speech.Icon;
+                    NpcFullBody.sprite = BlankSprite;
+                }
             }
 
             // Set font
@@ -639,6 +671,7 @@ namespace DialogueEditor
             }
 
             NpcIcon.sprite = BlankSprite;
+            NpcFullBody.sprite = BlankSprite;
         }
 
         private void TurnOffUI()

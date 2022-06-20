@@ -184,6 +184,9 @@ namespace DialogueEditor
         /// <summary> Deprecated as of V1.03 </summary>
         [DataMember] public string IconGUID;
 
+        /// <summary> Whether the Icon is the large or small icon </summary>
+        [DataMember] public bool LargeIcon;
+
         /// <summary> The Audio Clip acompanying this Speech. </summary>
         public AudioClip Audio;
         /// <summary> Deprecated as of V1.03 </summary>
