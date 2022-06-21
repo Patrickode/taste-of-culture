@@ -19,7 +19,7 @@ MonoBehaviour:
   options:
   - text: 
     nextSentence: {fileID: 11400000, guid: d7a46cd8eb293e04ba6bd99daa687067, type: 2}
-    consequence: {fileID: 0}
+    consequence: {fileID: 11400000, guid: 120cfdb583b166745b8027393093e936, type: 2}
   - text: '[Check on the curry]'
     nextSentence: {fileID: 11400000, guid: d7a46cd8eb293e04ba6bd99daa687067, type: 2}
     consequence: {fileID: 11400000, guid: 120cfdb583b166745b8027393093e936, type: 2}

@@ -17,18 +17,18 @@ public class CookConfirmer : MonoBehaviour
         fullyBurned = Mathf.Max(fullyBurned, minorBurn);
         majorityThreshold = Mathf.Max(majorityThreshold, minorityThreshold);
 
-        CookStirIngredients.DoneCooking += ConfirmOnionSaute;
+        CookStirIngredient.DoneCooking += ConfirmOnionSaute;
     }
     private void OnDestroy()
     {
-        CookStirIngredients.DoneCooking -= ConfirmOnionSaute;
+        CookStirIngredient.DoneCooking -= ConfirmOnionSaute;
     }
 
     private void ConfirmOnionSaute()
     {
-        CookStirIngredients.DoneCooking -= ConfirmOnionSaute;
+        CookStirIngredient.DoneCooking -= ConfirmOnionSaute;
 
-        List<float> burnAmounts = CookStirIngredients.BurnAmounts;
+        List<float> burnAmounts = CookStirIngredient.BurnAmounts;
         int numBurned = burnAmounts.Count((value) => value > minorBurn);
 
         string msg = "<color=#E05E00>";
@@ -72,7 +72,7 @@ public class CookConfirmer : MonoBehaviour
 #endif
 
         Debug.Log(msg);
-        CookStirIngredients.CookingPaused = true;
+        CookStirIngredient.CookingPaused = true;
 
         //TODO: Better scene transition?
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

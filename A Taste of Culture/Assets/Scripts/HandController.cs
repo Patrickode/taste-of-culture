@@ -28,8 +28,8 @@ public class HandController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Move the rigidbody toward the mouse, clamped to the screen's edge + the size of the hand's rendered sprite.
-        //This prevents the hand from getting stuck behind cursor-only zones.
+        //Move the rigidbody toward the mouse, clamped to the screen's edge + the size of the hand's
+        //rendered sprite. This prevents the hand from getting stuck behind cursor-only zones.
         rigidbodyRef.MovePosition(GetClampedTarget());
 
         #region Alternate Behavior; Stop tracking mouse entirely when offscreen
@@ -51,7 +51,11 @@ public class HandController : MonoBehaviour
         if (!spriteRenderer)
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        bool handSynced = Vector2.Distance(rigidbodyRef.position,
+            cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= 0.1;
+
+        //If the mouse and hand are desynced for whatever reason, don't pick/drop any spice
+        if (handSynced && Input.GetMouseButtonDown(0))
         {
             TrySetSprite(pinchedSprite);
         }
@@ -59,12 +63,10 @@ public class HandController : MonoBehaviour
         {
             TrySetSprite(openSprite);
 
-            if (!spicePrefab)
-                return;
-
-            //If the mouse and hand are desynced for whatever reason, don't drop any spice
-            if (Vector2.Distance(rigidbodyRef.position, cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= 0.1)
+            if (handSynced)
             {
+                if (!spicePrefab)
+                    return;
                 //Spawn the spice, increment the drop counter, then set the new spice's sort order to the counter
                 SpriteRenderer newSpice = Instantiate(spicePrefab, spiceSpawnPoint.position, Quaternion.identity);
                 newSpice.sortingOrder = ++layerDropCounter;

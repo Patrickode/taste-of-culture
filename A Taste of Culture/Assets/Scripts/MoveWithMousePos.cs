@@ -36,17 +36,17 @@ public class MoveWithMousePos : MonoBehaviour
                 moveWithPhysics = false;
             }
 
-        CookStirIngredients.DoneCooking += OnStirringComplete;
+        CookStirIngredient.DoneCooking += OnStirringComplete;
     }
 
     private void OnDestroy()
     {
-        CookStirIngredients.DoneCooking -= OnStirringComplete;
+        CookStirIngredient.DoneCooking -= OnStirringComplete;
     }
 
     private void OnStirringComplete()
     {
-        CookStirIngredients.DoneCooking -= OnStirringComplete;
+        CookStirIngredient.DoneCooking -= OnStirringComplete;
         CanMove = false;
     }
 

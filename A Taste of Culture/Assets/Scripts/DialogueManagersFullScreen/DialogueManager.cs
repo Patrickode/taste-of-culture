@@ -114,7 +114,8 @@ public class DialogueManager : MonoBehaviour
         Choice option = currentSentence.options[index];
         if (option.consequence != null)
         {
-            Debug.Log($"Raised consequence event \"{option.consequence}\" of option \"{option.text}\"");
+            Debug.Log($"<color=#777>Raised consequence event \"{option.consequence}\" " +
+                $"of option \"{option.text}\"</color>\n");
             option.consequence.Raise();
         }
         currentSentence = option.nextSentence;
