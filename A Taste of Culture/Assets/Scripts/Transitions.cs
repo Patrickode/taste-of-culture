@@ -13,9 +13,10 @@ public class Transitions : MonoBehaviour
     [SerializeField] private float screenToRateRatio = 1.1236f;
     [SerializeField] private float zPosition = 10;
 
-    ParticleSystem.MainModule mainCache;
-    ParticleSystem.ShapeModule shapeCache;
-    ParticleSystem.EmissionModule emitCache;
+    private ParticleSystem.MainModule mainCache;
+    private ParticleSystem.ShapeModule shapeCache;
+    private ParticleSystem.EmissionModule emitCache;
+    private float[] origVals = { 0, 0, 0, 0 };
 
     private Camera mainCam;
     private Keyframe startOfPeakKey;
@@ -225,6 +226,12 @@ public class Transitions : MonoBehaviour
         rateForSize = emitCache.rateOverTime.constant;
 
         mainCache = particles.main;
+
+        origVals[0] = mainCache.startSpeed.constant;
+        origVals[1] = emitCache.rateOverTime.constant;
+        origVals[2] = mainCache.startLifetimeMultiplier;
+        origVals[3] = mainCache.duration;
+
         SetSpeed();
     }
     private void SetSpeed(float newSpeed = 0)
@@ -232,10 +239,10 @@ public class Transitions : MonoBehaviour
         if (newSpeed <= 0)
             newSpeed = defaultSpeedMult;
 
-        mainCache.startSpeed = mainCache.startSpeed.constant * newSpeed;
-        emitCache.rateOverTime = rateForSize * newSpeed;
+        mainCache.startSpeed = origVals[0] * newSpeed;
+        emitCache.rateOverTime = origVals[1] * newSpeed;
 
-        mainCache.startLifetimeMultiplier /= newSpeed;
-        mainCache.duration /= newSpeed;
+        mainCache.startLifetimeMultiplier = origVals[2] / newSpeed;
+        mainCache.duration = origVals[3] / newSpeed;
     }
 }

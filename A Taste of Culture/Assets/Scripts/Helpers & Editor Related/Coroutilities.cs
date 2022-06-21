@@ -125,6 +125,7 @@ public static class Coroutilities
     public static Coroutine DoAfterSequence(MonoBehaviour coroutineCaller, Action thingToDo, params Func<object>[] yielders)
         => coroutineCaller.StartCoroutine(DoAfterSequence(thingToDo, yielders));
 
+    /// <remarks></remarks> <inheritdoc cref="DoAfterSequence(MonoBehaviour, Action, Func{object}[])"/>
     private static IEnumerator DoAfterSequence(Action thingToDo, params Func<object>[] yielders)
     {
         //Call each of the yielders and wait on the YieldInstruction they return.
@@ -133,6 +134,31 @@ public static class Coroutilities
 
         thingToDo();
     }
+
+
+
+    /*//Alas, this does not work. I'd need to figure out a way to take in any "event" type that supports +=/-=;
+    //I currently know no such way. Actions (my prime target) do work with this, Delegate just doesn't support +=/-=.
+    /// <summary>
+    /// Calls <paramref name="thingToDo"/> when <paramref name="evt"/> is invoked.
+    /// </summary>
+    /// <param name="thingToDo">The function or lambda expression that will be called 
+    /// when <paramref name="evt"/> is invoked.</param>
+    /// <param name="evt">Call <paramref name="thingToDo"/> when this is invoked.</param>
+    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
+    private static Coroutine DoAfterEvent(MonoBehaviour coroutineCaller, Action thingToDo, Delegate evt)
+        => coroutineCaller.StartCoroutine(DoAfterEvent(thingToDo, evt));
+
+    /// <remarks></remarks> <inheritdoc cref="DoAfterEvent(MonoBehaviour, Action, Action)"/>
+    private static IEnumerator DoAfterEvent(Action thingToDo, Delegate evt)
+    {
+        bool evtDone = false;
+        evt += OnEvt;
+        void OnEvt() { evt -= OnEvt; evtDone = true; }
+
+        yield return new WaitUntil(() => evtDone = false);
+        thingToDo();
+    }*/
 
 
 
