@@ -266,7 +266,8 @@ public static class UtilFunctions
             Debug.DrawRay(pos, rot * (Vector3.right * scale.x / 2), halfSatC);
         }
     }
-    public static void DrawBox(Vector3 pos, Quaternion rot, float scale, Color c) => DrawBox(pos, rot, Vector3.one * scale, c);
+    public static void DrawBox(Vector3 pos, Quaternion rot, float scale, Color c = default, float duration = 0, bool drawAxes = false)
+        => DrawBox(pos, rot, Vector3.one * scale, c, duration, drawAxes);
     #endregion
 
     /// <summary>

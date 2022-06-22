@@ -56,6 +56,8 @@ public class SpawnStirIngredients : MonoBehaviour
 
             spawnedIng.localPosition = spawnPos;
             startPosns[i] = spawnPos;
+
+            spawnedIng.gameObject.SetActive(true);
         }
     }
 }

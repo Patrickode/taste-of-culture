@@ -8,6 +8,9 @@ public class MoveWithMousePos : MonoBehaviour
     [SerializeField] private GameObject thingToMove;
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
     [SerializeField] private Collider2D moveZone;
+    [SerializeField] private Collider moveZone3D;
+    [SerializeField] private float screenPointDistance;
+    [SerializeField] private bool preserveDepthPos;
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
 
@@ -54,9 +57,15 @@ public class MoveWithMousePos : MonoBehaviour
     {
         if (!CanMove) return;
 
-        Vector2 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
+        else if (moveZone3D)
+        {
+            destination = moveZone3D.ClosestPoint(destination);
+            if (preserveDepthPos)
+                destination.y = thingToMove.transform.position.y;
+        }
 
         if (moveWithPhysics)
         {
