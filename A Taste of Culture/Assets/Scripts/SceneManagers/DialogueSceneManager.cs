@@ -16,7 +16,7 @@ public class DialogueSceneManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public GameObject dialogue;
     public DialogueTrigger trigger;
-    public string nextScene;
+    public int nextSceneIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +32,14 @@ public class DialogueSceneManager : MonoBehaviour
         dialogue.SetActive(false);
         switch (time)
         {
+            #region Deprecated
             case DialogueTime.Closing:
                 SceneManager.LoadScene("IntroDialogue");
                 break;
+            #endregion
 
             case DialogueTime.Opening:
-                SceneManager.LoadScene(nextScene);
+                Transitions.LoadWithTransition(nextSceneIndex, -1);
                 break;
         }
     }

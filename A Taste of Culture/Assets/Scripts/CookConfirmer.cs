@@ -74,7 +74,6 @@ public class CookConfirmer : MonoBehaviour
         Debug.Log(msg);
         CookStirIngredient.CookingPaused = true;
 
-        //TODO: Better scene transition?
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Transitions.LoadWithTransition?.Invoke(-1, -1);
     }
 }
