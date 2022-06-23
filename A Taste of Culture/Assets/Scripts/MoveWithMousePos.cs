@@ -5,9 +5,10 @@ using UnityEngine;
 public class MoveWithMousePos : MonoBehaviour
 {
     [SerializeField] private bool onlyMoveIfHeld;
+    [SerializeField] private bool returnWhenDropped;
     [SerializeField] private LayerMask holdMask;
     [SerializeField] [TagSelector] private string holdTag;
-    [Space(5)]
+    [Space(10)]
     [SerializeField] private bool moveWithPhysics;
     [SerializeField] private GameObject thingToMove;
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
@@ -18,11 +19,11 @@ public class MoveWithMousePos : MonoBehaviour
 
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
-
-    private bool held;
     private Vector3 holdOffset = Vector3.zero;
+    private Vector3 originalPos;
 
     public bool CanMove { get; set; } = true;
+    public bool Held { get; private set; }
 
     private Camera _cachedCam;
     private Camera CachedCam
@@ -36,6 +37,8 @@ public class MoveWithMousePos : MonoBehaviour
 
     private void Start()
     {
+        originalPos = thingToMove.transform.position;
+
         if (!thingToMove)
             thingToMove = gameObject;
 
@@ -75,20 +78,22 @@ public class MoveWithMousePos : MonoBehaviour
             //If not, just go ahead (so long as we found *something*).
             if (clickedColl && (string.IsNullOrEmpty(holdTag) || clickedColl.CompareTag(holdTag)))
             {
-                held = true;
+                Held = true;
                 holdOffset = thingToMove.transform.position - clickPos;
             }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            held = false;
+            Held = false;
             holdOffset = Vector3.zero;
+            if (returnWhenDropped)
+                thingToMove.transform.position = originalPos;
         }
     }
 
     private void FixedUpdate()
     {
-        if (!CanMove || (onlyMoveIfHeld && !held)) return;
+        if (!CanMove || (onlyMoveIfHeld && !Held)) return;
 
         Vector3 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
         destination += holdOffset;

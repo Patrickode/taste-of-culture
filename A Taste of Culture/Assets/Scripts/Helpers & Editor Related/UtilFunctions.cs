@@ -338,4 +338,26 @@ public static class UtilFunctions
         else
             return Mathf.Lerp(mid, to, (t - 0.5f) * 2);
     }
+
+    /// <summary>
+    /// Calls <see cref="GameObject.SetActive(bool)"/> on this game object if it's not null or pending destroy.
+    /// </summary>
+    /// <returns>Was <see cref="GameObject.SetActive(bool)"/> called successfully?</returns>
+    public static bool SafeSetActive(this GameObject obj, bool active)
+    {
+        if (obj)
+        {
+            obj.SetActive(active);
+            return true;
+        }
+
+        return false;
+    }
+
+    public static bool SafeSetActive(Component objSource, bool active)
+    {
+        if (objSource) return objSource.gameObject.SafeSetActive(active);
+
+        return false;
+    }
 }
