@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoveWithMousePos : MonoBehaviour
 {
+    [SerializeField] private bool onlyMoveIfHeld;
+    [Space(5)]
     [SerializeField] private bool moveWithPhysics;
     [SerializeField] private GameObject thingToMove;
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
@@ -11,8 +13,13 @@ public class MoveWithMousePos : MonoBehaviour
     [SerializeField] private Collider moveZone3D;
     [SerializeField] private float screenPointDistance;
     [SerializeField] private bool preserveDepthPos;
+
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
+
+    private int holdMask;
+    private bool held;
+    private Vector3 holdOffset = Vector3.zero;
 
     public bool CanMove { get; set; } = true;
 
@@ -28,6 +35,8 @@ public class MoveWithMousePos : MonoBehaviour
 
     private void Start()
     {
+        holdMask = LayerMask.GetMask("Tool");
+
         if (!thingToMove)
             thingToMove = gameObject;
 
@@ -53,11 +62,35 @@ public class MoveWithMousePos : MonoBehaviour
         CanMove = false;
     }
 
+    private void Update()
+    {
+        if (!onlyMoveIfHeld) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Vector3 clickPos = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
+            Collider2D clickedColl = Physics2D.OverlapPoint(clickPos, holdMask);
+
+            if (clickedColl && clickedColl.CompareTag("Player"))
+            {
+                held = true;
+                holdOffset = thingToMove.transform.position - clickPos;
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            held = false;
+            holdOffset = Vector3.zero;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (!CanMove) return;
+        if (!CanMove || (onlyMoveIfHeld && !held)) return;
 
         Vector3 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
+        destination += holdOffset;
+
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
         else if (moveZone3D)
