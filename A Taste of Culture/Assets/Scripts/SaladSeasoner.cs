@@ -11,7 +11,8 @@ public class SaladSeasoner : MonoBehaviour
     [Space(5)]
     [SerializeField] private MoveWithMousePos heldManager;
     [SerializeField] private GameObject seasonPrefab;
-    [SerializeField] private Collider2D destination;
+    [SerializeField] private Collider2D seasonZone;
+    [SerializeField] private Transform seasonContainer;
     [SerializeField] private Vector2 spawnOffset;
 
     private SpriteRenderer currentSpriteObj;
@@ -37,9 +38,13 @@ public class SaladSeasoner : MonoBehaviour
         {
             Vector3 targetPos = transform.position + (Vector3)spawnOffset;
 
-            if (destination.OverlapPoint(targetPos))
+            if (seasonZone.OverlapPoint(targetPos))
             {
-                Instantiate(seasonPrefab, transform.position + (Vector3)spawnOffset, transform.rotation);
+                var spawnedSeasoning = Instantiate(
+                    seasonPrefab,
+                    transform.position + (Vector3)spawnOffset,
+                    transform.rotation);
+                spawnedSeasoning.transform.parent = seasonContainer;
 
                 useTimer = Coroutilities.DoAfterDelay(this, () => useTimer = null, 0.1f);
                 SwitchToSpriteObj(SeasonerState.Use);
