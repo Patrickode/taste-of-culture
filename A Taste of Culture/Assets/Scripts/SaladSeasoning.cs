@@ -13,14 +13,23 @@ public abstract class SaladSeasoning : MonoBehaviour
     protected float anglesMoved;
 
     public float MixProgress { get; protected set; }
+    public bool Inert { get; private set; }
 
     protected virtual void Start()
     {
+        if (!transform.parent)
+        {
+            Inert = true;
+            return;
+        }
+
         previousRot = transform.parent.localRotation;
     }
 
     protected virtual void Update()
     {
+        if (Inert) return;
+
         anglesMoved += Quaternion.Angle(previousRot, transform.parent.localRotation);
         MixProgress = anglesMoved / mixDegrees;
         MixAction();
