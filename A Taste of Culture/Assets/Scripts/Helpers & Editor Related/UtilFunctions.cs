@@ -324,4 +324,18 @@ public static class UtilFunctions
 
         tform.localScale = InverseScale(tform.localScale, targetParent.localScale);
     }
+
+    /// <summary>
+    /// Lerps between <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>, based on <paramref name="t"/>.<br/>
+    /// Optionally allows setting the mid point's "time" [0-1] to something other than 0.5.
+    /// </summary>
+    /// <param name="midTime"><paramref name="mid"/>'s "position" along the 0-1 curve between 
+    /// <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>.<br/>0.5 = equal distance to both end points.</param>
+    public static float Lerp3Point(float from, float mid, float to, float t, float midTime = 0.5f)
+    {
+        if (t <= midTime)
+            return Mathf.Lerp(from, mid, t * 2);
+        else
+            return Mathf.Lerp(mid, to, (t - 0.5f) * 2);
+    }
 }

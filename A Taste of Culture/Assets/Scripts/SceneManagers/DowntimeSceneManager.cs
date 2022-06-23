@@ -48,7 +48,10 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[3].SetActive(false);
         backgrounds[4].SetActive(true);
-        StartCoroutine(PutOnLid());
+        dialogueManager.ToggleContinue(false);
+
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(PutOnLid()));
     }
 
     public void AddButter()
@@ -56,9 +59,12 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
         mentor.SetActive(false);
-        StartCoroutine(TakeOffLid());
-        StartCoroutine(ButterInPot());
-        StartCoroutine(BackgroundToSchool());
+        dialogueManager.ToggleContinue(false);
+
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(TakeOffLid()),
+            StartCoroutine(ButterInPot()),
+            StartCoroutine(BackgroundToSchool()));
     }
 
     IEnumerator ButterInPot()
@@ -69,12 +75,20 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void AddProtein()
     {
-        backgrounds[11].SetActive(false);
-        backgrounds[7].SetActive(true);
-        mentor.SetActive(false);
-        StartCoroutine(TakeOffLid());
-        StartCoroutine(ProteinInPot());
-        StartCoroutine(BackgroundToSchool());
+        Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2.5f)));
+
+        void ActuallyAddProtein()
+        {
+            backgrounds[11].SetActive(false);
+            backgrounds[7].SetActive(true);
+            mentor.SetActive(false);
+            Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
+
+            Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
+                StartCoroutine(TakeOffLid()),
+                StartCoroutine(ProteinInPot()),
+                StartCoroutine(BackgroundToSchool(2.5f)));
+        }
     }
 
     IEnumerator ProteinInPot()
@@ -88,16 +102,24 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[11].SetActive(false);
         backgrounds[8].SetActive(true);
         backgrounds[9].SetActive(true);
-        StartCoroutine(TakeOffLid());
+        Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
+
+        Coroutilities.DoAfterSequence(this, () => dialogueManager.ToggleDialogue(true),
+            () => StartCoroutine(TakeOffLid()),
+            () => new WaitForSeconds(1));
     }
 
     public void PlateCurry()
     {
-        StartCoroutine(ShowPlate());
+        dialogueManager.DialogueUI.SetActive(false);
+
+        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(ShowPlate()));
     }
 
     IEnumerator ShowPlate()
     {
+        yield return StartCoroutine(TransitionAndWait(false, 2.5f));
         mentor.SetActive(false);
         backgrounds[10].SetActive(true);
         if (flavorPfile)
@@ -122,17 +144,22 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[9].SetActive(false);
     }
 
-    IEnumerator BackgroundToSchool()
+    IEnumerator BackgroundToSchool(float waitLength = 3.5f)
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(waitLength);
+        yield return StartCoroutine(TransitionAndWait(false, 2.5f));
+
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
     }
-    IEnumerator BackgroundToDish()
+
+    IEnumerator TransitionAndWait(bool pauseOnMid, float speed)
     {
-        yield return new WaitForSeconds(1.0f);
-        backgrounds[10].SetActive(true);
-        mentor.SetActive(false);
+        Transitions.StartTransition(pauseOnMid, speed);
+        bool transitionDone = false;
+        Transitions.MidTransition += OnMid;
+        void OnMid(bool _) { Transitions.MidTransition -= OnMid; transitionDone = true; }
+        yield return new WaitUntil(() => transitionDone);
     }
 
     public void DialogueEnded()
@@ -142,6 +169,6 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void RecipeDismissed()
     {
-        SceneManager.LoadScene("MainMenu");
+        Transitions.LoadWithTransition(0, -1);
     }
 }
