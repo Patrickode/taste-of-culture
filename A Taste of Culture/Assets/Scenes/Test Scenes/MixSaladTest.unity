@@ -1674,6 +1674,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyMoveIfHeld: 1
+  holdMask:
+    serializedVersion: 2
+    m_Bits: 128
+  holdTag: Player
   moveWithPhysics: 0
   thingToMove: {fileID: 23967090}
   moveZone: {fileID: 1080620648}

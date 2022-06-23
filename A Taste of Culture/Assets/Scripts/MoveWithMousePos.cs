@@ -5,6 +5,8 @@ using UnityEngine;
 public class MoveWithMousePos : MonoBehaviour
 {
     [SerializeField] private bool onlyMoveIfHeld;
+    [SerializeField] private LayerMask holdMask;
+    [SerializeField] [TagSelector] private string holdTag;
     [Space(5)]
     [SerializeField] private bool moveWithPhysics;
     [SerializeField] private GameObject thingToMove;
@@ -17,7 +19,6 @@ public class MoveWithMousePos : MonoBehaviour
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
 
-    private int holdMask;
     private bool held;
     private Vector3 holdOffset = Vector3.zero;
 
@@ -35,8 +36,6 @@ public class MoveWithMousePos : MonoBehaviour
 
     private void Start()
     {
-        holdMask = LayerMask.GetMask("Tool");
-
         if (!thingToMove)
             thingToMove = gameObject;
 
@@ -68,10 +67,13 @@ public class MoveWithMousePos : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            //Since the mouse is down, check if it's down on any of the colliders in the hold layer mask.
             Vector3 clickPos = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
             Collider2D clickedColl = Physics2D.OverlapPoint(clickPos, holdMask);
 
-            if (clickedColl && clickedColl.CompareTag("Player"))
+            //If we're looking for a specific tag as well, check for that, too.
+            //If not, just go ahead (so long as we found *something*).
+            if (clickedColl && (string.IsNullOrEmpty(holdTag) || clickedColl.CompareTag(holdTag)))
             {
                 held = true;
                 holdOffset = thingToMove.transform.position - clickPos;
@@ -91,11 +93,13 @@ public class MoveWithMousePos : MonoBehaviour
         Vector3 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
         destination += holdOffset;
 
+        //If we've got a moveZone to constrain the destination to, get the closest point on it to the destination.
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
         else if (moveZone3D)
         {
             destination = moveZone3D.ClosestPoint(destination);
+            //Y was used instead of Z for a 3D experiment where Y was the depth dir (so typical gravity was away from camera)
             if (preserveDepthPos)
                 destination.y = thingToMove.transform.position.y;
         }
