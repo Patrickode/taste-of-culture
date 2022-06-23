@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleSpriteObj: {fileID: 62272128}
   heldSpriteObj: {fileID: 1332345665}
-  useSpriteObj: {fileID: 0}
+  useSpriteObj: {fileID: 1006781369}
   useSpriteTime: 0.1
   heldManager: {fileID: 448563891}
   seasonPrefab: {fileID: 343676661}
