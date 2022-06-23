@@ -1072,7 +1072,7 @@ MonoBehaviour:
   useSpriteObj: {fileID: 1006781369}
   useSpriteTime: 0.1
   heldManager: {fileID: 448563891}
-  seasonPrefab: {fileID: 343676661}
+  seasonPrefab: {fileID: 4327808168536800228, guid: 3613d194bbf94484f84ff5fd1fcb0bf4, type: 3}
   seasonZone: {fileID: 515310059}
   seasonContainer: {fileID: 228493694}
   spawnOffset: {x: 0, y: 0}

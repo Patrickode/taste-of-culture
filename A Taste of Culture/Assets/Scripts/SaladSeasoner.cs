@@ -10,7 +10,7 @@ public class SaladSeasoner : MonoBehaviour
     [SerializeField] private float useSpriteTime;
     [Space(5)]
     [SerializeField] private MoveWithMousePos heldManager;
-    [SerializeField] private GameObject seasonPrefab;
+    [SerializeField] private SaladSeasoning seasonPrefab;
     [SerializeField] private Collider2D seasonZone;
     [SerializeField] private Transform seasonContainer;
     [SerializeField] private Vector2 spawnOffset;
