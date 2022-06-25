@@ -43,10 +43,10 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
             currentIngredient = Ingredients[currentIngredientIndex + 1];
             if(Ingredients.IndexOf(currentIngredient) == Ingredients.Count - 1) { bAtLastIngredient = true; }
 
-            // currentInstruction = Instructions[currentInstructionIndex + 1];
+            currentInstruction = Instructions[currentInstructionIndex + 1];
 
             currentIngredient.SetActive(true);
-            // currentInstruction.SetActive(true);
+            currentInstruction.SetActive(true);
 
             yield break;
         }
