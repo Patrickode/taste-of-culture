@@ -9,12 +9,21 @@ public class IngredientMover : MonoBehaviour
     [SerializeField] float budgeDistance = 0.25f;
     [SerializeField] float budgeDuration = 0.125f;
     [Space(5)]
-    [SerializeField] float rotateXPosition;
-    [SerializeField] float finalXPosition;
+
+    [SerializeField] [Tooltip("X Position at which player can rotate ingredient")] 
+        float rotateXPosition;
+    [SerializeField] [Tooltip("X Position that triggers transition")] 
+        float finalXPosition;
     [Space(5)]
+
+    [SerializeField] [Tooltip("Desired position of ingredient after it has been rotated")] 
+        Vector2 rotatedPosition;
+    [Space(5)]
+
     [SerializeField] GameObject choppedPrefab;
-    [SerializeField] Vector2 choppedPosition;
+    [SerializeField] Vector2 choppedPrefabPosition;
     [Space(5)]
+
     [SerializeField] GameObject spriteMask;
     [SerializeField] Vector2 spriteMaskPosition;
 
@@ -48,7 +57,8 @@ public class IngredientMover : MonoBehaviour
         if (taskComplete)
             return;
 
-        TryRotateIngredient();
+        if (Input.GetKeyDown(KeyCode.Space) && allowRotation)
+            TryRotateIngredient();
 
         if (!allowRotation && (transform.position.x >= rotateXPosition))
         {
@@ -99,17 +109,20 @@ public class IngredientMover : MonoBehaviour
     // Rotate ingredient and reset it's position
     void TryRotateIngredient()
     {
-        if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
-            return;
+        // if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
+        //     return;
 
-        transform.position = originalPosition;
-        cachedIngrPosition = originalPosition;
+        // transform.position = originalPosition;
+        // cachedIngrPosition = originalPosition;
+
+        transform.position = rotatedPosition;
+        cachedIngrPosition = rotatedPosition;
 
         // Instantiate mask that will allow chunks to become visible
         mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
-        GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPosition, Quaternion.identity);
+        GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPrefabPosition, Quaternion.identity);
         choppedIngredient.transform.parent = transform;
 
         transform.Rotate(0, 0, 90);
@@ -144,6 +157,20 @@ public class IngredientMover : MonoBehaviour
             }
 
             sceneController.TaskComplete();
+        }
+
+        ChoppingSceneManager sceneManager = FindObjectOfType<ChoppingSceneManager>();
+
+        if (sceneManager != null)
+        {
+            // Disable knife chop if last ingredient
+            if(sceneManager.bAtLastIngredient) 
+            { 
+                ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
+                if (knife != null) { knife.CanChop = false; }
+            }
+            
+            sceneManager.TaskComplete();
         }
     }
 }
