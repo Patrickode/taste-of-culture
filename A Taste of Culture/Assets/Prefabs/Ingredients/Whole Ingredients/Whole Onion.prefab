@@ -145,6 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientPrefab: {fileID: 3238934704775748159}
-  spriteMask: {fileID: 1490022700101722497, guid: 37977ce5956a4924791382d669c85cf7, type: 3}
+  spriteMask: {fileID: 1490022700101722497, guid: 6519d9b2930210c49b22cd6a2307079b, type: 3}
   cutWidth: 0.1
   isCuttable: 0
