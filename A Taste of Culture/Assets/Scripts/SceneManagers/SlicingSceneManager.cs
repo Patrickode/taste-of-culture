@@ -8,28 +8,33 @@ public class SlicingSceneManager : BaseIngredientSceneManager
     public GameEvent choseChicken;
     public GameEvent choseTofu;
 
+    [SerializeField] string desiredProtein;
+
     GameObject currentProtein;
 
-    void Awake() 
+    void Start() 
     {
         string selectedProtein = "";
         string otherProtein = "";   // Used to deactivate alternative protein in cases where player is given a choice in protein
 
-        if (protein.value == "chicken")
+        if(protein.value == null)
         {
-            choseChicken.Raise();
+            if (protein.value == "chicken")
+            {
+                choseChicken.Raise();
 
-            selectedProtein = "Raw Chicken";
-            otherProtein = "Tofu Block";
-        }
-        else if (protein.value == "tofu")
-        {
-            choseTofu.Raise();
+                selectedProtein = "Raw Chicken";
+                otherProtein = "Tofu Block";
+            }
+            else if (protein.value == "tofu")
+            {
+                choseTofu.Raise();
 
-            selectedProtein = "Tofu Block";
-            otherProtein = "Raw Chicken";
+                selectedProtein = "Tofu Block";
+                otherProtein = "Raw Chicken";
+            }
         }
-        else { selectedProtein = "Conch"; }
+        else { selectedProtein = desiredProtein; }
 
         ActivateProtein(selectedProtein, otherProtein);
     }
@@ -48,6 +53,8 @@ public class SlicingSceneManager : BaseIngredientSceneManager
         CuttingKnife knife = FindObjectOfType<CuttingKnife>();
         if (knife != null && currentProtein != null)
         {
+            Debug.Log("Selected Protein: " + selectedProtein);
+
             knife.collider1 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<IngredientCollider>();
             knife.collider2 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<IngredientCollider>();
         }

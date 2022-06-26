@@ -11,6 +11,8 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     public void TaskComplete()
     {
+        Debug.Log("Task Complete!");
+
         StartCoroutine(CompleteTask());
     }
 
@@ -21,6 +23,8 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     protected void HandleSceneCompletion()
     {
+        Debug.Log("Scene Complete!");
+
         StartCoroutine(TransitionToNewScene());
     }
 

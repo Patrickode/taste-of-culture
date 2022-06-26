@@ -146,6 +146,7 @@ public class IngredientMover : MonoBehaviour
 
         mask.transform.localScale += scale;
 
+        // TODO: Replace sceneControllers in level 1 scene and delete this code
         SceneController sceneController = FindObjectOfType<SceneController>();
 
         if (sceneController != null)
