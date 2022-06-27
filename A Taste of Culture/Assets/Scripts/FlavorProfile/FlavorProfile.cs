@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,81 +13,98 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
-    [SerializeField] float GradualDisplaySpeed = 0.05f;
+    [SerializeField] [Min(0)] float gradualDisplaySpeed = 0.05f;
+    [SerializeField] bool visualizeOnStart;
     [Space(10)]
     [SerializeField] Color bitternessColor;
     [SerializeField] Color spicinessColor;
     [SerializeField] Color sweetnessColor;
     [SerializeField] Color saltinessColor;
 
-    List<KeyValuePair<int, Color>> flavors = new List<KeyValuePair<int, Color>>();
-
-    int bitterness;
-    int spiciness;
-    int sweetness;
-    int saltiness;
+    private Dictionary<FlavorType, FlavorVisualizer> visualizers = new Dictionary<FlavorType, FlavorVisualizer>();
+    private const string Separator = "<color=#00000000>X</color>";
 
     private void Start()
     {
-        FlavorProfileData flavorData = FlavorProfileData.Instance;
-
-        bitterness = flavorData.Bitterness;
-        spiciness = flavorData.Spiciness;
-        sweetness = flavorData.Sweetness;
-        saltiness = flavorData.Saltiness;
-
-        flavors.Add(new KeyValuePair<int, Color>(bitterness, bitternessColor));
-        flavors.Add(new KeyValuePair<int, Color>(spiciness, spicinessColor));
-        flavors.Add(new KeyValuePair<int, Color>(sweetness, sweetnessColor));
-        flavors.Add(new KeyValuePair<int, Color>(saltiness, saltinessColor));
+        if (visualizeOnStart)
+            VisualizeFlavors();
     }
 
     public void VisualizeFlavors()
     {
-        int totalFlavors = bitterness + spiciness + sweetness + saltiness;
+        FlavorProfileData fData = FlavorProfileData.Instance;
+        int totalFlavors = fData.FlavorSum;
+        var flavors = fData.FlavorDict;
 
-        float radius = maxRadius;
+        float iteratedRadius = maxRadius;
 
-        foreach (KeyValuePair<int, Color> flavor in flavors)
+        foreach (var flavor in flavors)
         {
-            float flavorFraction = flavor.Key > 0
-                ? (float)flavor.Key / totalFlavors
+            float flavorFraction = flavor.Value > 0
+                ? (float)flavor.Value / totalFlavors
                 : 0.005f;
             int segments = Mathf.RoundToInt(maxAngle * flavorFraction);
 
-            //Create a container object and move it to the right spot, then parent it to this for organization's sake.
-            //  NOTE: "worldPositionStays" doesn't just affect position, at least for RectTransform objs. Passing false
+            //Create a properly named container object with a rect transform and move it to the right spot.
+            Transform container = new GameObject
+            (
+                Enum.GetName(typeof(FlavorType), flavor.Key),
+                typeof(RectTransform)
+            ).transform;
+
+            //Then parent it to this for organization's sake.
+            //  NOTE: "worldPositionStays" doesn't just affect position (at least for RectTransform objs). Passing false
             //  prevents the object from having a scale of ~100.
-            Transform container = new GameObject(GetFlavorName(flavor), typeof(RectTransform)).transform;
             container.position = transform.position + visualizerOffset;
             container.SetParent(transform, false);
 
             FlavorVisualizer visualizer = Instantiate(flavorVisualizerPrefab, container.position, container.rotation);
             visualizer.transform.parent = container;
             visualizer.name = "Visualizer";
+            visualizers.Add(flavor.Key, visualizer);
 
             //Label text will be further positioned by the visualizer.
             visualizer.labelText = Instantiate(labelPrefab, container);
             visualizer.labelText.name = "Label";
-            visualizer.DisplayFlavorValue(radius, lineWidth, segments, flavor.Value, GradualDisplaySpeed);
+            visualizer.DisplayFlavorValue(iteratedRadius, lineWidth, segments, GetFlavorColor(flavor.Key), gradualDisplaySpeed);
 
-            int roundPercent = Mathf.RoundToInt((float)flavor.Key / totalFlavors * 100);
-            string separator = "<color=#00000000>X</color>";
-            visualizer.labelText.text = $"{GetFlavorName(flavor)}{separator}" +
-                $"{(roundPercent < 10 ? separator + roundPercent : roundPercent.ToString())}%";
+            int roundPercent = Mathf.RoundToInt(flavor.Value / Mathf.Max(totalFlavors, Mathf.Epsilon) * 100);
 
-            radius -= lineWidth + lineSpacing;
+            //Text = "Name ##%". The separator (zero alpha) acts as a letter-width space, accounting for non-monospaced fonts.
+            visualizer.labelText.text = $"{Enum.GetName(typeof(FlavorType), flavor.Key)}{Separator}" +
+                $"{(roundPercent < 10 ? Separator + roundPercent : roundPercent.ToString())}%";
+
+            iteratedRadius -= lineWidth + lineSpacing;
         }
     }
 
-    string GetFlavorName(KeyValuePair<int, Color> flavor)
+    public void UpdateFlavors()
     {
-        string flavorName = "Saltiness";
+        if (visualizers.Count < 1)
+        {
+            VisualizeFlavors();
+            return;
+        }
 
-        if (flavor.Key == bitterness) { flavorName = "Bitterness"; }
-        else if (flavor.Key == spiciness) { flavorName = "Spiciness"; }
-        else if (flavor.Key == sweetness) { flavorName = "Sweetness"; }
+        FlavorProfileData fData = FlavorProfileData.Instance;
+        var newFlavs = fData.FlavorDict;
 
-        return flavorName;
+        foreach (var flav in newFlavs)
+        {
+            visualizers[flav.Key].UpdateDisplay(flav.Value, gradualDisplaySpeed);
+
+            int roundPercent = Mathf.RoundToInt(flav.Value / Mathf.Max(fData.FlavorSum, Mathf.Epsilon) * 100);
+
+            visualizers[flav.Key].labelText.text = $"{Enum.GetName(typeof(FlavorType), flav.Key)}{Separator}" +
+                $"{(roundPercent < 10 ? Separator + roundPercent : roundPercent.ToString())}%";
+        }
     }
+
+    private Color GetFlavorColor(FlavorType flavType) => flavType switch
+    {
+        FlavorType.Bitterness => bitternessColor,
+        FlavorType.Spiciness => spicinessColor,
+        FlavorType.Sweetness => sweetnessColor,
+        _ => saltinessColor,
+    };
 }

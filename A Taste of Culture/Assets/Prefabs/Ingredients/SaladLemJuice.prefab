@@ -97,4 +97,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spRend: {fileID: 997269493177119786}
   mixDegrees: 1080
+  flavor:
+    _serializedPairs:
+    - key: 2
+      value: 1
+      isDuplicateKey: 0
+      index: 0
   minimumScaleFactor: 0

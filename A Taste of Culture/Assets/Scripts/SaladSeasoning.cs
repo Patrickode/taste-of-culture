@@ -8,6 +8,7 @@ public abstract class SaladSeasoning : MonoBehaviour
     [SerializeField] protected SpriteRenderer spRend;
     [Tooltip("The amount of rotation it'll take to fully mix this seasoning in.")]
     [SerializeField] protected float mixDegrees;
+    [SerializeField] protected Bewildered.UDictionary<FlavorType, int> flavor;
 
     protected Quaternion previousRot;
     protected float anglesMoved;
@@ -35,6 +36,17 @@ public abstract class SaladSeasoning : MonoBehaviour
         MixAction();
 
         previousRot = transform.parent.localRotation;
+
+        if (MixProgress >= 1)
+        {
+            FlavorProfileData.Instance.AddFlavor(flavor);
+            FullyMixed();
+        }
+    }
+
+    protected virtual void FullyMixed()
+    {
+        Destroy(gameObject);
     }
 
     protected abstract void MixAction();

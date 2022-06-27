@@ -9,51 +9,84 @@ public class FlavorVisualizer : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI labelText;
     [SerializeField] [Range(-2, 2)] private float labelXSpacing;
 
-    float displaySpeed;
+    private const int Segments = 360;
+
+    private LineRenderer lineRef;
+    private Coroutine gradualDisplay;
+
+    private float radiusCache;
+    private List<Vector3> pointsCache;
+    private float speedCache;
 
     public void DisplayFlavorValue(float radius, float lineWidth, int value, Color flavorColor, float gradualDisplaySpeed)
     {
         if (value == 0) { return; }
 
-        displaySpeed = gradualDisplaySpeed;
+        speedCache = gradualDisplaySpeed;
+        radiusCache = radius;
 
-        LineRenderer line = gameObject.GetComponent<LineRenderer>();
+        lineRef = gameObject.GetComponent<LineRenderer>();
 
-        line.useWorldSpace = false;
-        line.startWidth = lineWidth;
-        line.endWidth = lineWidth;
+        lineRef.useWorldSpace = false;
+        lineRef.startWidth = lineWidth;
+        lineRef.endWidth = lineWidth;
 
-        line.startColor = flavorColor;
-        line.endColor = flavorColor;
-        line.material.color = flavorColor;
+        lineRef.startColor = flavorColor;
+        lineRef.endColor = flavorColor;
+        lineRef.material.color = flavorColor;
 
-        int segments = 360;
-        List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
+        pointsCache = new List<Vector3>();
+        pointsCache.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
 
         Vector3 labelDest = transform.position;
         labelDest.x += labelXSpacing;
         labelDest.y += radius;
         labelText.transform.position = labelDest;
 
-        StartCoroutine(GraduallyDisplayFlavor(line, radius, segments, points, value));
+        if (gradualDisplay == null)
+        {
+            gradualDisplay = StartCoroutine(GraduallyDisplay(
+                pointsCache, radius, value));
+        }
     }
 
-    IEnumerator GraduallyDisplayFlavor(LineRenderer line, float radius, int segments, List<Vector3> points, int value)
+    public void UpdateDisplay(int value, float gradualDisplaySpeed = -1)
     {
-        int pointCount = 1;
-
-        while (pointCount < value)
+        if (gradualDisplay == null)
         {
-            var rad = Mathf.Deg2Rad * (pointCount * 360f / segments);
-            points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
-
-            yield return new WaitForSeconds(displaySpeed);
-
-            line.positionCount = points.Count;
-            line.SetPositions(points.ToArray());
-
-            pointCount++;
+            gradualDisplay = StartCoroutine(GraduallyDisplay(
+                pointsCache, radiusCache, value, gradualDisplaySpeed));
         }
+    }
+
+    IEnumerator GraduallyDisplay(List<Vector3> points, float radius, int value, float interval = -1)
+    {
+        if (interval < 0)
+            interval = speedCache;
+        int counter = points.Count;
+
+        //Untested code for updating visualizer to lower value
+        if (counter >= value)
+            while (counter > value)
+            {
+                lineRef.positionCount -= 1;
+                counter--;
+                yield return new WaitForSeconds(interval);
+            }
+        else
+            while (counter < value)
+            {
+                var rad = Mathf.Deg2Rad * (counter * 360f / Segments);
+                points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
+
+                yield return new WaitForSeconds(interval);
+
+                lineRef.positionCount = points.Count;
+                lineRef.SetPositions(points.ToArray());
+
+                counter++;
+            }
+
+        gradualDisplay = null;
     }
 }

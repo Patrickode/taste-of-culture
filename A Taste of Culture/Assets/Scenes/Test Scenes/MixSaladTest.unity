@@ -416,7 +416,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -498,7 +498,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.17999998, g: 0.9, b: 0.17999998, a: 1}
   m_FlipX: 0
@@ -1201,7 +1201,7 @@ GameObject:
   - component: {fileID: 448563891}
   - component: {fileID: 448563892}
   m_Layer: 9
-  m_Name: Salt
+  m_Name: Seasoner (Salt)
   m_TagString: Spice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2273,7 +2273,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2645,7 +2645,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0.95, b: 0, a: 1}
   m_FlipX: 0
@@ -2928,7 +2928,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0.95, b: 0, a: 1}
   m_FlipX: 0
@@ -2940,6 +2940,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1229030263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229030264}
+  - component: {fileID: 1229030265}
+  m_Layer: 0
+  m_Name: Salad Taster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1229030264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229030263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1229030265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229030263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55befb5cd2fe1f74d976632a7ed6c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profileToUpdate: {fileID: 5093214245220167307}
 --- !u!1 &1230247957
 GameObject:
   m_ObjectHideFlags: 0
@@ -3096,7 +3140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.17999998, g: 0.9, b: 0.17999998, a: 1}
   m_FlipX: 0
@@ -3192,7 +3236,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3260,7 +3304,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0.95, b: 0, a: 1}
   m_FlipX: 0
@@ -3298,7 +3342,7 @@ GameObject:
   - component: {fileID: 1399072385}
   - component: {fileID: 1399072384}
   m_Layer: 9
-  m_Name: Lime
+  m_Name: Seasoner (Lime)
   m_TagString: Spice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3463,7 +3507,7 @@ GameObject:
   - component: {fileID: 1516681381}
   - component: {fileID: 1516681380}
   m_Layer: 9
-  m_Name: Lemon
+  m_Name: Seasoner (Lemon)
   m_TagString: Spice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4063,7 +4107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1394326097
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.17999998, g: 0.9, b: 0.17999998, a: 1}
   m_FlipX: 0
@@ -4393,7 +4437,8 @@ MonoBehaviour:
   maxRadius: 2.05
   lineWidth: 0.25
   lineSpacing: 0.125
-  GradualDisplaySpeed: 0.01
+  gradualDisplaySpeed: 0.05
+  visualizeOnStart: 1
   bitternessColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   spicinessColor: {r: 1, g: 0.24905658, b: 0.24905658, a: 1}
   sweetnessColor: {r: 0.27735847, g: 0.71786976, b: 1, a: 1}
@@ -4424,7 +4469,7 @@ RectTransform:
   m_AnchorMax: {x: 0.22135417, y: 0.7500835}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5093214245220167350
 GameObject:
   m_ObjectHideFlags: 0

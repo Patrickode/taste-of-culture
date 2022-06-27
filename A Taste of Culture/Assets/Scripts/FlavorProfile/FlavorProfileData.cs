@@ -4,29 +4,47 @@ using UnityEngine;
 
 public class FlavorProfileData : Singleton<FlavorProfileData>
 {
-    private int bitterness, spiciness, sweetness, saltiness = 0;
+    private Dictionary<FlavorType, int> flavors = new Dictionary<FlavorType, int>
+    {
+        {FlavorType.Bitterness, 0 },
+        {FlavorType.Spiciness, 0 },
+        {FlavorType.Sweetness, 0 },
+        {FlavorType.Saltiness, 0 },
+    };
+
+    public Dictionary<FlavorType, int> FlavorDict { get => flavors; }
+
+    public void AddFlavor(Dictionary<FlavorType, int> flavor)
+    {
+        foreach (var typeVal in flavor)
+        {
+            flavors[typeVal.Key] += typeVal.Value;
+        }
+    }
+
+    public int FlavorSum { get => Bitterness + Spiciness + Sweetness + Saltiness; }
 
     public int Bitterness
     {
-        get { return bitterness;}
-        set { bitterness = value; }
+        get { return flavors[FlavorType.Bitterness]; }
+        set { flavors[FlavorType.Bitterness] = value; }
     }
 
     public int Spiciness
     {
-        get { return spiciness;}
-        set { spiciness = value; }
+        get { return flavors[FlavorType.Spiciness]; }
+        set { flavors[FlavorType.Spiciness] = value; }
     }
 
     public int Sweetness
     {
-        get { return sweetness;}
-        set { sweetness = value; }
+        get { return flavors[FlavorType.Sweetness]; }
+        set { flavors[FlavorType.Sweetness] = value; }
     }
 
     public int Saltiness
     {
-        get { return saltiness;}
-        set { saltiness = value; }
+        get { return flavors[FlavorType.Saltiness]; }
+        set { flavors[FlavorType.Saltiness] = value; }
     }
 }
