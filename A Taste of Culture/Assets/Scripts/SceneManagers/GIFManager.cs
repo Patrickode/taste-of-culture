@@ -28,8 +28,8 @@ public class GIFManager : MonoBehaviour
 #if !UNITY_EDITOR
         demoPlayer.loopPointReached += LoopedOnce; 
 #endif
-        if (startActive)
-            Coroutilities.DoAfterDelay(this, StartVideo, 1.5f);
+        //if (startActive)
+        //    Coroutilities.DoAfterDelay(this, StartVideo, 1.5f);
     }
 
     public void StartVideo()

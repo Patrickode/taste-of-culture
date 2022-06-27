@@ -10,10 +10,17 @@ public class DialogueController : MonoBehaviour
     private string nextScene;
     [SerializeField]
     private StringVariable protein;
+    [SerializeField]
+    private GameObject tool;
 
     void Start()
     {
         TriggerConversation(initConversation);
+        Cursor.visible = true;
+        if (tool != null)
+        {
+            tool.SetActive(false);
+        }
     }
 
     private void TriggerConversation(NPCConversation conversation)
@@ -36,9 +43,27 @@ public class DialogueController : MonoBehaviour
         ConversationManager.OnConversationEnded += LoadNextScene;
     }
 
-    public void EnableControls(bool enabled)
+    public void ConversationEndEnableControls()
     {
+        ConversationManager.OnConversationEnded += EnableControls;
+    }
 
+    public void EnableControls()
+    {
+        Cursor.visible = false;
+        if (tool != null)
+        {
+            tool.SetActive(true);
+        }
+    }
+
+    public void DisableControls()
+    {
+        Cursor.visible = true;
+        if (tool != null)
+        {
+            tool.SetActive(false);
+        }
     }
 
     private void LoadNextScene()
