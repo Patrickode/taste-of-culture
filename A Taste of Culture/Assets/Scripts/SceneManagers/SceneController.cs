@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] string nextScene;
+    [SerializeField] int nextSceneIndex = -1;
     public CookingSceneManager sceneManager;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
     public Ingredient CurrentIngredient { get { return currentIngredient; } }
 
     // public DataHolder dataHolder;
-    
+
     // Will only be referenced if in chopping scene.
     GameObject onion;
     GameObject tomato;
@@ -28,10 +28,10 @@ public class SceneController : MonoBehaviour
 
     GameObject currentProtein;
 
-    void Awake() 
+    void Awake()
     {
         // If ingredient is onion, then grab onion and tomato gameobjects to be referenced on task completion
-        if(currentIngredient == Ingredient.Onion)
+        if (currentIngredient == Ingredient.Onion)
         {
             onion = GameObject.Find("Onion");
             tomato = GameObject.Find("Tomato");
@@ -51,17 +51,17 @@ public class SceneController : MonoBehaviour
             choseTofu.Raise();
 
             ActivateProtein("Tofu Block", "Raw Chicken");
-        }       
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         // If ingredient is onion, then disable the tomato gameobject
-        if(currentIngredient == Ingredient.Onion)
+        if (currentIngredient == Ingredient.Onion)
         {
-            if(tomato != null) { tomato.SetActive(false); }
-            if(tomatoInstruction != null) { tomatoInstruction.SetActive(false); }
+            if (tomato != null) { tomato.SetActive(false); }
+            if (tomatoInstruction != null) { tomatoInstruction.SetActive(false); }
         }
     }
 
@@ -71,11 +71,11 @@ public class SceneController : MonoBehaviour
         // if(currentProtein != null) { currentProtein.SetActive(true); } 
 
         GameObject proteinToDeactivate = GameObject.Find(otherProtein);
-        if(proteinToDeactivate != null) { proteinToDeactivate.SetActive(false); } 
+        if (proteinToDeactivate != null) { proteinToDeactivate.SetActive(false); }
 
         CuttingKnife knife = FindObjectOfType<CuttingKnife>();
-        if(knife != null && currentProtein != null) 
-        { 
+        if (knife != null && currentProtein != null)
+        {
             knife.collider1 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<IngredientCollider>();
             knife.collider2 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<IngredientCollider>();
         }
@@ -91,28 +91,28 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // If current ingredient is Onion, disable it and enable tomato
-        if(currentIngredient == Ingredient.Onion)
+        if (currentIngredient == Ingredient.Onion)
         {
             yield return new WaitForSeconds(1f);
-            if(onion != null) { onion.SetActive(false); }
-            if(onionInstruction != null) { onionInstruction.SetActive(false); }
+            if (onion != null) { onion.SetActive(false); }
+            if (onionInstruction != null) { onionInstruction.SetActive(false); }
 
             GameObject spriteMask = GameObject.Find("Chunks Sprite Mask(Clone)");
-            if(spriteMask != null) { GameObject.Destroy(spriteMask); }
+            if (spriteMask != null) { GameObject.Destroy(spriteMask); }
 
-            if(tomato != null) 
-            { 
+            if (tomato != null)
+            {
                 // Debug.Log("Found Tomato!");
-                tomato.SetActive(true); 
+                tomato.SetActive(true);
                 currentIngredient = Ingredient.Tomato;
             }
 
-            if(tomatoInstruction != null) { tomatoInstruction.SetActive(true); }
+            if (tomatoInstruction != null) { tomatoInstruction.SetActive(true); }
 
             yield break;
         }
 
-        else 
+        else
         {
             sceneManager.FinishedSliceOrSpice();
             // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
@@ -125,12 +125,8 @@ public class SceneController : MonoBehaviour
             //     Debug.Log("Done selecting spices");
             // }
             yield return new WaitForSeconds(5f);
-            
-            // Load next scene
-            if(nextScene != null) 
-            {
-                SceneManager.LoadScene(nextScene);
-            }
+
+            Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);
         }
     }
 }

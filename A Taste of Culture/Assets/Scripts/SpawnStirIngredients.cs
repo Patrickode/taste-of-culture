@@ -48,11 +48,11 @@ public class SpawnStirIngredients : MonoBehaviour
                 spawnPos.y *= yRadius;
                 seprAttempts++;
             }
-            //Try again if that position's too close to a previous one. Forgo any extra tries if we've
-            //tried too many times (to prevent infinite loops).
-            while (separationRadius > 0
-            && (seprAttempts <= maxFailedSeparations + numIngredients || System.Array.Exists(
-                startPosns, (elem) => (spawnPos - elem).sqrMagnitude <= separationRadius * separationRadius)));
+            //If the separation radius is non-zero, AND we haven't used up all our seperation attempts,
+            //AND the position we generated is too close to another, try again.
+            while (separationRadius > 0 && seprAttempts <= maxFailedSeparations + numIngredients
+                && System.Array.Exists(startPosns, (elem)
+                    => (spawnPos - elem).sqrMagnitude <= separationRadius * separationRadius));
 
             spawnedIng.localPosition = spawnPos;
             startPosns[i] = spawnPos;
