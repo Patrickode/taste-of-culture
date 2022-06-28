@@ -13,7 +13,7 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
-    [SerializeField] [Min(0)] float gradualDisplaySpeed = 0.01f;
+    [SerializeField] [Min(0)] float fillInterval = 0.01f;
     [SerializeField] bool visualizeOnStart;
     [Space(10)]
     [SerializeField] Color bitternessColor;
@@ -21,7 +21,8 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] Color sweetnessColor;
     [SerializeField] Color saltinessColor;
 
-    private Dictionary<FlavorType, FlavorVisualizer> visualizers = new Dictionary<FlavorType, FlavorVisualizer>();
+    private Dictionary<FlavorType, FlavorVisualizer> visualizers
+        = new Dictionary<FlavorType, FlavorVisualizer>();
     private const string Separator = "<color=#00000000>X</color>";
 
     private void Start()
@@ -33,15 +34,13 @@ public class FlavorProfile : MonoBehaviour
     public void VisualizeFlavors()
     {
         FlavorProfileData fData = FlavorProfileData.Instance;
-        int totalFlavors = fData.FlavorSum;
         var flavors = fData.FlavorDict;
+        int totalFlavors = fData.FlavorSum;
 
         float iteratedRadius = maxRadius;
 
         foreach (var flavor in flavors)
         {
-            int segments = Mathf.RoundToInt(maxAngle * ((float)flavor.Value / totalFlavors));
-
             //Create a properly named container object with a rect transform and move it to the right spot.
             Transform container = new GameObject
             (
@@ -50,24 +49,35 @@ public class FlavorProfile : MonoBehaviour
             ).transform;
 
             //Then parent it to this for organization's sake.
-            //  NOTE: "worldPositionStays" doesn't just affect position (at least for RectTransform objs). Passing false
-            //  prevents the object from having a scale of ~100.
+            //  NOTE: "worldPositionStays" doesn't just affect position (at least for RectTransform objs).
+            //  Passing false prevents the object from having a scale of ~100.
             container.position = transform.position + visualizerOffset;
             container.SetParent(transform, false);
 
-            FlavorVisualizer visualizer = Instantiate(flavorVisualizerPrefab, container.position, container.rotation);
+            FlavorVisualizer visualizer = Instantiate(
+                flavorVisualizerPrefab,
+                container.position,
+                container.rotation);
             visualizer.transform.parent = container;
             visualizer.name = "Visualizer";
-            visualizers.Add(flavor.Key, visualizer);
 
-            //Label text will be further positioned by the visualizer.
             visualizer.labelText = Instantiate(labelPrefab, container);
             visualizer.labelText.name = "Label";
-            visualizer.DisplayFlavorValue(iteratedRadius, lineWidth, segments, GetFlavorColor(flavor.Key), gradualDisplaySpeed);
+            visualizers.Add(flavor.Key, visualizer);
 
-            int roundPercent = Mathf.RoundToInt(flavor.Value / Mathf.Max(totalFlavors, Mathf.Epsilon) * 100);
+            //We ensure total flavors is at least some exceedingly small non-zero val to prevent division by zero
+            float flavPercent = flavor.Value / Mathf.Max(totalFlavors, Mathf.Epsilon);
 
-            //Text = "Name ##%". The separator (zero alpha) acts as a letter-width space, accounting for non-monospaced fonts.
+            //Label text will be further positioned by the visualizer.
+            visualizer.DisplayFlavorValue(
+                iteratedRadius, lineWidth,
+                Mathf.RoundToInt(maxAngle * flavPercent),
+                GetFlavorColor(flavor.Key), fillInterval);
+
+            int roundPercent = Mathf.RoundToInt(flavPercent * 100);
+
+            //Text = "Name ##%". The separator (zero alpha) acts as a letter-width space, accounting for
+            //non-monospaced fonts.
             visualizer.labelText.text = $"{Enum.GetName(typeof(FlavorType), flavor.Key)}{Separator}" +
                 $"{(roundPercent < 10 ? Separator + roundPercent : roundPercent.ToString())}%";
 
@@ -85,13 +95,15 @@ public class FlavorProfile : MonoBehaviour
 
         FlavorProfileData fData = FlavorProfileData.Instance;
         var newFlavs = fData.FlavorDict;
+        int flavSum = fData.FlavorSum;
 
         foreach (var flav in newFlavs)
         {
-            visualizers[flav.Key].UpdateDisplay(flav.Value, gradualDisplaySpeed);
+            float flavPercent = flav.Value / Mathf.Max(flavSum, Mathf.Epsilon);
 
-            int roundPercent = Mathf.RoundToInt(flav.Value / Mathf.Max(fData.FlavorSum, Mathf.Epsilon) * 100);
+            visualizers[flav.Key].UpdateDisplay(Mathf.RoundToInt(maxAngle * flavPercent), fillInterval);
 
+            int roundPercent = Mathf.RoundToInt(flavPercent * 100);
             visualizers[flav.Key].labelText.text = $"{Enum.GetName(typeof(FlavorType), flav.Key)}{Separator}" +
                 $"{(roundPercent < 10 ? Separator + roundPercent : roundPercent.ToString())}%";
         }

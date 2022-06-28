@@ -8,7 +8,7 @@ public class FlavorVisualizer : MonoBehaviour
 {
     [HideInInspector] public TextMeshProUGUI labelText;
     [SerializeField] [Range(-2, 2)] private float labelXSpacing;
-    [SerializeField] [Range(0, 360)] private int minimumValue = 2;
+    [SerializeField] [Range(0, 360)] private int minimumSegments = 2;
 
     private const int Segments = 360;
 
@@ -17,13 +17,14 @@ public class FlavorVisualizer : MonoBehaviour
 
     private float radiusCache;
     private List<Vector3> pointsCache;
-    private float speedCache;
+    private float intervalCache;
 
-    public void DisplayFlavorValue(float radius, float lineWidth, int value, Color flavorColor, float gradualDisplaySpeed)
+    public void DisplayFlavorValue(float radius, float lineWidth, int segments,
+        Color flavorColor, float displayInterval)
     {
-        if (value < minimumValue) { value = minimumValue; }
+        if (segments < minimumSegments) { segments = minimumSegments; }
 
-        speedCache = gradualDisplaySpeed;
+        intervalCache = displayInterval;
         radiusCache = radius;
 
         lineRef = gameObject.GetComponent<LineRenderer>();
@@ -47,23 +48,23 @@ public class FlavorVisualizer : MonoBehaviour
         if (gradualDisplay == null)
         {
             gradualDisplay = StartCoroutine(GraduallyDisplay(
-                pointsCache, radius, value));
+                pointsCache, radius, segments, displayInterval));
         }
     }
 
-    public void UpdateDisplay(int value, float gradualDisplaySpeed = -1)
+    public void UpdateDisplay(int value, float displayInterval = -1)
     {
         if (gradualDisplay == null)
         {
             gradualDisplay = StartCoroutine(GraduallyDisplay(
-                pointsCache, radiusCache, value, gradualDisplaySpeed));
+                pointsCache, radiusCache, value, displayInterval));
         }
     }
 
     IEnumerator GraduallyDisplay(List<Vector3> points, float radius, int value, float interval = -1)
     {
         if (interval < 0)
-            interval = speedCache;
+            interval = intervalCache;
         int counter = points.Count;
 
         //Untested code for updating visualizer to lower value
