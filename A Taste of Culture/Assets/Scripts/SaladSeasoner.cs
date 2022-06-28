@@ -14,6 +14,7 @@ public class SaladSeasoner : MonoBehaviour
     [SerializeField] private Collider2D seasonZone;
     [SerializeField] private Transform seasonContainer;
     [SerializeField] private Vector2 spawnOffset;
+    [SerializeField] private Vector2 spawnRotMinMax;
 
     private SpriteRenderer currentSpriteObj;
     private SpriteRenderer newSpriteObj;
@@ -24,6 +25,9 @@ public class SaladSeasoner : MonoBehaviour
         UtilFunctions.SafeSetActive(heldSpriteObj, false);
         UtilFunctions.SafeSetActive(useSpriteObj, false);
         SwitchToSpriteObj(SeasonerState.Idle);
+
+        //Ensure that x is always the lesser value or equal to y
+        spawnRotMinMax.x = Mathf.Min(spawnRotMinMax.x, spawnRotMinMax.y);
     }
 
     private void Update()
@@ -43,7 +47,9 @@ public class SaladSeasoner : MonoBehaviour
                 var spawnedSeasoning = Instantiate(
                     seasonPrefab,
                     transform.position + (Vector3)spawnOffset,
-                    transform.rotation);
+                    transform.rotation * Quaternion.AngleAxis(
+                        Random.Range(spawnRotMinMax.x, spawnRotMinMax.y), Vector3.forward)
+                    );
                 spawnedSeasoning.transform.parent = seasonContainer;
 
                 useTimer = Coroutilities.DoAfterDelay(this, () => useTimer = null, 0.1f);
