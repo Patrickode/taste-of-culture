@@ -15,17 +15,18 @@ public class FlavorVisualizer : MonoBehaviour
     private LineRenderer lineRef;
     private Coroutine gradualDisplay;
 
-    private float radiusCache;
-    private List<Vector3> pointsCache;
-    private float intervalCache;
+    private float storedRadius;
+    private List<Vector3> storedPoints;
+    private float storedInterval;
 
     public void DisplayFlavorValue(float radius, float lineWidth, int segments,
-        Color flavorColor, float displayInterval)
+        Color flavorColor, float speed)
     {
+        if (speed <= 0) return;
         if (segments < minimumSegments) { segments = minimumSegments; }
 
-        intervalCache = displayInterval;
-        radiusCache = radius;
+        storedInterval = speed;
+        storedRadius = radius;
 
         lineRef = gameObject.GetComponent<LineRenderer>();
 
@@ -37,8 +38,8 @@ public class FlavorVisualizer : MonoBehaviour
         lineRef.endColor = flavorColor;
         lineRef.material.color = flavorColor;
 
-        pointsCache = new List<Vector3>();
-        pointsCache.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
+        storedPoints = new List<Vector3>();
+        storedPoints.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
 
         Vector3 labelDest = transform.position;
         labelDest.x += labelXSpacing;
@@ -47,56 +48,67 @@ public class FlavorVisualizer : MonoBehaviour
 
         if (gradualDisplay == null)
         {
-            gradualDisplay = StartCoroutine(GraduallyDisplay(
-                pointsCache, radius, segments, displayInterval));
+            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, speed));
         }
     }
 
-    public void UpdateDisplay(int segments, float displayInterval = -1)
+    public void UpdateDisplay(int segments, float speed)
     {
+        if (speed <= 0) return;
         if (segments < minimumSegments) { segments = minimumSegments; }
 
         if (gradualDisplay == null)
         {
-            gradualDisplay = StartCoroutine(GraduallyDisplay(
-                pointsCache, radiusCache, segments, displayInterval));
+            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, speed));
         }
     }
 
-    IEnumerator GraduallyDisplay(List<Vector3> points, float radius, int segments, float interval = -1)
+    private IEnumerator GraduallyDisplay(int segments, float speed)
     {
-        if (interval < 0)
-            interval = intervalCache;
-        int counter = points.Count;
-
-        if (counter == segments)
+        if (speed <= 0 || lineRef.positionCount == segments)
         {
             gradualDisplay = null;
             yield break;
         }
 
-        //Untested code for updating visualizer to lower value
-        if (counter >= segments)
-            while (counter > segments)
+        int counter = 0;
+        int loopNum = 1;
+
+        if (lineRef.positionCount >= segments)
+            while (lineRef.positionCount > segments)
             {
-                lineRef.positionCount -= 1;
-                counter--;
-                yield return new WaitForSeconds(interval);
+                //If speed is 2, this will run twice per frame.
+                //If speed is 0.5, this will run once, and then it won't run at all on the next loop.
+                while (counter < speed * loopNum)
+                {
+                    lineRef.positionCount--;
+                    counter++;
+                }
+
+                loopNum++;
+                yield return new WaitForEndOfFrame();
             }
         else
-            while (counter < segments)
+            while (lineRef.positionCount < segments)
             {
-                var rad = Mathf.Deg2Rad * (counter * 360f / Segments);
-                points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
+                while (counter < speed * loopNum)
+                {
+                    var rad = Mathf.Deg2Rad * (counter * 360f / Segments);
+                    storedPoints.Add(new Vector3(
+                        Mathf.Sin(rad) * storedRadius,
+                        Mathf.Cos(rad) * storedRadius,
+                        0));
 
-                lineRef.positionCount = points.Count;
-                lineRef.SetPositions(points.ToArray());
+                    lineRef.positionCount = storedPoints.Count;
+                    lineRef.SetPositions(storedPoints.ToArray());
 
-                counter++;
-                yield return new WaitForSeconds(interval);
+                    counter++;
+                }
+
+                loopNum++;
+                yield return new WaitForEndOfFrame();
             }
 
-        pointsCache = points;
         gradualDisplay = null;
     }
 }
