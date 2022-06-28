@@ -86,29 +86,33 @@ public class FlavorVisualizer : MonoBehaviour
                 }
 
                 loopNum++;
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
         else
             while (lineRef.positionCount < segments)
             {
                 while (counter < speed * loopNum)
                 {
-                    var rad = Mathf.Deg2Rad * (counter * 360f / Segments);
-                    storedPoints.Add(new Vector3(
-                        Mathf.Sin(rad) * storedRadius,
-                        Mathf.Cos(rad) * storedRadius,
-                        0));
-
-                    lineRef.positionCount = storedPoints.Count;
-                    lineRef.SetPositions(storedPoints.ToArray());
-
+                    AddSegment();
                     counter++;
                 }
 
                 loopNum++;
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
 
         gradualDisplay = null;
+    }
+
+    private void AddSegment()
+    {
+        var rad = Mathf.Deg2Rad * (storedPoints.Count * 360f / Segments);
+        storedPoints.Add(new Vector3(
+            Mathf.Sin(rad) * storedRadius,
+            Mathf.Cos(rad) * storedRadius,
+            0));
+
+        lineRef.positionCount = storedPoints.Count;
+        lineRef.SetPositions(storedPoints.ToArray());
     }
 }
