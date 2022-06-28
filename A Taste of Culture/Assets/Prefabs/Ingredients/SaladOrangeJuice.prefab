@@ -103,4 +103,4 @@ MonoBehaviour:
       value: 2
       isDuplicateKey: 0
       index: 0
-  minimumScaleFactor: 0
+  minimumScaleFactor: 0.25
