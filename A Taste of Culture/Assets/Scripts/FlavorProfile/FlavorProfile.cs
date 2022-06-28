@@ -13,7 +13,7 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
-    [SerializeField] [Min(0)] float gradualDisplaySpeed = 0.05f;
+    [SerializeField] [Min(0)] float gradualDisplaySpeed = 0.01f;
     [SerializeField] bool visualizeOnStart;
     [Space(10)]
     [SerializeField] Color bitternessColor;
