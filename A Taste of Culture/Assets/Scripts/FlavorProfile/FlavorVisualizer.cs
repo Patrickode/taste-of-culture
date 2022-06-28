@@ -8,6 +8,7 @@ public class FlavorVisualizer : MonoBehaviour
 {
     [HideInInspector] public TextMeshProUGUI labelText;
     [SerializeField] [Range(-2, 2)] private float labelXSpacing;
+    [SerializeField] [Range(0, 360)] private int minimumValue = 2;
 
     private const int Segments = 360;
 
@@ -20,7 +21,7 @@ public class FlavorVisualizer : MonoBehaviour
 
     public void DisplayFlavorValue(float radius, float lineWidth, int value, Color flavorColor, float gradualDisplaySpeed)
     {
-        if (value == 0) { return; }
+        if (value < minimumValue) { value = minimumValue; }
 
         speedCache = gradualDisplaySpeed;
         radiusCache = radius;

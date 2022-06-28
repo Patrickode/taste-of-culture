@@ -72,6 +72,7 @@ public class MoveWithMousePos : MonoBehaviour
 
     private void Update()
     {
+        //No need to check if this obj's held or not if being held doesn't matter.
         if (!onlyMoveIfHeld) return;
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -88,7 +89,7 @@ public class MoveWithMousePos : MonoBehaviour
                 holdOffset = thingToMove.transform.position - clickPos;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        else if (Held && !Input.GetKey(KeyCode.Mouse0))
         {
             Held = false;
             holdOffset = Vector3.zero;
@@ -99,6 +100,7 @@ public class MoveWithMousePos : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //If not held and we can only move when held, bail out. If moving's disabled in general, bail out.
         if (!CanMove || (onlyMoveIfHeld && !Held)) return;
 
         Vector3 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);

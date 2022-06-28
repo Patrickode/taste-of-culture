@@ -40,10 +40,7 @@ public class FlavorProfile : MonoBehaviour
 
         foreach (var flavor in flavors)
         {
-            float flavorFraction = flavor.Value > 0
-                ? (float)flavor.Value / totalFlavors
-                : 0.005f;
-            int segments = Mathf.RoundToInt(maxAngle * flavorFraction);
+            int segments = Mathf.RoundToInt(maxAngle * ((float)flavor.Value / totalFlavors));
 
             //Create a properly named container object with a rect transform and move it to the right spot.
             Transform container = new GameObject
