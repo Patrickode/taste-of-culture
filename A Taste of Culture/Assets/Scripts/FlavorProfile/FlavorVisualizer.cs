@@ -52,43 +52,51 @@ public class FlavorVisualizer : MonoBehaviour
         }
     }
 
-    public void UpdateDisplay(int value, float displayInterval = -1)
+    public void UpdateDisplay(int segments, float displayInterval = -1)
     {
+        if (segments < minimumSegments) { segments = minimumSegments; }
+
         if (gradualDisplay == null)
         {
             gradualDisplay = StartCoroutine(GraduallyDisplay(
-                pointsCache, radiusCache, value, displayInterval));
+                pointsCache, radiusCache, segments, displayInterval));
         }
     }
 
-    IEnumerator GraduallyDisplay(List<Vector3> points, float radius, int value, float interval = -1)
+    IEnumerator GraduallyDisplay(List<Vector3> points, float radius, int segments, float interval = -1)
     {
         if (interval < 0)
             interval = intervalCache;
         int counter = points.Count;
 
+        if (counter == segments)
+        {
+            gradualDisplay = null;
+            yield break;
+        }
+
         //Untested code for updating visualizer to lower value
-        if (counter >= value)
-            while (counter > value)
+        if (counter >= segments)
+            while (counter > segments)
             {
                 lineRef.positionCount -= 1;
                 counter--;
                 yield return new WaitForSeconds(interval);
             }
         else
-            while (counter < value)
+            while (counter < segments)
             {
                 var rad = Mathf.Deg2Rad * (counter * 360f / Segments);
                 points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
-
-                yield return new WaitForSeconds(interval);
 
                 lineRef.positionCount = points.Count;
                 lineRef.SetPositions(points.ToArray());
 
                 counter++;
+                yield return new WaitForSeconds(interval);
             }
 
+        pointsCache = points;
         gradualDisplay = null;
     }
 }
