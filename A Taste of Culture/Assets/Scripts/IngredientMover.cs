@@ -22,6 +22,7 @@ public class IngredientMover : MonoBehaviour
 
     [SerializeField] GameObject choppedPrefab;
     [SerializeField] Vector2 choppedPrefabPosition;
+    [SerializeField] Vector3 choppedPrefabRotation;
     [Space(5)]
 
     [SerializeField] GameObject spriteMask;
@@ -57,8 +58,7 @@ public class IngredientMover : MonoBehaviour
         if (taskComplete)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && allowRotation)
-            TryRotateIngredient();
+        TryRotateIngredient();
 
         if (!allowRotation && (transform.position.x >= rotateXPosition))
         {
@@ -74,6 +74,8 @@ public class IngredientMover : MonoBehaviour
 
     void DoMoveOrBudge()
     {
+        Debug.Log("Allow Movement: " + allowMovement);
+
         // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
         if (allowMovement)
         {
@@ -109,8 +111,8 @@ public class IngredientMover : MonoBehaviour
     // Rotate ingredient and reset it's position
     void TryRotateIngredient()
     {
-        // if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
-        //     return;
+        if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
+            return;
 
         // transform.position = originalPosition;
         // cachedIngrPosition = originalPosition;
@@ -123,6 +125,7 @@ public class IngredientMover : MonoBehaviour
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
         GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPrefabPosition, Quaternion.identity);
+        choppedIngredient.transform.Rotate(choppedPrefabRotation);      // Manually change to desired prefab rotation
         choppedIngredient.transform.parent = transform;
 
         transform.Rotate(0, 0, 90);
