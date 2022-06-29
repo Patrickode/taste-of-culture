@@ -9,7 +9,7 @@ public class CookingSceneManager : MonoBehaviour
     public CookingDialogueManager dialogueManager;
     public CookingDialogueTrigger dialogueTrigger;
     public GameObject dialogue;
-    public GifManager gifManager;
+    public GIFManager gifManager;
     public string dialogueString;
 
     bool gifHasPlayed = false;
@@ -33,9 +33,10 @@ public class CookingSceneManager : MonoBehaviour
     public void IntroEnded()
     {
         if (gifHasPlayed) { return; }
+        dialogueString = "";
 
+        // cursorObj.SetActive(true);
         dialogue.SetActive(false);
-        // knife.SetActive(true);
         gifManager.StartVideo();
 
         gifHasPlayed = true;
@@ -75,7 +76,7 @@ public class CookingSceneManager : MonoBehaviour
         dialogue.SetActive(true);
         cursorObj.SetActive(false);
         Cursor.visible = true;
-        
+
         gameObject.GetComponents<CookingDialogueTrigger>()[1].TriggerDialogue();
         GameObject.Find("ContinueButton").SetActive(false);
     }

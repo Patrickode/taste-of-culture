@@ -285,4 +285,56 @@ public static class UtilFunctions
         Color.RGBToHSV(c, out result.x, out result.y, out result.z);
         return result;
     }
+
+    public static Vector3 ClampComponents(Vector3 v,
+        float xMin, float xMax,
+        float yMin, float yMax,
+        float zMin, float zMax)
+    {
+        v.x = Mathf.Clamp(v.x, xMin, xMax);
+        v.y = Mathf.Clamp(v.y, yMin, yMax);
+        v.z = Mathf.Clamp(v.z, zMin, zMax);
+        return v;
+    }
+    public static Vector3 ClampComponents(Vector3 v, Vector3 minComponents, Vector3 maxComponents) =>
+        ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
+    public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
+        ClampComponents(v, min, max, min, max, min, max);
+
+    /// <summary>
+    /// Divides two vectors component-wise.
+    /// </summary>
+    public static Vector3 InverseScale(Vector3 a, Vector3 b) => new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
+
+    /// <summary>
+    /// Scales this transform so that it's sized as if its parent had a scale of (1,1,1).
+    /// </summary>
+    /// <param name="parentLevel">The number of parents to go up by. 0 = parent, 1 = grandparent (parent.parent), etc.</param>
+    public static void NegateParentScale(this Transform tform, int parentLevel = 0)
+    {
+        Transform targetParent = tform.parent;
+        for (int i = 0; i < parentLevel; i++)
+        {
+            if (!targetParent.parent)
+                break;
+
+            targetParent = targetParent.parent;
+        }
+
+        tform.localScale = InverseScale(tform.localScale, targetParent.localScale);
+    }
+
+    /// <summary>
+    /// Lerps between <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>, based on <paramref name="t"/>.<br/>
+    /// Optionally allows setting the mid point's "time" [0-1] to something other than 0.5.
+    /// </summary>
+    /// <param name="midTime"><paramref name="mid"/>'s "position" along the 0-1 curve between 
+    /// <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>.<br/>0.5 = equal distance to both end points.</param>
+    public static float Lerp3Point(float from, float mid, float to, float t, float midTime = 0.5f)
+    {
+        if (t <= midTime)
+            return Mathf.Lerp(from, mid, t * 2);
+        else
+            return Mathf.Lerp(mid, to, (t - 0.5f) * 2);
+    }
 }

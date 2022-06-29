@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public Text npcNameTextUI;
     public Text playerTextUI;
     public Text npcTextUI;
+    public GameObject continueButton;
     public SpriteRenderer playerSprite;
     public SpriteRenderer npcSprite;
 
@@ -114,7 +115,8 @@ public class DialogueManager : MonoBehaviour
         Choice option = currentSentence.options[index];
         if (option.consequence != null)
         {
-            Debug.Log($"Raised consequence event \"{option.consequence}\" of option \"{option.text}\"");
+            Debug.Log($"<color=#777>Raised consequence event \"{option.consequence}\" " +
+                $"of option \"{option.text}\"</color>\n");
             option.consequence.Raise();
         }
         currentSentence = option.nextSentence;
@@ -150,11 +152,19 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void ToggleContinue(bool active) => continueButton.SetActive(active);
+
     public void EndDialogue()
     {
         DialogueUI.SetActive(false);
         //Debug.Log("Dialogue Ended");
         if (ConversationEnded != null)
             ConversationEnded.Raise();
+    }
+
+    public void ToggleDialogue(bool active)
+    {
+        animator.SetTrigger(active ? "StartDialogue" : "EndDialogue");
+        DialogueUI.SetActive(active);
     }
 }

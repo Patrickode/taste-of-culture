@@ -12,21 +12,30 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e0181dcaba8e628499e4a899668f6702
   - enabled: 1
-    path: Assets/Scenes/IntroDialogue.unity
+    path: Assets/Scenes/Level 1/IntroDialogue.unity
     guid: 6d6ff56e499418740a7ce792ce4517d1
   - enabled: 1
-    path: Assets/Scenes/SpiceSelection.unity
+    path: Assets/Scenes/Level 1/SpiceSelection.unity
     guid: 09cbf9b5fbbde61479d3c16f039c1401
   - enabled: 1
-    path: Assets/Scenes/Slicing.unity
+    path: Assets/Scenes/Level 1/Slicing.unity
     guid: aeb5b42f3c9d03f46bf34dd1bd652c85
   - enabled: 1
-    path: Assets/Scenes/Chopping.unity
+    path: Assets/Scenes/Level 1/Chopping.unity
     guid: 64b0c19ad6c39304e92f61e46dd93019
-  - enabled: 1
-    path: Assets/Scenes/ClosingDialogue.unity
+  - enabled: 0
+    path: Assets/Scenes/Level 1/ClosingDialogue.unity
     guid: 61bde242c657792448f46c00a213d319
   - enabled: 1
-    path: Assets/Scenes/Downtime.unity
+    path: Assets/Scenes/Level 1/OnionSauteing.unity
+    guid: 6eb45561059d90943aab5f259e92112a
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Downtime.unity
     guid: 62fdba8951283854398098e0e13b45c5
+  - enabled: 1
+    path: Assets/Scenes/Level 2/ConchSlicing.unity
+    guid: ed5527b3eab93e346ad419eddc574343
+  - enabled: 1
+    path: Assets/Scenes/Level 2/Chopping.unity
+    guid: d28dde1b714858d49810ec7395a62a99
   m_configObjects: {}
