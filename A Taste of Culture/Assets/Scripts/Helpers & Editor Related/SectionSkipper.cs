@@ -24,8 +24,8 @@ public class SectionSkipper : Singleton<SectionSkipper>
         int nextScIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextScIndex < SceneManager.sceneCountInBuildSettings || nextScIndex < 0)
         {
-            Debug.Log($"<color=#FFF200>Skipping current scene; loading scene at index {nextScIndex}.</color>");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log($"<color=#FFF200>Skipping current scene of index {nextScIndex - 1}; loading scene at index {nextScIndex}.</color>");
+            SceneManager.LoadScene(nextScIndex);
         }
         else
         {
