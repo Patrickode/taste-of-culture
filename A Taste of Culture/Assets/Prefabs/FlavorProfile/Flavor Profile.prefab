@@ -91,11 +91,13 @@ MonoBehaviour:
   flavorVisualizerPrefab: {fileID: 5609292886739406053, guid: b22505569eeea5e4ba624a4a9945e37b, type: 3}
   labelPrefab: {fileID: 4642164095386587334, guid: 2bde511db5b8a514a9eb09cfad9ea0ed, type: 3}
   visualizerOffset: {x: 2.66, y: 0, z: 0}
-  maxAngle: 360
+  maxAngle: 270
   maxRadius: 2.05
   lineWidth: 0.25
   lineSpacing: 0.125
-  GradualDisplaySpeed: 0.01
+  displayDuration: 2
+  minSpeed: 1
+  visualizeOnStart: 0
   bitternessColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   spicinessColor: {r: 1, g: 0.24905658, b: 0.24905658, a: 1}
   sweetnessColor: {r: 0.27735847, g: 0.71786976, b: 1, a: 1}

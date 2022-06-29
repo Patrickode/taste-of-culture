@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   labelText: {fileID: 0}
   labelXSpacing: -0.125
+  minimumSegments: 3
+  minimumSpeed: 1
 --- !u!120 &5609292886739406052
 LineRenderer:
   m_ObjectHideFlags: 0

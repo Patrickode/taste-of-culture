@@ -4,14 +4,32 @@ using UnityEngine;
 
 public class MoveWithMousePos : MonoBehaviour
 {
+    [SerializeField] private bool onlyMoveIfHeld;
+    [SerializeField] private bool returnWhenDropped;
+    [SerializeField] private LayerMask holdMask;
+    [SerializeField] [TagSelector] private string holdTag;
+    [Tooltip("The minimum Z coordinate that'll be recognized by the hold check. " +
+        "See https://docs.unity3d.com/ScriptReference/Physics2D.OverlapPoint.html.")]
+    [SerializeField] private float holdMinDepth = Mathf.NegativeInfinity;
+    [Tooltip("The maximum Z coordinate that'll be recognized by the hold check. " +
+        "See https://docs.unity3d.com/ScriptReference/Physics2D.OverlapPoint.html.")]
+    [SerializeField] private float holdMaxDepth = Mathf.Infinity;
+    [Space(10)]
     [SerializeField] private bool moveWithPhysics;
     [SerializeField] private GameObject thingToMove;
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
     [SerializeField] private Collider2D moveZone;
+    [SerializeField] private Collider moveZone3D;
+    [SerializeField] private float screenPointDistance;
+    [SerializeField] private bool preserveDepthPos;
+
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
+    private Vector3 holdOffset = Vector3.zero;
+    private Vector3 originalPos;
 
     public bool CanMove { get; set; } = true;
+    public bool Held { get; private set; }
 
     private Camera _cachedCam;
     private Camera CachedCam
@@ -25,6 +43,8 @@ public class MoveWithMousePos : MonoBehaviour
 
     private void Start()
     {
+        originalPos = thingToMove.transform.position;
+
         if (!thingToMove)
             thingToMove = gameObject;
 
@@ -50,13 +70,52 @@ public class MoveWithMousePos : MonoBehaviour
         CanMove = false;
     }
 
+    private void Update()
+    {
+        //No need to check if this obj's held or not if being held doesn't matter.
+        if (!onlyMoveIfHeld) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            //Since the mouse is down, check if it's down on any of the colliders in the hold layer mask.
+            Vector3 clickPos = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
+            Collider2D clickedColl = Physics2D.OverlapPoint(clickPos, holdMask, holdMinDepth, holdMaxDepth);
+
+            //If we're looking for a specific tag as well, check for that, too.
+            //If not, just go ahead (so long as we found *something*).
+            if (clickedColl && (string.IsNullOrEmpty(holdTag) || clickedColl.CompareTag(holdTag)))
+            {
+                Held = true;
+                holdOffset = thingToMove.transform.position - clickPos;
+            }
+        }
+        else if (Held && !Input.GetKey(KeyCode.Mouse0))
+        {
+            Held = false;
+            holdOffset = Vector3.zero;
+            if (returnWhenDropped)
+                thingToMove.transform.position = originalPos;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (!CanMove) return;
+        //If not held and we can only move when held, bail out. If moving's disabled in general, bail out.
+        if (!CanMove || (onlyMoveIfHeld && !Held)) return;
 
-        Vector2 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 destination = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
+        destination += holdOffset;
+
+        //If we've got a moveZone to constrain the destination to, get the closest point on it to the destination.
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
+        else if (moveZone3D)
+        {
+            destination = moveZone3D.ClosestPoint(destination);
+            //Y was used instead of Z for a 3D experiment where Y was the depth dir (so typical gravity was away from camera)
+            if (preserveDepthPos)
+                destination.y = thingToMove.transform.position.y;
+        }
 
         if (moveWithPhysics)
         {

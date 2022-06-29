@@ -50,6 +50,8 @@ public class Transitions : MonoBehaviour
     private Coroutine waitForMidCorout;
     private Coroutine midPauseCorout;
 
+    public static void UI_LoadWithTransition(int index) => LoadWithTransition?.Invoke(index, -1);
+
     private void Start()
     {
         if (!duplicationPreventer)

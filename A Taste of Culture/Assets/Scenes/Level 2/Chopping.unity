@@ -2883,7 +2883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f1c55dba3f8e042b2bad28ebc07b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneIndex: 5
+  nextSceneIndex: -1
   sceneManager: {fileID: 1749865173}
   Ingredients:
   - {fileID: 545925036}
