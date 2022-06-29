@@ -75,7 +75,7 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void AddProtein()
     {
-        Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2.5f)));
+        Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2)));
 
         void ActuallyAddProtein()
         {
@@ -87,7 +87,7 @@ public class DowntimeSceneManager : MonoBehaviour
             Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
                 StartCoroutine(TakeOffLid()),
                 StartCoroutine(ProteinInPot()),
-                StartCoroutine(BackgroundToSchool(2.5f)));
+                StartCoroutine(BackgroundToSchool(2)));
         }
     }
 
@@ -108,7 +108,7 @@ public class DowntimeSceneManager : MonoBehaviour
         };
 
         Coroutilities.DoAfterSequence(this, () => dialogueManager.ToggleDialogue(true),
-            () => Coroutilities.DoAfterYielder(this, bgSwitch, StartCoroutine(TransitionAndWait(false, 2.5f))),
+            () => Coroutilities.DoAfterYielder(this, bgSwitch, StartCoroutine(TransitionAndWait(false, 2))),
             () => StartCoroutine(TakeOffLid()),
             () => new WaitForSeconds(1));
     }
@@ -124,7 +124,7 @@ public class DowntimeSceneManager : MonoBehaviour
     IEnumerator ShowPlate()
     {
         mentor.SetActive(false);
-        yield return StartCoroutine(TransitionAndWait(false, 2.5f));
+        yield return StartCoroutine(TransitionAndWait(false, 2));
         backgrounds[10].SetActive(true);
         if (flavorPfile)
             flavorPfile.VisualizeFlavors();
@@ -151,7 +151,7 @@ public class DowntimeSceneManager : MonoBehaviour
     IEnumerator BackgroundToSchool(float waitLength = 3.5f)
     {
         yield return new WaitForSeconds(waitLength);
-        yield return StartCoroutine(TransitionAndWait(false, 2.5f));
+        yield return StartCoroutine(TransitionAndWait(false, 2));
 
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
