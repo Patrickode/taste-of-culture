@@ -17,7 +17,6 @@ public class FlavorVisualizer : MonoBehaviour
 
     private float storedRadius;
     private List<Vector3> storedPoints;
-    private float storedInterval;
 
     public void DisplayFlavorValue(float radius, float lineWidth, int segments,
         Color flavorColor, float speed)
@@ -25,10 +24,8 @@ public class FlavorVisualizer : MonoBehaviour
         if (speed <= 0) return;
         if (segments < minimumSegments) { segments = minimumSegments; }
 
-        storedInterval = speed;
-        storedRadius = radius;
-
         lineRef = gameObject.GetComponent<LineRenderer>();
+        storedRadius = radius;
 
         lineRef.useWorldSpace = false;
         lineRef.startWidth = lineWidth;
@@ -71,41 +68,41 @@ public class FlavorVisualizer : MonoBehaviour
             yield break;
         }
 
-        int counter = 0;
-        int loopNum = 1;
+        int initCount = lineRef.positionCount;
+        float floatifiedCount = lineRef.positionCount;
+        speed = lineRef.positionCount < segments ? speed : speed * -1;
 
-        if (lineRef.positionCount >= segments)
-            while (lineRef.positionCount > segments)
-            {
-                //If speed is 2, this will run twice per frame.
-                //If speed is 0.5, this will run once, and then it won't run at all on the next loop.
-                while (counter < speed * loopNum)
-                {
-                    lineRef.positionCount--;
-                    counter++;
-                }
+        while (lineRef.positionCount != segments)
+        {
+            floatifiedCount += speed * Time.deltaTime;
+            //Ensure that, regardless of any wacky deltaTimes, the count cannot exceed our target
+            floatifiedCount = speed > 0
+                ? Mathf.Min(floatifiedCount, segments)
+                : Mathf.Max(floatifiedCount, segments);
 
-                loopNum++;
-                yield return null;
-            }
-        else
-            while (lineRef.positionCount < segments)
-            {
-                while (counter < speed * loopNum)
-                {
-                    AddSegment();
-                    counter++;
-                }
+            //Whenever our float counter crosses an int threshold (the cast cuts off decimals), increment/decrement.
+            //  For high speeds, this'll call behavior several times per frame. (SetSegments prevents overshooting.)
+            //  For low speeds, this'll skip calls to behavior on some frames.
+            while (lineRef.positionCount != (int)floatifiedCount)
+                SetSegments(speed > 0, segments);
 
-                loopNum++;
-                yield return null;
-            }
+            yield return null;
+        }
 
         gradualDisplay = null;
     }
 
-    private void AddSegment()
+    private void SetSegments(bool add, int target)
     {
+        if (lineRef.positionCount == target) return;
+
+        if (!add)
+        {
+            storedPoints.RemoveAt(storedPoints.Count - 1);
+            lineRef.positionCount--;
+            return;
+        }
+
         var rad = Mathf.Deg2Rad * (storedPoints.Count * 360f / Segments);
         storedPoints.Add(new Vector3(
             Mathf.Sin(rad) * storedRadius,

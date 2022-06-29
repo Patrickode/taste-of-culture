@@ -13,7 +13,7 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
-    [SerializeField] [Min(0)] float segmentsPerFrame = 1f;
+    [SerializeField] [Min(0)] float segmentsPerSecond = 360f;
     [SerializeField] bool visualizeOnStart;
     [Space(10)]
     [SerializeField] Color bitternessColor;
@@ -72,7 +72,7 @@ public class FlavorProfile : MonoBehaviour
             visualizer.DisplayFlavorValue(
                 iteratedRadius, lineWidth,
                 Mathf.RoundToInt(maxAngle * flavPercent),
-                GetFlavorColor(flavor.Key), segmentsPerFrame);
+                GetFlavorColor(flavor.Key), segmentsPerSecond);
 
             int roundPercent = Mathf.RoundToInt(flavPercent * 100);
 
@@ -101,7 +101,7 @@ public class FlavorProfile : MonoBehaviour
         {
             float flavPercent = flav.Value / Mathf.Max(flavSum, Mathf.Epsilon);
 
-            visualizers[flav.Key].UpdateDisplay(Mathf.RoundToInt(maxAngle * flavPercent), segmentsPerFrame);
+            visualizers[flav.Key].UpdateDisplay(Mathf.RoundToInt(maxAngle * flavPercent), segmentsPerSecond);
 
             int roundPercent = Mathf.RoundToInt(flavPercent * 100);
             visualizers[flav.Key].labelText.text = $"{Enum.GetName(typeof(FlavorType), flav.Key)}{Separator}" +

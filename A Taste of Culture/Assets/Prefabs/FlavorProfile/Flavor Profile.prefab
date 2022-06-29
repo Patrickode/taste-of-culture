@@ -95,7 +95,7 @@ MonoBehaviour:
   maxRadius: 2.05
   lineWidth: 0.25
   lineSpacing: 0.125
-  fillInterval: 0.01
+  segmentsPerSecond: 270
   visualizeOnStart: 0
   bitternessColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   spicinessColor: {r: 1, g: 0.24905658, b: 0.24905658, a: 1}
