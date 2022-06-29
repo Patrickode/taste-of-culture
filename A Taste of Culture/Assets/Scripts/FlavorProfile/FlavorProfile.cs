@@ -7,15 +7,18 @@ public class FlavorProfile : MonoBehaviour
 {
     [SerializeField] FlavorVisualizer flavorVisualizerPrefab;
     [SerializeField] TMPro.TextMeshProUGUI labelPrefab;
-    [Space(5)]
+    [Space(10)]
     [SerializeField] Vector3 visualizerOffset;
     [SerializeField] [Range(1, 360)] float maxAngle = 360;
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
     [SerializeField] [Range(.01f, .5f)] float lineWidth = .05f;
     [SerializeField] [Range(.01f, .5f)] float lineSpacing = .05f;
-    [SerializeField] [Min(0)] float segmentsPerSecond = 360f;
+    [Tooltip("How long it'll take for the visualizers to fill, in seconds.")]
+    [SerializeField] [Min(0)] float displayDuration = 1;
+    [Tooltip("The minimum number of segments to add/remove per second. Overrides displayDuration.")]
+    [SerializeField] [Min(0)] float minSpeed = 0;
     [SerializeField] bool visualizeOnStart;
-    [Space(10)]
+    [Space(5)]
     [SerializeField] Color bitternessColor;
     [SerializeField] Color spicinessColor;
     [SerializeField] Color sweetnessColor;
@@ -63,16 +66,19 @@ public class FlavorProfile : MonoBehaviour
 
             visualizer.labelText = Instantiate(labelPrefab, container);
             visualizer.labelText.name = "Label";
+            visualizer.minimumSpeed = minSpeed;
             visualizers.Add(flavor.Key, visualizer);
 
             //We ensure total flavors is at least some exceedingly small non-zero val to prevent division by zero
             float flavPercent = flavor.Value / Mathf.Max(totalFlavors, Mathf.Epsilon);
 
             //Label text will be further positioned by the visualizer.
+            int angleSegments = Mathf.RoundToInt(maxAngle * flavPercent);
             visualizer.DisplayFlavorValue(
                 iteratedRadius, lineWidth,
                 Mathf.RoundToInt(maxAngle * flavPercent),
-                GetFlavorColor(flavor.Key), segmentsPerSecond);
+                GetFlavorColor(flavor.Key),
+                displayDuration);
 
             int roundPercent = Mathf.RoundToInt(flavPercent * 100);
 
@@ -101,7 +107,7 @@ public class FlavorProfile : MonoBehaviour
         {
             float flavPercent = flav.Value / Mathf.Max(flavSum, Mathf.Epsilon);
 
-            visualizers[flav.Key].UpdateDisplay(Mathf.RoundToInt(maxAngle * flavPercent), segmentsPerSecond);
+            visualizers[flav.Key].UpdateDisplay(Mathf.RoundToInt(maxAngle * flavPercent), displayDuration);
 
             int roundPercent = Mathf.RoundToInt(flavPercent * 100);
             visualizers[flav.Key].labelText.text = $"{Enum.GetName(typeof(FlavorType), flav.Key)}{Separator}" +

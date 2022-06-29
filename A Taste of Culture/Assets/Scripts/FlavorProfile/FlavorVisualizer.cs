@@ -9,6 +9,7 @@ public class FlavorVisualizer : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI labelText;
     [SerializeField] [Range(-2, 2)] private float labelXSpacing;
     [SerializeField] [Range(0, 360)] private int minimumSegments = 2;
+    [SerializeField] [Min(0)] public float minimumSpeed = 0;
 
     private const int Segments = 360;
 
@@ -19,9 +20,9 @@ public class FlavorVisualizer : MonoBehaviour
     private List<Vector3> storedPoints;
 
     public void DisplayFlavorValue(float radius, float lineWidth, int segments,
-        Color flavorColor, float speed)
+        Color flavorColor, float duration)
     {
-        if (speed <= 0) return;
+        if (duration <= 0) return;
         if (segments < minimumSegments) { segments = minimumSegments; }
 
         lineRef = gameObject.GetComponent<LineRenderer>();
@@ -45,32 +46,31 @@ public class FlavorVisualizer : MonoBehaviour
 
         if (gradualDisplay == null)
         {
-            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, speed));
+            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, duration));
         }
     }
 
-    public void UpdateDisplay(int segments, float speed)
+    public void UpdateDisplay(int segments, float duration)
     {
-        if (speed <= 0) return;
+        if (duration <= 0) return;
         if (segments < minimumSegments) { segments = minimumSegments; }
 
         if (gradualDisplay == null)
         {
-            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, speed));
+            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, duration));
         }
     }
 
-    private IEnumerator GraduallyDisplay(int segments, float speed)
+    private IEnumerator GraduallyDisplay(int segments, float duration)
     {
-        if (speed <= 0 || lineRef.positionCount == segments)
+        if (duration <= 0 || lineRef.positionCount == segments)
         {
             gradualDisplay = null;
             yield break;
         }
 
-        int initCount = lineRef.positionCount;
+        float speed = UtilFunctions.ClampOutside((segments - lineRef.positionCount) / duration, -minimumSpeed, minimumSpeed);
         float floatifiedCount = lineRef.positionCount;
-        speed = lineRef.positionCount < segments ? speed : speed * -1;
 
         while (lineRef.positionCount != segments)
         {

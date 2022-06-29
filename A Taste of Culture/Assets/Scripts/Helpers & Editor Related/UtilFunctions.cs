@@ -302,6 +302,22 @@ public static class UtilFunctions
     public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
         ClampComponents(v, min, max, min, max, min, max);
 
+
+    /// <summary>
+    /// Returns the closest value to <paramref name="v"/> that's outside the range (<paramref name="rangeMin"/>, 
+    /// <paramref name="rangeMax"/>).<br/>
+    /// Returns <paramref name="rangeMax"/> if equidistant to both edges.
+    /// </summary>
+    public static float ClampOutside(float v, float rangeMin, float rangeMax)
+    {
+        if (v < rangeMin || v > rangeMax)
+            return v;
+
+        return v - rangeMin < rangeMax - v
+            ? rangeMin
+            : rangeMax;
+    }
+
     /// <summary>
     /// Divides two vectors component-wise.
     /// </summary>
