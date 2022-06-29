@@ -99,12 +99,16 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void CheckOnCurry()
     {
-        backgrounds[11].SetActive(false);
-        backgrounds[8].SetActive(true);
-        backgrounds[9].SetActive(true);
-        Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
+        System.Action bgSwitch = () =>
+        {
+            backgrounds[11].SetActive(false);
+            backgrounds[8].SetActive(true);
+            backgrounds[9].SetActive(true);
+            Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
+        };
 
         Coroutilities.DoAfterSequence(this, () => dialogueManager.ToggleDialogue(true),
+            () => Coroutilities.DoAfterYielder(this, bgSwitch, StartCoroutine(TransitionAndWait(false, 2.5f))),
             () => StartCoroutine(TakeOffLid()),
             () => new WaitForSeconds(1));
     }
