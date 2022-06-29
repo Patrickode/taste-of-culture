@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 60731902966601608}
   - component: {fileID: -2866641080516490743}
   m_Layer: 6
-  m_Name: Raw Chicken
+  m_Name: Whole Conch
   m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -2011137939
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 66211799c7fb68d448a74927f107e453, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a45297dff88ef2049a5c17b64baa30c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23334146, y: 0.11225128}
+  m_Offset: {x: -0.2519169, y: 0.29800105}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.612478, y: 6.156186}
+  m_Size: {x: 10.306124, y: 5.4874835}
   m_EdgeRadius: 0
 --- !u!114 &60731902966601608
 MonoBehaviour:
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guidelinePrefab: {fileID: 1042026321526072308, guid: 87b42d52702bdef4db30272d4f786ec7, type: 3}
-  cutWidth: 1.25
-  marginOfError: 0.75
+  cutWidth: 1
+  marginOfError: 0.65
   drawInitialGuideline: 1
 --- !u!1 &3270537869083788526
 GameObject:
