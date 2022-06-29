@@ -22,6 +22,17 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
         }
     }
 
+    public void ResetData()
+    {
+        flavors = new Dictionary<FlavorType, int>
+        {
+            {FlavorType.Bitterness, 0 },
+            {FlavorType.Spiciness, 0 },
+            {FlavorType.Sweetness, 0 },
+            {FlavorType.Saltiness, 0 },
+        };
+    }
+
     public int FlavorSum { get => Bitterness + Spiciness + Sweetness + Saltiness; }
 
     public int Bitterness
