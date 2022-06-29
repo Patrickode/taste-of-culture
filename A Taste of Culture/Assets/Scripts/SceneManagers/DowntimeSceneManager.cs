@@ -123,8 +123,8 @@ public class DowntimeSceneManager : MonoBehaviour
 
     IEnumerator ShowPlate()
     {
-        yield return StartCoroutine(TransitionAndWait(false, 2.5f));
         mentor.SetActive(false);
+        yield return StartCoroutine(TransitionAndWait(false, 2.5f));
         backgrounds[10].SetActive(true);
         if (flavorPfile)
             flavorPfile.VisualizeFlavors();
