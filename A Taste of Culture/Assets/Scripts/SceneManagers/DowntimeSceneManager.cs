@@ -100,9 +100,9 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void CheckOnCurry()
     {
-        Debug.Break();
         System.Action bgSwitch = () =>
         {
+            mentor.SetActive(false);
             backgrounds[11].SetActive(false);
             backgrounds[8].SetActive(true);
             backgrounds[9].SetActive(true);
@@ -177,7 +177,7 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void DialogueEnded()
     {
-        dialogue.SetActive(false);
+        dialogueManager.animator.gameObject.SetActive(false);
     }
 
     public void RecipeDismissed()
