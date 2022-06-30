@@ -96,7 +96,7 @@ MonoBehaviour:
   lineWidth: 0.25
   lineSpacing: 0.125
   displayDuration: 2
-  minSpeed: 1
+  minSpeed: 3
   visualizeOnStart: 0
   bitternessColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   spicinessColor: {r: 1, g: 0.24905658, b: 0.24905658, a: 1}
