@@ -8,7 +8,6 @@ public class FlavorProfile : MonoBehaviour
     [SerializeField] FlavorVisualizer flavorVisualizerPrefab;
     [SerializeField] TMPro.TextMeshProUGUI labelPrefab;
     [Space(10)]
-    [Tooltip("WARNING: Does not seem to work due to world<->UI space shenanigans")]
     [SerializeField] Vector3 visualizerOffset;
     [SerializeField] [Range(1, 360)] float maxAngle = 360;
     [SerializeField] [Range(1f, 8f)] float maxRadius = 4f;
