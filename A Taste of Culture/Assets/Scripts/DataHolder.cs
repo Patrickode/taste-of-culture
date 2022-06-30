@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataHolder : Singleton<DataHolder>
 {
+    [Header("Data Holder Fields")]
     [SerializeField] private int[] spices;
     [SerializeField] private int NumSpices = 8;
 
@@ -22,19 +23,19 @@ public class DataHolder : Singleton<DataHolder>
         get { return spices[0]; }
         set { spices[0] = value; }
     }
-    
+
     public int Cumin
     {
         get { return spices[1]; }
         set { spices[1] = value; }
     }
-    
+
     public int Ginger
     {
         get { return spices[2]; }
         set { spices[2] = value; }
     }
-    
+
     public int Garlic
     {
         get { return spices[3]; }

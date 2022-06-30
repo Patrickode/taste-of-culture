@@ -15,8 +15,8 @@ public class Singleton<T> : MonoBehaviour where T : Component
 
     protected static T instance;
 
-    [SerializeField]
-    private bool stayInScene;
+    [Header("Singleton Fields")]
+    [SerializeField] private bool dontDestroyOnLoad = true;
 
     #endregion Fields
 
@@ -54,28 +54,16 @@ public class Singleton<T> : MonoBehaviour where T : Component
     /// </summary>
     public virtual void Awake()
     {
-        if (stayInScene)
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = this as T;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            instance = this as T;
+
+            if (dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
         }
         else
         {
-            if (instance == null)
-            {
-                instance = this as T;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 }

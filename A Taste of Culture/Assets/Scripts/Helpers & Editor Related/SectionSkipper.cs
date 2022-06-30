@@ -6,18 +6,43 @@ using UnityEngine.UI;
 
 public class SectionSkipper : Singleton<SectionSkipper>
 {
-    [SerializeField] Button skipButton;
-
 #if UNITY_EDITOR
-    void Start()
+    [Header("Section Skipper Fields")]
+    [SerializeField] Canvas skipCanvas;
+    [SerializeField] Button skipButton;
+    [Space(5)]
+    [SerializeField] private bool useSkipButton;
+    [SerializeField] private bool useSkipKeystroke;
+
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        if (!Application.isPlaying && skipCanvas && !skipCanvas.worldCamera
+            && GameObject.FindGameObjectWithTag("MainCamera").TryGetComponent(out Camera mainCam))
+        {
+            skipCanvas.worldCamera = mainCam;
+        }
+    });
+
+    private void Start()
     {
         if (skipButton != null)
         {
-            skipButton.gameObject.SetActive(true);
+            skipButton.gameObject.SetActive(useSkipButton);
             skipButton.onClick.AddListener(SkipSection);
         }
     }
-#endif
+
+    private void Update()
+    {
+        if (useSkipKeystroke
+            && Input.GetKey(KeyCode.S)
+            && Input.GetKey(KeyCode.K)
+            && Input.GetKey(KeyCode.I)
+            && Input.GetKeyDown(KeyCode.P))
+        {
+            SkipSection();
+        }
+    }
 
     void SkipSection()
     {
@@ -33,4 +58,5 @@ public class SectionSkipper : Singleton<SectionSkipper>
                 $"scene {nextScIndex} exists, you might've forgotten to add it to the build settings.)</color>");
         }
     }
+#endif
 }
