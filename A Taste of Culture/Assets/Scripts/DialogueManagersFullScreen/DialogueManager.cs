@@ -30,6 +30,16 @@ public class DialogueManager : MonoBehaviour
     DialogueContainer dialogue;
     Sentence currentSentence;
 
+    #region Delete Later
+    private Text[] diUITexts;
+    private Color initDiUIColor;
+    private void Start()
+    {
+        diUITexts = DialogueUI.GetComponentsInChildren<Text>(true);
+        initDiUIColor = diUITexts[0].color;
+    }
+    #endregion
+
     public void StartDialogue(DialogueContainer dialogueContainer)
     {
         if (!dialogueContainer.isAvailable)
@@ -166,5 +176,10 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetTrigger(active ? "StartDialogue" : "EndDialogue");
         DialogueUI.SetActive(active);
+
+        //Since DialogueUI reactivates itself when scrolling through text,
+        //set its color to be invisible instead until there's a better fix.
+        foreach (var txt in diUITexts)
+            txt.color = active ? initDiUIColor : Color.clear;
     }
 }

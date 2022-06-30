@@ -119,8 +119,12 @@ public static class Coroutilities
     /// <summary>
     /// Calls <paramref name="thingToDo"/> after a sequence of <paramref name="yielders"/>, called one by one in the order they were passed.
     /// </summary>
-    /// <param name="yielders">Any number of functions or lambdas that return <see cref="YieldInstruction"/>s; for example,<br/>
-    /// <c>() =&gt; <see cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/></c>.</param>
+    /// <param name="yielders">
+    /// Any number of functions or lambdas that return <see cref="YieldInstruction"/>s or similar types; for example,<br/>
+    /// <c>() =&gt; <see cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/></c>.<br/><br/>
+    ///     Note that many other functions/lambdas can be passed, but non-<see cref="YieldInstruction"/> return types<br/>
+    ///     will probably not be executed.
+    /// </param>
     /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction[])"/>
     public static Coroutine DoAfterSequence(MonoBehaviour coroutineCaller, Action thingToDo, params Func<object>[] yielders)
         => coroutineCaller.StartCoroutine(DoAfterSequence(thingToDo, yielders));

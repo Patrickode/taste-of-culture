@@ -75,6 +75,8 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void AddProtein()
     {
+        dialogueManager.ToggleContinue(false);
+        dialogueManager.ToggleDialogue(false);
         Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2)));
 
         void ActuallyAddProtein()
@@ -82,9 +84,8 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[11].SetActive(false);
             backgrounds[7].SetActive(true);
             mentor.SetActive(false);
-            Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
 
-            Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleDialogue(true),
+            Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
                 StartCoroutine(TakeOffLid()),
                 StartCoroutine(ProteinInPot()),
                 StartCoroutine(BackgroundToSchool(2)));
@@ -99,25 +100,30 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void CheckOnCurry()
     {
+        Debug.Break();
         System.Action bgSwitch = () =>
         {
             backgrounds[11].SetActive(false);
             backgrounds[8].SetActive(true);
             backgrounds[9].SetActive(true);
-            Coroutilities.DoAfterDelayFrames(this, () => dialogueManager.ToggleDialogue(false), 1);
         };
 
-        Coroutilities.DoAfterSequence(this, () => dialogueManager.ToggleDialogue(true),
-            () => Coroutilities.DoAfterYielder(this, bgSwitch, StartCoroutine(TransitionAndWait(false, 2))),
+        dialogueManager.ToggleContinue(false);
+        dialogueManager.ToggleDialogue(false);
+
+        Coroutilities.DoAfterSequence(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+            () => StartCoroutine(TransitionAndWait(false, 2)),
+            () => Coroutilities.DoAfterDelayFrames(this, bgSwitch, 0),
             () => StartCoroutine(TakeOffLid()),
             () => new WaitForSeconds(1));
     }
 
     public void PlateCurry()
     {
-        dialogueManager.DialogueUI.SetActive(false);
+        dialogueManager.ToggleDialogue(false);
+        dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
             StartCoroutine(ShowPlate()));
     }
 
@@ -129,8 +135,11 @@ public class DowntimeSceneManager : MonoBehaviour
         if (flavorPfile)
             flavorPfile.VisualizeFlavors();
 
+        dialogueManager.ToggleDialogue(true);
+
         yield return new WaitForSeconds(4.5f);
 
+        yield return StartCoroutine(TransitionAndWait(false, 2));
         backgrounds[10].SetActive(false);
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
