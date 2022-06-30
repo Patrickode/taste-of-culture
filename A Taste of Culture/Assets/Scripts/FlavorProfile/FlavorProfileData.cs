@@ -14,6 +14,12 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
 
     public Dictionary<FlavorType, int> FlavorDict { get => flavors; }
 
+    public int this[FlavorType type]
+    {
+        get => flavors[type];
+        set => flavors[type] = value;
+    }
+
     public void AddFlavor(Dictionary<FlavorType, int> flavor)
     {
         foreach (var typeVal in flavor)
