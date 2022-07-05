@@ -10,8 +10,6 @@ public class CuttingKnife : MonoBehaviour
     public IngredientCollider collider2;
 
     public Animator animator;
-    public CookingSceneManager sceneManager;
-    public CookingDialogueTrigger dialogueTrigger;
 
     private AudioSource sliceAudio;
 
@@ -124,8 +122,8 @@ public class CuttingKnife : MonoBehaviour
 
         if ((cutPostion.x > guidelinePosition.x + margin) || (cutPostion.x < guidelinePosition.x - margin))
         {
-            sceneManager.dialogueTrigger = dialogueTrigger;
-            sceneManager.CutOutsideMargins();
+            //sceneManager.dialogueTrigger = dialogueTrigger;
+            //sceneManager.CutOutsideMargins();
 
             lineRenderer.enabled = false;
             return false;

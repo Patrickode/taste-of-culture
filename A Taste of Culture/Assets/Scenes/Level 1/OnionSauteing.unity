@@ -278,8 +278,8 @@ MonoBehaviour:
   visuals: {fileID: 1446094053}
   shadow: {fileID: 1911767337}
   spoonCollider: {fileID: 148958238}
-  raisedOffset: {x: 0, y: 0.25, z: 0}
   audioPlayer: {fileID: 23967095}
+  raisedOffset: {x: 0, y: 0.25, z: 0}
 --- !u!82 &23967094
 AudioSource:
   m_ObjectHideFlags: 0
@@ -902,7 +902,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStartup: 0
+  preserveSpawnScale: 0
   numIngredients: 20
+  container: {fileID: 0}
   possibleIngredients:
   - {fileID: 7970102196557702234, guid: 0b49d357a8cc21040844b7f0276bc323, type: 3}
   - {fileID: 16534192335065476, guid: a585b26206d46554f8d58e61d667d674, type: 3}
@@ -1041,16 +1043,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 13
-  json: '{"Options":[],"Parameters":[{"__type":"EditableIntParameter:#DialogueEditor","ParameterName":"PercentBurnt","IntValue":0},{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"VeryBurnt","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":0,"RequiredValue":100},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":false}],"NodeUID":5},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":1,"RequiredValue":1}],"NodeUID":6},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":1,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":false}],"NodeUID":7},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":2,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":false}],"NodeUID":8},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":1,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":true}],"NodeUID":9},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":0,"RequiredValue":100},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":true}],"NodeUID":10},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":2,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":true}],"NodeUID":12}],"EditorInfo":{"isRoot":true,"xPos":336,"yPos":134},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"All
-    done cooking? Let''s see what you''ve got.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":342,"yPos":486},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"Now,
-    let''s put it all together!","parentUIDs":[5,6,7,8,9,10,12],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":183,"yPos":305},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"They''re
-    all a tad burnt... but that''s ok! I''ve got plenty of extras.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":-297,"yPos":305},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"These
-    onions look great, well done!","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":-58,"yPos":305},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"A
+  json: '{"Options":[],"Parameters":[{"__type":"EditableIntParameter:#DialogueEditor","ParameterName":"PercentBurnt","IntValue":0},{"__type":"EditableBoolParameter:#DialogueEditor","ParameterName":"VeryBurnt","BoolValue":false}],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":0,"RequiredValue":100},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":false}],"NodeUID":5},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":1,"RequiredValue":1}],"NodeUID":6},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":1,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":false}],"NodeUID":7},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":2,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":false}],"NodeUID":8},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":1,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":true}],"NodeUID":9},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":0,"RequiredValue":100},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":true}],"NodeUID":10},{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[{"__type":"EditableIntCondition:#DialogueEditor","ParameterName":"PercentBurnt","CheckType":2,"RequiredValue":50},{"__type":"EditableBoolCondition:#DialogueEditor","ParameterName":"VeryBurnt","CheckType":0,"RequiredValue":true}],"NodeUID":12}],"EditorInfo":{"isRoot":true,"xPos":355,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"All
+    done cooking? Let''s see what you''ve got.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":361,"yPos":374},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"Now,
+    let''s put it all together!","parentUIDs":[5,6,7,8,9,10,12],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":202,"yPos":193},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"They''re
+    all a tad burnt... but that''s ok! I''ve got plenty of extras.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":-278,"yPos":193},"ID":6,"ParamActions":[],"TMPFontGUID":null,"Text":"These
+    onions look great, well done!","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":-39,"yPos":193},"ID":7,"ParamActions":[],"TMPFontGUID":null,"Text":"A
     few of them are a tad burnt, but that''s okay. I''ve got some extras if you''d
-    like.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":423,"yPos":303},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Most
-    of them are a tad burnt, but that''s ok! I''ve got extras if you''d like.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":661,"yPos":304},"ID":9,"ParamActions":[],"TMPFontGUID":null,"Text":"A
-    few of them are quite burnt, but that''s ok! I''ve got some extras.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":903,"yPos":304},"ID":10,"ParamActions":[],"TMPFontGUID":null,"Text":"You
-    have burnt all the onions to a crisp. Did you even try?","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":1143,"yPos":305},"ID":12,"ParamActions":[],"TMPFontGUID":null,"Text":"Most
+    like.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":442,"yPos":191},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Most
+    of them are a tad burnt, but that''s ok! I''ve got extras if you''d like.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":680,"yPos":192},"ID":9,"ParamActions":[],"TMPFontGUID":null,"Text":"A
+    few of them are quite burnt, but that''s ok! I''ve got some extras.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":922,"yPos":192},"ID":10,"ParamActions":[],"TMPFontGUID":null,"Text":"You
+    have burnt all the onions to a crisp. Did you even try?","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":1162,"yPos":193},"ID":12,"ParamActions":[],"TMPFontGUID":null,"Text":"Most
     of them are... quite burnt! But that''s ok, I''ve got extras.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: Jaya
@@ -1071,7 +1073,19 @@ MonoBehaviour:
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   Event:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1588946842}
+        m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
+        m_MethodName: DisableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &887069284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,9 +1193,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53fa2a69a6fe3a24aab4357f73b2f824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onlyMoveIfHeld: 0
+  returnWhenDropped: 0
+  holdMask:
+    serializedVersion: 2
+    m_Bits: 0
+  holdTag: 
+  holdMinDepth: -Infinity
+  holdMaxDepth: Infinity
   moveWithPhysics: 1
   thingToMove: {fileID: 23967090}
   moveZone: {fileID: 1080620648}
+  moveZone3D: {fileID: 0}
+  screenPointDistance: 0
+  preserveDepthPos: 0
 --- !u!212 &1080620651
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1868,7 +1893,31 @@ MonoBehaviour:
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   Event:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 387493557}
+        m_TargetAssemblyTypeName: GIFManager, Assembly-CSharp
+        m_MethodName: StartVideo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1588946842}
+        m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
+        m_MethodName: ConversationEndEnableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1911767337
 GameObject:
   m_ObjectHideFlags: 0
