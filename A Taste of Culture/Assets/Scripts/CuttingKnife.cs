@@ -14,7 +14,7 @@ public class CuttingKnife : MonoBehaviour
     private AudioSource sliceAudio;
 
     Rigidbody2D rigidbodyComponent;
-    IngredientCutter ingredientCutter;
+    //IngredientCutter ingredientCutter;
     LineRenderer lineRenderer;
 
     Vector2 cutStartPosition;
@@ -29,7 +29,7 @@ public class CuttingKnife : MonoBehaviour
         // Cursor.visible = false;
 
         rigidbodyComponent = GetComponent<Rigidbody2D>();
-        ingredientCutter = GetComponent<IngredientCutter>();
+        //ingredientCutter = GetComponent<IngredientCutter>();
         lineRenderer = GetComponent<LineRenderer>();
 
         sliceAudio = GetComponent<AudioSource>();

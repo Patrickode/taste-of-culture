@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class DowntimeSceneManager : MonoBehaviour
 {
-    public DialogueManager dialogueManager;
+    // public DialogueManager dialogueManager;
     public GameObject dialogue;
-    public DialogueTrigger trigger;
+    // public DialogueTrigger trigger;
     public GameObject mentor;
 
     public GameObject[] backgrounds;
@@ -27,7 +27,7 @@ public class DowntimeSceneManager : MonoBehaviour
 
         AddOnions();
         CookOnions();
-        trigger.StartDialogue();
+        // trigger.StartDialogue();
     }
 
     public void AddOnions()
@@ -48,10 +48,10 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[3].SetActive(false);
         backgrounds[4].SetActive(true);
-        dialogueManager.ToggleContinue(false);
+        // dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
-            StartCoroutine(PutOnLid()));
+        //Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+        //    StartCoroutine(PutOnLid()));
     }
 
     public void AddButter()
@@ -59,12 +59,12 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
         mentor.SetActive(false);
-        dialogueManager.ToggleContinue(false);
+        // dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
-            StartCoroutine(TakeOffLid()),
-            StartCoroutine(ButterInPot()),
-            StartCoroutine(BackgroundToSchool()));
+        // Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+        //    StartCoroutine(TakeOffLid()),
+        //    StartCoroutine(ButterInPot()),
+        //    StartCoroutine(BackgroundToSchool()));
     }
 
     IEnumerator ButterInPot()
@@ -75,9 +75,9 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void AddProtein()
     {
-        dialogueManager.ToggleContinue(false);
-        dialogueManager.ToggleDialogue(false);
-        Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2)));
+        //dialogueManager.ToggleContinue(false);
+        //dialogueManager.ToggleDialogue(false);
+        //Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2)));
 
         void ActuallyAddProtein()
         {
@@ -85,10 +85,10 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[7].SetActive(true);
             mentor.SetActive(false);
 
-            Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
-                StartCoroutine(TakeOffLid()),
-                StartCoroutine(ProteinInPot()),
-                StartCoroutine(BackgroundToSchool(2)));
+            //Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+            //    StartCoroutine(TakeOffLid()),
+            //    StartCoroutine(ProteinInPot()),
+            //    StartCoroutine(BackgroundToSchool(2)));
         }
     }
 
@@ -108,23 +108,23 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[9].SetActive(true);
         };
 
-        dialogueManager.ToggleContinue(false);
-        dialogueManager.ToggleDialogue(false);
+        //dialogueManager.ToggleContinue(false);
+        //dialogueManager.ToggleDialogue(false);
 
-        Coroutilities.DoAfterSequence(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
-            () => StartCoroutine(TransitionAndWait(false, 2)),
-            () => Coroutilities.DoAfterDelayFrames(this, bgSwitch, 0),
-            () => StartCoroutine(TakeOffLid()),
-            () => new WaitForSeconds(1));
+        //Coroutilities.DoAfterSequence(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+        //    () => StartCoroutine(TransitionAndWait(false, 2)),
+        //    () => Coroutilities.DoAfterDelayFrames(this, bgSwitch, 0),
+        //    () => StartCoroutine(TakeOffLid()),
+        //    () => new WaitForSeconds(1));
     }
 
     public void PlateCurry()
     {
-        dialogueManager.ToggleDialogue(false);
-        dialogueManager.ToggleContinue(false);
+        //dialogueManager.ToggleDialogue(false);
+        //dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
-            StartCoroutine(ShowPlate()));
+        //Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+        //    StartCoroutine(ShowPlate()));
     }
 
     IEnumerator ShowPlate()
@@ -135,7 +135,7 @@ public class DowntimeSceneManager : MonoBehaviour
         if (flavorPfile)
             flavorPfile.VisualizeFlavors();
 
-        dialogueManager.ToggleDialogue(true);
+        //dialogueManager.ToggleDialogue(true);
 
         yield return new WaitForSeconds(4.5f);
 
@@ -177,7 +177,7 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void DialogueEnded()
     {
-        dialogueManager.animator.gameObject.SetActive(false);
+        //dialogueManager.animator.gameObject.SetActive(false);
     }
 
     public void RecipeDismissed()

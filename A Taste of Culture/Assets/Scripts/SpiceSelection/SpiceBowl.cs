@@ -13,7 +13,7 @@ public class SpiceBowl : MonoBehaviour
     [SerializeField] Collider2D triggerRef;
     [Space(5)]
     [SerializeField] SpriteRenderer pinchedSpicePrefab;
-    public CookingDialogueTrigger dialogueTrigger;
+    //public CookingDialogueTrigger dialogueTrigger;
     // public GameObject dialogue;
 
     HandController hand;
@@ -100,7 +100,7 @@ public class SpiceBowl : MonoBehaviour
             TooltipOwnerStateChange?.Invoke(this);
             Coroutilities.TryStopCoroutine(this, ref DisableTooltipCorout);
 
-            dialogueTrigger.TriggerDialogue();
+            //dialogueTrigger.TriggerDialogue(); 
         }
     }
 
@@ -124,7 +124,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if (CanDisplayTooltip && spiceBowlsHovered < 1)
         {
-            dialogueTrigger.DisableDialogue();
+            //dialogueTrigger.DisableDialogue();
         }
     }
 }

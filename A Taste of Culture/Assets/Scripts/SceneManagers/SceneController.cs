@@ -10,8 +10,8 @@ public class SceneController : MonoBehaviour
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
     public StringVariable protein;
-    public GameEvent choseChicken;
-    public GameEvent choseTofu;
+    //public GameEvent choseChicken;
+    //public GameEvent choseTofu;
     public NPCConversation finishedConversation;
 
     public enum Ingredient { Protein, Onion, Tomato, Spices };
@@ -43,13 +43,13 @@ public class SceneController : MonoBehaviour
 
         if (protein.value == "chicken")
         {
-            choseChicken.Raise();
+            //choseChicken.Raise();
 
             ActivateProtein("Raw Chicken", "Tofu Block");
         }
         else if (protein.value == "tofu")
         {
-            choseTofu.Raise();
+            //choseTofu.Raise();
 
             ActivateProtein("Tofu Block", "Raw Chicken");
         }

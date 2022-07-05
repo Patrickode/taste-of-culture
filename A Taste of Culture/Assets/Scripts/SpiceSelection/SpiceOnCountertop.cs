@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiceOnCountertop : MonoBehaviour
 {
-    public CookingDialogueTrigger dialogueTrigger;
+    //public CookingDialogueTrigger dialogueTrigger;
     public float dialogueTimer = 2.5f;
 
     [SerializeField] private UnityEngine.UI.Button[] buttonsToDisable;
@@ -23,19 +23,19 @@ public class SpiceOnCountertop : MonoBehaviour
     {
         if (timesScolded > 0)
         {
-            dialogueTrigger.dialogue.sentences[0] = timesScolded < 2
-                ? "Oh, don't worry, I'm used to mess-makers."
-                : "...";
+            //dialogueTrigger.dialogue.sentences[0] = timesScolded < 2
+            //    ? "Oh, don't worry, I'm used to mess-makers."
+            //    : "...";
         }
 
         //Trigger dialogue and prevent tooltips or early escape until it's disabled.
-        dialogueTrigger.TriggerDialogue();
+        //dialogueTrigger.TriggerDialogue();
         SpiceBowl.CanDisplayTooltip = false;
         TryToggleButtons(false);
 
         yield return new WaitForSeconds(2.5f);
 
-        dialogueTrigger.DisableDialogue();
+        //dialogueTrigger.DisableDialogue();
         SpiceBowl.CanDisplayTooltip = true;
         TryToggleButtons(true);
 
