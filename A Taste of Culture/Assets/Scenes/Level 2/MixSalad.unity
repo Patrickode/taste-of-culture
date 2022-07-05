@@ -4675,6 +4675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad593fdd1b1d0e43b91f08ebbf31d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seasoningContainer: {fileID: 228493694}
+  startActive: 0
   perfectLeeway: 5
   tooMuchThreshold: 5
   targetFlavor:
