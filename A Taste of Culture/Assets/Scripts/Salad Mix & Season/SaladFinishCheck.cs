@@ -6,6 +6,7 @@ using UnityEngine;
 public class SaladFinishCheck : MonoBehaviour
 {
     [SerializeField] private Transform seasoningContainer;
+    [SerializeField] private TMPro.TextMeshProUGUI targetTxt;
     [Space(5)]
     [SerializeField] private bool startActive;
     [SerializeField] [Min(0)] private int perfectLeeway;
@@ -16,6 +17,8 @@ public class SaladFinishCheck : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(startActive);
+
+        SetTargetText();
 
         deltaDict = new Dictionary<FlavorType, int>();
         foreach (var flav in targetFlavor)
@@ -32,6 +35,16 @@ public class SaladFinishCheck : MonoBehaviour
     {
         deltaDict[updatedType] = updatedValue - targetFlavor[updatedType];
         gameObject.SetActive(true);
+    }
+
+    private void SetTargetText()
+    {
+        string txt = "Target:\n";
+        txt += string.Join("\n", targetFlavor);
+        txt = txt.TrimEnd('\n');
+        txt = txt.Replace("[", "");
+        txt = txt.Replace("]", "");
+        targetTxt.text = txt;
     }
 
     public void TryFinish()
