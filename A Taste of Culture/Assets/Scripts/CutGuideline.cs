@@ -46,11 +46,14 @@ public class CutGuideline : MonoBehaviour
     // Disable knife interaction and inform scene controller that the task has been completed.
     void BroadcastTaskCompletion()
     {
-        
         CuttingKnife knife = FindObjectOfType<CuttingKnife>();
         if(knife != null) { knife.CanChop = false; }
 
+        // TODO: Replace sceneControllers in level 1 scene and delete this code
         SceneController sceneController = FindObjectOfType<SceneController>();
         if(sceneController != null) { sceneController.TaskComplete(); }
+
+        BaseIngredientSceneManager sceneManager = FindObjectOfType<BaseIngredientSceneManager>();
+        if(sceneManager != null) { sceneManager.TaskComplete(); }
     }
 }

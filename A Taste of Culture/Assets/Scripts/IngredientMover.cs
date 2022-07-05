@@ -9,12 +9,22 @@ public class IngredientMover : MonoBehaviour
     [SerializeField] float budgeDistance = 0.25f;
     [SerializeField] float budgeDuration = 0.125f;
     [Space(5)]
-    [SerializeField] float rotateXPosition;
-    [SerializeField] float finalXPosition;
+
+    [SerializeField] [Tooltip("X Position at which player can rotate ingredient")] 
+        float rotateXPosition;
+    [SerializeField] [Tooltip("X Position that triggers transition")] 
+        float finalXPosition;
     [Space(5)]
+
+    [SerializeField] [Tooltip("Desired position of ingredient after it has been rotated")] 
+        Vector2 rotatedPosition;
+    [Space(5)]
+
     [SerializeField] GameObject choppedPrefab;
-    [SerializeField] Vector2 choppedPosition;
+    [SerializeField] Vector2 choppedPrefabPosition;
+    [SerializeField] Vector3 choppedPrefabRotation;
     [Space(5)]
+
     [SerializeField] GameObject spriteMask;
     [SerializeField] Vector2 spriteMaskPosition;
 
@@ -64,6 +74,8 @@ public class IngredientMover : MonoBehaviour
 
     void DoMoveOrBudge()
     {
+        Debug.Log("Allow Movement: " + allowMovement);
+
         // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
         if (allowMovement)
         {
@@ -102,14 +114,18 @@ public class IngredientMover : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
             return;
 
-        transform.position = originalPosition;
-        cachedIngrPosition = originalPosition;
+        // transform.position = originalPosition;
+        // cachedIngrPosition = originalPosition;
+
+        transform.position = rotatedPosition;
+        cachedIngrPosition = rotatedPosition;
 
         // Instantiate mask that will allow chunks to become visible
         mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
-        GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPosition, Quaternion.identity);
+        GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPrefabPosition, Quaternion.identity);
+        choppedIngredient.transform.Rotate(choppedPrefabRotation);      // Manually change to desired prefab rotation
         choppedIngredient.transform.parent = transform;
 
         transform.Rotate(0, 0, 90);
@@ -133,6 +149,7 @@ public class IngredientMover : MonoBehaviour
 
         mask.transform.localScale += scale;
 
+        // TODO: Replace sceneControllers in level 1 scene and delete this code
         SceneController sceneController = FindObjectOfType<SceneController>();
 
         if (sceneController != null)
@@ -144,6 +161,20 @@ public class IngredientMover : MonoBehaviour
             }
 
             sceneController.TaskComplete();
+        }
+
+        ChoppingSceneManager sceneManager = FindObjectOfType<ChoppingSceneManager>();
+
+        if (sceneManager != null)
+        {
+            // Disable knife chop if last ingredient
+            if(sceneManager.bAtLastIngredient) 
+            { 
+                ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
+                if (knife != null) { knife.CanChop = false; }
+            }
+            
+            sceneManager.TaskComplete();
         }
     }
 }
