@@ -119,8 +119,12 @@ public static class Coroutilities
     /// <summary>
     /// Calls <paramref name="thingToDo"/> after a sequence of <paramref name="yielders"/>, called one by one in the order they were passed.
     /// </summary>
-    /// <param name="yielders">Any number of functions or lambdas that return <see cref="YieldInstruction"/>s; for example,<br/>
-    /// <c>() =&gt; <see cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/></c>.</param>
+    /// <param name="yielders">
+    /// Any number of functions or lambdas that return <see cref="YieldInstruction"/>s or similar types; for example,<br/>
+    /// <c>() =&gt; <see cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/></c>.<br/><br/>
+    ///     Note that many other functions/lambdas can be passed, but non-<see cref="YieldInstruction"/> return types<br/>
+    ///     will probably not be executed.
+    /// </param>
     /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction[])"/>
     public static Coroutine DoAfterSequence(MonoBehaviour coroutineCaller, Action thingToDo, params Func<object>[] yielders)
         => coroutineCaller.StartCoroutine(DoAfterSequence(thingToDo, yielders));
@@ -255,9 +259,7 @@ public static class Coroutilities
     /// <param name="predicate">Delegate or lambda that will be evaluated every frame. Once it evaluates to true, call <paramref name="thingToDo"/>.</param>
     /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
     public static Coroutine DoWhen(MonoBehaviour coroutineCaller, Action thingToDo, Func<bool> predicate)
-    {
-        return coroutineCaller.StartCoroutine(DoWhen(thingToDo, predicate));
-    }
+        => coroutineCaller.StartCoroutine(DoWhen(thingToDo, predicate));
 
     /// <remarks></remarks> <inheritdoc cref="DoWhen(MonoBehaviour, Action, Func{bool})"/>
     private static IEnumerator DoWhen(Action thingToDo, Func<bool> predicate)
@@ -275,9 +277,7 @@ public static class Coroutilities
     /// <param name="predicate">Delegate or lambda that will be evaluated every frame. Once it evaluates to true, stop calling <paramref name="thingToDo"/>.</param>
     /// <inheritdoc cref="DoForSeconds(MonoBehaviour, Action, float, float, bool)"/>
     public static Coroutine DoUntil(MonoBehaviour coroutineCaller, Action thingToDo, Func<bool> predicate, float interval = 0, bool realTime = false)
-    {
-        return coroutineCaller.StartCoroutine(DoUntil(thingToDo, predicate, interval, realTime));
-    }
+        => coroutineCaller.StartCoroutine(DoUntil(thingToDo, predicate, interval, realTime));
 
     /// <remarks></remarks> <inheritdoc cref="DoUntil(MonoBehaviour, Action, Func{bool}, float, bool)"/>
     private static IEnumerator DoUntil(Action thingToDo, Func<bool> predicate, float interval = 0, bool realTime = false)

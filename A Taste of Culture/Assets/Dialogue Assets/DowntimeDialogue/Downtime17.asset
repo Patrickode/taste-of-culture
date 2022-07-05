@@ -15,6 +15,6 @@ MonoBehaviour:
   speaker: {fileID: 11400000, guid: b09dc6104c289f144bfb25005ed49558, type: 2}
   text: "Looks good! It's time to plate the dish. Plating curry isn\u2019t too complicated.
     All we need to do is pour it into our bowl and sprinkle on some herbs for color."
-  expression: {fileID: 0}
+  expression: {fileID: 21300000, guid: d1ed27ee52a4179438042caebcb8faeb, type: 3}
   nextSentence: {fileID: 11400000, guid: 24cca848f1d14be4ba5c94ed468d8009, type: 2}
   options: []

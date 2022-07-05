@@ -50,6 +50,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadIndex(int index)
     {
+        FlavorProfileData.Instance.ResetData();
         Transitions.LoadWithTransition?.Invoke(index, -1);
     }
 

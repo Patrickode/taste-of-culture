@@ -266,7 +266,8 @@ public static class UtilFunctions
             Debug.DrawRay(pos, rot * (Vector3.right * scale.x / 2), halfSatC);
         }
     }
-    public static void DrawBox(Vector3 pos, Quaternion rot, float scale, Color c) => DrawBox(pos, rot, Vector3.one * scale, c);
+    public static void DrawBox(Vector3 pos, Quaternion rot, float scale, Color c = default, float duration = 0, bool drawAxes = false)
+        => DrawBox(pos, rot, Vector3.one * scale, c, duration, drawAxes);
     #endregion
 
     /// <summary>
@@ -300,6 +301,22 @@ public static class UtilFunctions
         ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
     public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
         ClampComponents(v, min, max, min, max, min, max);
+
+
+    /// <summary>
+    /// Returns the closest value to <paramref name="v"/> that's outside the range (<paramref name="rangeMin"/>, 
+    /// <paramref name="rangeMax"/>).<br/>
+    /// Returns <paramref name="rangeMax"/> if equidistant to both edges.
+    /// </summary>
+    public static float ClampOutside(float v, float rangeMin, float rangeMax)
+    {
+        if (v < rangeMin || v > rangeMax)
+            return v;
+
+        return v - rangeMin < rangeMax - v
+            ? rangeMin
+            : rangeMax;
+    }
 
     /// <summary>
     /// Divides two vectors component-wise.
@@ -336,5 +353,27 @@ public static class UtilFunctions
             return Mathf.Lerp(from, mid, t * 2);
         else
             return Mathf.Lerp(mid, to, (t - 0.5f) * 2);
+    }
+
+    /// <summary>
+    /// Calls <see cref="GameObject.SetActive(bool)"/> on this game object if it's not null or pending destroy.
+    /// </summary>
+    /// <returns>Was <see cref="GameObject.SetActive(bool)"/> called successfully?</returns>
+    public static bool SafeSetActive(this GameObject obj, bool active)
+    {
+        if (obj)
+        {
+            obj.SetActive(active);
+            return true;
+        }
+
+        return false;
+    }
+
+    public static bool SafeSetActive(Component objSource, bool active)
+    {
+        if (objSource) return objSource.gameObject.SafeSetActive(active);
+
+        return false;
     }
 }

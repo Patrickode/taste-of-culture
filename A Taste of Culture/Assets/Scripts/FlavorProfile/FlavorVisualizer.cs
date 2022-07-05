@@ -8,52 +8,108 @@ public class FlavorVisualizer : MonoBehaviour
 {
     [HideInInspector] public TextMeshProUGUI labelText;
     [SerializeField] [Range(-2, 2)] private float labelXSpacing;
+    [SerializeField] [Range(0, 360)] private int minimumSegments = 2;
+    [SerializeField] [Min(0)] public float minimumSpeed = 0;
 
-    float displaySpeed;
+    private const int Segments = 360;
 
-    public void DisplayFlavorValue(float radius, float lineWidth, int value, Color flavorColor, float gradualDisplaySpeed)
+    private LineRenderer lineRef;
+    private Coroutine gradualDisplay;
+
+    private float storedRadius;
+    private List<Vector3> storedPoints;
+
+    public void DisplayFlavorValue(float radius, float lineWidth, int segments,
+        Color flavorColor, float duration)
     {
-        if (value == 0) { return; }
+        if (duration <= 0) return;
+        if (segments < minimumSegments) { segments = minimumSegments; }
 
-        displaySpeed = gradualDisplaySpeed;
+        lineRef = gameObject.GetComponent<LineRenderer>();
+        storedRadius = radius;
 
-        LineRenderer line = gameObject.GetComponent<LineRenderer>();
+        lineRef.useWorldSpace = false;
+        lineRef.startWidth = lineWidth;
+        lineRef.endWidth = lineWidth;
 
-        line.useWorldSpace = false;
-        line.startWidth = lineWidth;
-        line.endWidth = lineWidth;
+        lineRef.startColor = flavorColor;
+        lineRef.endColor = flavorColor;
+        lineRef.material.color = flavorColor;
 
-        line.startColor = flavorColor;
-        line.endColor = flavorColor;
-        line.material.color = flavorColor;
-
-        int segments = 360;
-        List<Vector3> points = new List<Vector3>();
-        points.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
+        storedPoints = new List<Vector3>();
+        storedPoints.Add(new Vector3(Mathf.Sin(0) * radius, Mathf.Cos(0) * radius, 0));
 
         Vector3 labelDest = transform.position;
         labelDest.x += labelXSpacing;
         labelDest.y += radius;
         labelText.transform.position = labelDest;
 
-        StartCoroutine(GraduallyDisplayFlavor(line, radius, segments, points, value));
+        if (gradualDisplay == null)
+        {
+            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, duration));
+        }
     }
 
-    IEnumerator GraduallyDisplayFlavor(LineRenderer line, float radius, int segments, List<Vector3> points, int value)
+    public void UpdateDisplay(int segments, float duration)
     {
-        int pointCount = 1;
+        if (duration <= 0) return;
+        if (segments < minimumSegments) { segments = minimumSegments; }
 
-        while (pointCount < value)
+        if (gradualDisplay == null)
         {
-            var rad = Mathf.Deg2Rad * (pointCount * 360f / segments);
-            points.Add(new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, 0));
-
-            yield return new WaitForSeconds(displaySpeed);
-
-            line.positionCount = points.Count;
-            line.SetPositions(points.ToArray());
-
-            pointCount++;
+            gradualDisplay = StartCoroutine(GraduallyDisplay(segments, duration));
         }
+    }
+
+    private IEnumerator GraduallyDisplay(int segments, float duration)
+    {
+        if (duration <= 0 || lineRef.positionCount == segments)
+        {
+            gradualDisplay = null;
+            yield break;
+        }
+
+        float speed = UtilFunctions.ClampOutside((segments - lineRef.positionCount) / duration, -minimumSpeed, minimumSpeed);
+        float floatifiedCount = lineRef.positionCount;
+
+        while (lineRef.positionCount != segments)
+        {
+            floatifiedCount += speed * Time.deltaTime;
+            //Ensure that, regardless of any wacky deltaTimes, the count cannot exceed our target
+            floatifiedCount = speed > 0
+                ? Mathf.Min(floatifiedCount, segments)
+                : Mathf.Max(floatifiedCount, segments);
+
+            //Whenever our float counter crosses an int threshold (the cast cuts off decimals), increment/decrement.
+            //  For high speeds, this'll call behavior several times per frame. (SetSegments prevents overshooting.)
+            //  For low speeds, this'll skip calls to behavior on some frames.
+            while (lineRef.positionCount != (int)floatifiedCount)
+                SetSegments(speed > 0, segments);
+
+            yield return null;
+        }
+
+        gradualDisplay = null;
+    }
+
+    private void SetSegments(bool add, int target)
+    {
+        if (lineRef.positionCount == target) return;
+
+        if (!add)
+        {
+            storedPoints.RemoveAt(storedPoints.Count - 1);
+            lineRef.positionCount--;
+            return;
+        }
+
+        var rad = Mathf.Deg2Rad * (storedPoints.Count * 360f / Segments);
+        storedPoints.Add(new Vector3(
+            Mathf.Sin(rad) * storedRadius,
+            Mathf.Cos(rad) * storedRadius,
+            0));
+
+        lineRef.positionCount = storedPoints.Count;
+        lineRef.SetPositions(storedPoints.ToArray());
     }
 }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class SpawnStirIngredients : MonoBehaviour
 {
     [SerializeField] private bool spawnOnStartup;
+    [SerializeField] private bool preserveSpawnScale;
     [SerializeField] [Min(1)] private int numIngredients;
+    [SerializeField] private Transform container;
     [SerializeField] private Transform[] possibleIngredients;
     [Space(5)]
     [SerializeField] [Min(0)] private float separationRadius;
@@ -24,8 +26,11 @@ public class SpawnStirIngredients : MonoBehaviour
         float xRadius = transform.localScale.x / 2;
         float yRadius = transform.localScale.y / 2;
 
-        Transform container = new GameObject("Stir Ingredients").transform;
-        container.SetPositionAndRotation(transform.position, transform.rotation);
+        if (!container)
+        {
+            container = new GameObject("Stir Ingredients").transform;
+            container.SetPositionAndRotation(transform.position, transform.rotation);
+        }
 
         //Init values for the upcoming loop; the spawn positions of the ingredients, and the number of
         //times such a position has been generated
@@ -35,9 +40,7 @@ public class SpawnStirIngredients : MonoBehaviour
 
         for (int i = 0; i < numIngredients; i++)
         {
-            var spawnedIng = Instantiate(
-                possibleIngredients[Random.Range(0, possibleIngredients.Length)],
-                container);
+            var spawnedIng = Instantiate(possibleIngredients[Random.Range(0, possibleIngredients.Length)]);
 
             //Set a spawn pos in a random position within the radii.
             Vector3 spawnPos;
@@ -56,6 +59,12 @@ public class SpawnStirIngredients : MonoBehaviour
 
             spawnedIng.localPosition = spawnPos;
             startPosns[i] = spawnPos;
+            spawnedIng.parent = container;
+
+            if (preserveSpawnScale)
+                spawnedIng.NegateParentScale();
+
+            spawnedIng.gameObject.SetActive(true);
         }
     }
 }
