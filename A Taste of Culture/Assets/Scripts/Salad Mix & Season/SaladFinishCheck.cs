@@ -39,7 +39,7 @@ public class SaladFinishCheck : MonoBehaviour
 
     private void SetTargetText()
     {
-        string txt = "Target:\n";
+        string txt = "<u>Target:</u>\n";
         txt += string.Join("\n", targetFlavor);
         txt = txt.TrimEnd('\n');
         txt = txt.Replace("[", "");
