@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class DialogueController : MonoBehaviour
 {
-    [SerializeField]
-    private NPCConversation initConversation;
-    [SerializeField]
-    private string nextScene;
-    [SerializeField]
-    private StringVariable protein;
-    [SerializeField]
-    private GameObject tool;
+    [SerializeField] private NPCConversation initConversation;
+    [Space(5)]
+    [SerializeField] private bool useIndex;
+    [SerializeField] private string nextScene;
+    [SerializeField] private int nextSceneIndex;
+    [Space(5)]
+    [SerializeField] private StringVariable protein;
+    [SerializeField] private GameObject tool;
 
     void Start()
     {
@@ -68,6 +68,13 @@ public class DialogueController : MonoBehaviour
 
     private void LoadNextScene()
     {
+        if (useIndex)
+        {
+            SceneManager.LoadScene(nextSceneIndex >= 0
+                ? nextSceneIndex
+                : SceneManager.GetActiveScene().buildIndex + nextSceneIndex);
+        }
+
         SceneManager.LoadScene(nextScene);
     }
 }
