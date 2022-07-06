@@ -192,7 +192,7 @@ public static class UtilFunctions
 
     /// <summary>
     /// Uses <see cref="RectTransform.GetWorldCorners(Vector3[])"/> to create and return a <see cref="Bounds"/>.<br/>
-    /// Inspired by <see href="http://answers.unity.com/answers/1628573/view.html"/>.
+    /// Lightly edited from <see href="http://answers.unity.com/answers/1628573/view.html"/>.
     /// </summary>
     public static Bounds GetWorldBounds(this RectTransform rect)
     {
