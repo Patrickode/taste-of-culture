@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class RemovalHand : RemovalTool
 {
+    private bool hoveringTool;
+    [SerializeField] private string hoverToolName;
+
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
+        hoveringTool = false;
     }
 
     // Update is called once per frame
     new void Update()
     {
         base.Update();
+
+        if (hoveringTool && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (hoverToolName == "Hammer")
+            {
+                RemovalManager.Instance.SetHammer();
+            }
+            else if (hoverToolName == "Knife")
+            {
+                RemovalManager.Instance.SetKnife();
+            }
+            
+        }
     }
 
     public override void Use()
@@ -21,71 +38,21 @@ public class RemovalHand : RemovalTool
         throw new System.NotImplementedException();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnEnter");
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (collision.gameObject.layer == 7)
         {
-            switch (collision.gameObject.layer)
-            {
-                case 7:
-                    RemovalTool t = collision.gameObject.GetComponent<RemovalTool>();
-                    if (t is RemovalHammer h)
-                    {
-                        Debug.Log("I did it :)");
-                    }
-                    else if (t is RemovalKnife k)
-                    {
-                        Debug.Log("I did it :)");
-                    }
-
-                    //if (t.GetType() == typeof(RemovalHammer))
-                    //{
-                    //    Debug.Log("I did it :)");
-                    //}
-                    break;
-
-                default:
-                    break;
-            }
+            hoveringTool = true;
+            hoverToolName = collision.gameObject.name;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("OnEnter");
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (collision.gameObject.layer == 7)
         {
-            switch (collision.gameObject.layer)
-            {
-                case 7:
-                    RemovalTool t = collision.gameObject.GetComponent<RemovalTool>();
-                    if (t is RemovalHammer h)
-                    {
-                        Debug.Log("I did it :)");
-                    }
-                    else if (t is RemovalKnife k)
-                    {
-                        Debug.Log("I did it :)");
-                    }
-
-                    //if (t.GetType() == typeof(RemovalHammer))
-                    //{
-                    //    Debug.Log("I did it :)");
-                    //}
-                    break;
-
-                default:
-                    break;
-            }
+            hoveringTool = false;
+            hoverToolName = "";
         }
     }
 }

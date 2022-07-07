@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class RemovalTool : MonoBehaviour
 {
-    [SerializeField] private Vector3 startPos;
-    [SerializeField] private bool active;
+    [SerializeField] protected Vector3 startPos;
+    [SerializeField] protected bool active;
 
-    public bool Active
+    public virtual bool Active
     {
         get { return active; }
         set { active = value; }
