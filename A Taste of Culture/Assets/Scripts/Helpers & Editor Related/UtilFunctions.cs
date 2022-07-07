@@ -409,9 +409,9 @@ public static class UtilFunctions
     /// Takes a collection and, in the order of the collection, adds all distinct elements 
     /// of it to <paramref name="destination"/>.
     /// </summary>
-    /// <param name="clearDest">Whether to <see cref="List{T}.Clear"/> <paramref name="destination"/> before 
-    /// adding to it.</param>
-    public static void DistinctNonAlloc<T>(IEnumerable<T> source, List<T> destination, bool clearDest = false)
+    /// <param name="clearDest">Whether to <see cref="ICollection{T}.Clear"/> 
+    /// <paramref name="destination"/> before adding to it.</param>
+    public static void DistinctNonAlloc<T>(IEnumerable<T> source, IList<T> destination, bool clearDest = false)
     {
         if (clearDest)
             destination.Clear();
@@ -425,15 +425,21 @@ public static class UtilFunctions
         }
     }
 
+    /// <summary>
+    /// Takes an ordered collection and, in the order of the collection, adds its elements to 
+    /// <paramref name="destination"/>, sans any elements identical<br/>to the one immediately before.
+    /// </summary>
+    /// <param name="clearDest">Whether to <see cref="ICollection{T}.Clear"/> 
+    /// <paramref name="destination"/> before adding to it.</param>
     public static void RemoveAdjacentDuplicatesNonAlloc<T>(
-        IReadOnlyList<T> source, List<T> destination, bool clearDest = true)
+        IList<T> source, IList<T> destination, bool clearDest = true)
     {
         if (clearDest)
             destination.Clear();
 
         for (int i = 0; i < source.Count; i++)
         {
-            if (i < 1 || !EqCompEquals(source[i - 1], source[i]))
+            if (i < 1 || !EquCompEquals(source[i - 1], source[i]))
             {
                 destination.Add(source[i]);
             }
@@ -443,5 +449,5 @@ public static class UtilFunctions
     /// <summary>
     /// A shorthand function for <see cref="EqualityComparer{T}.Default.Equals(T, T)"/>.
     /// </summary>
-    public static bool EqCompEquals<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
+    public static bool EquCompEquals<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
 }

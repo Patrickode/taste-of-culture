@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlavorGraphBorder : MonoBehaviour
+public class FlavorGraphLine : MonoBehaviour
 {
+    private enum GraphLine { Primary, Midline, Border }
+
     [SerializeField] private LineRenderer border;
     [SerializeField] private RectTransform posSizeRef;
+    [SerializeField] private GraphLine lineType;
     [SerializeField] private FlavorType[] flavsToDisplay;
     [Space(5)]
     [SerializeField] private bool clockwise;
     [SerializeField] [Range(0, 360)] private float startAngle;
-    [SerializeField] private int maxValue = 10;
+    [SerializeField] [Min(1)] private float maxValue = 10;
+    [SerializeField] [Range(0, 1)] private float percentOfMax = 1;
     private float startAngInRads;
 
     private Bounds refBounds;
@@ -41,7 +45,7 @@ public class FlavorGraphBorder : MonoBehaviour
         for (int i = 0; i < numPoints; i++)
         {
             float angle = startAngInRads + 2 * Mathf.PI * i / numPoints;
-            points[i] = LerpPointByData(
+            points[i] = RepositionPoint(
                 flavsToDisplay[i],
                 center,
                 center + new Vector3(
@@ -51,18 +55,20 @@ public class FlavorGraphBorder : MonoBehaviour
 
         UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, pointsToBorder);
 
-        //If the last point is roughly equal to the center, we don't need to loop (and shouldn't if
-        //we want to avoid weird line renderer shenanigans)
-        border.loop = !pointsToBorder[pointsToBorder.Count - 1].EqualWithinRange(center, 0.01f);
         border.positionCount = pointsToBorder.Count;
         border.SetPositions(pointsToBorder.ToArray());
     }
 
-    private Vector3 LerpPointByData(FlavorType type, Vector3 zeroPoint, Vector3 point)
+    private Vector3 RepositionPoint(FlavorType type, Vector3 zeroPoint, Vector3 point)
     {
-        if (FlavorProfileData.Instance.TryGetFlav(type, out int flavValue))
-            return Vector3.Lerp(zeroPoint, point, Mathf.InverseLerp(0, maxValue, flavValue));
+        float interpolant = 1;
 
-        return refBounds.center;
+        if (lineType != GraphLine.Primary)
+            interpolant = percentOfMax;
+
+        else if (FlavorProfileData.Instance.TryGetFlav(type, out int flavValue))
+            interpolant = Mathf.InverseLerp(0, maxValue, flavValue);
+
+        return Vector3.Lerp(zeroPoint, point, interpolant);
     }
 }
