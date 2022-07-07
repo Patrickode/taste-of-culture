@@ -15,34 +15,54 @@ public class FlavorGraphBorder : MonoBehaviour
 
     private Bounds refBounds;
     private float radius;
+    private Vector3[] points;
+    private List<Vector3> pointsToBorder = new List<Vector3>();
 
     private void Start()
     {
         refBounds = posSizeRef.GetWorldBounds();
         radius = Mathf.Min(refBounds.extents.x, refBounds.extents.y);
-        Debug.DrawRay(refBounds.center, Vector3.up * radius, Color.cyan, 100);
-        Debug.DrawRay(refBounds.center, Vector3.down * radius, Color.blue, 100);
-        Debug.DrawRay(refBounds.center, Vector3.down * (radius - radius / 5), Color.magenta, 100);
-        Debug.DrawRay(refBounds.center, Quaternion.AngleAxis(120, Vector3.forward) * (Vector3.up * radius), Color.green, 100);
-        Debug.DrawRay(refBounds.center, Quaternion.AngleAxis(120 * 2, Vector3.forward) * (Vector3.up * radius), Color.green, 100);
 
         startAngInRads = startAngle * Mathf.Deg2Rad * (clockwise ? -1 : 1);
         int numPoints = flavsToDisplay.Length;
-
         Vector3 center = refBounds.center;
-        if (numPoints % 2 > 0)
-            center.y -= (radius - (radius * Mathf.Cos(Mathf.PI / numPoints))) / 2;
 
-        var points = new Vector3[numPoints];
+        //For odd-numbered n-gons, the point opposite of start will be the middle of an edge instead of
+        //a vertex, so said opposite point will not be the same distance from the center (apothem <= radius).
+        if (numPoints % 2 > 0)
+        {
+            //Offset by half of the apothem for equal start/opposite padding.
+            var halfApothem = (radius - (radius * Mathf.Cos(Mathf.PI / numPoints))) / 2;
+            var dirToStartAng = Quaternion.AngleAxis(startAngle, Vector3.forward) * Vector3.right;
+            center += -dirToStartAng * halfApothem;
+        }
+
+        points = new Vector3[numPoints];
         for (int i = 0; i < numPoints; i++)
         {
             float angle = startAngInRads + 2 * Mathf.PI * i / numPoints;
-            points[i] = center + new Vector3(
-                radius * Mathf.Cos(angle),
-                radius * Mathf.Sin(angle));
+            points[i] = LerpPointByData(
+                flavsToDisplay[i],
+                center,
+                center + new Vector3(
+                    radius * Mathf.Cos(angle),
+                    radius * Mathf.Sin(angle)));
         }
 
-        border.positionCount = points.Length;
-        border.SetPositions(points);
+        UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, pointsToBorder);
+
+        //If the last point is roughly equal to the center, we don't need to loop (and shouldn't if
+        //we want to avoid weird line renderer shenanigans)
+        border.loop = !pointsToBorder[pointsToBorder.Count - 1].EqualWithinRange(center, 0.01f);
+        border.positionCount = pointsToBorder.Count;
+        border.SetPositions(pointsToBorder.ToArray());
+    }
+
+    private Vector3 LerpPointByData(FlavorType type, Vector3 zeroPoint, Vector3 point)
+    {
+        if (FlavorProfileData.Instance.TryGetFlav(type, out int flavValue))
+            return Vector3.Lerp(zeroPoint, point, Mathf.InverseLerp(0, maxValue, flavValue));
+
+        return refBounds.center;
     }
 }

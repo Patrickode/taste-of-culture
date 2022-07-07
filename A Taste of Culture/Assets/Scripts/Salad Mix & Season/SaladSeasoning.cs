@@ -39,7 +39,7 @@ public abstract class SaladSeasoning : MonoBehaviour
 
         if (MixProgress >= 1)
         {
-            FlavorProfileData.Instance.AddFlavor(flavor);
+            FlavorProfileData.Instance.Add(flavor);
             FullyMixed();
         }
     }
