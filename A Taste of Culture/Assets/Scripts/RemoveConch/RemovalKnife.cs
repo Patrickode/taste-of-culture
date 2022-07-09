@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RemovalKnife : RemovalTool
 {
-    private bool canSetBack;
+    [SerializeField] private bool canSetBack;
+
+    [SerializeField] private float unstickProgress;
+    [SerializeField] private bool isUsing;
 
     public override bool Active
     {
@@ -21,7 +24,15 @@ public class RemovalKnife : RemovalTool
 
     public override void Use()
     {
-        throw new System.NotImplementedException();
+        if (properArea)
+        {
+            Debug.Log("Being used properly");
+            isUsing = true;
+        }
+        else
+        {
+            RemovalManager.Instance.WarnPlayerHammer(); // change to knife
+        }
     }
 
     // Start is called before the first frame update
@@ -39,6 +50,26 @@ public class RemovalKnife : RemovalTool
         {
             RemovalManager.Instance.ResetCurrentTool();
         }
+
+        if (isUsing && Input.GetKey(KeyCode.Mouse0))
+        {
+            unstickProgress += Time.deltaTime;
+        }
+        else if (canUse && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Use();
+        }
+
+        if (isUsing && Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            isUsing = false;
+
+            if (unstickProgress >= 5.0f)
+            {
+                Debug.Log("Move to the hand!");
+                RemovalManager.Instance.StartHandPlay();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +77,15 @@ public class RemovalKnife : RemovalTool
         if (collision.gameObject.layer == 11)
         {
             canSetBack = true;
+        }
+        else if (collision.gameObject.layer == 6)
+        {
+            if (collision.gameObject.CompareTag("Ingredient"))
+            {
+                Debug.Log("In proper area");
+                properArea = true;
+            }
+            canUse = true;
         }
         else
         {
@@ -59,5 +99,32 @@ public class RemovalKnife : RemovalTool
         {
             canSetBack = false;
         }
+        else if (collision.gameObject.layer == 6 && !collision.CompareTag("Ingredient"))
+        {
+            canUse = false;
+        }
+        else if (collision.gameObject.layer == 6 && collision.CompareTag("Ingredient"))
+        {
+            Debug.Log("Out proper area");
+            properArea = false;
+            canUse = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ForbiddenZone"))
+        {
+            canUse = false;
+            isUsing = false;
+
+            Debug.LogWarning("This person is going to kill this thing with the knife!");
+            // do dialogue warning for knife maybe?
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        canUse = true;
     }
 }

@@ -5,12 +5,14 @@ using UnityEngine;
 public class RemovalHammer : RemovalTool
 {
     [SerializeField] private bool canSetBack;
-    [SerializeField] private bool canUse;
-    [SerializeField] private bool properArea;
 
     [SerializeField] private int holeProgress;
     [SerializeField] private bool isUsing;
     [SerializeField] private int hitPower;
+
+    [SerializeField] private SpriteRenderer render;
+    [SerializeField] private Sprite setSprite;
+    [SerializeField] private Sprite holdSprite;
 
     public override bool Active 
     { 
@@ -46,13 +48,13 @@ public class RemovalHammer : RemovalTool
         canSetBack = false;
         holeProgress = 0;
         hitPower = 0;
+
     }
 
     // Update is called once per frame
     new void Update()
     {
         base.Update();
-
 
         if (canSetBack && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -77,12 +79,26 @@ public class RemovalHammer : RemovalTool
             if (holeProgress >= 1200)
             {
                 Debug.LogWarning("This player is going to kill this poor thing with the hammer!");
+                // do warn dialogue
                 
             }
             else if (holeProgress >= 1000)
             {
                 Debug.Log("Move to the knife!");
+                RemovalManager.Instance.StartKnifePlay();
             }
+        }
+    }
+
+    public void ChangeSprite(bool toHoldSprite = true)
+    {
+        if (toHoldSprite)
+        {
+            render.sprite = holdSprite;
+        }
+        else
+        {
+            render.sprite = setSprite;
         }
     }
 

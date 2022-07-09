@@ -10,6 +10,12 @@ public class RemovalManager : MonoBehaviour
     [SerializeField] private RemovalTool knife;
     public static RemovalManager Instance;
 
+    [SerializeField] private GameObject[] knifeStartObjects;
+    [SerializeField] private GameObject[] hammerStopObjects;
+
+    [SerializeField] private GameObject startingShellObject;
+    [SerializeField] private GameObject flippedShellObject;
+ 
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -29,6 +35,7 @@ public class RemovalManager : MonoBehaviour
         {
             // place in hamer position
             hammer.Active = false;
+            ((RemovalHammer)hammer).ChangeSprite(false);
             hammer.ResetPosition();
         }
         else if (current.name == "Knife")
@@ -52,6 +59,7 @@ public class RemovalManager : MonoBehaviour
     {
         hammer.Active = true;
         current = hammer;
+        ((RemovalHammer)hammer).ChangeSprite();
 
         ResetHand();
     }
@@ -62,5 +70,29 @@ public class RemovalManager : MonoBehaviour
         current = knife;
 
         ResetHand();
+    }
+
+    public void StartKnifePlay()
+    {
+        // turns on the stuff for knife stuff
+        foreach (GameObject go in knifeStartObjects)
+        {
+            go.SetActive(true);
+        }
+
+        // turns off stuff for the hammer stuff
+        foreach (GameObject go in hammerStopObjects)
+        {
+            go.SetActive(false);
+        }
+    }
+
+    public void StartHandPlay()
+    {
+        // turn off entire unflipped shell
+        startingShellObject.SetActive(false);
+
+        // turn on flipped shell
+        flippedShellObject.SetActive(true);
     }
 }

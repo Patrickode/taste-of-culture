@@ -12,6 +12,8 @@ TagManager:
   - Hand
   - Spice
   - Initial Spice
+  - ShellArea
+  - ForbiddenZone
   layers:
   - Default
   - TransparentFX

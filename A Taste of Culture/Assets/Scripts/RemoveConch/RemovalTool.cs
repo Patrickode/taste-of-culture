@@ -7,6 +7,12 @@ public abstract class RemovalTool : MonoBehaviour
     [SerializeField] protected Vector3 startPos;
     [SerializeField] protected bool active;
 
+    [SerializeField] protected Vector2 offset;
+    [SerializeField] protected int heldZ;
+
+    [SerializeField] protected bool canUse;
+    [SerializeField] protected bool properArea;
+
     public virtual bool Active
     {
         get { return active; }
@@ -29,13 +35,15 @@ public abstract class RemovalTool : MonoBehaviour
         if (active)
         {
             Vector3 temp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = new Vector3(temp.x, temp.y, -3);
+            transform.position = new Vector3(temp.x + offset.x, temp.y + offset.y, heldZ);
         }
     }
 
     public void ResetPosition()
     {
         transform.position = startPos;
+        canUse = false;
+        properArea = false;
     }
 
     public abstract void Use();
