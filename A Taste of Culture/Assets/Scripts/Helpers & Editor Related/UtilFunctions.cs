@@ -190,6 +190,22 @@ public static class UtilFunctions
         return newBounds;
     }
 
+    /// <summary>
+    /// Uses <see cref="RectTransform.GetWorldCorners(Vector3[])"/> to create and return a <see cref="Bounds"/>.<br/>
+    /// Inspired by <see href="http://answers.unity.com/answers/1628573/view.html"/>.
+    /// </summary>
+    public static Bounds GetWorldBounds(this RectTransform rect)
+    {
+        var corners = new Vector3[4];
+        rect.GetWorldCorners(corners);
+
+        Bounds result = new Bounds(corners[0], Vector3.zero);
+        for (int i = 1; i < 4; i++)
+            result.Encapsulate(corners[i]);
+
+        return result;
+    }
+
     #region Lightly modified from unitycoder via https://gist.github.com/unitycoder/58f4b5d80f423d29e35c814a9556f9d9
     public static void DrawBounds(Bounds b, Color c = default, float duration = 0)
     {
@@ -370,6 +386,7 @@ public static class UtilFunctions
         return false;
     }
 
+    /// <inheritdoc cref="SafeSetActive(GameObject, bool)"/>
     public static bool SafeSetActive(Component objSource, bool active)
     {
         if (objSource) return objSource.gameObject.SafeSetActive(active);

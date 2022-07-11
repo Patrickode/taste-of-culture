@@ -47,9 +47,16 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
 
-        Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
-           StartCoroutine(ButterInPot()),
-           StartCoroutine(BackgroundToSchool()));
+//<<<<<<< dialogue-overhaul
+        //Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
+          // StartCoroutine(ButterInPot()),
+           //StartCoroutine(BackgroundToSchool()));
+//=======
+        Coroutilities.DoAfterYielders(this, () => dialogueManager.ToggleContinue(true),
+            StartCoroutine(TakeOffLid()),
+            StartCoroutine(ButterInPot()),
+            StartCoroutine(BackgroundToSchool()));
+//>>>>>>> dev
     }
 
     IEnumerator ButterInPot()
@@ -67,7 +74,12 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[11].SetActive(false);
             backgrounds[7].SetActive(true);
 
-            Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
+//<<<<<<< dialogue-overhaul
+           // Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
+//=======
+            Coroutilities.DoAfterYielders(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+                StartCoroutine(TakeOffLid()),
+//>>>>>>> dev
                 StartCoroutine(ProteinInPot()),
                 StartCoroutine(BackgroundToSchool(2)));
         }

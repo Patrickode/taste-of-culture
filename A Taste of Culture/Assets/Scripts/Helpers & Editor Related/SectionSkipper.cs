@@ -14,6 +14,8 @@ public class SectionSkipper : Singleton<SectionSkipper>
     [SerializeField] private bool useSkipButton;
     [SerializeField] private bool useSkipKeystroke;
 
+    private bool[] keystrokeKeysDown = { false, false, false, false };
+
     private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
     {
         if (!Application.isPlaying && skipCanvas && !skipCanvas.worldCamera
@@ -34,11 +36,19 @@ public class SectionSkipper : Singleton<SectionSkipper>
 
     private void Update()
     {
-        if (useSkipKeystroke
-            && Input.GetKey(KeyCode.S)
-            && Input.GetKey(KeyCode.K)
-            && Input.GetKey(KeyCode.I)
-            && Input.GetKeyDown(KeyCode.P))
+        if (!useSkipKeystroke) return;
+
+        keystrokeKeysDown[0] = Input.GetKey(KeyCode.S);
+        keystrokeKeysDown[1] = Input.GetKey(KeyCode.K);
+        keystrokeKeysDown[2] = Input.GetKey(KeyCode.I);
+        keystrokeKeysDown[3] = Input.GetKey(KeyCode.P);
+
+        //I is ignored because SKI (and thus SKIP) in particular doesn't work on the keyboard of
+        //the computer Patrick uses in the labs, for hardware reasons (look up keyboard rollover)
+        if (keystrokeKeysDown[0]
+            && keystrokeKeysDown[1]
+            //&& keystrokeKeysDown[2]
+            && keystrokeKeysDown[3])
         {
             SkipSection();
         }
@@ -47,7 +57,7 @@ public class SectionSkipper : Singleton<SectionSkipper>
     void SkipSection()
     {
         int nextScIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextScIndex < SceneManager.sceneCountInBuildSettings || nextScIndex < 0)
+        if (nextScIndex < SceneManager.sceneCountInBuildSettings && nextScIndex >= 0)
         {
             Debug.Log($"<color=#FFF200>Skipping current scene of index {nextScIndex - 1}; loading scene at index {nextScIndex}.</color>");
             SceneManager.LoadScene(nextScIndex);
