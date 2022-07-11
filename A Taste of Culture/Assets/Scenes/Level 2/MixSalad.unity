@@ -3037,6 +3037,10 @@ PrefabInstance:
       value: GIF Manager
       objectReference: {fileID: 0}
     - target: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
+      propertyPath: startActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: videoFilename
       value: MixingDemo.mp4
       objectReference: {fileID: 0}
