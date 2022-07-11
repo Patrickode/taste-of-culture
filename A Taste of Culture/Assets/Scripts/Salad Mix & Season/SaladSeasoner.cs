@@ -14,20 +14,23 @@ public class SaladSeasoner : MonoBehaviour
     [SerializeField] private Collider2D seasonZone;
     [SerializeField] private Transform seasonContainer;
     [SerializeField] private Vector2 spawnOffset;
-    [SerializeField] private Vector2 spawnRotMinMax;
+    [SerializeField] [VectorLabels(0.5f, 5, "Min", "Max")] private Vector2 spawnRotRange;
 
     private SpriteRenderer currentSpriteObj;
     private SpriteRenderer newSpriteObj;
     private Coroutine useTimer;
+
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        spawnRotRange.x = Mathf.Min(spawnRotRange.x, spawnRotRange.y);
+        spawnRotRange.y = Mathf.Max(spawnRotRange.y, spawnRotRange.x);
+    });
 
     private void Start()
     {
         UtilFunctions.SafeSetActive(heldSpriteObj, false);
         UtilFunctions.SafeSetActive(useSpriteObj, false);
         SwitchToSpriteObj(SeasonerState.Idle);
-
-        //Ensure that x is always the lesser value or equal to y
-        spawnRotMinMax.x = Mathf.Min(spawnRotMinMax.x, spawnRotMinMax.y);
     }
 
     private void Update()
@@ -48,7 +51,7 @@ public class SaladSeasoner : MonoBehaviour
                     seasonPrefab,
                     transform.position + (Vector3)spawnOffset,
                     transform.rotation * Quaternion.AngleAxis(
-                        Random.Range(spawnRotMinMax.x, spawnRotMinMax.y), Vector3.forward)
+                        Random.Range(spawnRotRange.x, spawnRotRange.y), Vector3.forward)
                     );
                 spawnedSeasoning.transform.parent = seasonContainer;
 
