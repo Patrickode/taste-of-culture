@@ -1385,8 +1385,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   holdTag: 
-  holdMinDepth: 1
-  holdMaxDepth: 1
+  holdDepthRange: {x: 1, y: 1}
   moveWithPhysics: 0
   thingToMove: {fileID: 448563889}
   moveZone: {fileID: 0}
@@ -2799,8 +2798,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   holdTag: Player
-  holdMinDepth: -Infinity
-  holdMaxDepth: Infinity
+  holdDepthRange: {x: -Infinity, y: Infinity}
   moveWithPhysics: 0
   thingToMove: {fileID: 23967090}
   moveZone: {fileID: 1080620648}
@@ -3343,8 +3341,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   holdTag: 
-  holdMinDepth: 2
-  holdMaxDepth: 2
+  holdDepthRange: {x: 2, y: 2}
   moveWithPhysics: 0
   thingToMove: {fileID: 1399072383}
   moveZone: {fileID: 0}
@@ -4977,8 +4974,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   holdTag: 
-  holdMinDepth: 3
-  holdMaxDepth: 3
+  holdDepthRange: {x: 3, y: 3}
   moveWithPhysics: 0
   thingToMove: {fileID: 2095641381}
   moveZone: {fileID: 0}
