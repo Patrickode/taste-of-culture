@@ -2883,7 +2883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f1c55dba3f8e042b2bad28ebc07b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneIndex: -1
+  nextSceneIndex: 9
   sceneManager: {fileID: 1749865173}
   Ingredients:
   - {fileID: 545925036}
@@ -5288,8 +5288,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748345c9a65c0f94d80ea290cccee1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stayInScene: 0
+  dontDestroyOnLoad: 1
+  skipCanvas: {fileID: 0}
   skipButton: {fileID: 606200453}
+  useSkipButton: 0
+  useSkipKeystroke: 0
 --- !u!4 &2112189923
 Transform:
   m_ObjectHideFlags: 0
