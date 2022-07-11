@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class RemovalHand : RemovalTool
 {
-    private bool hoveringTool;
+    [Header("Removal Hand Fields")]
     [SerializeField] private string hoverToolName;
-
+    private bool hoveringTool;
+    [Space(5)]
     [SerializeField] private Sprite idleHand;
     [SerializeField] private Sprite grabHand;
     [SerializeField] private SpriteRenderer render;
-
+    [Space(5)]
     [SerializeField] private Vector2 useStartPos;
     [SerializeField] private Vector2 useDistance;
     [SerializeField] private float resistScalar;
     [SerializeField] private int framesDown;
-
+    [Space(5)]
     [SerializeField] private GameObject animal;
 
     // Start is called before the first frame update

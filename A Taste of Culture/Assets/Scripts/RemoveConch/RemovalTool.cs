@@ -4,12 +4,13 @@ using UnityEngine;
 
 public abstract class RemovalTool : MonoBehaviour
 {
+    [Header("Removal Tool Fields")]
     [SerializeField] protected Vector3 startPos;
     [SerializeField] protected bool active;
-
+    [Space(5)]
     [SerializeField] protected Vector2 offset;
     [SerializeField] protected int heldZ;
-
+    [Space(5)]
     [SerializeField] protected bool canUse;
     [SerializeField] protected bool properArea;
     [SerializeField] protected bool isUsing;

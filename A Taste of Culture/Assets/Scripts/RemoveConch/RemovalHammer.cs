@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class RemovalHammer : RemovalTool
 {
+    [Header("Removal Hammer Fields")]
     [SerializeField] private bool canSetBack;
-
+    [Space(5)]
     [SerializeField] private int holeProgress;
     [SerializeField] private int hitPower;
-
+    [Space(5)]
     [SerializeField] private SpriteRenderer render;
     [SerializeField] private Sprite setSprite;
     [SerializeField] private Sprite holdSprite;

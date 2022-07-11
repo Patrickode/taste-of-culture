@@ -10,19 +10,20 @@ public class RemovalManager : MonoBehaviour
     [SerializeField] private RemovalTool hammer;
     [SerializeField] private RemovalTool knife;
     public static RemovalManager Instance;
-
+    [Space(5)]
     [SerializeField] private GameObject[] knifeStartObjects;
     [SerializeField] private GameObject[] hammerStopObjects;
-
+    [Space(5)]
     [SerializeField] private GameObject startingShellObject;
     [SerializeField] private GameObject flippedShellObject;
-
+    [Space(5)]
+    [Tooltip("Uses `Transitions.LoadWithTransition`, so negative indices = relative; -2 = 2 ahead.")]
     [SerializeField] private int NextSceneIndex;
- 
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        else Destroy(this.gameObject);
+        else Destroy(gameObject);
 
         current = hand;
     }
@@ -101,6 +102,6 @@ public class RemovalManager : MonoBehaviour
 
     public void MoveToNextScene()
     {
-        SceneManager.LoadScene(NextSceneIndex);
+        Transitions.LoadWithTransition?.Invoke(NextSceneIndex, -1);
     }
 }

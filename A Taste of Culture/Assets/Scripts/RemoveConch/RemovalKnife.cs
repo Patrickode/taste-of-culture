@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class RemovalKnife : RemovalTool
 {
+    [Header("Removal Knife Fields")]
     [SerializeField] private bool canSetBack;
-
+    [Space(5)]
     [SerializeField] private float unstickProgress;
 
     public override bool Active
