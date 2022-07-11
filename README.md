@@ -1,4 +1,4 @@
-*A Taste of Culture* is a game where players can learn about cultures from across the world via the unifying, yet incredibly diverse practice of making food.
+*A Taste of Culture* is a game where players can learn about cultures from across the world via the unifying, yet incredibly diverse practice of making food, made by *Too Many Cooks*.
 
 ## Team Members
  - Joeseph Hong - Producer, Audio, Background Research
