@@ -41,6 +41,12 @@ public class MoveWithMousePos : MonoBehaviour
         }
     }
 
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        holdMinDepth = Mathf.Min(holdMinDepth, holdMaxDepth);
+        holdMaxDepth = Mathf.Max(holdMaxDepth, holdMinDepth);
+    });
+
     private void Start()
     {
         originalPos = thingToMove.transform.position;

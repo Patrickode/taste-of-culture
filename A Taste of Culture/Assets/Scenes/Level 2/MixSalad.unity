@@ -2799,8 +2799,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   holdTag: Player
-  holdMinDepth: 0
-  holdMaxDepth: 0
+  holdMinDepth: -Infinity
+  holdMaxDepth: Infinity
   moveWithPhysics: 0
   thingToMove: {fileID: 23967090}
   moveZone: {fileID: 1080620648}
