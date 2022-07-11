@@ -33,6 +33,8 @@ namespace DialogueEditor
         /// <summary> The font used for the 'End' button. </summary>
         public TMPro.TMP_FontAsset EndConversationFont;
 
+        public UnityEngine.Events.UnityEvent EventsOnEnd;
+
         // ---
 
         public void SetInt(string paramName, int value, out eParamStatus status)

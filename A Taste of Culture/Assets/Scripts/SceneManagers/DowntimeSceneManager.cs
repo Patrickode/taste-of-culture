@@ -47,16 +47,10 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
 
-//<<<<<<< dialogue-overhaul
-        //Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
-          // StartCoroutine(ButterInPot()),
-           //StartCoroutine(BackgroundToSchool()));
-//=======
-        Coroutilities.DoAfterYielders(this, () => { },
-            StartCoroutine(TakeOffLid()),
-            StartCoroutine(ButterInPot()),
-            StartCoroutine(BackgroundToSchool()));
-//>>>>>>> dev
+        StartCoroutine(TakeOffLid());
+        StartCoroutine(ButterInPot());
+        StartCoroutine(BackgroundToSchool());
+
     }
 
     IEnumerator ButterInPot()
@@ -74,14 +68,9 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[11].SetActive(false);
             backgrounds[7].SetActive(true);
 
-//<<<<<<< dialogue-overhaul
-           // Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
-//=======
-            Coroutilities.DoAfterYielders(this, () => {  },
-                StartCoroutine(TakeOffLid()),
-//>>>>>>> dev
-                StartCoroutine(ProteinInPot()),
-                StartCoroutine(BackgroundToSchool(2)));
+            StartCoroutine(TakeOffLid());
+            StartCoroutine(ProteinInPot());
+            StartCoroutine(BackgroundToSchool(2));
         }
     }
 
@@ -108,7 +97,7 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void PlateCurry()
     {
-    StartCoroutine(ShowPlate());
+        StartCoroutine(ShowPlate());
     }
 
     IEnumerator ShowPlate()

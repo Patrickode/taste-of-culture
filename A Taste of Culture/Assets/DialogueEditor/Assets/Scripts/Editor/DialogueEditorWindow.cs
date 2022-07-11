@@ -15,7 +15,7 @@ namespace DialogueEditor
                 Connection
             }
 
-            public abstract eType Type { get; }           
+            public abstract eType Type { get; }
         }
 
         public class SelectableUINode : SelectableUI
@@ -45,7 +45,7 @@ namespace DialogueEditor
             Regular,
             PlacingOption,
             PlacingSpeech,
-            ConnectingNode,         
+            ConnectingNode,
             draggingPanel,
         }
 
@@ -174,7 +174,7 @@ namespace DialogueEditor
 #endif
         }
 
-        
+
 
         public void RecreateUI(EditableConversation conversation)
         {
@@ -625,7 +625,7 @@ namespace DialogueEditor
                     GUILayout.BeginHorizontal();
 
                     float paramNameWidth = panelWidth * 0.6f;
-                    CurrentAsset.ParameterList[i].ParameterName = GUILayout.TextField(CurrentAsset.ParameterList[i].ParameterName, 
+                    CurrentAsset.ParameterList[i].ParameterName = GUILayout.TextField(CurrentAsset.ParameterList[i].ParameterName,
                         EditableParameter.MAX_NAME_SIZE, GUILayout.Width(paramNameWidth), GUILayout.ExpandWidth(false));
 
                     if (CurrentAsset.ParameterList[i] is EditableBoolParameter)
@@ -685,6 +685,14 @@ namespace DialogueEditor
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("'End' font:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
                 CurrentAsset.EndConversationFont = (TMPro.TMP_FontAsset)EditorGUILayout.ObjectField(CurrentAsset.EndConversationFont, typeof(TMPro.TMP_FontAsset), false, GUILayout.MaxWidth(fieldWidth));
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+
+                EditorGUILayout.BeginHorizontal();
+                SerializedObject sObj = new SerializedObject(CurrentAsset);
+                EditorGUILayout.PropertyField(sObj.FindProperty("EventsOnEnd"), false, GUILayout.MaxWidth(labelWidth + fieldWidth));
+                sObj.ApplyModifiedProperties();
                 EditorGUILayout.EndHorizontal();
             }
             else
@@ -1439,7 +1447,7 @@ namespace DialogueEditor
                 pos.x > panelResizerRect.x - panelResizerRect.width - PANEL_RESIZER_PADDING &&
                 pos.x < panelResizerRect.x + panelResizerRect.width + PANEL_RESIZER_PADDING &&
                 pos.y > panelResizerRect.y &&
-                panelResizerRect.y < panelResizerRect.y + panelResizerRect.height);        
+                panelResizerRect.y < panelResizerRect.y + panelResizerRect.height);
         }
 
         public bool NodeContainsSetParamAction(EditableConversationNode node, string parameterName)

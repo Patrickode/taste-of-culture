@@ -170,7 +170,10 @@ namespace DialogueEditor
             SetState(eState.TransitioningDialogueOff);
 
             if (OnConversationEnded != null)
+            {
                 OnConversationEnded.Invoke();
+                m_conversation.EventsOnEnd?.Invoke();
+            }
         }
 
         public void SelectNextOption()

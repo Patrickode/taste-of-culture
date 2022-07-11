@@ -22,6 +22,11 @@ public class DialogueController : MonoBehaviour
             tool.SetActive(false);
         }
     }
+    private void OnDestroy()
+    {
+        ConversationManager.OnConversationEnded -= LoadNextScene;
+        ConversationManager.OnConversationEnded -= EnableControls;
+    }
 
     private void TriggerConversation(NPCConversation conversation)
     {
@@ -46,6 +51,17 @@ public class DialogueController : MonoBehaviour
     public void ConversationEndEnableControls()
     {
         ConversationManager.OnConversationEnded += EnableControls;
+    }
+
+    public void EvtOnConversationEnd(UnityEngine.Events.UnityEvent evt)
+    {
+        ConversationManager.OnConversationEnded += unityToSystemEvt;
+
+        void unityToSystemEvt()
+        {
+            ConversationManager.OnConversationEnded -= unityToSystemEvt;
+            evt?.Invoke();
+        }
     }
 
     public void EnableControls()
