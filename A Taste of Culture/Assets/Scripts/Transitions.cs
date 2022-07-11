@@ -131,7 +131,7 @@ public class Transitions : MonoBehaviour
             },
             midTime);
 
-        FadeBackingImg(pauseOnMid, midTime);
+        FadeBackingImg(pauseOnMid);
     }
 
     private void OnMidTransition(bool pauseOnMid)
@@ -144,19 +144,21 @@ public class Transitions : MonoBehaviour
 
     private void OnContinueTransition() => pausedAtMidpoint = false;
 
-    private void FadeBackingImg(bool pauseOnMid, float midTime)
+    private void FadeBackingImg(bool pauseOnMid)
     {
         backingCanv.gameObject.SetActive(true);
 
         //First, set up a progress tracker, then determine the duration (end time - start time).
         //  End = duration of the transition p system, plus some time for the last particles to leave the screen
-        //  Start = Visual mid; the time when the particle sizes peak, plus some time for those peak particles to get on screen
+        //  Start = The time when the particle sizes peak, plus some time for those peak particles to get on screen
         float fadeProgress = 0;
-        float visualMid = Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4;
-        float duration = (mainCache.duration + mainCache.startLifetime.constant / 2) - visualMid;
+        float peakTime = Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4;
+        float duration = (mainCache.duration + mainCache.startLifetime.constant / 2) - peakTime;
 
         //Once we get to the start of the particle size peak, start the fade process.
-        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, visualMid);
+        //  The idea is to fade the backing image in when the biggest particles show up (i.e. the fade is least noticable) to
+        //  help those particles obscure the load behind them.
+        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, peakTime);
 
         //Disable the backing canvas when the fading's done.
         Coroutilities.DoWhen(this, () => backingCanv.gameObject.SetActive(false), () => fadeProgress >= 1);
