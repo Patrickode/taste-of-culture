@@ -7,7 +7,6 @@ public class RemovalKnife : RemovalTool
     [SerializeField] private bool canSetBack;
 
     [SerializeField] private float unstickProgress;
-    [SerializeField] private bool isUsing;
 
     public override bool Active
     {
@@ -67,6 +66,7 @@ public class RemovalKnife : RemovalTool
             if (unstickProgress >= 5.0f)
             {
                 Debug.Log("Move to the hand!");
+                heldZ = -5;
                 RemovalManager.Instance.StartHandPlay();
             }
         }

@@ -7,7 +7,6 @@ public class RemovalHammer : RemovalTool
     [SerializeField] private bool canSetBack;
 
     [SerializeField] private int holeProgress;
-    [SerializeField] private bool isUsing;
     [SerializeField] private int hitPower;
 
     [SerializeField] private SpriteRenderer render;
@@ -85,6 +84,7 @@ public class RemovalHammer : RemovalTool
             else if (holeProgress >= 1000)
             {
                 Debug.Log("Move to the knife!");
+                heldZ = -5;
                 RemovalManager.Instance.StartKnifePlay();
             }
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RemovalManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class RemovalManager : MonoBehaviour
 
     [SerializeField] private GameObject startingShellObject;
     [SerializeField] private GameObject flippedShellObject;
+
+    [SerializeField] private int NextSceneIndex;
  
     private void Awake()
     {
@@ -94,5 +97,10 @@ public class RemovalManager : MonoBehaviour
 
         // turn on flipped shell
         flippedShellObject.SetActive(true);
+    }
+
+    public void MoveToNextScene()
+    {
+        SceneManager.LoadScene(NextSceneIndex);
     }
 }

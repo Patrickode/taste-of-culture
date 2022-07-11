@@ -12,6 +12,7 @@ public abstract class RemovalTool : MonoBehaviour
 
     [SerializeField] protected bool canUse;
     [SerializeField] protected bool properArea;
+    [SerializeField] protected bool isUsing;
 
     public virtual bool Active
     {
