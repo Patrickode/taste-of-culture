@@ -61,7 +61,7 @@ public class DowntimeSceneManager : MonoBehaviour
         mentor.SetActive(false);
         dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielders(this, () => dialogueManager.ToggleContinue(true),
             StartCoroutine(TakeOffLid()),
             StartCoroutine(ButterInPot()),
             StartCoroutine(BackgroundToSchool()));
@@ -85,7 +85,7 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[7].SetActive(true);
             mentor.SetActive(false);
 
-            Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+            Coroutilities.DoAfterYielders(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
                 StartCoroutine(TakeOffLid()),
                 StartCoroutine(ProteinInPot()),
                 StartCoroutine(BackgroundToSchool(2)));

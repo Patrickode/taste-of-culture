@@ -28,7 +28,8 @@ public class Transitions : MonoBehaviour
 
     /// <summary>
     /// <b>Arguments:</b><br/>
-    /// - <see cref="int"/>: The index of the scene to load. (<i>Relative if negative; -2 = two scenes ahead of this one.</i>)<br/>
+    /// - <see cref="int"/>: The index of the scene to load. (<i>Relative if negative; 
+    /// -2 = two scenes ahead of this one.</i>)<br/>
     /// - <see cref="float"/>: The speed of the transition. Pass &lt;= 0 to use default speed 
     /// (as set in the inspector).
     /// </summary>
@@ -130,7 +131,7 @@ public class Transitions : MonoBehaviour
             },
             midTime);
 
-        FadeBackingImg(pauseOnMid, midTime);
+        FadeBackingImg(pauseOnMid);
     }
 
     private void OnMidTransition(bool pauseOnMid)
@@ -143,19 +144,21 @@ public class Transitions : MonoBehaviour
 
     private void OnContinueTransition() => pausedAtMidpoint = false;
 
-    private void FadeBackingImg(bool pauseOnMid, float midTime)
+    private void FadeBackingImg(bool pauseOnMid)
     {
         backingCanv.gameObject.SetActive(true);
 
         //First, set up a progress tracker, then determine the duration (end time - start time).
         //  End = duration of the transition p system, plus some time for the last particles to leave the screen
-        //  Start = the time when the particle sizes peak, plus some time for those peak particles to get on screen
+        //  Start = The time when the particle sizes peak, plus some time for those peak particles to get on screen
         float fadeProgress = 0;
-        float duration = mainCache.duration + mainCache.startLifetime.constant / 2 -
-            (Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4);
+        float peakTime = Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4;
+        float duration = (mainCache.duration + mainCache.startLifetime.constant / 2) - peakTime;
 
         //Once we get to the start of the particle size peak, start the fade process.
-        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, Mathf.Lerp(0, mainCache.duration, startOfPeakKey.time) + mainCache.startLifetime.constant / 4);
+        //  The idea is to fade the backing image in when the biggest particles show up (i.e. the fade is least noticable) to
+        //  help those particles obscure the load behind them.
+        Coroutilities.DoAfterDelay(this, FadeBasedOnPause, peakTime);
 
         //Disable the backing canvas when the fading's done.
         Coroutilities.DoWhen(this, () => backingCanv.gameObject.SetActive(false), () => fadeProgress >= 1);
@@ -166,16 +169,16 @@ public class Transitions : MonoBehaviour
             if (pauseOnMid)
             {
                 //fade to white (the middle of the fade process), then wait till the transition resumes.
-                FadeTillValue(0.5f);
+                FadeUntilT(0.5f);
                 ContinueTransition += ResumeFade;
                 return;
             }
 
             //If not, no need to wait, just go all the way through.
-            FadeTillValue(1);
+            FadeUntilT(1);
         }
 
-        void FadeTillValue(float until) => Coroutilities.DoUntil(this, FadeImgColor, () => fadeProgress >= until);
+        void FadeUntilT(float t) => Coroutilities.DoUntil(this, FadeImgColor, () => fadeProgress >= t);
 
         void FadeImgColor()
         {
@@ -188,7 +191,7 @@ public class Transitions : MonoBehaviour
         void ResumeFade()
         {
             ContinueTransition -= ResumeFade;
-            FadeTillValue(1);
+            FadeUntilT(1);
         }
     }
 

@@ -82,28 +82,34 @@ public static class Coroutilities
     /// Calls <paramref name="thingToDo"/> after <paramref name="yielder"/>, whatever it is, is done.
     /// </summary>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="yielder"/>.</param>
-    /// <param name="yielder">The thing that comes before <paramref name="thingToDo"/>. This could be a <see cref="Coroutine"/>, 
-    /// an <see cref="AsyncOperation"/>, or any other child of <see cref="YieldInstruction"/>.</param>
+    /// <param name="yielder">
+    /// A <see cref="YieldInstruction"/>, <see cref="CustomYieldInstruction"/>, <see cref="Coroutine"/>, or similar thing.
+    /// <paramref name="thingToDo"/> will be called after this.<br/><br/>
+    ///     Avoid passing things that aren't akin to <see cref="YieldInstruction"/>; that can cause unpredictable behavior.
+    /// </param>
     /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
-    public static Coroutine DoAfterYielder(MonoBehaviour coroutineCaller, Action thingToDo, YieldInstruction yielder)
+    public static Coroutine DoAfterYielder(MonoBehaviour coroutineCaller, Action thingToDo, object yielder)
         => coroutineCaller.StartCoroutine(DoAfterYielder(thingToDo, yielder));
 
-    /// <remarks></remarks> <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction)"/>
-    private static IEnumerator DoAfterYielder(Action thingToDo, YieldInstruction yielder)
+    /// <remarks></remarks> <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, object)"/>
+    private static IEnumerator DoAfterYielder(Action thingToDo, object yielder)
     {
         yield return yielder;
         thingToDo();
     }
 
     /// <summary>
-    /// Calls <paramref name="thingToDo"/> after all <paramref name="yielders"/> <b>(run in parallel)</b> are done.
+    /// Calls <paramref name="thingToDo"/> after all <paramref name="yielders"/> <b>(run in parallel, not in sequence)</b> are done.
     /// </summary>
-    /// <param name="yielders">The things that come before <paramref name="thingToDo"/>. They could be 
-    /// <see cref="Coroutine"/>s, <see cref="AsyncOperation"/>s, or any other child of <see cref="YieldInstruction"/>.</param>
-    /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction)"/>
-    public static Coroutine DoAfterYielder(MonoBehaviour coroutineCaller, Action thingToDo, params YieldInstruction[] yielders)
+    /// <param name="yielders">
+    /// <see cref="YieldInstruction"/>s, <see cref="CustomYieldInstruction"/>s, <see cref="Coroutine"/>s, or similar things
+    /// that will all happen before <paramref name="thingToDo"/>.<br/><br/>
+    ///     Avoid passing things that aren't akin to <see cref="YieldInstruction"/>; that can cause unpredictable behavior.
+    /// </param>
+    /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, object)"/>
+    public static Coroutine DoAfterYielders(MonoBehaviour coroutineCaller, Action thingToDo, params object[] yielders)
     {
-        HashSet<YieldInstruction> activeYielders = new HashSet<YieldInstruction>();
+        HashSet<object> activeYielders = new HashSet<object>();
         foreach (var yielder in yielders)
         {
             //Add this yielder to our set of active ones. When it's done, remove it.
@@ -122,10 +128,9 @@ public static class Coroutilities
     /// <param name="yielders">
     /// Any number of functions or lambdas that return <see cref="YieldInstruction"/>s or similar types; for example,<br/>
     /// <c>() =&gt; <see cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/></c>.<br/><br/>
-    ///     Note that many other functions/lambdas can be passed, but non-<see cref="YieldInstruction"/> return types<br/>
-    ///     will probably not be executed.
+    ///     Avoid passing functions/lambdas that don't return <see cref="YieldInstruction"/>-like things; they can<br/>behave unpredictably.
     /// </param>
-    /// <inheritdoc cref="DoAfterYielder(MonoBehaviour, Action, YieldInstruction[])"/>
+    /// <inheritdoc cref="DoAfterYielders(MonoBehaviour, Action, object[])"/>
     public static Coroutine DoAfterSequence(MonoBehaviour coroutineCaller, Action thingToDo, params Func<object>[] yielders)
         => coroutineCaller.StartCoroutine(DoAfterSequence(thingToDo, yielders));
 
@@ -138,31 +143,6 @@ public static class Coroutilities
 
         thingToDo();
     }
-
-
-
-    /*//Alas, this does not work. I'd need to figure out a way to take in any "event" type that supports +=/-=;
-    //I currently know no such way. Actions (my prime target) do work with this, Delegate just doesn't support +=/-=.
-    /// <summary>
-    /// Calls <paramref name="thingToDo"/> when <paramref name="evt"/> is invoked.
-    /// </summary>
-    /// <param name="thingToDo">The function or lambda expression that will be called 
-    /// when <paramref name="evt"/> is invoked.</param>
-    /// <param name="evt">Call <paramref name="thingToDo"/> when this is invoked.</param>
-    /// <inheritdoc cref="DoAfterDelay(MonoBehaviour, Action, float, bool)"/>
-    private static Coroutine DoAfterEvent(MonoBehaviour coroutineCaller, Action thingToDo, Delegate evt)
-        => coroutineCaller.StartCoroutine(DoAfterEvent(thingToDo, evt));
-
-    /// <remarks></remarks> <inheritdoc cref="DoAfterEvent(MonoBehaviour, Action, Action)"/>
-    private static IEnumerator DoAfterEvent(Action thingToDo, Delegate evt)
-    {
-        bool evtDone = false;
-        evt += OnEvt;
-        void OnEvt() { evt -= OnEvt; evtDone = true; }
-
-        yield return new WaitUntil(() => evtDone = false);
-        thingToDo();
-    }*/
 
 
 
