@@ -52,7 +52,7 @@ public class DowntimeSceneManager : MonoBehaviour
           // StartCoroutine(ButterInPot()),
            //StartCoroutine(BackgroundToSchool()));
 //=======
-        Coroutilities.DoAfterYielders(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielders(this, () => { },
             StartCoroutine(TakeOffLid()),
             StartCoroutine(ButterInPot()),
             StartCoroutine(BackgroundToSchool()));
@@ -77,7 +77,7 @@ public class DowntimeSceneManager : MonoBehaviour
 //<<<<<<< dialogue-overhaul
            // Coroutilities.DoAfterYielder(this, () => StartCoroutine(TakeOffLid()),
 //=======
-            Coroutilities.DoAfterYielders(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+            Coroutilities.DoAfterYielders(this, () => {  },
                 StartCoroutine(TakeOffLid()),
 //>>>>>>> dev
                 StartCoroutine(ProteinInPot()),
