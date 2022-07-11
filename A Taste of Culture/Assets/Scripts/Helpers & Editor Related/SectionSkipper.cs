@@ -36,14 +36,16 @@ public class SectionSkipper : Singleton<SectionSkipper>
 
     private void Update()
     {
+        if (!useSkipKeystroke) return;
+
         keystrokeKeysDown[0] = Input.GetKey(KeyCode.S);
         keystrokeKeysDown[1] = Input.GetKey(KeyCode.K);
         keystrokeKeysDown[2] = Input.GetKey(KeyCode.I);
         keystrokeKeysDown[3] = Input.GetKey(KeyCode.P);
 
-        //I is ignored because SKI (and thus SKIP) in particular doesn't work. Why? God only knows.
-        if (useSkipKeystroke
-            && keystrokeKeysDown[0]
+        //I is ignored because SKI (and thus SKIP) in particular doesn't work on the keyboard of
+        //the computer Patrick uses in the labs, for hardware reasons (look up keyboard rollover)
+        if (keystrokeKeysDown[0]
             && keystrokeKeysDown[1]
             //&& keystrokeKeysDown[2]
             && keystrokeKeysDown[3])
