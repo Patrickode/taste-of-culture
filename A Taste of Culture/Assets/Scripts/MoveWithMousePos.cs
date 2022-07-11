@@ -18,8 +18,9 @@ public class MoveWithMousePos : MonoBehaviour
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
     [SerializeField] private Collider2D moveZone;
     [SerializeField] private Collider moveZone3D;
+    [Tooltip("Distance Z from the camera plane; see `Camera.ScreenToWorldPoint`.")]
     [SerializeField] private float screenPointDistance;
-    [SerializeField] private bool preserveDepthPos;
+    //[SerializeField] private bool preserveDepthPos;
 
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
@@ -97,6 +98,7 @@ public class MoveWithMousePos : MonoBehaviour
         {
             Held = false;
             holdOffset = Vector3.zero;
+            
             if (returnWhenDropped)
                 thingToMove.transform.position = originalPos;
         }
@@ -113,12 +115,13 @@ public class MoveWithMousePos : MonoBehaviour
         //If we've got a moveZone to constrain the destination to, get the closest point on it to the destination.
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
+
         else if (moveZone3D)
         {
             destination = moveZone3D.ClosestPoint(destination);
             //Y was used instead of Z for a 3D experiment where Y was the depth dir (so typical gravity was away from camera)
-            if (preserveDepthPos)
-                destination.y = thingToMove.transform.position.y;
+            /*if (preserveDepthPos)
+                destination.y = thingToMove.transform.position.y;*/
         }
 
         if (moveWithPhysics)
