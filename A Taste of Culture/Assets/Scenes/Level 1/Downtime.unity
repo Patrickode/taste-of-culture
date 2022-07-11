@@ -899,22 +899,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4782670276490448452, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782670276490448452, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 785695405}
-    - target: {fileID: 4782670276490448452, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782670276490448452, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5231451589119995397, guid: 1032f6815e08bdd4c8169fe06feb0b03, type: 3}
       propertyPath: m_Camera
       value: 
@@ -3248,6 +3232,9 @@ MonoBehaviour:
   - {fileID: 997879718}
   ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
   Event:
     m_PersistentCalls:
       m_Calls: []
