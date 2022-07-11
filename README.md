@@ -8,9 +8,7 @@
  - Robley Evans - Part-time Gameplay/UI Programming
  - Gel Howell - Part-time Gameplay Programming
 
-
-
-
+<br/><br/><br/>
 
 # 601 Archive
 ## A Taste of Culture
