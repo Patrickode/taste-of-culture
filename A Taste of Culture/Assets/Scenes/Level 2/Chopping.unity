@@ -3446,6 +3446,7 @@ MonoBehaviour:
   - {fileID: 546798017}
   - {fileID: 1236935005}
   progressFill: {fileID: 1162230522}
+  fillDuration: 0.2
   bAtLastIngredient: 0
 --- !u!4 &1311813211
 Transform:

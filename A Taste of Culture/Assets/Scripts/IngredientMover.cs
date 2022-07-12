@@ -10,14 +10,17 @@ public class IngredientMover : MonoBehaviour
     [SerializeField] float budgeDuration = 0.125f;
     [Space(5)]
 
-    [SerializeField] [Tooltip("X Position at which player can rotate ingredient")] 
-        float rotateXPosition;
-    [SerializeField] [Tooltip("X Position that triggers transition")] 
-        float finalXPosition;
+    [SerializeField]
+    [Tooltip("X Position at which player can rotate ingredient")]
+    float rotateXPosition;
+    [SerializeField]
+    [Tooltip("X Position that triggers transition")]
+    float finalXPosition;
     [Space(5)]
 
-    [SerializeField] [Tooltip("Desired position of ingredient after it has been rotated")] 
-        Vector2 rotatedPosition;
+    [SerializeField]
+    [Tooltip("Desired position of ingredient after it has been rotated")]
+    Vector2 rotatedPosition;
     [Space(5)]
 
     [SerializeField] GameObject choppedPrefab;
@@ -74,7 +77,7 @@ public class IngredientMover : MonoBehaviour
 
     void DoMoveOrBudge()
     {
-        Debug.Log("Allow Movement: " + allowMovement);
+        Debug.Log($"<color=#777>IngMover: Allow Movement = {allowMovement}</color>");
 
         // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
         if (allowMovement)
@@ -168,12 +171,12 @@ public class IngredientMover : MonoBehaviour
         if (sceneManager != null)
         {
             // Disable knife chop if last ingredient
-            if(sceneManager.bAtLastIngredient) 
-            { 
+            if (sceneManager.bAtLastIngredient)
+            {
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
                 if (knife != null) { knife.CanChop = false; }
             }
-            
+
             sceneManager.TaskComplete();
         }
     }
