@@ -36,10 +36,7 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
 
         if(progressIndicator != null) 
         { 
-            Debug.Log("Ingredient: " + (ingredients.IndexOf(currentIngredient) + 1) + " of " + ingredients.Count);
             float progress = (float)(ingredients.IndexOf(currentIngredient) + 1) / (float)ingredients.Count;
-            Debug.Log(progress);
-
             progressIndicator.transform.localScale = new Vector2(progress, 1);
         }
 
