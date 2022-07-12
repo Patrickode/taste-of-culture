@@ -8,9 +8,18 @@ public class FlavorGraphLine : MonoBehaviour
 
     [SerializeField] private LineRenderer border;
     [SerializeField] private RectTransform posSizeRef;
-    [SerializeField] private GraphLine lineType;
     [SerializeField] private FlavorType[] flavsToDisplay;
     [Space(5)]
+    [SerializeField] private GraphLine lineType;
+    [SerializeField] private TMPro.TextMeshProUGUI labelPrefab;
+    [SerializeField] private bool useNumberLabels;
+    [SerializeField] private bool rotateLabels;
+    [SerializeField] private float labelOffset;
+    [Space(5)]
+    [SerializeField] private bool adjustLabelAutoSize;
+    [VectorLabels("Min", "Max", "WD%", "Line")]
+    [SerializeField] private Vector4 labelAutoSizeOptns;
+    [Space(10)]
     [SerializeField] private bool clockwise;
     [SerializeField] [Range(0, 360)] private float startAngle;
     [SerializeField] [Min(1)] private float maxValue = 10;
@@ -21,6 +30,14 @@ public class FlavorGraphLine : MonoBehaviour
     private float radius;
     private Vector3[] points;
     private List<Vector3> pointsToBorder = new List<Vector3>();
+
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        labelAutoSizeOptns.x = Mathf.Min(labelAutoSizeOptns.x, labelAutoSizeOptns.y);
+        labelAutoSizeOptns.y = Mathf.Max(labelAutoSizeOptns.y, labelAutoSizeOptns.x);
+        labelAutoSizeOptns.z = Mathf.Clamp(labelAutoSizeOptns.z, 0, 50);
+        labelAutoSizeOptns.w = Mathf.Clamp(labelAutoSizeOptns.w, Mathf.NegativeInfinity, 0);
+    });
 
     private void Start()
     {
@@ -50,7 +67,35 @@ public class FlavorGraphLine : MonoBehaviour
                 center,
                 center + new Vector3(
                     radius * Mathf.Cos(angle),
-                    radius * Mathf.Sin(angle)));
+                    radius * Mathf.Sin(angle)),
+                out float val);
+
+            if (labelPrefab)
+            {
+                var awayFrmCenter = (points[i] - center).normalized;
+                var newLabel = Instantiate(
+                    labelPrefab,
+                    points[i] + awayFrmCenter * labelOffset,
+                    rotateLabels
+                        ? Quaternion.LookRotation(Vector3.forward, Vector3.Dot(Vector3.up, awayFrmCenter) >= 0
+                            ? awayFrmCenter
+                            : -awayFrmCenter)
+                        : Quaternion.identity,
+                    posSizeRef);
+
+                newLabel.text = useNumberLabels
+                    ? val.ToString()
+                    : System.Enum.GetName(typeof(FlavorType), flavsToDisplay[i]);
+
+                if (adjustLabelAutoSize)
+                {
+                    newLabel.fontSizeMin = labelAutoSizeOptns.x;
+                    newLabel.fontSizeMax = labelAutoSizeOptns.y;
+                    //I don't know if these are the right ones, leaving them commented out
+                    //newLabel.characterWidthAdjustment = labelAutoSizeOptns.z;
+                    //newLabel.lineSpacingAdjustment = labelAutoSizeOptns.w;
+                }
+            }
         }
 
         UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, pointsToBorder);
@@ -59,15 +104,22 @@ public class FlavorGraphLine : MonoBehaviour
         border.SetPositions(pointsToBorder.ToArray());
     }
 
-    private Vector3 RepositionPoint(FlavorType type, Vector3 zeroPoint, Vector3 point)
+    private Vector3 RepositionPoint(FlavorType type, Vector3 zeroPoint, Vector3 point, out float valueUsed)
     {
-        float interpolant = 1;
+        float interpolant = 0;
+        valueUsed = 0;
 
         if (lineType != GraphLine.Primary)
+        {
             interpolant = percentOfMax;
+            valueUsed = maxValue * percentOfMax;
+        }
 
         else if (FlavorProfileData.Instance.TryGetFlav(type, out int flavValue))
+        {
             interpolant = Mathf.InverseLerp(0, maxValue, flavValue);
+            valueUsed = flavValue;
+        }
 
         return Vector3.Lerp(zeroPoint, point, interpolant);
     }
