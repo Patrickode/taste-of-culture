@@ -727,13 +727,17 @@ namespace DialogueEditor
                         if (node.Connections.Count > 0 && node.Connections[0] is EditableSpeechConnection)
                         {
                             GUILayout.Label("Auto-Advance options", EditorStyles.boldLabel);
-                            node.AdvanceDialogueAutomatically = EditorGUILayout.Toggle("Automatically Advance", node.AdvanceDialogueAutomatically);
-                            if (node.AdvanceDialogueAutomatically)
+                            node.SkipNode = EditorGUILayout.Toggle("Skip Node", node.SkipNode);
+                            if (!node.SkipNode)
                             {
-                                node.AutoAdvanceShouldDisplayOption = EditorGUILayout.Toggle("Display continue option", node.AutoAdvanceShouldDisplayOption);
-                                node.TimeUntilAdvance = EditorGUILayout.FloatField("Dialogue Time", node.TimeUntilAdvance);
-                                if (node.TimeUntilAdvance < 0.1f)
-                                    node.TimeUntilAdvance = 0.1f;
+                                node.AdvanceDialogueAutomatically = EditorGUILayout.Toggle("Automatically Advance", node.AdvanceDialogueAutomatically);
+                                if (node.AdvanceDialogueAutomatically)
+                                {
+                                    node.AutoAdvanceShouldDisplayOption = EditorGUILayout.Toggle("Display continue option", node.AutoAdvanceShouldDisplayOption);
+                                    node.TimeUntilAdvance = EditorGUILayout.FloatField("Dialogue Time", node.TimeUntilAdvance);
+                                    //if (node.TimeUntilAdvance < 0.1f)
+                                    //    node.TimeUntilAdvance = 0.1f;
+                                } 
                             }
                             EditorGUILayout.Space();
                         }

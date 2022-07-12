@@ -487,6 +487,20 @@ namespace DialogueEditor
 
             m_currentSpeech = speech;
 
+            if (speech.SkipNode)
+            {
+                SpeechNode nextSpeech = GetValidSpeechOfNode(speech);
+                if (nextSpeech == null)
+                {
+                    EndConversation();
+                }
+                else
+                {
+                    SetupSpeech(nextSpeech);
+                }
+                return;
+            }
+
             // Clear current options
             ClearOptions();
             m_currentSelectedIndex = 0;

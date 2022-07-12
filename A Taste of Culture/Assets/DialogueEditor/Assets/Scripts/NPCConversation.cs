@@ -12,7 +12,7 @@ namespace DialogueEditor
         V1_03 = 103,    // Initial save data
         V1_10 = 110,    // Parameters
     }
-    
+
 
     //--------------------------------------
     // Conversation Monobehaviour (Serialized)
@@ -47,7 +47,7 @@ namespace DialogueEditor
         public UnityEngine.Events.UnityEvent Event;
         public List<EditableParameter> ParameterList; // Serialized into the json string
 
-        
+
 
 
         //--------------------------------------
@@ -137,7 +137,7 @@ namespace DialogueEditor
         {
             // Dejsonify 
             EditableConversation conversation = Dejsonify();
-            
+
             if (conversation != null)
             {
                 // Copy the param list
@@ -388,6 +388,7 @@ namespace DialogueEditor
             SpeechNode speech = new SpeechNode();
             speech.Name = editableNode.Name;
             speech.Text = editableNode.Text;
+            speech.SkipNode = editableNode.SkipNode;
             speech.AutomaticallyAdvance = editableNode.AdvanceDialogueAutomatically;
             speech.AutoAdvanceShouldDisplayOption = editableNode.AutoAdvanceShouldDisplayOption;
             speech.TimeUntilAdvance = editableNode.TimeUntilAdvance;

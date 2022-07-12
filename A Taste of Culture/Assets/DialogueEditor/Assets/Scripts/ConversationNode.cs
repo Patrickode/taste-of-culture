@@ -54,6 +54,11 @@ namespace DialogueEditor
         /// <summary> The name of the NPC who is speaking. </summary>
         public string Name;
 
+        /// <summary>
+        /// Immediately move on to the next node after this one. Use for, in effect, conditional root nodes.
+        /// </summary>
+        public bool SkipNode;
+
         /// <summary> Should this speech node go onto the next one automatically? </summary>
         public bool AutomaticallyAdvance;
 

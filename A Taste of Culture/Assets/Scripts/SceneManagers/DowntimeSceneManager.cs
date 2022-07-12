@@ -11,6 +11,8 @@ public class DowntimeSceneManager : MonoBehaviour
     private FlavorProfile flavorPfile;
     [SerializeField] private StringVariable protein;
 
+    public static System.Action AnimFinished;
+
     void Start()
     {
         flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
@@ -20,6 +22,9 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[backgrounds.Length - 1].SetActive(true);
         ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
     }
+
+    private void MarkAnimFinished() => AnimFinished?.Invoke();
+    private void MarkAnimFinished(float delay) => Coroutilities.DoAfterDelay(this, MarkAnimFinished, delay);
 
     public void AddOnions()
     {
@@ -39,7 +44,9 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[3].SetActive(false);
         backgrounds[4].SetActive(true);
-        StartCoroutine(PutOnLid());
+
+        Coroutilities.DoAfterYielder(this, MarkAnimFinished,
+            StartCoroutine(PutOnLid()));
     }
 
     public void AddButter()
@@ -47,10 +54,10 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
 
-        StartCoroutine(TakeOffLid());
-        StartCoroutine(ButterInPot());
-        StartCoroutine(BackgroundToSchool());
-
+        Coroutilities.DoAfterYielders(this, MarkAnimFinished,
+            StartCoroutine(TakeOffLid()),
+            StartCoroutine(ButterInPot()),
+            StartCoroutine(BackgroundToSchool()));
     }
 
     IEnumerator ButterInPot()
@@ -59,19 +66,25 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[6].SetActive(true);
     }
 
-    public void AddProtein()
+    public void CheckSauce()
     {
-        Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2)));
+        Coroutilities.DoAfterYielder(this, RemoveLid, StartCoroutine(TransitionAndWait(false, 2)));
 
-        void ActuallyAddProtein()
+        void RemoveLid()
         {
             backgrounds[11].SetActive(false);
             backgrounds[7].SetActive(true);
 
-            StartCoroutine(TakeOffLid());
-            StartCoroutine(ProteinInPot());
-            StartCoroutine(BackgroundToSchool(2));
+            Coroutilities.DoAfterYielder(this, () => MarkAnimFinished(0.5f),
+                StartCoroutine(TakeOffLid()));
         }
+    }
+
+    public void AddProtein()
+    {
+        Coroutilities.DoAfterYielders(this, MarkAnimFinished,
+            StartCoroutine(ProteinInPot()),
+            StartCoroutine(BackgroundToSchool(2)));
     }
 
     IEnumerator ProteinInPot()

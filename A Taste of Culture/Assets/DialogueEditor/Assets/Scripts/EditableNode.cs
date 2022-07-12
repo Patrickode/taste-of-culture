@@ -195,6 +195,8 @@ namespace DialogueEditor
         /// <summary> The Volume for the AudioClip; </summary>
         [DataMember] public float Volume;
 
+        [DataMember] public bool SkipNode;
+
         /// <summary> If this dialogue leads onto another dialogue... 
         /// Should the dialogue advance automatially? </summary>
         [DataMember] public bool AdvanceDialogueAutomatically;
