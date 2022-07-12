@@ -8,20 +8,19 @@ public class MoveWithMousePos : MonoBehaviour
     [SerializeField] private bool returnWhenDropped;
     [SerializeField] private LayerMask holdMask;
     [SerializeField] [TagSelector] private string holdTag;
-    [Tooltip("The minimum Z coordinate that'll be recognized by the hold check. " +
+    [VectorLabels(0.5f, 5, "Min", "Max")]
+    [Tooltip("The minimum/maximum (inclusive) Z coordinates that'll be recognized by the hold check. " +
         "See https://docs.unity3d.com/ScriptReference/Physics2D.OverlapPoint.html.")]
-    [SerializeField] private float holdMinDepth = Mathf.NegativeInfinity;
-    [Tooltip("The maximum Z coordinate that'll be recognized by the hold check. " +
-        "See https://docs.unity3d.com/ScriptReference/Physics2D.OverlapPoint.html.")]
-    [SerializeField] private float holdMaxDepth = Mathf.Infinity;
+    [SerializeField] private Vector2 holdDepthRange = new Vector2(Mathf.NegativeInfinity, Mathf.Infinity);
     [Space(10)]
     [SerializeField] private bool moveWithPhysics;
     [SerializeField] private GameObject thingToMove;
     [Tooltip("If assigned, thingToMove will be constrained to positions inside this collider.")]
     [SerializeField] private Collider2D moveZone;
     [SerializeField] private Collider moveZone3D;
+    [Tooltip("Distance Z from the camera plane; see `Camera.ScreenToWorldPoint`.")]
     [SerializeField] private float screenPointDistance;
-    [SerializeField] private bool preserveDepthPos;
+    //[SerializeField] private bool preserveDepthPos;
 
     private Rigidbody2D movedRb2D;
     private Rigidbody movedRb3D;
@@ -40,6 +39,12 @@ public class MoveWithMousePos : MonoBehaviour
             return _cachedCam;
         }
     }
+
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        holdDepthRange.x = Mathf.Min(holdDepthRange.x, holdDepthRange.y);
+        holdDepthRange.y = Mathf.Max(holdDepthRange.y, holdDepthRange.x);
+    });
 
     private void Start()
     {
@@ -79,7 +84,7 @@ public class MoveWithMousePos : MonoBehaviour
         {
             //Since the mouse is down, check if it's down on any of the colliders in the hold layer mask.
             Vector3 clickPos = CachedCam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * screenPointDistance);
-            Collider2D clickedColl = Physics2D.OverlapPoint(clickPos, holdMask, holdMinDepth, holdMaxDepth);
+            Collider2D clickedColl = Physics2D.OverlapPoint(clickPos, holdMask, holdDepthRange.x, holdDepthRange.y);
 
             //If we're looking for a specific tag as well, check for that, too.
             //If not, just go ahead (so long as we found *something*).
@@ -93,6 +98,7 @@ public class MoveWithMousePos : MonoBehaviour
         {
             Held = false;
             holdOffset = Vector3.zero;
+            
             if (returnWhenDropped)
                 thingToMove.transform.position = originalPos;
         }
@@ -109,12 +115,13 @@ public class MoveWithMousePos : MonoBehaviour
         //If we've got a moveZone to constrain the destination to, get the closest point on it to the destination.
         if (moveZone)
             destination = moveZone.ClosestPoint(destination);
+
         else if (moveZone3D)
         {
             destination = moveZone3D.ClosestPoint(destination);
             //Y was used instead of Z for a 3D experiment where Y was the depth dir (so typical gravity was away from camera)
-            if (preserveDepthPos)
-                destination.y = thingToMove.transform.position.y;
+            /*if (preserveDepthPos)
+                destination.y = thingToMove.transform.position.y;*/
         }
 
         if (moveWithPhysics)

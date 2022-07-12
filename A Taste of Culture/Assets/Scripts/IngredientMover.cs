@@ -30,7 +30,7 @@ public class IngredientMover : MonoBehaviour
 
     // Allow player to move ingredient.
     private bool allowMovement = false;
-    public bool AllowMovement { set { allowMovement = value; } }
+    public bool AllowMovement { set { allowMovement = value; } get { return allowMovement; } }
 
     // Allow player to rotate ingredient.
     private bool allowRotation = false;
