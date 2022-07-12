@@ -17,10 +17,7 @@ public class DialogueController : MonoBehaviour
     {
         TriggerConversation(initConversation);
         Cursor.visible = true;
-        if (tool != null)
-        {
-            tool.SetActive(false);
-        }
+        tool.SafeSetActive(false);
     }
     private void OnDestroy()
     {
@@ -67,19 +64,13 @@ public class DialogueController : MonoBehaviour
     public void EnableControls()
     {
         Cursor.visible = false;
-        if (tool != null)
-        {
-            tool.SetActive(true);
-        }
+        tool.SafeSetActive(true);
     }
 
     public void DisableControls()
     {
         Cursor.visible = true;
-        if (tool != null)
-        {
-            tool.SetActive(false);
-        }
+        tool.SafeSetActive(false);
     }
 
     private void LoadNextScene()
