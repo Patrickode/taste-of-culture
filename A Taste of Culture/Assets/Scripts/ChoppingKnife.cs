@@ -16,6 +16,8 @@ public class ChoppingKnife : MonoBehaviour
     private bool canChop = true;
     public bool CanChop { set { canChop = value; } }
 
+    private bool madeFirstCut = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,14 @@ public class ChoppingKnife : MonoBehaviour
 
         foreach(RaycastHit2D hitObject in hitObjects)
         {
+            // Check if a cut mask should be instantiated (avoids having serval cut masks on the same "cut")
+            if(!madeFirstCut) { madeFirstCut = true; }
+            else 
+            {
+                IngredientMover ingredientMover = hitObject.transform.parent.gameObject.GetComponent<IngredientMover>();
+                if(ingredientMover.AllowMovement) { continue; }
+            }
+            
             objectsToCut.Add(hitObject.transform.gameObject);
         }    
 
