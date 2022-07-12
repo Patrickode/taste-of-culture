@@ -3221,7 +3221,7 @@ MonoBehaviour:
   - {fileID: 1409768014}
   - {fileID: 546798017}
   - {fileID: 1236935005}
-  progressBar: {fileID: 1182818330}
+  progressFill: {fileID: 533441341}
   bAtLastIngredient: 0
 --- !u!4 &1311813211
 Transform:
