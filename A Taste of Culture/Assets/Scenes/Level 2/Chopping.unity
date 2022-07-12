@@ -1211,7 +1211,7 @@ MonoBehaviour:
   budgeDuration: 0.1
   rotateXPosition: 2.3
   finalXPosition: 0.8
-  rotatedPosition: {x: -0.1, y: 0}
+  rotatedPosition: {x: -0.28, y: 0}
   choppedPrefab: {fileID: 2884203642612794587, guid: ed30c487dd27179419ccb5614000cb78, type: 3}
   choppedPrefabPosition: {x: 0, y: -0.6}
   choppedPrefabRotation: {x: 0, y: 0, z: 90}
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   budgeDuration: 0.1
   rotateXPosition: 2.3
   finalXPosition: 0.8
-  rotatedPosition: {x: -0.1, y: 0}
+  rotatedPosition: {x: -0.28, y: 0}
   choppedPrefab: {fileID: 2884203642612794587, guid: ed30c487dd27179419ccb5614000cb78, type: 3}
   choppedPrefabPosition: {x: 0, y: -0.6}
   choppedPrefabRotation: {x: 0, y: 0, z: 90}
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   budgeDuration: 0.1
   rotateXPosition: 2.3
   finalXPosition: 0.8
-  rotatedPosition: {x: -0.1, y: 0}
+  rotatedPosition: {x: -0.28, y: 0}
   choppedPrefab: {fileID: 2884203642612794587, guid: ed30c487dd27179419ccb5614000cb78, type: 3}
   choppedPrefabPosition: {x: 0, y: -0.6}
   choppedPrefabRotation: {x: 0, y: 0, z: 270}
@@ -3711,7 +3711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6075877295949646230, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.18
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6075877295949646230, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3787,7 +3787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555532, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c039b97f54a8b864b94250f0b3620a11, type: 3}
@@ -4079,7 +4079,7 @@ MonoBehaviour:
   budgeDuration: 0.1
   rotateXPosition: 2.3
   finalXPosition: 0.8
-  rotatedPosition: {x: 0.02, y: 0}
+  rotatedPosition: {x: -0.03, y: 0}
   choppedPrefab: {fileID: 2884203642612794587, guid: ed30c487dd27179419ccb5614000cb78, type: 3}
   choppedPrefabPosition: {x: 0, y: -0.35}
   choppedPrefabRotation: {x: 0, y: 0, z: 90}
@@ -4161,7 +4161,7 @@ MonoBehaviour:
   budgeDuration: 0.1
   rotateXPosition: 2.43
   finalXPosition: 2.57
-  rotatedPosition: {x: -0.94, y: -0.58}
+  rotatedPosition: {x: -1.01, y: -0.58}
   choppedPrefab: {fileID: 2884203642612794587, guid: 097e797f6cc249c4e8854b543c98cc8b, type: 3}
   choppedPrefabPosition: {x: -0.45, y: -0.29}
   choppedPrefabRotation: {x: 0, y: 0, z: 0}
