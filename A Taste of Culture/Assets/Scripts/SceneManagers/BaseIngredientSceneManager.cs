@@ -11,7 +11,7 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     public void TaskComplete()
     {
-        Debug.Log("Task Complete!");
+        Debug.Log($"<color=#777>BaseIngSceneManager \"{name}\": Task Complete!</color>");
 
         StartCoroutine(CompleteTask());
     }
@@ -23,15 +23,15 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     protected void HandleSceneCompletion()
     {
-        Debug.Log("Scene Complete!");
+        Debug.Log("<color=#777>BaseIngSceneManager \"{name}\": Scene Complete!</color>");
 
         StartCoroutine(TransitionToNewScene());
     }
 
     protected IEnumerator TransitionToNewScene()
     {
-        //sceneManager.FinishedSliceOrSpice();
-        
+        sceneManager.FinishedSliceOrSpice();
+
         yield return new WaitForSeconds(5f);
 
         Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);
