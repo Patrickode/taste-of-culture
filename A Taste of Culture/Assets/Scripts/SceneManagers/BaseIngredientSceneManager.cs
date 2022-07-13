@@ -30,7 +30,7 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     protected IEnumerator TransitionToNewScene()
     {
-        sceneManager.FinishedSliceOrSpice();
+        //sceneManager.FinishedSliceOrSpice();
 
         yield return new WaitForSeconds(5f);
 

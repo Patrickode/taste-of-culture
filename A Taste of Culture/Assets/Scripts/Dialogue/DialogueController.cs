@@ -98,10 +98,10 @@ public class DialogueController : MonoBehaviour
     {
         if (useIndex)
         {
-            Transitions.LoadWithTransition(nextSceneIndex, -1);
+            Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);
             return;
         }
 
-        Transitions.LoadWithTransition(SceneManager.GetSceneByName(nextScene).buildIndex, -1);
+        Transitions.LoadWithTransition?.Invoke(SceneManager.GetSceneByName(nextScene).buildIndex, -1);
     }
 }
