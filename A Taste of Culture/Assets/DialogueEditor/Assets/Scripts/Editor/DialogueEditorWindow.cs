@@ -754,23 +754,25 @@ namespace DialogueEditor
 
                         GUILayout.Label("Icon", EditorStyles.boldLabel);
                         node.Icon = (Sprite)EditorGUILayout.ObjectField(node.Icon, typeof(Sprite), false, GUILayout.ExpandWidth(true));
-                        EditorGUILayout.Space();
 
                         // Bool to select small or large icon
-                        GUILayout.Label("Large Icon", EditorStyles.boldLabel);
                         node.LargeIcon = EditorGUILayout.Toggle("Large Icon On", node.LargeIcon);
                         EditorGUILayout.Space();
 
                         GUILayout.Label("Audio Options", EditorStyles.boldLabel);
-                        GUILayout.Label("Audio");
+                        GUILayout.Label("Asset");
                         node.Audio = (AudioClip)EditorGUILayout.ObjectField(node.Audio, typeof(AudioClip), false);
 
-                        GUILayout.Label("Audio Volume");
+                        GUILayout.Label("Volume");
                         node.Volume = EditorGUILayout.Slider(node.Volume, 0, 1);
                         EditorGUILayout.Space();
 
-                        GUILayout.Label("TMP Font", EditorStyles.boldLabel);
+                        GUILayout.Label("Text", EditorStyles.boldLabel);
+                        GUILayout.Label("TMP Font");
                         node.TMPFont = (TMPro.TMP_FontAsset)EditorGUILayout.ObjectField(node.TMPFont, typeof(TMPro.TMP_FontAsset), false);
+
+                        GUILayout.Label("Continue / End Text Override");
+                        node.ContinueEndOverride = EditorGUILayout.TextField(node.ContinueEndOverride);
                         EditorGUILayout.Space();
 
                         // Event

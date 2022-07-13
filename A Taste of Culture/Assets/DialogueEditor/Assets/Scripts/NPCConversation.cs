@@ -340,7 +340,7 @@ namespace DialogueEditor
             conversation.ContinueFont = this.ContinueFont;
             conversation.EndConversationFont = this.EndConversationFont;
             conversation.ContinueText = this.ContinueText;
-            conversation.EndText = this.ContinueText;
+            conversation.EndText = this.EndText;
             conversation.EventsOnEnd = this.EventsOnEnd;
 
             // Create a dictionary to store our created nodes by UID
@@ -392,13 +392,18 @@ namespace DialogueEditor
             SpeechNode speech = new SpeechNode();
             speech.Name = editableNode.Name;
             speech.Text = editableNode.Text;
+            
             speech.SkipNode = editableNode.SkipNode;
             speech.AutomaticallyAdvance = editableNode.AdvanceDialogueAutomatically;
             speech.AutoAdvanceShouldDisplayOption = editableNode.AutoAdvanceShouldDisplayOption;
             speech.TimeUntilAdvance = editableNode.TimeUntilAdvance;
+            
             speech.TMPFont = editableNode.TMPFont;
+            speech.ContinueEndOverride = editableNode.ContinueEndOverride;
+            
             speech.Icon = editableNode.Icon;
             speech.LargeIcon = editableNode.LargeIcon;
+            
             speech.Audio = editableNode.Audio;
             speech.Volume = editableNode.Volume;
 

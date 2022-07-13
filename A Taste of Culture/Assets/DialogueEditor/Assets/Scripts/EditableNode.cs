@@ -196,6 +196,7 @@ namespace DialogueEditor
         [DataMember] public float Volume;
 
         [DataMember] public bool SkipNode;
+        [DataMember] public string ContinueEndOverride;
 
         /// <summary> If this dialogue leads onto another dialogue... 
         /// Should the dialogue advance automatially? </summary>

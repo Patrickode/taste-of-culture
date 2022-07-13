@@ -202,13 +202,14 @@ namespace DialogueEditor
                     break;
             }
         }
-        public void SetupButton(eButtonType buttonType, ConversationNode node, Conversation convWithOptions)
+        public void SetupButton(eButtonType buttonType, ConversationNode node, Conversation convWithOptions, string advTextOverride = "")
         {
             if (convWithOptions == null) return;
 
             SetupButton(buttonType, node,
                 convWithOptions.ContinueFont, convWithOptions.EndConversationFont,
-                convWithOptions.ContinueText, convWithOptions.EndText);
+                string.IsNullOrEmpty(advTextOverride) ? convWithOptions.ContinueText : advTextOverride,
+                string.IsNullOrEmpty(advTextOverride) ? convWithOptions.EndText : advTextOverride);
         }
 
 

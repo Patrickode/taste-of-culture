@@ -59,6 +59,11 @@ namespace DialogueEditor
         /// </summary>
         public bool SkipNode;
 
+        /// <summary>
+        /// If not null or empty, this will override the conversation's generic continue/end text.
+        /// </summary>
+        public string ContinueEndOverride;
+
         /// <summary> Should this speech node go onto the next one automatically? </summary>
         public bool AutomaticallyAdvance;
 
