@@ -46,7 +46,7 @@ public class DialogueController : MonoBehaviour
     {
         if (currentConvoIndex < convos.Length)
             TriggerConversation(convos[currentConvoIndex]);
-        
+
         else Debug.LogWarning($"Tried to start next convo @ index {currentConvoIndex}, " +
                 $"but that index is out of range! (convos.Length = {convos.Length})");
     }
@@ -94,15 +94,14 @@ public class DialogueController : MonoBehaviour
         tool.SafeSetActive(false);
     }
 
-    private void LoadNextScene()
+    public void LoadNextScene()
     {
         if (useIndex)
         {
-            SceneManager.LoadScene(nextSceneIndex >= 0
-                ? nextSceneIndex
-                : SceneManager.GetActiveScene().buildIndex + nextSceneIndex);
+            Transitions.LoadWithTransition(nextSceneIndex, -1);
+            return;
         }
 
-        SceneManager.LoadScene(nextScene);
+        Transitions.LoadWithTransition(SceneManager.GetSceneByName(nextScene).buildIndex, -1);
     }
 }

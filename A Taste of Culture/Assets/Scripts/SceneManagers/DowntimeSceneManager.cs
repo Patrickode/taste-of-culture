@@ -105,7 +105,8 @@ public class DowntimeSceneManager : MonoBehaviour
             backgrounds[9].SetActive(true);
         };
 
-        Coroutilities.DoAfterSequence(this, () => StartCoroutine(TransitionAndWait(false, 2)),
+        Coroutilities.DoAfterSequence(this, MarkAnimFinished,
+            () => StartCoroutine(TransitionAndWait(false, 2)),
             () => Coroutilities.DoAfterDelayFrames(this, bgSwitch, 0),
             () => StartCoroutine(TakeOffLid()),
             () => new WaitForSeconds(1));
@@ -113,22 +114,35 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void PlateCurry()
     {
-        StartCoroutine(ShowPlate());
+        Coroutilities.DoAfterYielder(this, MarkAnimFinished, StartCoroutine(ShowPlate()));
+    }
+
+    public void ReturnAfterPlating()
+    {
+        Coroutilities.DoAfterYielder(this, () =>
+            {
+                backgrounds[10].SetActive(false);
+                backgrounds[11].SetActive(true);
+                MarkAnimFinished();
+            },
+            StartCoroutine(TransitionAndWait(false, 2)));
     }
 
     IEnumerator ShowPlate()
     {
         yield return StartCoroutine(TransitionAndWait(false, 2));
+
         backgrounds[10].SetActive(true);
         if (flavorPfile)
             flavorPfile.VisualizeFlavors();
 
+        yield return new WaitForSeconds(1.5f);
 
-        yield return new WaitForSeconds(4.5f);
+        /*yield return new WaitForSeconds(4.5f);
 
         yield return StartCoroutine(TransitionAndWait(false, 2));
         backgrounds[10].SetActive(false);
-        backgrounds[11].SetActive(true);
+        backgrounds[11].SetActive(true);*/
     }
 
     IEnumerator PutOnLid()
