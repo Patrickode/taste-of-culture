@@ -2556,7 +2556,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f5da118a27aae4c987272e9eca5966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initConversation: {fileID: 1805018993}
+  convos:
+  - {fileID: 1805018993}
+  - {fileID: 1514005784}
   useIndex: 0
   nextScene: Slicing
   nextSceneIndex: 0

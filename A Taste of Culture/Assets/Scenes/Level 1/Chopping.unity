@@ -834,7 +834,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f5da118a27aae4c987272e9eca5966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initConversation: {fileID: 1134315445}
+  convos:
+  - {fileID: 1134315445}
+  - {fileID: 1173036874}
   useIndex: 0
   nextScene: OnionSauteing
   nextSceneIndex: 0

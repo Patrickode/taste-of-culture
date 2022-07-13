@@ -21,6 +21,9 @@ public class DowntimeSceneManager : MonoBehaviour
             bg.SetActive(false);
         backgrounds[backgrounds.Length - 1].SetActive(true);
         ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
+
+        AddOnions();
+        CookOnions();
     }
 
     private void MarkAnimFinished() => AnimFinished?.Invoke();

@@ -1071,6 +1071,9 @@ MonoBehaviour:
   - {fileID: 1982176453}
   ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
   Event:
     m_PersistentCalls:
       m_Calls:
@@ -1199,14 +1202,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   holdTag: 
-  holdMinDepth: -Infinity
-  holdMaxDepth: Infinity
+  holdDepthRange: {x: -Infinity, y: Infinity}
   moveWithPhysics: 1
   thingToMove: {fileID: 23967090}
   moveZone: {fileID: 1080620648}
   moveZone3D: {fileID: 0}
   screenPointDistance: 0
-  preserveDepthPos: 0
 --- !u!212 &1080620651
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1602,8 +1603,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f5da118a27aae4c987272e9eca5966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initConversation: {fileID: 1884656650}
+  convos:
+  - {fileID: 1884656650}
+  - {fileID: 714154540}
+  useIndex: 0
   nextScene: Downtime
+  nextSceneIndex: 0
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   tool: {fileID: 23967090}
 --- !u!4 &1588946843
@@ -1891,6 +1896,9 @@ MonoBehaviour:
   - {fileID: 1668234429}
   ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
   Event:
     m_PersistentCalls:
       m_Calls:

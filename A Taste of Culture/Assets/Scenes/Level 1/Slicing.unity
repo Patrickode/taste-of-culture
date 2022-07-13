@@ -737,6 +737,9 @@ MonoBehaviour:
   - {fileID: 402554941}
   ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
   Event:
     m_PersistentCalls:
       m_Calls: []
@@ -914,6 +917,9 @@ MonoBehaviour:
   - {fileID: 603071720}
   ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
   Event:
     m_PersistentCalls:
       m_Calls: []
@@ -1447,8 +1453,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f5da118a27aae4c987272e9eca5966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initConversation: {fileID: 704316352}
+  convos:
+  - {fileID: 704316352}
+  - {fileID: 544922497}
+  useIndex: 0
   nextScene: Chopping
+  nextSceneIndex: 0
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   tool: {fileID: 1236782930}
 --- !u!1 &1495306955
@@ -1580,10 +1590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bfe527eb47a844d90017f2a74830ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneIndex: 4
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
-  choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
-  choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
   finishedConversation: {fileID: 544922497}
   currentIngredient: 0
 --- !u!4 &1533509940

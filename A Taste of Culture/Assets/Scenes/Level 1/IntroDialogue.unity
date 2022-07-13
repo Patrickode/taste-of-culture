@@ -951,8 +951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f5da118a27aae4c987272e9eca5966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initConversation: {fileID: 1710760866}
+  convos:
+  - {fileID: 1710760866}
+  useIndex: 0
   nextScene: SpiceSelection
+  nextSceneIndex: 0
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   tool: {fileID: 0}
 --- !u!4 &1405199868
@@ -998,8 +1001,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748345c9a65c0f94d80ea290cccee1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stayInScene: 0
+  dontDestroyOnLoad: 1
+  skipCanvas: {fileID: 0}
   skipButton: {fileID: 990189616}
+  useSkipButton: 0
+  useSkipKeystroke: 0
 --- !u!4 &1609435550
 Transform:
   m_ObjectHideFlags: 0
@@ -1181,6 +1187,9 @@ MonoBehaviour:
   - {fileID: 861595704}
   ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
   Event:
     m_PersistentCalls:
       m_Calls:
