@@ -14,7 +14,7 @@ public class FlavorGraphLine : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI labelPrefab;
     [SerializeField] private bool useNumberLabels;
     [SerializeField] private bool rotateLabels;
-    [SerializeField] private float labelOffset;
+    [SerializeField] [VectorLabels("Bottom", "Top")] private Vector2 labelPadding;
     [Space(5)]
     [SerializeField] private bool adjustLabelAutoSize;
     [VectorLabels("Min", "Max", "WD%", "Line")]
@@ -70,32 +70,7 @@ public class FlavorGraphLine : MonoBehaviour
                     radius * Mathf.Sin(angle)),
                 out float val);
 
-            if (labelPrefab)
-            {
-                var awayFrmCenter = (points[i] - center).normalized;
-                var newLabel = Instantiate(
-                    labelPrefab,
-                    points[i] + awayFrmCenter * labelOffset,
-                    rotateLabels
-                        ? Quaternion.LookRotation(Vector3.forward, Vector3.Dot(Vector3.up, awayFrmCenter) >= 0
-                            ? awayFrmCenter
-                            : -awayFrmCenter)
-                        : Quaternion.identity,
-                    posSizeRef);
-
-                newLabel.text = useNumberLabels
-                    ? val.ToString()
-                    : System.Enum.GetName(typeof(FlavorType), flavsToDisplay[i]);
-
-                if (adjustLabelAutoSize)
-                {
-                    newLabel.fontSizeMin = labelAutoSizeOptns.x;
-                    newLabel.fontSizeMax = labelAutoSizeOptns.y;
-                    //I don't know if these are the right ones, leaving them commented out
-                    //newLabel.characterWidthAdjustment = labelAutoSizeOptns.z;
-                    //newLabel.lineSpacingAdjustment = labelAutoSizeOptns.w;
-                }
-            }
+            MakeLabel(i, center, val);
         }
 
         UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, pointsToBorder);
@@ -122,5 +97,45 @@ public class FlavorGraphLine : MonoBehaviour
         }
 
         return Vector3.Lerp(zeroPoint, point, interpolant);
+    }
+
+    private void MakeLabel(int index, Vector3 center, float value)
+    {
+        if (!labelPrefab) return;
+
+        var awayFrmCenter = (points[index] - center).normalized;
+        Vector3 labelPos;
+        Quaternion labelRot;
+
+        if (labelPadding.x <= 0 && labelPadding.y <= 0)
+        {
+            labelPos = points[index];
+            labelRot = rotateLabels ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter) : Quaternion.identity;
+        }
+        else if (Vector3.Dot(Vector3.up, awayFrmCenter) >= 0)
+        {
+            labelPos = points[index] + awayFrmCenter * labelPadding.x;
+            labelRot = rotateLabels ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter) : Quaternion.identity;
+        }
+        else
+        {
+            labelPos = points[index] + awayFrmCenter * labelPadding.y;
+            labelRot = rotateLabels ? Quaternion.LookRotation(Vector3.forward, -awayFrmCenter) : Quaternion.identity;
+        }
+
+        var newLabel = Instantiate(labelPrefab, labelPos, labelRot, posSizeRef);
+
+        newLabel.text = useNumberLabels
+            ? value.ToString()
+            : System.Enum.GetName(typeof(FlavorType), flavsToDisplay[index]);
+
+        if (adjustLabelAutoSize)
+        {
+            newLabel.fontSizeMin = labelAutoSizeOptns.x;
+            newLabel.fontSizeMax = labelAutoSizeOptns.y;
+            //I don't know if these are the right things to set, so they'll stay commented out for now
+            /*newLabel.characterWidthAdjustment = labelAutoSizeOptns.z;
+            newLabel.lineSpacingAdjustment = labelAutoSizeOptns.w;*/
+        }
     }
 }
