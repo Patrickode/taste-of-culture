@@ -54,6 +54,7 @@ public class RemovalKnife : RemovalTool
         if (isUsing && Input.GetKey(KeyCode.Mouse0))
         {
             unstickProgress += Time.deltaTime;
+            GetComponent<SpriteRenderer>().color = Color.blue;
         }
         else if (canUse && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -63,6 +64,7 @@ public class RemovalKnife : RemovalTool
         if (isUsing && Input.GetKeyUp(KeyCode.Mouse0))
         {
             isUsing = false;
+            GetComponent<SpriteRenderer>().color = Color.white;
 
             if (unstickProgress >= 5.0f)
             {

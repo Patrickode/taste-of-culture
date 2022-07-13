@@ -64,6 +64,7 @@ public class RemovalHammer : RemovalTool
         if (isUsing && Input.GetKey(KeyCode.Mouse0))
         {
             hitPower++;
+            render.color = Color.blue;
         }
         else if (canUse && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -75,6 +76,7 @@ public class RemovalHammer : RemovalTool
             holeProgress += hitPower / 2;
             hitPower = 0;
             isUsing = false;
+            render.color = Color.white;
 
             if (holeProgress >= 1200)
             {

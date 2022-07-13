@@ -1241,7 +1241,7 @@ MonoBehaviour:
   startPos: {x: -6.5, y: -2.5, z: -2}
   active: 0
   offset: {x: 0, y: 1}
-  heldZ: -3
+  heldZ: -2
   canUse: 0
   properArea: 0
   isUsing: 0
