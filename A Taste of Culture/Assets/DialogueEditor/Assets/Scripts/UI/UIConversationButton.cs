@@ -30,7 +30,7 @@ namespace DialogueEditor
 
         // Node data
         private eButtonType m_buttonType;
-        private ConversationNode m_node;    
+        private ConversationNode m_node;
 
         // Hovering 
         private float m_hoverT = 0.0f;
@@ -62,7 +62,7 @@ namespace DialogueEditor
                 }
                 Vector3 size = Vector3.one;
                 float ease = EaseOutQuart(normalised);
-                
+
 
                 switch (m_hoverState)
                 {
@@ -171,7 +171,9 @@ namespace DialogueEditor
             TextMesh.color = c_text;
         }
 
-        public void SetupButton(eButtonType buttonType, ConversationNode node, TMPro.TMP_FontAsset continueFont = null, TMPro.TMP_FontAsset endFont = null)
+        public void SetupButton(eButtonType buttonType, ConversationNode node,
+            TMPro.TMP_FontAsset continueFont = null, TMPro.TMP_FontAsset endFont = null,
+            string continueText = null, string endText = null)
         {
             m_buttonType = buttonType;
             m_node = node;
@@ -187,18 +189,26 @@ namespace DialogueEditor
 
                 case eButtonType.Speech:
                     {
-                        TextMesh.text = "Continue.";
+                        TextMesh.text = string.IsNullOrEmpty(continueText) ? "Continue." : continueText;
                         TextMesh.font = continueFont;
                     }
                     break;
 
                 case eButtonType.End:
                     {
-                        TextMesh.text = "End.";
+                        TextMesh.text = string.IsNullOrEmpty(endText) ? "End." : endText;
                         TextMesh.font = endFont;
                     }
                     break;
             }
+        }
+        public void SetupButton(eButtonType buttonType, ConversationNode node, Conversation convWithOptions)
+        {
+            if (convWithOptions == null) return;
+
+            SetupButton(buttonType, node,
+                convWithOptions.ContinueFont, convWithOptions.EndConversationFont,
+                convWithOptions.ContinueText, convWithOptions.EndText);
         }
 
 

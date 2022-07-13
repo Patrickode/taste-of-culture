@@ -46,6 +46,9 @@ public class DialogueController : MonoBehaviour
     {
         if (currentConvoIndex < convos.Length)
             TriggerConversation(convos[currentConvoIndex]);
+        
+        else Debug.LogWarning($"Tried to start next convo @ index {currentConvoIndex}, " +
+                $"but that index is out of range! (convos.Length = {convos.Length})");
     }
 
     public string getProtein()

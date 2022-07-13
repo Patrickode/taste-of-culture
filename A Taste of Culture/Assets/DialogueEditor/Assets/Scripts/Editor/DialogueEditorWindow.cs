@@ -675,7 +675,7 @@ namespace DialogueEditor
                 EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
                 // Font options
-                GUILayout.Label("'Continue' and 'End' button font", panelTitleStyle);
+                GUILayout.Label("'Continue' and 'End' button options", panelTitleStyle);
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("'Continue' font:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
@@ -685,6 +685,16 @@ namespace DialogueEditor
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("'End' font:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
                 CurrentAsset.EndConversationFont = (TMPro.TMP_FontAsset)EditorGUILayout.ObjectField(CurrentAsset.EndConversationFont, typeof(TMPro.TMP_FontAsset), false, GUILayout.MaxWidth(fieldWidth));
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("'Continue' text:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
+                CurrentAsset.ContinueText = EditorGUILayout.TextField(CurrentAsset.ContinueText, GUILayout.MaxWidth(fieldWidth));
+                EditorGUILayout.EndHorizontal();
+                
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("'End' text:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
+                CurrentAsset.EndText = EditorGUILayout.TextField(CurrentAsset.EndText, GUILayout.MaxWidth(fieldWidth));
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
@@ -737,7 +747,7 @@ namespace DialogueEditor
                                     node.TimeUntilAdvance = EditorGUILayout.FloatField("Dialogue Time", node.TimeUntilAdvance);
                                     //if (node.TimeUntilAdvance < 0.1f)
                                     //    node.TimeUntilAdvance = 0.1f;
-                                } 
+                                }
                             }
                             EditorGUILayout.Space();
                         }

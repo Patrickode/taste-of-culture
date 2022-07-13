@@ -33,6 +33,16 @@ namespace DialogueEditor
         /// <summary> The font used for the 'End' button. </summary>
         public TMPro.TMP_FontAsset EndConversationFont;
 
+        /// <summary>
+        /// The text continue buttons in this conversation should have.
+        /// </summary>
+        public string ContinueText;
+
+        /// <summary>
+        /// /// The text the end button in this conversation should have.
+        /// </summary>
+        public string EndText;
+
         public UnityEngine.Events.UnityEvent EventsOnEnd;
 
         // ---
@@ -87,7 +97,7 @@ namespace DialogueEditor
             {
                 status = eParamStatus.OK;
                 return param.BoolValue;
-                
+
             }
             else
             {

@@ -41,6 +41,8 @@ namespace DialogueEditor
         [SerializeField] private List<NodeEventHolder> NodeSerializedDataList;
         [SerializeField] public TMPro.TMP_FontAsset ContinueFont;
         [SerializeField] public TMPro.TMP_FontAsset EndConversationFont;
+        [SerializeField] public string ContinueText;
+        [SerializeField] public string EndText;
         [SerializeField] public UnityEngine.Events.UnityEvent EventsOnEnd;
 
         // Runtime vars
@@ -337,6 +339,8 @@ namespace DialogueEditor
             // Construct the Conversation-Based variables (not node-based)
             conversation.ContinueFont = this.ContinueFont;
             conversation.EndConversationFont = this.EndConversationFont;
+            conversation.ContinueText = this.ContinueText;
+            conversation.EndText = this.ContinueText;
             conversation.EventsOnEnd = this.EventsOnEnd;
 
             // Create a dictionary to store our created nodes by UID
