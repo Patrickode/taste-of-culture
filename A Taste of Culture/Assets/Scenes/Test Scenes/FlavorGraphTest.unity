@@ -464,8 +464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc54535b238edf49986e70e304cdcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  defaultAnimTime: 0
   line: {fileID: 360986271}
   posSizeRef: {fileID: 1362325557}
   flavsToDisplay: 0000000000000000020000000000000003000000
@@ -623,8 +625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc54535b238edf49986e70e304cdcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetLineOnStart: 1
   initOnStart: 1
-  animate: 0
+  animate: 1
+  defaultAnimTime: 1
   line: {fileID: 470488028}
   posSizeRef: {fileID: 1362325557}
   flavsToDisplay: 0000000000000000020000000000000003000000
@@ -748,8 +752,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc54535b238edf49986e70e304cdcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  defaultAnimTime: 0
   line: {fileID: 0}
   posSizeRef: {fileID: 1362325557}
   flavsToDisplay: 0000000000000000020000000000000003000000
@@ -907,8 +913,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc54535b238edf49986e70e304cdcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  defaultAnimTime: 0
   line: {fileID: 609903344}
   posSizeRef: {fileID: 1362325557}
   flavsToDisplay: 0000000000000000020000000000000003000000
@@ -1224,8 +1232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc54535b238edf49986e70e304cdcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  defaultAnimTime: 0
   line: {fileID: 1040615792}
   posSizeRef: {fileID: 1362325557}
   flavsToDisplay: 0000000000000000020000000000000003000000
@@ -1558,8 +1568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc54535b238edf49986e70e304cdcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  defaultAnimTime: 0
   line: {fileID: 1437329905}
   posSizeRef: {fileID: 1362325557}
   flavsToDisplay: 0000000000000000020000000000000003000000

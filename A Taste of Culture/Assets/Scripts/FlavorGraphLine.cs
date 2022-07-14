@@ -6,8 +6,10 @@ public class FlavorGraphLine : MonoBehaviour
 {
     private enum GraphLine { Value, Midline, Border }
 
+    [SerializeField] private bool resetLineOnStart = true;
     [SerializeField] private bool initOnStart;
     [SerializeField] private bool animate;
+    [SerializeField] [Min(0)] private float defaultAnimTime;
     [Space(5)]
     [SerializeField] private LineRenderer line;
     [SerializeField] private RectTransform posSizeRef;
@@ -32,8 +34,9 @@ public class FlavorGraphLine : MonoBehaviour
     private Bounds refBounds;
     private float radius;
     private Vector3[] points;
-    private List<Vector3> pointsToBorder = new List<Vector3>();
+    private List<Vector3> finalizedPointsCache = new List<Vector3>();
     private TMPro.TextMeshProUGUI labelText;
+    private Coroutine pointsAnim;
 
     private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
     {
@@ -47,15 +50,40 @@ public class FlavorGraphLine : MonoBehaviour
 
     private void Start()
     {
-        UtilFunctions.SafeSetActive(line, false);
+        refBounds = posSizeRef.GetWorldBounds();
+
+        if (line && resetLineOnStart)
+        {
+            ResetLine(flavsToDisplay.Length);
+            line.gameObject.SetActive(false);
+        }
 
         if (initOnStart)
             SetGraphLine();
+
+        //temp, for testing
+        if (lineType == GraphLine.Value && line)
+        {
+            Coroutilities.DoAfterDelay(this, () => { FlavorProfileData.Instance.Bitterness += 2; SetGraphLine(); }, 2);
+        }
     }
 
-    private void SetGraphLine()
+    private void ResetLine(int newCount = -1) => ResetLine(refBounds.center, newCount);
+    private void ResetLine(Vector3 resetPoint, int newCount = -1)
     {
-        refBounds = posSizeRef.GetWorldBounds();
+        if (newCount >= 0)
+            line.positionCount = newCount;
+
+        for (int i = 0; i < line.positionCount; i++)
+        {
+            line.SetPosition(i, resetPoint);
+        }
+    }
+
+    public void SetGraphLine(float animDuration = -1)
+    {
+        Coroutilities.TryStopCoroutine(this, ref pointsAnim);
+
         radius = Mathf.Min(refBounds.extents.x, refBounds.extents.y);
 
         startAngInRads = startAngle * Mathf.Deg2Rad * (clockwise ? -1 : 1);
@@ -87,14 +115,46 @@ public class FlavorGraphLine : MonoBehaviour
             MakeLabel(i, center, val);
         }
 
-        UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, pointsToBorder);
-
         if (line)
         {
             line.gameObject.SetActive(true);
-            line.positionCount = pointsToBorder.Count;
-            line.SetPositions(pointsToBorder.ToArray());
+            line.positionCount = points.Length;
+
+            if (animate)
+            {
+                pointsAnim = StartCoroutine(AnimLinePositions(points, animDuration >= 0
+                    ? animDuration
+                    : defaultAnimTime));
+                return;
+            }
+
+            UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, finalizedPointsCache);
+            line.SetPositions(finalizedPointsCache.ToArray());
+            return;
         }
+
+        UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, finalizedPointsCache);
+    }
+
+    private IEnumerator AnimLinePositions(Vector3[] targetPoints, float duration)
+    {
+        Vector3[] startPoints = new Vector3[line.positionCount];
+        line.GetPositions(startPoints);
+
+        if (duration > 0)
+            for (float progress = 0; progress < 1; progress += Time.deltaTime / duration)
+            {
+                for (int i = 0; i < startPoints.Length; i++)
+                    line.SetPosition(i, Vector3.Lerp(startPoints[i], targetPoints[i], progress));
+
+                yield return null;
+            }
+
+        //Now that the animation's done, remove any adjacent duplicates and reset the line's points to that.
+        //  This ensures several points can converge to zero in the animation, then be removed if needed.
+        UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(targetPoints, finalizedPointsCache);
+        line.positionCount = finalizedPointsCache.Count;
+        line.SetPositions(finalizedPointsCache.ToArray());
     }
 
     private Vector3 RepositionPoint(FlavorType type, Vector3 zeroPoint, Vector3 point, out float valueUsed)
