@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class FlavorGraphLine : MonoBehaviour
 {
-    private enum GraphLine { Primary, Midline, Border }
+    private enum GraphLine { Value, Midline, Border }
 
-    [SerializeField] private LineRenderer border;
+    [SerializeField] private bool initOnStart;
+    [SerializeField] private bool animate;
+    [Space(5)]
+    [SerializeField] private LineRenderer line;
     [SerializeField] private RectTransform posSizeRef;
     [SerializeField] private FlavorType[] flavsToDisplay;
     [Space(5)]
     [SerializeField] private GraphLine lineType;
-    [SerializeField] private TMPro.TextMeshProUGUI labelPrefab;
+    [SerializeField] private RectTransform labelPrefab;
     [SerializeField] private bool useNumberLabels;
     [SerializeField] private bool rotateLabels;
     [SerializeField] [VectorLabels("Bottom", "Top")] private Vector2 labelPadding;
@@ -30,16 +33,27 @@ public class FlavorGraphLine : MonoBehaviour
     private float radius;
     private Vector3[] points;
     private List<Vector3> pointsToBorder = new List<Vector3>();
+    private TMPro.TextMeshProUGUI labelText;
 
     private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
     {
+        labelAutoSizeOptns = Vector4.Max(labelAutoSizeOptns, new Vector4(0, 0, 0, Mathf.NegativeInfinity));
+
         labelAutoSizeOptns.x = Mathf.Min(labelAutoSizeOptns.x, labelAutoSizeOptns.y);
         labelAutoSizeOptns.y = Mathf.Max(labelAutoSizeOptns.y, labelAutoSizeOptns.x);
-        labelAutoSizeOptns.z = Mathf.Clamp(labelAutoSizeOptns.z, 0, 50);
-        labelAutoSizeOptns.w = Mathf.Clamp(labelAutoSizeOptns.w, Mathf.NegativeInfinity, 0);
+        labelAutoSizeOptns.z = Mathf.Min(labelAutoSizeOptns.z, 50);
+        labelAutoSizeOptns.w = Mathf.Max(labelAutoSizeOptns.w, 0);
     });
 
     private void Start()
+    {
+        UtilFunctions.SafeSetActive(line, false);
+
+        if (initOnStart)
+            SetGraphLine();
+    }
+
+    private void SetGraphLine()
     {
         refBounds = posSizeRef.GetWorldBounds();
         radius = Mathf.Min(refBounds.extents.x, refBounds.extents.y);
@@ -75,8 +89,12 @@ public class FlavorGraphLine : MonoBehaviour
 
         UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, pointsToBorder);
 
-        border.positionCount = pointsToBorder.Count;
-        border.SetPositions(pointsToBorder.ToArray());
+        if (line)
+        {
+            line.gameObject.SetActive(true);
+            line.positionCount = pointsToBorder.Count;
+            line.SetPositions(pointsToBorder.ToArray());
+        }
     }
 
     private Vector3 RepositionPoint(FlavorType type, Vector3 zeroPoint, Vector3 point, out float valueUsed)
@@ -84,7 +102,7 @@ public class FlavorGraphLine : MonoBehaviour
         float interpolant = 0;
         valueUsed = 0;
 
-        if (lineType != GraphLine.Primary)
+        if (lineType == GraphLine.Border || lineType == GraphLine.Midline)
         {
             interpolant = percentOfMax;
             valueUsed = maxValue * percentOfMax;
@@ -107,23 +125,40 @@ public class FlavorGraphLine : MonoBehaviour
         Vector3 labelPos;
         Quaternion labelRot;
 
+        //No padding
         if (labelPadding.x <= 0 && labelPadding.y <= 0)
         {
             labelPos = points[index];
-            labelRot = rotateLabels ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter) : Quaternion.identity;
+            labelRot = rotateLabels
+                ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter)
+                : Quaternion.identity;
         }
+        //Uninverted padding direction
         else if (Vector3.Dot(Vector3.up, awayFrmCenter) >= 0)
         {
             labelPos = points[index] + awayFrmCenter * labelPadding.x;
-            labelRot = rotateLabels ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter) : Quaternion.identity;
+            labelRot = rotateLabels
+                ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter)
+                : Quaternion.identity;
         }
+        //Inverted padding direction
         else
         {
             labelPos = points[index] + awayFrmCenter * labelPadding.y;
-            labelRot = rotateLabels ? Quaternion.LookRotation(Vector3.forward, -awayFrmCenter) : Quaternion.identity;
+            labelRot = rotateLabels
+                ? Quaternion.LookRotation(Vector3.forward, -awayFrmCenter)
+                : Quaternion.identity;
         }
 
-        var newLabel = Instantiate(labelPrefab, labelPos, labelRot, posSizeRef);
+        //Check if we have a text component for the label cached. If not, and we can't find one, bail out
+        //immediately after spawning the label.
+        if (!labelText && !labelPrefab.TryGetComponent(out labelText))
+        {
+            Instantiate(labelPrefab, labelPos, labelRot, posSizeRef);
+            return;
+        }
+
+        var newLabel = Instantiate(labelText, labelPos, labelRot, posSizeRef);
 
         newLabel.text = useNumberLabels
             ? value.ToString()
