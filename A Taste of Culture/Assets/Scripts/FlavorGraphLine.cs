@@ -167,7 +167,7 @@ public class FlavorGraphLine : MonoBehaviour
 
             if (animate)
             {
-                pointsAnim = StartCoroutine(AnimLinePositions(points, animDuration >= 0
+                pointsAnim = StartCoroutine(AnimLinePositions(points, center, animDuration >= 0
                     ? animDuration
                     : defaultAnimTime));
                 return;
@@ -181,13 +181,19 @@ public class FlavorGraphLine : MonoBehaviour
         UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, finalizedPointsCache);
     }
 
-    private IEnumerator AnimLinePositions(Vector3[] targetPoints, float duration)
+    private IEnumerator AnimLinePositions(Vector3[] targetPoints, Vector3 zeroPoint, float duration)
     {
         Vector3[] startPoints = new Vector3[line.positionCount];
         Vector3 nextPos;
         Transform labelCache;
 
         line.GetPositions(startPoints);
+        //Vector3.zero is a valid initial point, but if it is, center equals Vector3.zero.
+        for (int i = 0; i < startPoints.Length; i++)
+            if (startPoints[i] == Vector3.zero)
+            {
+                startPoints[i] = zeroPoint;
+            }
 
         if (duration > 0)
             for (float progress = 0; progress <= 1; progress += Time.deltaTime / duration)

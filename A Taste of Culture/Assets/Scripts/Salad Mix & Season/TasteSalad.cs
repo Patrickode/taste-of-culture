@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TasteSalad : MonoBehaviour
 {
-    [SerializeField] private FlavorProfile profileToUpdate;
+    [SerializeField] private FlavorGraphLine flavLineToUpdate;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (flavLineToUpdate.isActiveAndEnabled && Input.GetKeyDown(KeyCode.Space))
         {
-            profileToUpdate.UpdateFlavors();
+            flavLineToUpdate.SetGraphLine();
         }
     }
 }
