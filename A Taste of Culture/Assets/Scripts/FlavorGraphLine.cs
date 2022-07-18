@@ -15,6 +15,8 @@ public class FlavorGraphLine : MonoBehaviour
     [SerializeField] private LineRenderer line;
     [SerializeField] private RectTransform posSizeRef;
     [SerializeField] private FlavorType[] flavsToDisplay;
+    [SerializeField] private bool useDataValues;
+    [SerializeField] private int[] flavVals;
     [Space(5)]
     [SerializeField] private GraphLine lineType;
     [SerializeField] private RectTransform labelPrefab;
@@ -52,6 +54,13 @@ public class FlavorGraphLine : MonoBehaviour
         labelAutoSizeOptns.y = Mathf.Max(labelAutoSizeOptns.y, labelAutoSizeOptns.x);
         labelAutoSizeOptns.z = Mathf.Min(labelAutoSizeOptns.z, 50);
         labelAutoSizeOptns.w = Mathf.Max(labelAutoSizeOptns.w, 0);
+
+        if (flavVals.Length != flavsToDisplay.Length)
+        {
+            int[] resizer = new int[flavsToDisplay.Length];
+            System.Array.Copy(flavVals, resizer, Mathf.Min(flavVals.Length, resizer.Length));
+            flavVals = resizer;
+        }
     });
 
     private void OnEnable()
@@ -140,7 +149,7 @@ public class FlavorGraphLine : MonoBehaviour
         {
             float angle = startAngInRads + 2 * Mathf.PI * i / numPoints;
             points[i] = RepositionPoint(
-                flavsToDisplay[i],
+                i,
                 center,
                 center + new Vector3(
                     radius * Mathf.Cos(angle),
@@ -203,7 +212,7 @@ public class FlavorGraphLine : MonoBehaviour
         line.SetPositions(finalizedPointsCache.ToArray());
     }
 
-    private Vector3 RepositionPoint(FlavorType type, Vector3 zeroPoint, Vector3 point, out float valueUsed)
+    private Vector3 RepositionPoint(int index, Vector3 zeroPoint, Vector3 point, out float valueUsed)
     {
         float interpolant = 0;
         valueUsed = 0;
@@ -214,7 +223,13 @@ public class FlavorGraphLine : MonoBehaviour
             valueUsed = maxValue * percentOfMax;
         }
 
-        else if (FlavorProfileData.Instance.TryGetFlav(type, out int flavValue))
+        else if (!useDataValues)
+        {
+            interpolant = Mathf.InverseLerp(0, maxValue, flavVals[index]);
+            valueUsed = flavVals[index];
+        }
+
+        else if (FlavorProfileData.Instance.TryGetFlav(flavsToDisplay[index], out int flavValue))
         {
             interpolant = Mathf.InverseLerp(0, maxValue, flavValue);
             valueUsed = flavValue;

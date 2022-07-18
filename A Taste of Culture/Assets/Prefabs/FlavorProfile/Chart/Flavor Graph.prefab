@@ -127,6 +127,8 @@ MonoBehaviour:
   line: {fileID: 768422140999343932}
   posSizeRef: {fileID: 768422140924331768}
   flavsToDisplay: 0000000000000000020000000000000003000000
+  useDataValues: 0
+  flavVals: 0000000000000000000000000000000000000000
   lineType: 1
   labelPrefab: {fileID: 1115986421047469845, guid: fd7a5a94c7537b647bf62a8cf77d678d, type: 3}
   useNumberLabels: 1
@@ -389,6 +391,8 @@ MonoBehaviour:
   line: {fileID: 768422141344546749}
   posSizeRef: {fileID: 768422140924331768}
   flavsToDisplay: 0000000000000000020000000000000003000000
+  useDataValues: 0
+  flavVals: 0000000000000000000000000000000000000000
   lineType: 2
   labelPrefab: {fileID: 1115986421047469845, guid: 248931094b1ce6f46904fc9a34ec26b4, type: 3}
   useNumberLabels: 0
@@ -551,6 +555,8 @@ MonoBehaviour:
   line: {fileID: 768422141714191855}
   posSizeRef: {fileID: 768422140924331768}
   flavsToDisplay: 0000000000000000020000000000000003000000
+  useDataValues: 0
+  flavVals: 050000000500000001000000050000000a000000
   lineType: 0
   labelPrefab: {fileID: 5987704953728520932, guid: 4c599f6581592ef4694be756c31f843a, type: 3}
   useNumberLabels: 0
@@ -713,6 +719,8 @@ MonoBehaviour:
   line: {fileID: 768422141778334781}
   posSizeRef: {fileID: 768422140924331768}
   flavsToDisplay: 0000000000000000020000000000000003000000
+  useDataValues: 0
+  flavVals: 0000000000000000000000000000000000000000
   lineType: 1
   labelPrefab: {fileID: 0}
   useNumberLabels: 0
@@ -875,6 +883,8 @@ MonoBehaviour:
   line: {fileID: 768422141915784465}
   posSizeRef: {fileID: 768422140924331768}
   flavsToDisplay: 0000000000000000020000000000000003000000
+  useDataValues: 1
+  flavVals: 0000000000000000000000000000000000000000
   lineType: 0
   labelPrefab: {fileID: 0}
   useNumberLabels: 0
@@ -1074,6 +1084,8 @@ MonoBehaviour:
   line: {fileID: 768422142074175570}
   posSizeRef: {fileID: 768422140924331768}
   flavsToDisplay: 0000000000000000020000000000000003000000
+  useDataValues: 0
+  flavVals: 0000000000000000000000000000000000000000
   lineType: 1
   labelPrefab: {fileID: 0}
   useNumberLabels: 0
