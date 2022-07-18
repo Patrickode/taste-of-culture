@@ -122,6 +122,7 @@ MonoBehaviour:
   resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  autoUpdate: 0
   defaultAnimTime: 0
   line: {fileID: 768422140999343932}
   posSizeRef: {fileID: 768422140924331768}
@@ -383,6 +384,7 @@ MonoBehaviour:
   resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  autoUpdate: 0
   defaultAnimTime: 0
   line: {fileID: 768422141344546749}
   posSizeRef: {fileID: 768422140924331768}
@@ -544,6 +546,7 @@ MonoBehaviour:
   resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  autoUpdate: 0
   defaultAnimTime: 0
   line: {fileID: 768422141714191855}
   posSizeRef: {fileID: 768422140924331768}
@@ -705,6 +708,7 @@ MonoBehaviour:
   resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  autoUpdate: 0
   defaultAnimTime: 0
   line: {fileID: 768422141778334781}
   posSizeRef: {fileID: 768422140924331768}
@@ -866,6 +870,7 @@ MonoBehaviour:
   resetLineOnStart: 1
   initOnStart: 1
   animate: 1
+  autoUpdate: 1
   defaultAnimTime: 1
   line: {fileID: 768422141915784465}
   posSizeRef: {fileID: 768422140924331768}
@@ -1064,6 +1069,7 @@ MonoBehaviour:
   resetLineOnStart: 1
   initOnStart: 1
   animate: 0
+  autoUpdate: 0
   defaultAnimTime: 0
   line: {fileID: 768422142074175570}
   posSizeRef: {fileID: 768422140924331768}

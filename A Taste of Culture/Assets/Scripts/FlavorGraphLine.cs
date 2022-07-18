@@ -9,6 +9,7 @@ public class FlavorGraphLine : MonoBehaviour
     [SerializeField] private bool resetLineOnStart = true;
     [SerializeField] private bool initOnStart;
     [SerializeField] private bool animate;
+    [SerializeField] private bool autoUpdate;
     [SerializeField] [Min(0)] private float defaultAnimTime;
     [Space(5)]
     [SerializeField] private LineRenderer line;
@@ -33,9 +34,14 @@ public class FlavorGraphLine : MonoBehaviour
 
     private Bounds refBounds;
     private float radius;
+
     private Vector3[] points;
+    private RectTransform[] labels = null;
+    private TMPro.TextMeshProUGUI[] txtLabels = null;
+    private Vector3[] labelOffsets;
+
+    private TMPro.TextMeshProUGUI txtLabelPrefab;
     private List<Vector3> finalizedPointsCache = new List<Vector3>();
-    private TMPro.TextMeshProUGUI labelText;
     private Coroutine pointsAnim;
 
     private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
@@ -48,9 +54,30 @@ public class FlavorGraphLine : MonoBehaviour
         labelAutoSizeOptns.w = Mathf.Max(labelAutoSizeOptns.w, 0);
     });
 
+    private void OnEnable()
+    {
+        if (autoUpdate)
+            FlavorProfileData.FlavorUpdated += OnFlavorUpdate;
+    }
+    private void OnDisable()
+    {
+        FlavorProfileData.FlavorUpdated -= OnFlavorUpdate;
+    }
+    private void OnFlavorUpdate(FlavorType dontCare, int didntAsk) => SetGraphLine();
+
     private void Start()
     {
         refBounds = posSizeRef.GetWorldBounds();
+
+        if (labelPrefab)
+        {
+            if (labelPrefab.TryGetComponent(out txtLabelPrefab))
+                txtLabels = new TMPro.TextMeshProUGUI[flavsToDisplay.Length];
+            else
+                labels = new RectTransform[flavsToDisplay.Length];
+
+            labelOffsets = new Vector3[flavsToDisplay.Length];
+        }
 
         if (line && resetLineOnStart)
         {
@@ -72,6 +99,20 @@ public class FlavorGraphLine : MonoBehaviour
         {
             line.SetPosition(i, resetPoint);
         }
+    }
+
+    private Transform LabelAtIndex(int index)
+    {
+        if (!labelPrefab)
+            return null;
+
+        if (labels != null)
+            return labels[index];
+
+        if (txtLabels != null)
+            return txtLabels[index] ? txtLabels[index].transform : null;
+
+        return null;
     }
 
     public void SetGraphLine(float animDuration = -1)
@@ -106,7 +147,8 @@ public class FlavorGraphLine : MonoBehaviour
                     radius * Mathf.Sin(angle)),
                 out float val);
 
-            MakeLabel(i, center, val);
+            if (!LabelAtIndex(i))
+                MakeLabel(i, center, val);
         }
 
         if (line)
@@ -133,13 +175,23 @@ public class FlavorGraphLine : MonoBehaviour
     private IEnumerator AnimLinePositions(Vector3[] targetPoints, float duration)
     {
         Vector3[] startPoints = new Vector3[line.positionCount];
+        Vector3 nextPos;
+        Transform labelCache;
+
         line.GetPositions(startPoints);
 
         if (duration > 0)
-            for (float progress = 0; progress < 1; progress += Time.deltaTime / duration)
+            for (float progress = 0; progress <= 1; progress += Time.deltaTime / duration)
             {
                 for (int i = 0; i < startPoints.Length; i++)
-                    line.SetPosition(i, Vector3.Lerp(startPoints[i], targetPoints[i], progress));
+                {
+                    nextPos = Vector3.Lerp(startPoints[i], targetPoints[i], progress);
+                    line.SetPosition(i, nextPos);
+
+                    labelCache = LabelAtIndex(i);
+                    if (labelCache)
+                        labelCache.position = nextPos + labelOffsets[i];
+                }
 
                 yield return null;
             }
@@ -176,55 +228,52 @@ public class FlavorGraphLine : MonoBehaviour
         if (!labelPrefab) return;
 
         var awayFrmCenter = (points[index] - center).normalized;
-        Vector3 labelPos;
         Quaternion labelRot;
 
         //No padding
         if (labelPadding.x <= 0 && labelPadding.y <= 0)
         {
-            labelPos = points[index];
+            labelOffsets[index] = Vector3.zero;
             labelRot = rotateLabels
                 ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter)
                 : Quaternion.identity;
         }
-        //Uninverted padding direction
+        //Uninverted padding direction - use bottom padding
         else if (Vector3.Dot(Vector3.up, awayFrmCenter) >= 0)
         {
-            labelPos = points[index] + awayFrmCenter * labelPadding.x;
+            labelOffsets[index] = awayFrmCenter * labelPadding.x;
             labelRot = rotateLabels
                 ? Quaternion.LookRotation(Vector3.forward, awayFrmCenter)
                 : Quaternion.identity;
         }
-        //Inverted padding direction
+        //Inverted padding direction - use top padding
         else
         {
-            labelPos = points[index] + awayFrmCenter * labelPadding.y;
+            labelOffsets[index] = awayFrmCenter * labelPadding.y;
             labelRot = rotateLabels
                 ? Quaternion.LookRotation(Vector3.forward, -awayFrmCenter)
                 : Quaternion.identity;
         }
 
-        //Check if we have a text component for the label cached. If not, and we can't find one, bail out
-        //immediately after spawning the label.
-        if (!labelText && !labelPrefab.TryGetComponent(out labelText))
+        //If we the label isn't text, no further adjustment's necessary.
+        if (!txtLabelPrefab)
         {
-            Instantiate(labelPrefab, labelPos, labelRot, posSizeRef);
+            labels[index] = Instantiate(labelPrefab, points[index] + labelOffsets[index], labelRot, posSizeRef);
             return;
         }
 
-        var newLabel = Instantiate(labelText, labelPos, labelRot, posSizeRef);
+        txtLabels[index] = Instantiate(txtLabelPrefab, points[index] + labelOffsets[index], labelRot, posSizeRef);
 
-        newLabel.text = useNumberLabels
+        txtLabels[index].text = useNumberLabels
             ? value.ToString()
             : System.Enum.GetName(typeof(FlavorType), flavsToDisplay[index]);
 
         if (adjustLabelAutoSize)
         {
-            newLabel.fontSizeMin = labelAutoSizeOptns.x;
-            newLabel.fontSizeMax = labelAutoSizeOptns.y;
-            //I don't know if these are the right things to set, so they'll stay commented out for now
-            /*newLabel.characterWidthAdjustment = labelAutoSizeOptns.z;
-            newLabel.lineSpacingAdjustment = labelAutoSizeOptns.w;*/
+            txtLabels[index].fontSizeMin = labelAutoSizeOptns.x;
+            txtLabels[index].fontSizeMax = labelAutoSizeOptns.y;
+            txtLabels[index].characterWidthAdjustment = labelAutoSizeOptns.z;
+            txtLabels[index].lineSpacingAdjustment = labelAutoSizeOptns.w;
         }
     }
 }
