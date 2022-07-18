@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlavorGraphLine : MonoBehaviour
 {
-    private enum GraphLine { Value, Midline, Border }
+    private enum GraphLine { Dynamic, Midline, Border }
 
     [SerializeField] private bool resetLineOnStart = true;
     [SerializeField] private bool initOnStart;
@@ -60,12 +60,6 @@ public class FlavorGraphLine : MonoBehaviour
 
         if (initOnStart)
             SetGraphLine();
-
-        //temp, for testing
-        if (lineType == GraphLine.Value && line)
-        {
-            Coroutilities.DoAfterDelay(this, () => { FlavorProfileData.Instance.Bitterness += 2; SetGraphLine(); }, 2);
-        }
     }
 
     private void ResetLine(int newCount = -1) => ResetLine(refBounds.center, newCount);
