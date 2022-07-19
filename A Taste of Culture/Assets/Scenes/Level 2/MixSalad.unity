@@ -2534,6 +2534,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 768422140999343906, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 768422140999343935, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
       value: 3
@@ -2558,6 +2562,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4454846}
+    - target: {fileID: 768422141344546723, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 768422141344546748, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
       value: 3
@@ -2577,6 +2585,10 @@ PrefabInstance:
     - target: {fileID: 768422141344546748, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavsToDisplay.Array.data[2]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422141714191853, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 768422141714191854, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
@@ -2601,6 +2613,10 @@ PrefabInstance:
     - target: {fileID: 768422141714191854, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavsToDisplay.Array.data[2]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422141778334755, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 768422141778334780, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
@@ -2693,6 +2709,10 @@ PrefabInstance:
     - target: {fileID: 768422141978710099, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: m_Name
       value: Flavor Graph
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422142074175568, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 768422142074175597, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size

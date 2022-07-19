@@ -9,6 +9,7 @@ public class FlavorGraphLine : MonoBehaviour
     [SerializeField] private bool resetLineOnStart = true;
     [SerializeField] private bool initOnStart;
     [SerializeField] private bool animate;
+    [SerializeField] private bool animateOnStart;
     [SerializeField] private bool autoUpdate;
     [SerializeField] [Min(0)] private float defaultAnimTime;
     [Space(5)]
@@ -88,14 +89,13 @@ public class FlavorGraphLine : MonoBehaviour
             labelOffsets = new Vector3[flavsToDisplay.Length];
         }
 
-        if (line && resetLineOnStart)
-        {
-            ResetLine(flavsToDisplay.Length);
-            line.gameObject.SetActive(false);
-        }
+        if (line)
+            line.enabled = false;
 
         if (initOnStart)
-            SetGraphLine();
+            SetGraphLine(animateOnStart ? -1 : 0, resetLineOnStart);
+        else if (resetLineOnStart && line)
+            ResetLine(flavsToDisplay.Length);
     }
 
     private void ResetLine(int newCount = -1) => ResetLine(refBounds.center, newCount);
@@ -124,7 +124,7 @@ public class FlavorGraphLine : MonoBehaviour
         return null;
     }
 
-    public void SetGraphLine(float animDuration = -1)
+    public void SetGraphLine(float animDuration = -1, bool resetLine = false)
     {
         Coroutilities.TryStopCoroutine(this, ref pointsAnim);
 
@@ -144,6 +144,9 @@ public class FlavorGraphLine : MonoBehaviour
             center += -dirToStartAng * halfApothem;
         }
 
+        if (resetLine && line)
+            ResetLine(center, flavsToDisplay.Length);
+
         points = new Vector3[numPoints];
         for (int i = 0; i < numPoints; i++)
         {
@@ -162,9 +165,6 @@ public class FlavorGraphLine : MonoBehaviour
 
         if (line)
         {
-            line.gameObject.SetActive(true);
-            line.positionCount = points.Length;
-
             if (animate)
             {
                 pointsAnim = StartCoroutine(AnimLinePositions(points, center, animDuration >= 0
@@ -173,8 +173,9 @@ public class FlavorGraphLine : MonoBehaviour
                 return;
             }
 
-            UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(points, finalizedPointsCache);
-            line.SetPositions(finalizedPointsCache.ToArray());
+            line.enabled = true;
+            TrimLineAdjDupes(points);
+            line.loop = line.positionCount > 2;
             return;
         }
 
@@ -183,23 +184,48 @@ public class FlavorGraphLine : MonoBehaviour
 
     private IEnumerator AnimLinePositions(Vector3[] targetPoints, Vector3 zeroPoint, float duration)
     {
+        line.positionCount = targetPoints.Length;
+
         Vector3[] startPoints = new Vector3[line.positionCount];
+        line.GetPositions(startPoints);
+
         Vector3 nextPos;
         Transform labelCache;
+        int targZeros = 0;
 
-        line.GetPositions(startPoints);
-        //Vector3.zero is a valid initial point, but if it is, center equals Vector3.zero.
+        bool[] matches = new bool[startPoints.Length];
+        bool willAnim = false;
+
         for (int i = 0; i < startPoints.Length; i++)
+        {
+            //Vector3.zero is a valid initial point, but if it is, zeroPoint should equal Vector3.zero.
             if (startPoints[i] == Vector3.zero)
-            {
                 startPoints[i] = zeroPoint;
-            }
+
+            if (targetPoints[i] == zeroPoint)
+                targZeros++;
+
+            if (startPoints[i] == targetPoints[i])
+                matches[i] = true;
+            else
+                willAnim = true;
+        }
+
+        //Don't loop the line unless there are two or more non-zero target points.
+        line.loop = targZeros < targetPoints.Length - 1;
+
+        //If none of the points are moving, just skip the loop entirely and don't set enabled (whether it's true or false).
+        duration = willAnim ? duration : 0;
+        line.enabled = willAnim ? true : line.enabled;
 
         if (duration > 0)
             for (float progress = 0; progress <= 1; progress += Time.deltaTime / duration)
             {
                 for (int i = 0; i < startPoints.Length; i++)
                 {
+                    //Even if this point won't move, don't skip the first loop, to ensure proper initialization
+                    if (progress > 0 && matches[i]) continue;
+
                     nextPos = Vector3.Lerp(startPoints[i], targetPoints[i], progress);
                     line.SetPosition(i, nextPos);
 
@@ -211,11 +237,9 @@ public class FlavorGraphLine : MonoBehaviour
                 yield return null;
             }
 
-        //Now that the animation's done, remove any adjacent duplicates and reset the line's points to that.
-        //  This ensures several points can converge to zero in the animation, then be removed if needed.
-        UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(targetPoints, finalizedPointsCache);
-        line.positionCount = finalizedPointsCache.Count;
-        line.SetPositions(finalizedPointsCache.ToArray());
+        //Remove adjacent duplicates and reset the line's points to the result *after* the animation.
+        //  This ensures several points, adjacent or not, can converge to zero before removal.
+        TrimLineAdjDupes(targetPoints);
     }
 
     private Vector3 RepositionPoint(int index, Vector3 zeroPoint, Vector3 point, out float valueUsed)
@@ -296,5 +320,12 @@ public class FlavorGraphLine : MonoBehaviour
             txtLabels[index].characterWidthAdjustment = labelAutoSizeOptns.z;
             txtLabels[index].lineSpacingAdjustment = labelAutoSizeOptns.w;
         }
+    }
+
+    private void TrimLineAdjDupes(Vector3[] pointsToTrim)
+    {
+        UtilFunctions.RemoveAdjacentDuplicatesNonAlloc(pointsToTrim, finalizedPointsCache);
+        line.positionCount = finalizedPointsCache.Count;
+        line.SetPositions(finalizedPointsCache.ToArray());
     }
 }
