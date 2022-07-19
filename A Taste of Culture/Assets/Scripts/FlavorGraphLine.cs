@@ -47,6 +47,7 @@ public class FlavorGraphLine : MonoBehaviour
     private List<Vector3> finalizedPointsCache = new List<Vector3>();
     private Coroutine pointsAnim;
 
+    //Sanitize inspector values
     private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
     {
         labelAutoSizeOptns = Vector4.Max(labelAutoSizeOptns, new Vector4(0, 0, 0, Mathf.NegativeInfinity));
@@ -81,6 +82,7 @@ public class FlavorGraphLine : MonoBehaviour
 
         if (labelPrefab)
         {
+            //Only init the array we'll need; non-text or text
             if (labelPrefab.TryGetComponent(out txtLabelPrefab))
                 txtLabels = new TMPro.TextMeshProUGUI[flavsToDisplay.Length];
             else
@@ -89,6 +91,7 @@ public class FlavorGraphLine : MonoBehaviour
             labelOffsets = new Vector3[flavsToDisplay.Length];
         }
 
+        //We'll show the line again when it's finished initialization
         if (line)
             line.enabled = false;
 
@@ -124,7 +127,7 @@ public class FlavorGraphLine : MonoBehaviour
         return null;
     }
 
-    public void SetGraphLine(float animDuration = -1, bool resetLine = false)
+    public void SetGraphLine(float animDuration = -1, bool shouldResetLine = false)
     {
         Coroutilities.TryStopCoroutine(this, ref pointsAnim);
 
@@ -138,18 +141,19 @@ public class FlavorGraphLine : MonoBehaviour
         //a vertex, so said opposite point will not be the same distance from the center (apothem <= radius).
         if (numPoints % 2 > 0)
         {
-            //Offset by half of the apothem for equal start/opposite padding.
+            //Offset by half of the apothem for equal start/opposite padding (distance from refBounds edges)
             var halfApothem = (radius - (radius * Mathf.Cos(Mathf.PI / numPoints))) / 2;
             var dirToStartAng = Quaternion.AngleAxis(startAngle, Vector3.forward) * Vector3.right;
             center += -dirToStartAng * halfApothem;
         }
 
-        if (resetLine && line)
+        if (shouldResetLine && line)
             ResetLine(center, flavsToDisplay.Length);
 
         points = new Vector3[numPoints];
         for (int i = 0; i < numPoints; i++)
         {
+            //2PI split into flavsToDisplay number of segments
             float angle = startAngInRads + 2 * Mathf.PI * i / numPoints;
             points[i] = RepositionPoint(
                 i,
@@ -175,6 +179,7 @@ public class FlavorGraphLine : MonoBehaviour
 
             line.enabled = true;
             TrimLineAdjDupes(points);
+            //If there are only two points, the end's already connected to the start, no need to loop
             line.loop = line.positionCount > 2;
             return;
         }
@@ -198,7 +203,7 @@ public class FlavorGraphLine : MonoBehaviour
 
         for (int i = 0; i < startPoints.Length; i++)
         {
-            //Vector3.zero is a valid initial point, but if it is, zeroPoint should equal Vector3.zero.
+            //Vector3.zero is a valid init point, but when it is, zeroPoint should be equal to it.
             if (startPoints[i] == Vector3.zero)
                 startPoints[i] = zeroPoint;
 
@@ -214,28 +219,29 @@ public class FlavorGraphLine : MonoBehaviour
         //Don't loop the line unless there are two or more non-zero target points.
         line.loop = targZeros < targetPoints.Length - 1;
 
-        //If none of the points are moving, just skip the loop entirely and don't set enabled (whether it's true or false).
+        //If not animating, set duration to zero; we're essentially already done.
         duration = willAnim ? duration : 0;
-        line.enabled = willAnim ? true : line.enabled;
+        //If the line's already disabled and we're not animating, leave it disabled.
+        line.enabled = willAnim || line.enabled;
 
-        if (duration > 0)
-            for (float progress = 0; progress <= 1; progress += Time.deltaTime / duration)
+        //Note progress's initialization. The loop is skipped if duration is too short.
+        for (float progress = duration > 0 ? 0 : 1; progress <= 1; progress += Time.deltaTime / duration)
+        {
+            for (int i = 0; i < startPoints.Length; i++)
             {
-                for (int i = 0; i < startPoints.Length; i++)
-                {
-                    //Even if this point won't move, don't skip the first loop, to ensure proper initialization
-                    if (progress > 0 && matches[i]) continue;
+                //Even if this point won't move, don't skip the first loop, to ensure proper initialization
+                if (progress > 0 && matches[i]) continue;
 
-                    nextPos = Vector3.Lerp(startPoints[i], targetPoints[i], progress);
-                    line.SetPosition(i, nextPos);
+                nextPos = Vector3.Lerp(startPoints[i], targetPoints[i], progress);
+                line.SetPosition(i, nextPos);
 
-                    labelCache = LabelAtIndex(i);
-                    if (labelCache)
-                        labelCache.position = nextPos + labelOffsets[i];
-                }
-
-                yield return null;
+                labelCache = LabelAtIndex(i);
+                if (labelCache)
+                    labelCache.position = nextPos + labelOffsets[i];
             }
+
+            yield return null;
+        }
 
         //Remove adjacent duplicates and reset the line's points to the result *after* the animation.
         //  This ensures several points, adjacent or not, can converge to zero before removal.
@@ -247,18 +253,21 @@ public class FlavorGraphLine : MonoBehaviour
         float interpolant = 0;
         valueUsed = 0;
 
+        //Static line; use percentOfMax
         if (lineType == GraphLine.Border || lineType == GraphLine.Midline)
         {
             interpolant = percentOfMax;
             valueUsed = maxValue * percentOfMax;
         }
 
+        //Dynamic line; use flavor data's value
         else if (!useDataValues)
         {
             interpolant = Mathf.InverseLerp(0, maxValue, flavVals[index]);
             valueUsed = flavVals[index];
         }
 
+        //Dynamic line; use inspector value
         else if (FlavorProfileData.Instance.TryGetFlav(flavsToDisplay[index], out int flavValue))
         {
             interpolant = Mathf.InverseLerp(0, maxValue, flavValue);
@@ -300,7 +309,7 @@ public class FlavorGraphLine : MonoBehaviour
                 : Quaternion.identity;
         }
 
-        //If we the label isn't text, no further adjustment's necessary.
+        //If the label isn't text, no further adjustment's necessary.
         if (!txtLabelPrefab)
         {
             labels[index] = Instantiate(labelPrefab, points[index] + labelOffsets[index], labelRot, posSizeRef);
