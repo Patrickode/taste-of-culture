@@ -1568,6 +1568,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCamera: {fileID: 74386172}
+  tooltipText: {fileID: 918498853}
+  backgroundRectTransform: {fileID: 1177301374}
+  textPaddingSize: 12.5
 --- !u!1001 &806216058
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,25 +3,33 @@ using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour
 {
-    [SerializeField]
-    private Camera uiCamera;
+    [SerializeField] private Camera uiCamera;
+    [SerializeField] private Text tooltipText;
+    [SerializeField] private RectTransform backgroundRectTransform;
+    [Space(5)]
+    [SerializeField] float textPaddingSize = 12.5f;
 
-    private Text tooltipText;
-    private RectTransform backgroundRectTransform;
     private static Tooltip instance;
+    private RectTransform prntRectRef;
+    private Vector2 localPointCache;
 
     private void Awake()
     {
         instance = this;
-        backgroundRectTransform = transform.Find("TooltipBackground").GetComponent<RectTransform>();
-        tooltipText = transform.Find("TooltipText").GetComponent<Text>();
+        prntRectRef = transform.parent.GetComponent<RectTransform>();
     }
 
     private void Update()
     {
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), Input.mousePosition, uiCamera, out localPoint);
-        transform.localPosition = new Vector2(localPoint.x - 50, localPoint.y + 100);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            prntRectRef,
+            Input.mousePosition,
+            uiCamera,
+            out localPointCache);
+
+        localPointCache.x -= 50;
+        localPointCache.y += 100;
+        transform.localPosition = localPointCache;
     }
 
     private void ShowTooltip(string tooltipString)
@@ -29,8 +37,9 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(true);
 
         tooltipText.text = tooltipString;
-        float textPaddingSize = 12.5f;
-        Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + textPaddingSize * 2f, tooltipText.preferredHeight + textPaddingSize * 2f);
+        Vector2 backgroundSize = new Vector2(
+            tooltipText.preferredWidth + textPaddingSize * 2f,
+            tooltipText.preferredHeight + textPaddingSize * 2f);
         backgroundRectTransform.sizeDelta = backgroundSize;
     }
 
