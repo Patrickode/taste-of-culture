@@ -6,7 +6,9 @@ public class FlavorGraphLine : MonoBehaviour
 {
     private enum GraphLine { Dynamic, Midline, Border }
 
-    [SerializeField] private bool resetLineOnStart = true;
+    [Tooltip("All lines are reset to zero on start. This resets them to posSizeRef's world center " +
+        "immediately afterward. Said world center will be adjusted by SetGraphLine if initOnStart is true.")]
+    [SerializeField] private bool extraResetOnStart = true;
     [SerializeField] private bool initOnStart;
     [SerializeField] private bool animate;
     [SerializeField] private bool animateOnStart;
@@ -93,11 +95,14 @@ public class FlavorGraphLine : MonoBehaviour
 
         //We'll show the line again when it's finished initialization
         if (line)
+        {
+            ResetLine(Vector3.zero);
             line.enabled = false;
+        }
 
         if (initOnStart)
-            SetGraphLine(animateOnStart ? -1 : 0, resetLineOnStart);
-        else if (resetLineOnStart && line)
+            SetGraphLine(animateOnStart ? -1 : 0, extraResetOnStart);
+        else if (extraResetOnStart && line)
             ResetLine(flavsToDisplay.Length);
     }
 
@@ -131,6 +136,7 @@ public class FlavorGraphLine : MonoBehaviour
     {
         Coroutilities.TryStopCoroutine(this, ref pointsAnim);
 
+        refBounds = posSizeRef.GetWorldBounds();
         radius = Mathf.Min(refBounds.extents.x, refBounds.extents.y);
 
         startAngInRads = startAngle * Mathf.Deg2Rad * (clockwise ? -1 : 1);

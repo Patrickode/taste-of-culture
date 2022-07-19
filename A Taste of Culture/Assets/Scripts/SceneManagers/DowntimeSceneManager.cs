@@ -10,19 +10,20 @@ public class DowntimeSceneManager : MonoBehaviour
     public GameObject dialogue;
     public DialogueTrigger trigger;
     public GameObject mentor;
+    [SerializeField] private GameObject flavorPObj;
 
     public GameObject[] backgrounds;
-    private FlavorProfile flavorPfile;
+    //private FlavorProfile flavorPfile;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
+        //flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
         Cursor.visible = true;
         dialogue.SetActive(true);
 
         foreach (var bg in backgrounds)
             bg.SetActive(false);
+
         backgrounds[backgrounds.Length - 1].SetActive(true);
 
         AddOnions();
@@ -131,16 +132,20 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         mentor.SetActive(false);
         yield return StartCoroutine(TransitionAndWait(false, 2));
+
         backgrounds[10].SetActive(true);
-        if (flavorPfile)
-            flavorPfile.VisualizeFlavors();
+        /*if (flavorPfile)
+            flavorPfile.VisualizeFlavors();*/
+        flavorPObj.SafeSetActive(true);
 
         dialogueManager.ToggleDialogue(true);
 
         yield return new WaitForSeconds(4.5f);
-
         yield return StartCoroutine(TransitionAndWait(false, 2));
+
         backgrounds[10].SetActive(false);
+        flavorPObj.SafeSetActive(false);
+        
         backgrounds[11].SetActive(true);
         mentor.SetActive(true);
     }
