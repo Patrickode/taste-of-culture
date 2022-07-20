@@ -17,11 +17,13 @@ public class FlavorGraphLine : MonoBehaviour
     [Space(10)]
     [SerializeField] private LineRenderer line;
     [SerializeField] private RectTransform posSizeRef;
+    [SerializeField] private GraphLine lineType;
     [SerializeField] private FlavorType[] flavsToDisplay;
     [SerializeField] private bool useDataValues;
     [SerializeField] private int[] flavVals;
+    [SerializeField] private bool useValueRange;
+    [SerializeField] [Min(0)] [VectorLabels("Min", "Max")] private Vector2Int valueRange;
     [Space(5)]
-    [SerializeField] private GraphLine lineType;
     [SerializeField] private RectTransform labelPrefab;
     [SerializeField] private bool useNumberLabels;
     [SerializeField] private bool rotateLabels;
@@ -52,13 +54,15 @@ public class FlavorGraphLine : MonoBehaviour
     //Sanitize inspector values
     private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
     {
+        //Ensure the first three options are 0 or more
         labelAutoSizeOptns = Vector4.Max(labelAutoSizeOptns, new Vector4(0, 0, 0, Mathf.NegativeInfinity));
 
-        labelAutoSizeOptns.x = Mathf.Min(labelAutoSizeOptns.x, labelAutoSizeOptns.y);
+        //Ensure max >= min, WD% is <= 50, line is <= 0
         labelAutoSizeOptns.y = Mathf.Max(labelAutoSizeOptns.y, labelAutoSizeOptns.x);
         labelAutoSizeOptns.z = Mathf.Min(labelAutoSizeOptns.z, 50);
-        labelAutoSizeOptns.w = Mathf.Max(labelAutoSizeOptns.w, 0);
+        labelAutoSizeOptns.w = Mathf.Min(labelAutoSizeOptns.w, 0);
 
+        //Resize flavVals to match flavsToDisplay, preserving as many entered values as possible
         if (flavVals.Length != flavsToDisplay.Length)
         {
             int[] resizer = new int[flavsToDisplay.Length];
