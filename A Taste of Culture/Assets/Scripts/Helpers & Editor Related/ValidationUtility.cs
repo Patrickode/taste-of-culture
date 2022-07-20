@@ -5,10 +5,11 @@ using UnityEngine;
 
 /// <summary>
 /// <b>Code Author: cxode, via <br/>
-/// <see href="https://forum.unity.com/threads/sendmessage-cannot-be-called-during-awake-checkconsistency-or-onvalidate-can-we-suppress.537265/#post-7841490"/></b><br/>
+/// <see href="https://forum.unity.com/threads/sendmessage-cannot-be-called-during-awake-checkconsistency-or-onvalidate-can-we-suppress.537265/#post-7841490"/></b>
+/// <br/><br/>
 /// Doing certain things in OnValidate can flood the log with warning messages (sometimes outright incorrectly!).<br/>
 /// To avoid this, you can run that OnValidate code through this class's methods instead.<br/>
-/// <i>Edited by Patrick Mitchell.</i>
+/// <i>Edited by Patrick Mitchell @ <see href="https://patrickode.github.io"/>.</i>
 /// </summary>
 public static class ValidationUtility
 {
