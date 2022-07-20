@@ -2011,6 +2011,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 768422140999343935, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: defaultAnimTime
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422140999343935, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -2033,6 +2037,10 @@ PrefabInstance:
     - target: {fileID: 768422141344546748, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: maxValue
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422141344546748, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: defaultAnimTime
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 768422141344546748, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
@@ -2059,6 +2067,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 768422141714191854, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: defaultAnimTime
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422141714191854, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -2077,6 +2089,10 @@ PrefabInstance:
     - target: {fileID: 768422141778334780, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: maxValue
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422141778334780, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: defaultAnimTime
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 768422141778334780, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
@@ -2101,6 +2117,10 @@ PrefabInstance:
     - target: {fileID: 768422141915784467, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: animateOnStart
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422141915784467, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: defaultAnimTime
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 768422141915784467, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
@@ -2173,6 +2193,10 @@ PrefabInstance:
     - target: {fileID: 768422142074175597, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: maxValue
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 768422142074175597, guid: 460f313815f99a04481e47d01c560202, type: 3}
+      propertyPath: defaultAnimTime
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 768422142074175597, guid: 460f313815f99a04481e47d01c560202, type: 3}
       propertyPath: flavVals.Array.size
