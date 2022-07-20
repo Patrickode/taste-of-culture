@@ -14,7 +14,7 @@ public class FlavorGraphLine : MonoBehaviour
     [SerializeField] private bool animateOnStart;
     [SerializeField] private bool autoUpdate;
     [SerializeField] [Min(0)] private float defaultAnimTime;
-    [Space(5)]
+    [Space(10)]
     [SerializeField] private LineRenderer line;
     [SerializeField] private RectTransform posSizeRef;
     [SerializeField] private FlavorType[] flavsToDisplay;
