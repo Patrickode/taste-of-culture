@@ -21,9 +21,7 @@ public class FlavorGraphLine : MonoBehaviour
     [SerializeField] private FlavorType[] flavsToDisplay;
     [SerializeField] private bool useDataValues;
     [SerializeField] private int[] flavVals;
-    [SerializeField] private bool useValueRange;
-    [SerializeField] [Min(0)] [VectorLabels("Min", "Max")] private Vector2Int valueRange;
-    [Space(5)]
+    [Space(10)]
     [SerializeField] private RectTransform labelPrefab;
     [SerializeField] private bool useNumberLabels;
     [SerializeField] private bool rotateLabels;
@@ -40,7 +38,7 @@ public class FlavorGraphLine : MonoBehaviour
     private float startAngInRads;
 
     private Bounds refBounds;
-    private float radius;
+    private float graphRadius;
 
     private Vector3[] points;
     private RectTransform[] labels = null;
@@ -141,7 +139,7 @@ public class FlavorGraphLine : MonoBehaviour
         Coroutilities.TryStopCoroutine(this, ref pointsAnim);
 
         refBounds = posSizeRef.GetWorldBounds();
-        radius = Mathf.Min(refBounds.extents.x, refBounds.extents.y);
+        graphRadius = Mathf.Min(refBounds.extents.x, refBounds.extents.y);
 
         startAngInRads = startAngle * Mathf.Deg2Rad * (clockwise ? -1 : 1);
         int numPoints = flavsToDisplay.Length;
@@ -152,7 +150,7 @@ public class FlavorGraphLine : MonoBehaviour
         if (numPoints % 2 > 0)
         {
             //Offset by half of the apothem for equal start/opposite padding (distance from refBounds edges)
-            var halfApothem = (radius - (radius * Mathf.Cos(Mathf.PI / numPoints))) / 2;
+            var halfApothem = (graphRadius - (graphRadius * Mathf.Cos(Mathf.PI / numPoints))) / 2;
             var dirToStartAng = Quaternion.AngleAxis(startAngle, Vector3.forward) * Vector3.right;
             center += -dirToStartAng * halfApothem;
         }
@@ -169,8 +167,8 @@ public class FlavorGraphLine : MonoBehaviour
                 i,
                 center,
                 center + new Vector3(
-                    radius * Mathf.Cos(angle),
-                    radius * Mathf.Sin(angle)),
+                    graphRadius * Mathf.Cos(angle),
+                    graphRadius * Mathf.Sin(angle)),
                 out float val);
 
             if (!LabelAtIndex(i))
