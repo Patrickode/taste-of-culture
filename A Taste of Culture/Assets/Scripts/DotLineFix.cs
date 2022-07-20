@@ -8,6 +8,12 @@ public class DotLineFix : MonoBehaviour
     [SerializeField] private LineRenderer lineRef;
     private float widthCache;
 
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        if (!lineRef)
+            TryGetComponent(out lineRef);
+    });
+
     private void Update()
     {
         if (widthCache != lineRef.widthMultiplier)
