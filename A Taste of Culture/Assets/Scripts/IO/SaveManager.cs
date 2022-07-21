@@ -31,6 +31,31 @@ public static class SaveManager
         _ => LevelID.Generic,
     };
 
+    /// <summary>
+    /// Takes a scene and returns the level it belongs to.<br/>
+    /// This method uses Regex to look at the scene's path, which should contain<br/>what number level it's 
+    /// in (for example in the name of its folder).
+    /// <br/><br/>
+    /// If "Level #" (case insensitive) can't be found in the path, returns <see cref="LevelID.Generic"/>.
+    /// </summary>
+    public static LevelID ScnIndToLvlID(Scene scn)
+    {
+        //Go through the scene's path and get the number next to "Level " (case insensitive), if there is one.
+        var lvlNumMatch = System.Text.RegularExpressions.Regex.Match(scn.path, @"(?<=(?i)Level\s(?-i))\d*");
+
+        if (lvlNumMatch.Success && int.TryParse(lvlNumMatch.Value, out int lvlNum))
+        {
+            return lvlNum switch
+            {
+                1 => LevelID.Makhani,
+                2 => LevelID.ConchSalad,
+                _ => LevelID.Generic,
+            };
+        }
+
+        return LevelID.Generic;
+    }
+
     //This attribute and argument make this method run just before the unity splash screen plays; I.e., on game startup.
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     private static void Init()
@@ -49,7 +74,7 @@ public static class SaveManager
 
     private static void SaveOnLoad(Scene sceneLoaded, LoadSceneMode loadMode)
     {
-        LevelID lvl = ScnIndToLvlID(sceneLoaded.buildIndex);
+        LevelID lvl = ScnIndToLvlID(sceneLoaded);
 
         SaveLevelData(new LevelData()
         {
