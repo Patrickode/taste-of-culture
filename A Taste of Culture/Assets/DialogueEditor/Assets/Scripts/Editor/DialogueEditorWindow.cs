@@ -604,7 +604,14 @@ namespace DialogueEditor
                     CurrentAsset.ParameterList = new List<EditableParameter>();
 
                 GUILayout.Label("Conversation: " + CurrentAsset.gameObject.name, panelTitleStyle);
-                GUILayout.Space(VERTICAL_GAP);
+
+                GUILayout.Space(VERTICAL_GAP / 2);
+
+                GUILayout.BeginHorizontal();
+                CurrentAsset.IDToStartAt = EditorGUILayout.IntField("ID To Start At", CurrentAsset.IDToStartAt);
+                GUILayout.EndHorizontal();
+
+                GUILayout.Space(VERTICAL_GAP / 2);
 
                 GUILayout.Label("Parameters", panelTitleStyle);
                 GUILayout.BeginHorizontal();
@@ -691,7 +698,7 @@ namespace DialogueEditor
                 EditorGUILayout.LabelField("'Continue' text:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
                 CurrentAsset.ContinueText = EditorGUILayout.TextField(CurrentAsset.ContinueText, GUILayout.MaxWidth(fieldWidth));
                 EditorGUILayout.EndHorizontal();
-                
+
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("'End' text:", GUILayout.MinWidth(labelWidth), GUILayout.MaxWidth(labelWidth));
                 CurrentAsset.EndText = EditorGUILayout.TextField(CurrentAsset.EndText, GUILayout.MaxWidth(fieldWidth));

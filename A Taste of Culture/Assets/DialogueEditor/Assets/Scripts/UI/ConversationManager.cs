@@ -161,7 +161,12 @@ namespace DialogueEditor
                 OnConversationStarted.Invoke();
 
             TurnOnUI();
-            m_currentSpeech = m_conversation.Root;
+
+            if (m_conversation.NodeToStartAt != null)
+                m_currentSpeech = m_conversation.NodeToStartAt;
+            else
+                m_currentSpeech = m_conversation.Root;
+
             SetState(eState.TransitioningDialogueBoxOn);
         }
 
@@ -729,13 +734,13 @@ namespace DialogueEditor
                         // If there was no valid speech node (due to no conditions being met) this becomes a None button type
                         if (next == null)
                         {
-                            uiOption.SetupButton(UIConversationButton.eButtonType.End, null, 
+                            uiOption.SetupButton(UIConversationButton.eButtonType.End, null,
                                 m_conversation, m_currentSpeech.ContinueEndOverride);
                         }
                         // Else, valid speech node found
                         else
                         {
-                            uiOption.SetupButton(UIConversationButton.eButtonType.Speech, next, 
+                            uiOption.SetupButton(UIConversationButton.eButtonType.Speech, next,
                                 m_conversation, m_currentSpeech.ContinueEndOverride);
                         }
 
@@ -743,7 +748,7 @@ namespace DialogueEditor
                     else if (m_currentSpeech.ConnectionType == Connection.eConnectionType.None)
                     {
                         UIConversationButton uiOption = CreateButton();
-                        uiOption.SetupButton(UIConversationButton.eButtonType.End, null, 
+                        uiOption.SetupButton(UIConversationButton.eButtonType.End, null,
                             m_conversation, m_currentSpeech.ContinueEndOverride);
                     }
                 }

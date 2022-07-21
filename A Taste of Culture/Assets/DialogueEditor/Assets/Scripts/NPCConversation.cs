@@ -34,6 +34,8 @@ namespace DialogueEditor
         [SerializeField] public int CurrentIDCounter = 1;
         [SerializeField] private string json;
         [SerializeField] private int saveVersion;
+
+        [SerializeField] public int IDToStartAt = -1;
         [SerializeField] public string DefaultName;
         [SerializeField] public Sprite DefaultSprite;
         [SerializeField] public TMPro.TMP_FontAsset DefaultFont;
@@ -337,6 +339,7 @@ namespace DialogueEditor
             CreateParameters(ec, conversation);
 
             // Construct the Conversation-Based variables (not node-based)
+            conversation.IDToStartAt = this.IDToStartAt;
             conversation.ContinueFont = this.ContinueFont;
             conversation.EndConversationFont = this.EndConversationFont;
             conversation.ContinueText = this.ContinueText;
@@ -389,23 +392,25 @@ namespace DialogueEditor
 
         private SpeechNode CreateSpeechNode(EditableSpeechNode editableNode)
         {
-            SpeechNode speech = new SpeechNode();
-            speech.Name = editableNode.Name;
-            speech.Text = editableNode.Text;
-            
-            speech.SkipNode = editableNode.SkipNode;
-            speech.AutomaticallyAdvance = editableNode.AdvanceDialogueAutomatically;
-            speech.AutoAdvanceShouldDisplayOption = editableNode.AutoAdvanceShouldDisplayOption;
-            speech.TimeUntilAdvance = editableNode.TimeUntilAdvance;
-            
-            speech.TMPFont = editableNode.TMPFont;
-            speech.ContinueEndOverride = editableNode.ContinueEndOverride;
-            
-            speech.Icon = editableNode.Icon;
-            speech.LargeIcon = editableNode.LargeIcon;
-            
-            speech.Audio = editableNode.Audio;
-            speech.Volume = editableNode.Volume;
+            SpeechNode speech = new SpeechNode
+            {
+                Name = editableNode.Name,
+                Text = editableNode.Text,
+
+                SkipNode = editableNode.SkipNode,
+                AutomaticallyAdvance = editableNode.AdvanceDialogueAutomatically,
+                AutoAdvanceShouldDisplayOption = editableNode.AutoAdvanceShouldDisplayOption,
+                TimeUntilAdvance = editableNode.TimeUntilAdvance,
+
+                TMPFont = editableNode.TMPFont,
+                ContinueEndOverride = editableNode.ContinueEndOverride,
+
+                Icon = editableNode.Icon,
+                LargeIcon = editableNode.LargeIcon,
+
+                Audio = editableNode.Audio,
+                Volume = editableNode.Volume
+            };
 
             CopyParamActions(editableNode, speech);
 
@@ -420,9 +425,11 @@ namespace DialogueEditor
 
         private OptionNode CreateOptionNode(EditableOptionNode editableNode)
         {
-            OptionNode option = new OptionNode();
-            option.Text = editableNode.Text;
-            option.TMPFont = editableNode.TMPFont;
+            OptionNode option = new OptionNode
+            {
+                Text = editableNode.Text,
+                TMPFont = editableNode.TMPFont
+            };
 
             CopyParamActions(editableNode, option);
 
@@ -497,7 +504,12 @@ namespace DialogueEditor
                 // Root?
                 if (editableNode.EditorInfo.isRoot)
                 {
-                    conversation.Root = dialogues[editableNode.ID];
+                    conversation.Root = speechNode;
+                }
+
+                if (editableNode.ID == conversation.IDToStartAt)
+                {
+                    conversation.NodeToStartAt = speechNode;
                 }
             }
 

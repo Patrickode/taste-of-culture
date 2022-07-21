@@ -24,6 +24,13 @@ namespace DialogueEditor
         /// <summary> The start of the conversation </summary>
         public SpeechNode Root;
 
+        /// <summary>
+        /// The ID of the node we should start the conversation at. -1 = invalid/ignored.<br/>
+        /// Added for restoring a save at a position in the conversation.
+        /// </summary>
+        public int IDToStartAt = -1;
+        public SpeechNode NodeToStartAt = null;
+
         /// <summary> The parameters of this conversation, and their values </summary>
         public List<Parameter> Parameters;
 
