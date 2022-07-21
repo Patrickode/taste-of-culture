@@ -47,7 +47,7 @@ public static class SaveManager
         binFormatter.Serialize(stream, dataToSave);
     }
 
-    public static void SaveOnLoad(Scene sceneLoaded, LoadSceneMode loadMode)
+    private static void SaveOnLoad(Scene sceneLoaded, LoadSceneMode loadMode)
     {
         LevelID lvl = ScnIndToLvlID(sceneLoaded.buildIndex);
 
