@@ -21,7 +21,7 @@ public static class SaveManager
 
     /// <summary>
     /// Takes a scene build index and returns the level that scene belongs to.<br/>
-    /// <b>This method must be manually updated through code when scenes are reordered/added.</b>
+    /// <b>This overload must be manually updated through code whenever scenes are reordered/added/removed.</b>
     /// </summary>
     /// <remarks>Implementation inspired by <see href="https://stackoverflow.com/q/56676260"/>.</remarks>
     public static LevelID ScnIndToLvlID(int index) => index switch
