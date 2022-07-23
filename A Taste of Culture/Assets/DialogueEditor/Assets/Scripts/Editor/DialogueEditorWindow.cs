@@ -741,23 +741,23 @@ namespace DialogueEditor
                         EditorGUILayout.Space();
 
                         // Advance
-                        if (node.Connections.Count > 0 && node.Connections[0] is EditableSpeechConnection)
+                        //if (node.Connections.Count > 0 && node.Connections[0] is EditableSpeechConnection)
+                        //{
+                        GUILayout.Label("Auto-Advance options", EditorStyles.boldLabel);
+                        node.SkipNode = EditorGUILayout.Toggle("Skip Node", node.SkipNode);
+                        if (!node.SkipNode)
                         {
-                            GUILayout.Label("Auto-Advance options", EditorStyles.boldLabel);
-                            node.SkipNode = EditorGUILayout.Toggle("Skip Node", node.SkipNode);
-                            if (!node.SkipNode)
+                            node.AdvanceDialogueAutomatically = EditorGUILayout.Toggle("Automatically Advance", node.AdvanceDialogueAutomatically);
+                            if (node.AdvanceDialogueAutomatically)
                             {
-                                node.AdvanceDialogueAutomatically = EditorGUILayout.Toggle("Automatically Advance", node.AdvanceDialogueAutomatically);
-                                if (node.AdvanceDialogueAutomatically)
-                                {
-                                    node.AutoAdvanceShouldDisplayOption = EditorGUILayout.Toggle("Display continue option", node.AutoAdvanceShouldDisplayOption);
-                                    node.TimeUntilAdvance = EditorGUILayout.FloatField("Dialogue Time", node.TimeUntilAdvance);
-                                    //if (node.TimeUntilAdvance < 0.1f)
-                                    //    node.TimeUntilAdvance = 0.1f;
-                                }
+                                node.AutoAdvanceShouldDisplayOption = EditorGUILayout.Toggle("Display continue option", node.AutoAdvanceShouldDisplayOption);
+                                node.TimeUntilAdvance = EditorGUILayout.FloatField("Dialogue Time", node.TimeUntilAdvance);
+                                //if (node.TimeUntilAdvance < 0.1f)
+                                //    node.TimeUntilAdvance = 0.1f;
                             }
-                            EditorGUILayout.Space();
                         }
+                        EditorGUILayout.Space();
+                        //}
 
                         GUILayout.Label("Icon", EditorStyles.boldLabel);
                         node.Icon = (Sprite)EditorGUILayout.ObjectField(node.Icon, typeof(Sprite), false, GUILayout.ExpandWidth(true));

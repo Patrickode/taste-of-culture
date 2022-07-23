@@ -2257,6 +2257,70 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1027306175}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1034664278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1034664279}
+  - component: {fileID: 1034664280}
+  m_Layer: 0
+  m_Name: DroppedSpicesNice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1034664279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034664278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1836017819}
+  m_Father: {fileID: 1220651107}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1034664280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034664278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83189876d4d389f43b7dd2e925aa112e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentIDCounter: 2
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":355,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Careful!
+    Wouldn''t want to make a mess!","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0}]}'
+  saveVersion: 110
+  IDToStartAt: -1
+  DefaultName: Jaya
+  DefaultSprite: {fileID: -5973138034709907536, guid: debad48834a51a045b391d73af778980, type: 3}
+  DefaultFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  NodeSerializedDataList:
+  - {fileID: 1836017820}
+  ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  ContinueText: 
+  EndText: 
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1054445500 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
@@ -2552,6 +2616,56 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 1085881060}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1132649162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1132649163}
+  - component: {fileID: 1132649164}
+  m_Layer: 0
+  m_Name: ConversationEventInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1132649163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132649162}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0737492, y: 1.0765738, z: -57.227283}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2040950628}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1132649164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132649162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
+  NodeID: 0
+  TMPFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  Icon: {fileID: -8456495353191199655, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
+  Audio: {fileID: 0}
 --- !u!1 &1177301373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,6 +2770,8 @@ Transform:
   m_Children:
   - {fileID: 1805018992}
   - {fileID: 1514005783}
+  - {fileID: 1034664279}
+  - {fileID: 2040950628}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3087,6 +3203,7 @@ MonoBehaviour:
   json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":302.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Great
     job! I''ll set this aside for us to use later. Now for the next step.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
+  IDToStartAt: -1
   DefaultName: Jaya
   DefaultSprite: {fileID: -8456495353191199655, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
   DefaultFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3826,6 +3943,7 @@ MonoBehaviour:
     to three pinches.","parentUIDs":[2],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":355,"yPos":425},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Or
     maybe you want it extra hot! Like I said, it''s up to you.","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
+  IDToStartAt: -1
   DefaultName: Jaya
   DefaultSprite: {fileID: -8456495353191199655, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
   DefaultFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3859,7 +3977,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1321017253}
         m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
-        m_MethodName: ConversationEndEnableControls
+        m_MethodName: DisableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 772782275}
+        m_TargetAssemblyTypeName: Tooltip, Assembly-CSharp
+        m_MethodName: HideTooltip_Static
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4020,6 +4150,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1836017818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836017819}
+  - component: {fileID: 1836017820}
+  m_Layer: 0
+  m_Name: ConversationEventInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1836017819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836017818}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0737492, y: 1.0765738, z: -57.227283}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1034664279}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1836017820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836017818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
+  NodeID: 0
+  TMPFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  Icon: {fileID: -5973138034709907536, guid: debad48834a51a045b391d73af778980, type: 3}
+  Audio: {fileID: 0}
 --- !u!1001 &1871038878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4559,6 +4739,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3956968207194152632, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
   m_PrefabInstance: {fileID: 2003601189}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2040950627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2040950628}
+  - component: {fileID: 2040950629}
+  m_Layer: 0
+  m_Name: DroppedSpicesMean
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2040950628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040950627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1132649163}
+  m_Father: {fileID: 1220651107}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2040950629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040950627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83189876d4d389f43b7dd2e925aa112e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentIDCounter: 1
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":355,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"...","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Jaya","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0}]}'
+  saveVersion: 110
+  IDToStartAt: -1
+  DefaultName: 
+  DefaultSprite: {fileID: 0}
+  DefaultFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  NodeSerializedDataList:
+  - {fileID: 1132649164}
+  ContinueFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  EndConversationFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  ContinueText: 
+  EndText: 
+  EventsOnEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2047479027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5244,6 +5487,8 @@ MonoBehaviour:
   buttonsToDisable:
   - {fileID: 1701473671}
   - {fileID: 10635381}
+  scoldKind: {fileID: 1034664280}
+  scoldMean: {fileID: 2040950629}
 --- !u!1 &4528925098360649775
 GameObject:
   m_ObjectHideFlags: 0
