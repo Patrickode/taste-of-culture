@@ -55,8 +55,8 @@ public class ChoppingKnife : MonoBehaviour
         {
             if(hitObject.transform.gameObject.CompareTag("Double Ingredient"))
             {
-                Ingredients.Add(hitObject.transform.gameObject.GetComponent<DualIngredientHandler>().Ingredients[0]);
-                Ingredients.Add(hitObject.transform.gameObject.GetComponent<DualIngredientHandler>().Ingredients[1]);
+                Ingredients.Add(hitObject.transform.gameObject.GetComponent<DoubleIngredient>().Ingredient1);
+                Ingredients.Add(hitObject.transform.gameObject.GetComponent<DoubleIngredient>().Ingredient2);
             }
 
             // Ensure that hitObject isn't the child of a double ingredient object 

@@ -144,25 +144,18 @@ public class IngredientMover : MonoBehaviour
     // Disable knife interaction and inform scene controller that the task has been completed.
     void TryBroadcastTaskCompletion()
     {
-        if (!hasBeenRotated || transform.position.x < finalXPosition)
-            return;
+        if (!hasBeenRotated || transform.position.x < finalXPosition) { return; }
 
         taskComplete = true;
 
         // If ingredient is a double ingredient, make sure other ingredient is finished chopping before task completion
         if(isDoubleIngredient)
         {
-            DualIngredientHandler dual = gameObject.transform.parent.transform.gameObject.GetComponent<DualIngredientHandler>();
-            dual.FinishedChopping(gameObject);
-            dual.masks.Add(mask);
+            DoubleIngredient doubleIngredient = gameObject.transform.parent.transform.gameObject.GetComponent<DoubleIngredient>();
+            doubleIngredient.FinishedChopping(gameObject);
+            doubleIngredient.masks.Add(mask);
 
-            if(!dual.DualChoppingComplete) 
-            { 
-                Debug.Log("Dual Chopping INCOMPLETE");
-                // GameObject.Destroy(mask);
-                return; 
-            }
-            else { Debug.Log("Dual Chopping COMPLETE"); }
+            if(!doubleIngredient.DualChoppingComplete) { return; }
         }
 
         Vector3 scale = new Vector3(1, 1, 0);
@@ -193,6 +186,8 @@ public class IngredientMover : MonoBehaviour
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
                 if (knife != null) { knife.CanChop = false; }
             }
+            
+            Debug.Log("Task Complete!");
             
             sceneManager.TaskComplete();
         }
