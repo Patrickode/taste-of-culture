@@ -355,7 +355,7 @@ MonoBehaviour:
   demoVideo: {fileID: 1176281770562920347}
   closeButton: {fileID: 1176281770637953019}
   demoPlayer: {fileID: 8303049666560765903}
-  videoFilename: 
+  videoFilename: SPDemo.mp4
 --- !u!1 &1176281771317526589
 GameObject:
   m_ObjectHideFlags: 0

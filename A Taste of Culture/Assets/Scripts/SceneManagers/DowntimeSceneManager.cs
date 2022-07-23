@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DialogueEditor;
 
 public class DowntimeSceneManager : MonoBehaviour
 {
-    public DialogueManager dialogueManager;
-    public GameObject dialogue;
-    public DialogueTrigger trigger;
-    public GameObject mentor;
-
     public GameObject[] backgrounds;
     private FlavorProfile flavorPfile;
+    [SerializeField] private StringVariable protein;
 
-    // Start is called before the first frame update
+    public static System.Action AnimFinished;
+
     void Start()
     {
         flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
-        Cursor.visible = true;
-        dialogue.SetActive(true);
 
         foreach (var bg in backgrounds)
             bg.SetActive(false);
         backgrounds[backgrounds.Length - 1].SetActive(true);
+        ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
 
         AddOnions();
         CookOnions();
-        trigger.StartDialogue();
     }
+
+    private void MarkAnimFinished() => AnimFinished?.Invoke();
+    private void MarkAnimFinished(float delay) => Coroutilities.DoAfterDelay(this, MarkAnimFinished, delay);
 
     public void AddOnions()
     {
@@ -48,9 +47,8 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[3].SetActive(false);
         backgrounds[4].SetActive(true);
-        dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielder(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielder(this, MarkAnimFinished,
             StartCoroutine(PutOnLid()));
     }
 
@@ -58,10 +56,8 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         backgrounds[4].SetActive(false);
         backgrounds[5].SetActive(true);
-        mentor.SetActive(false);
-        dialogueManager.ToggleContinue(false);
 
-        Coroutilities.DoAfterYielders(this, () => dialogueManager.ToggleContinue(true),
+        Coroutilities.DoAfterYielders(this, MarkAnimFinished,
             StartCoroutine(TakeOffLid()),
             StartCoroutine(ButterInPot()),
             StartCoroutine(BackgroundToSchool()));
@@ -73,23 +69,25 @@ public class DowntimeSceneManager : MonoBehaviour
         backgrounds[6].SetActive(true);
     }
 
-    public void AddProtein()
+    public void CheckSauce()
     {
-        dialogueManager.ToggleContinue(false);
-        dialogueManager.ToggleDialogue(false);
-        Coroutilities.DoAfterYielder(this, ActuallyAddProtein, StartCoroutine(TransitionAndWait(false, 2)));
+        Coroutilities.DoAfterYielder(this, RemoveLid, StartCoroutine(TransitionAndWait(false, 2)));
 
-        void ActuallyAddProtein()
+        void RemoveLid()
         {
             backgrounds[11].SetActive(false);
             backgrounds[7].SetActive(true);
-            mentor.SetActive(false);
 
-            Coroutilities.DoAfterYielders(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
-                StartCoroutine(TakeOffLid()),
-                StartCoroutine(ProteinInPot()),
-                StartCoroutine(BackgroundToSchool(2)));
+            Coroutilities.DoAfterYielder(this, () => MarkAnimFinished(0.5f),
+                StartCoroutine(TakeOffLid()));
         }
+    }
+
+    public void AddProtein()
+    {
+        Coroutilities.DoAfterYielders(this, MarkAnimFinished,
+            StartCoroutine(ProteinInPot()),
+            StartCoroutine(BackgroundToSchool(2)));
     }
 
     IEnumerator ProteinInPot()
@@ -102,16 +100,12 @@ public class DowntimeSceneManager : MonoBehaviour
     {
         System.Action bgSwitch = () =>
         {
-            mentor.SetActive(false);
             backgrounds[11].SetActive(false);
             backgrounds[8].SetActive(true);
             backgrounds[9].SetActive(true);
         };
 
-        dialogueManager.ToggleContinue(false);
-        dialogueManager.ToggleDialogue(false);
-
-        Coroutilities.DoAfterSequence(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
+        Coroutilities.DoAfterSequence(this, MarkAnimFinished,
             () => StartCoroutine(TransitionAndWait(false, 2)),
             () => Coroutilities.DoAfterDelayFrames(this, bgSwitch, 0),
             () => StartCoroutine(TakeOffLid()),
@@ -120,29 +114,35 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void PlateCurry()
     {
-        dialogueManager.ToggleDialogue(false);
-        dialogueManager.ToggleContinue(false);
+        Coroutilities.DoAfterYielder(this, MarkAnimFinished, StartCoroutine(ShowPlate()));
+    }
 
-        Coroutilities.DoAfterYielder(this, () => { dialogueManager.ToggleDialogue(true); dialogueManager.ToggleContinue(true); },
-            StartCoroutine(ShowPlate()));
+    public void ReturnAfterPlating()
+    {
+        Coroutilities.DoAfterYielder(this, () =>
+            {
+                backgrounds[10].SetActive(false);
+                backgrounds[11].SetActive(true);
+                MarkAnimFinished();
+            },
+            StartCoroutine(TransitionAndWait(false, 2)));
     }
 
     IEnumerator ShowPlate()
     {
-        mentor.SetActive(false);
         yield return StartCoroutine(TransitionAndWait(false, 2));
+
         backgrounds[10].SetActive(true);
         if (flavorPfile)
             flavorPfile.VisualizeFlavors();
 
-        dialogueManager.ToggleDialogue(true);
+        yield return new WaitForSeconds(1.5f);
 
-        yield return new WaitForSeconds(4.5f);
+        /*yield return new WaitForSeconds(4.5f);
 
         yield return StartCoroutine(TransitionAndWait(false, 2));
         backgrounds[10].SetActive(false);
-        backgrounds[11].SetActive(true);
-        mentor.SetActive(true);
+        backgrounds[11].SetActive(true);*/
     }
 
     IEnumerator PutOnLid()
@@ -163,7 +163,6 @@ public class DowntimeSceneManager : MonoBehaviour
         yield return StartCoroutine(TransitionAndWait(false, 2));
 
         backgrounds[11].SetActive(true);
-        mentor.SetActive(true);
     }
 
     IEnumerator TransitionAndWait(bool pauseOnMid, float speed)
@@ -173,15 +172,5 @@ public class DowntimeSceneManager : MonoBehaviour
         Transitions.MidTransition += OnMid;
         void OnMid(bool _) { Transitions.MidTransition -= OnMid; transitionDone = true; }
         yield return new WaitUntil(() => transitionDone);
-    }
-
-    public void DialogueEnded()
-    {
-        dialogueManager.animator.gameObject.SetActive(false);
-    }
-
-    public void RecipeDismissed()
-    {
-        Transitions.LoadWithTransition(0, -1);
     }
 }

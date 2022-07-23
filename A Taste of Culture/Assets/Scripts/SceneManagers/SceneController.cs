@@ -1,3 +1,4 @@
+using DialogueEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] int nextSceneIndex = -1;
-    public CookingSceneManager sceneManager;
+    //[SerializeField] int nextSceneIndex = -1;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
     public StringVariable protein;
-    public GameEvent choseChicken;
-    public GameEvent choseTofu;
+    //public GameEvent choseChicken;
+    //public GameEvent choseTofu;
+    public NPCConversation finishedConversation;
 
     public enum Ingredient { Protein, Onion, Tomato, Spices };
 
@@ -42,13 +43,13 @@ public class SceneController : MonoBehaviour
 
         if (protein.value == "chicken")
         {
-            choseChicken.Raise();
+            //choseChicken.Raise();
 
             ActivateProtein("Raw Chicken", "Tofu Block");
         }
         else if (protein.value == "tofu")
         {
-            choseTofu.Raise();
+            //choseTofu.Raise();
 
             ActivateProtein("Tofu Block", "Raw Chicken");
         }
@@ -114,19 +115,7 @@ public class SceneController : MonoBehaviour
 
         else
         {
-            sceneManager.FinishedSliceOrSpice();
-            // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
-            // {
-            //     sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
-            // }
-            // else 
-            // { 
-            //     /// TODO: Disable hand in spice selection...
-            //     Debug.Log("Done selecting spices");
-            // }
-            yield return new WaitForSeconds(5f);
-
-            Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);
+            ConversationManager.Instance.StartConversation(finishedConversation);
         }
     }
 }

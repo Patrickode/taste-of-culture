@@ -5,9 +5,9 @@ using UnityEngine;
 public class SlicingSceneManager : BaseIngredientSceneManager
 {
     public StringVariable protein;
-    public GameEvent choseChicken;
-    public GameEvent choseTofu;
-
+    //public GameEvent choseChicken;
+    //public GameEvent choseTofu;
+    
     [SerializeField] string desiredProtein;
 
     GameObject currentProtein;
@@ -21,14 +21,14 @@ public class SlicingSceneManager : BaseIngredientSceneManager
         {
             if (protein.value == "chicken")
             {
-                choseChicken.Raise();
+                //choseChicken.Raise();
 
                 selectedProtein = "Raw Chicken";
                 otherProtein = "Tofu Block";
             }
             else if (protein.value == "tofu")
             {
-                choseTofu.Raise();
+                //choseTofu.Raise();
 
                 selectedProtein = "Tofu Block";
                 otherProtein = "Raw Chicken";
