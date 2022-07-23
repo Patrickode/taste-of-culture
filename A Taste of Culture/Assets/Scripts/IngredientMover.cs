@@ -35,6 +35,9 @@ public class IngredientMover : MonoBehaviour
     // Allow player to rotate ingredient.
     private bool allowRotation = false;
     public bool AllowRotation { set { allowRotation = value; } }
+    
+    private bool isDoubleIngredient = false;
+    public bool IsDoubleIngredient { set { isDoubleIngredient = value; } }
 
     Vector2 originalPosition;
     Vector2 cachedIngrPosition;
@@ -117,10 +120,11 @@ public class IngredientMover : MonoBehaviour
         // transform.position = originalPosition;
         // cachedIngrPosition = originalPosition;
 
+        Debug.Log("Rotating " + gameObject.name);
+
         transform.position = rotatedPosition;
         cachedIngrPosition = rotatedPosition;
 
-        // Instantiate mask that will allow chunks to become visible
         mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
@@ -144,6 +148,22 @@ public class IngredientMover : MonoBehaviour
             return;
 
         taskComplete = true;
+
+        // If ingredient is a double ingredient, make sure other ingredient is finished chopping before task completion
+        if(isDoubleIngredient)
+        {
+            DualIngredientHandler dual = gameObject.transform.parent.transform.gameObject.GetComponent<DualIngredientHandler>();
+            dual.FinishedChopping(gameObject);
+            dual.masks.Add(mask);
+
+            if(!dual.DualChoppingComplete) 
+            { 
+                Debug.Log("Dual Chopping INCOMPLETE");
+                // GameObject.Destroy(mask);
+                return; 
+            }
+            else { Debug.Log("Dual Chopping COMPLETE"); }
+        }
 
         Vector3 scale = new Vector3(1, 1, 0);
 
