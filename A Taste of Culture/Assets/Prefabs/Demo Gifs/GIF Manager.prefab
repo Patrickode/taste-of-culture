@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startActive: 0
+  enableControlsOnClose: 1
   demoVideo: {fileID: 1176281770562920347}
   closeButton: {fileID: 1176281770637953019}
   demoPlayer: {fileID: 8303049666560765903}

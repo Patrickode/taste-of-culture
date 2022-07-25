@@ -14,6 +14,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private StringVariable protein;
     [SerializeField] private GameObject tool;
 
+    public static System.Action<bool> ToggleControls;
+
     void Start()
     {
         TriggerConversation(convos[0]);
@@ -22,6 +24,8 @@ public class DialogueController : MonoBehaviour
 
         ConversationManager.OnConversationEnded += OnAnyConvoEnd;
         DowntimeSceneManager.AnimFinished += TriggerNextConvo;
+
+        ToggleControls += OnToggleControls;
     }
     private void OnDestroy()
     {
@@ -30,11 +34,21 @@ public class DialogueController : MonoBehaviour
 
         ConversationManager.OnConversationEnded -= LoadNextScene;
         ConversationManager.OnConversationEnded -= EnableControls;
+
+        ToggleControls -= OnToggleControls;
     }
 
     private void OnAnyConvoEnd()
     {
         currentConvoIndex++;
+    }
+
+    private void OnToggleControls(bool enable)
+    {
+        if (enable)
+            EnableControls();
+        else
+            DisableControls();
     }
 
     public void TriggerConversation(NPCConversation conversation)
@@ -68,7 +82,7 @@ public class DialogueController : MonoBehaviour
 
     public void ConversationEndEnableControls()
     {
-        ConversationManager.OnConversationEnded += EnableControls;
+        //ConversationManager.OnConversationEnded += EnableControls;
     }
 
     public void EvtOnConversationEnd(UnityEngine.Events.UnityEvent evt)
@@ -84,6 +98,9 @@ public class DialogueController : MonoBehaviour
 
     public void EnableControls()
     {
+        //Only enable controls on the first conversation/when explicitly resubscribed
+        ConversationManager.OnConversationEnded -= EnableControls;
+
         Cursor.visible = false;
         tool.SafeSetActive(true);
     }

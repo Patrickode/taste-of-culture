@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GIFManager : MonoBehaviour
 {
     public bool startActive;
+    public bool enableControlsOnClose;
     public RawImage demoVideo;
     public Button closeButton;
     public VideoPlayer demoPlayer;
@@ -69,6 +70,9 @@ public class GIFManager : MonoBehaviour
         // Start timer for toggling instruction tooltips
         InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
         if (tooltips != null) { tooltips.PrepToToggle(); }
+
+        if (enableControlsOnClose)
+            DialogueController.ToggleControls(true);
     }
 
     void LoopedOnce(VideoPlayer demoPlayer)
