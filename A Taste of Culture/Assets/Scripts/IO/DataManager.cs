@@ -42,6 +42,11 @@ public static class DataManager
 {
     public static readonly string fileExt = ".sav";
 
+    private static readonly HashSet<int> dontSaveScenes = new HashSet<int>()
+    {
+        1,  //IntroDialogue
+    };
+
     private static Dictionary<LevelID, LevelData> cachedData = new Dictionary<LevelID, LevelData>();
 
     //This attribute and argument make this method run when indicated. Afaik, they're all on
@@ -50,6 +55,23 @@ public static class DataManager
     private static void Init()
     {
         SceneManager.sceneLoaded += SaveOnLoad;
+    }
+
+    private static void SaveOnLoad(Scene sceneLoaded, LoadSceneMode loadMode)
+    {
+        if (dontSaveScenes.Contains(sceneLoaded.buildIndex)) return;
+        LevelID lvlID = ScnIndToLvlID(sceneLoaded);
+
+        //If we have cached data, get it and only overwrite the stuff that changed on load.
+        if (cachedData.TryGetValue(lvlID, out LevelData lvlData))
+        {
+            lvlData.level = lvlID;
+            lvlData.sceneIndex = sceneLoaded.buildIndex;
+            lvlData.flavorProfile = FlavorProfileData.Instance.FlavorDict;
+        }
+        else lvlData = new LevelData(lvlID, sceneLoaded.buildIndex, FlavorProfileData.Instance.FlavorDict);
+
+        SaveLevelData(lvlData, IDToName(lvlID));
     }
 
     public static void SaveLevelData(LevelData dataToSave, string filename = "")
@@ -67,22 +89,6 @@ public static class DataManager
         binFormatter.Serialize(stream, dataToSave);
 
         cachedData[dataToSave.level] = dataToSave;
-    }
-
-    private static void SaveOnLoad(Scene sceneLoaded, LoadSceneMode loadMode)
-    {
-        LevelID lvlID = ScnIndToLvlID(sceneLoaded);
-
-        //If we have cached data, get it and only overwrite the stuff that changed on load.
-        if (cachedData.TryGetValue(lvlID, out LevelData lvlData))
-        {
-            lvlData.level = lvlID;
-            lvlData.sceneIndex = sceneLoaded.buildIndex;
-            lvlData.flavorProfile = FlavorProfileData.Instance.FlavorDict;
-        }
-        else lvlData = new LevelData(lvlID, sceneLoaded.buildIndex, FlavorProfileData.Instance.FlavorDict);
-
-        SaveLevelData(lvlData, IDToName(lvlID));
     }
 
     public static void SaveChoice(LevelID idToSaveAt, ChoiceFlag choice, bool overwriteAll = false)
@@ -125,18 +131,6 @@ public static class DataManager
 
         return null;
     }
-
-    /// <summary>
-    /// Takes a scene build index and returns the level that scene belongs to.<br/>
-    /// <b>This overload must be manually updated through code whenever scenes are reordered/added/removed.</b>
-    /// </summary>
-    /// <remarks>Implementation inspired by <see href="https://stackoverflow.com/q/56676260"/>.</remarks>
-    public static LevelID ScnIndToLvlID(int index) => index switch
-    {
-        var i when (i >= 1 && i <= 6) => LevelID.Makhani,
-        var i when (i >= 7 && i <= 9) => LevelID.ConchSalad,
-        _ => LevelID.Generic,
-    };
 
     /// <summary>
     /// Takes a scene and returns the level it belongs to.<br/>

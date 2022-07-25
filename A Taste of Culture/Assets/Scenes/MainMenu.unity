@@ -1825,7 +1825,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4ad1569cb45d14680777aa92413cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedByDefault: 1
+  lockedByDefault: 0
+  level: 2
+  startButton: {fileID: 262713925}
+  continueButton: {fileID: 258368367}
 --- !u!1 &608766777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,6 +2343,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedByDefault: 0
+  level: 1
+  startButton: {fileID: 2062843807}
+  continueButton: {fileID: 439082918}
 --- !u!1 &1028824714
 GameObject:
   m_ObjectHideFlags: 0
@@ -3078,7 +3084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1478278839
 RectTransform:
   m_ObjectHideFlags: 0
