@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseIngredientSceneManager : MonoBehaviour
 {
     [SerializeField] int nextSceneIndex = -1;
-    [SerializeField] CookingSceneManager sceneManager;
+    //[SerializeField] CookingSceneManager sceneManager;
     // [SerializeField] float sceneTransitionDelay = 3f;
     // [SerializeField] float applauseDelay = 0.5f;
 
@@ -30,7 +30,7 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     protected IEnumerator TransitionToNewScene()
     {
-        sceneManager.FinishedSliceOrSpice();
+        //sceneManager.FinishedSliceOrSpice();
 
         yield return new WaitForSeconds(5f);
 
