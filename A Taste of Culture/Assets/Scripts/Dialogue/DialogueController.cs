@@ -82,7 +82,7 @@ public class DialogueController : MonoBehaviour
 
     public void ConversationEndEnableControls()
     {
-        //ConversationManager.OnConversationEnded += EnableControls;
+        ConversationManager.OnConversationEnded += EnableControls;
     }
 
     public void EvtOnConversationEnd(UnityEngine.Events.UnityEvent evt)
