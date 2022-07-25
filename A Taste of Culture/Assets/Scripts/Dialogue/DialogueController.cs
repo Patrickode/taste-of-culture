@@ -85,6 +85,9 @@ public class DialogueController : MonoBehaviour
         ConversationManager.OnConversationEnded += EnableControls;
     }
 
+    public void SaveChoice_Tofu() => DataManager.SaveChoice(DataManager.ScnIndToLvlID(SceneManager.GetActiveScene()), ChoiceFlag.Tofu);
+    public void SaveChoice_Chicken() => DataManager.SaveChoice(DataManager.ScnIndToLvlID(SceneManager.GetActiveScene()), ChoiceFlag.Chicken);
+
     public void EvtOnConversationEnd(UnityEngine.Events.UnityEvent evt)
     {
         ConversationManager.OnConversationEnded += unityToSystemEvt;
