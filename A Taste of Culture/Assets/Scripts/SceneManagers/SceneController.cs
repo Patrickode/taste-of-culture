@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
     //[SerializeField] int nextSceneIndex = -1;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
-    public StringVariable protein;
+    //public StringVariable protein;
     //public GameEvent choseChicken;
     //public GameEvent choseTofu;
     public NPCConversation finishedConversation;
@@ -41,13 +41,15 @@ public class SceneController : MonoBehaviour
             tomatoInstruction = GameObject.Find("Tomato Instruction");
         }
 
-        if (protein.value == "chicken")
+        //if (protein.value == "chicken")
+        if (DataManager.GetLevelData(LevelID.Makhani) is LevelData data
+            && (ChoiceFlag.Chicken & data.choices) == ChoiceFlag.Chicken)
         {
             //choseChicken.Raise();
 
             ActivateProtein("Raw Chicken", "Tofu Block");
         }
-        else if (protein.value == "tofu")
+        else /*if (protein.value == "tofu")*/
         {
             //choseTofu.Raise();
 

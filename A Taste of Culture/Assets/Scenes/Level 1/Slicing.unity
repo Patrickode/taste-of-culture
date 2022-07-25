@@ -1306,7 +1306,7 @@ PrefabInstance:
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: dialogueTrigger
       value: 
-      objectReference: {fileID: 1236782931}
+      objectReference: {fileID: 0}
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: outsideLinesDialogue
       value: 
@@ -1370,18 +1370,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9007410564129555532, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
   m_PrefabInstance: {fileID: 1236782929}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1236782931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236782930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1236782939
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1527,7 +1515,6 @@ MonoBehaviour:
   useIndex: 0
   nextScene: Chopping
   nextSceneIndex: 0
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   tool: {fileID: 1236782930}
 --- !u!1 &1380855856
 GameObject:
@@ -1708,7 +1695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bfe527eb47a844d90017f2a74830ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   finishedConversation: {fileID: 544922497}
   currentIngredient: 0
 --- !u!4 &1533509940

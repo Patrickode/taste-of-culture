@@ -9,7 +9,7 @@ public class DowntimeSceneManager : MonoBehaviour
 {
     public GameObject[] backgrounds;
     private FlavorProfile flavorPfile;
-    [SerializeField] private StringVariable protein;
+    //[SerializeField] private StringVariable protein;
 
     public static System.Action AnimFinished;
 
@@ -20,7 +20,9 @@ public class DowntimeSceneManager : MonoBehaviour
         foreach (var bg in backgrounds)
             bg.SetActive(false);
         backgrounds[backgrounds.Length - 1].SetActive(true);
-        ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
+        //ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
+        ConversationManager.Instance.SetBool("UsedChicken", DataManager.GetLevelData(LevelID.Makhani) is LevelData data 
+            && (ChoiceFlag.Chicken & data.choices) == ChoiceFlag.Chicken);
 
         AddOnions();
         CookOnions();
