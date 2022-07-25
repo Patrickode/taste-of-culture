@@ -7,12 +7,21 @@ using UnityEngine.SceneManagement;
 
 public enum LevelID { Generic, Makhani, ConchSalad }
 
+[System.Flags]
+public enum ChoiceFlags
+{
+    None = 1 << 0,
+    Tofu = 1 << 1,
+    Chicken = 1 << 2,
+}
+
 [System.Serializable]
 public struct LevelData
 {
     public LevelID level;
     public int sceneIndex;
     public Dictionary<FlavorType, int> flavorProfile;
+    public ChoiceFlags choices;
 }
 
 public static class SaveManager
@@ -40,7 +49,7 @@ public static class SaveManager
     /// </summary>
     public static LevelID ScnIndToLvlID(Scene scn)
     {
-        //Go through the scene's path and get the number next to "Level " (case insensitive), if there is one.
+        //Go through the scene's path and try to get the number next to "Level " (case insensitive)
         var lvlNumMatch = System.Text.RegularExpressions.Regex.Match(scn.path, @"(?<=(?i)Level\s(?-i))\d*");
 
         if (lvlNumMatch.Success && int.TryParse(lvlNumMatch.Value, out int lvlNum))
@@ -56,8 +65,9 @@ public static class SaveManager
         return LevelID.Generic;
     }
 
-    //This attribute and argument make this method run just before the unity splash screen plays; I.e., on game startup.
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+    //This attribute and argument make this method run when indicated. Afaik, they're all on
+    //game startup, just at different points of startup.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Init()
     {
         SceneManager.sceneLoaded += SaveOnLoad;
