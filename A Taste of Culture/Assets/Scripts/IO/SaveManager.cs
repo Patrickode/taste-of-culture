@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public enum LevelID { Generic, Makhani, ConchSalad }
 
-[System.Flags]
+[Flags]
 public enum ChoiceFlags
 {
     None = 0,
@@ -15,7 +16,7 @@ public enum ChoiceFlags
     Chicken = 1 << 1,
 }
 
-[System.Serializable]
+[Serializable]
 public struct LevelData
 {
     public LevelID level;
@@ -27,6 +28,8 @@ public struct LevelData
 public static class SaveManager
 {
     public static readonly string fileExt = ".sav";
+
+    private static Dictionary<LevelID, LevelData> cachedData;
 
     /// <summary>
     /// Takes a scene build index and returns the level that scene belongs to.<br/>
@@ -76,10 +79,14 @@ public static class SaveManager
     public static void SaveLevelData(LevelData dataToSave, string filename = "generic")
     {
         BinaryFormatter binFormatter = new BinaryFormatter();
-        string dataPath = Path.Combine(Application.persistentDataPath, filename + fileExt);
+        string dataPath = Path.Combine(
+            Application.persistentDataPath,
+            filename + fileExt);
 
         using FileStream stream = new FileStream(dataPath, FileMode.Create);
         binFormatter.Serialize(stream, dataToSave);
+
+        cachedData[dataToSave.level] = dataToSave;
     }
 
     private static void SaveOnLoad(Scene sceneLoaded, LoadSceneMode loadMode)
@@ -91,6 +98,36 @@ public static class SaveManager
             level = lvl,
             sceneIndex = sceneLoaded.buildIndex,
             flavorProfile = FlavorProfileData.Instance.FlavorDict
-        }, System.Enum.GetName(typeof(LevelID), lvl));
+        }, Enum.GetName(typeof(LevelID), lvl));
+    }
+
+    /// <summary>
+    /// Attempts to get cached level data by ID; failing that, attempts to load that level data from a file.
+    /// <br/><br/>
+    /// Returns a nullable <see cref="LevelData"/>; check it for validity with <see langword="is"/> or similar.
+    /// </summary>
+    public static LevelData? GetLevelData(LevelID idToLoad)
+    {
+        //If we already have data cached, don't load any, just get that.
+        if (cachedData.TryGetValue(idToLoad, out LevelData cacheData))
+            return cacheData;
+
+        string dataPath = Path.Combine(
+            Application.persistentDataPath,
+            Enum.GetName(typeof(LevelID), idToLoad) + fileExt);
+
+        if (!File.Exists(dataPath)) return null;
+
+        BinaryFormatter binFormatter = new BinaryFormatter();
+        using FileStream stream = new FileStream(dataPath, FileMode.Open);
+
+        if (binFormatter.Deserialize(stream) is LevelData lvlData)
+        {
+            //If we got here, there's no data cached, so cache what we just loaded.
+            cachedData[idToLoad] = lvlData;
+            return lvlData;
+        }
+
+        return null;
     }
 }
