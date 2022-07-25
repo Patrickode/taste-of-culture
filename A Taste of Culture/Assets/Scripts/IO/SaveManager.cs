@@ -10,9 +10,9 @@ public enum LevelID { Generic, Makhani, ConchSalad }
 [System.Flags]
 public enum ChoiceFlags
 {
-    None = 1 << 0,
-    Tofu = 1 << 1,
-    Chicken = 1 << 2,
+    None = 0,
+    Tofu = 1 << 0,
+    Chicken = 1 << 1,
 }
 
 [System.Serializable]
