@@ -12,9 +12,9 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
         { FlavorType.Saltiness, 0 },
     };
 
-    public Dictionary<FlavorType, int> FlavorDict 
-    { 
-        get => flavors; 
+    public Dictionary<FlavorType, int> FlavorDict
+    {
+        get => flavors;
         set
         {
             flavors = value;
@@ -50,6 +50,13 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
             this[typeVal.Key] += typeVal.Value;
         }
     }
+    public void AddFlavors(params (FlavorType type, int value)[] flavors)
+    {
+        foreach (var (type, value) in flavors)
+        {
+            this[type] += value;
+        }
+    }
 
     public void ResetData()
     {
@@ -65,29 +72,15 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
         FlavorUpdated?.Invoke((FlavorType)(-1), 0);
     }
 
-    public int FlavorSum { get => Bitterness + Spiciness + Sweetness + Saltiness; }
-
-    public int Bitterness
+    public int FlavorSum
     {
-        get { return flavors[FlavorType.Bitterness]; }
-        set { flavors[FlavorType.Bitterness] = value; }
-    }
+        get
+        {
+            int sum = 0;
+            foreach (var val in flavors.Values)
+                sum += val;
 
-    public int Spiciness
-    {
-        get { return flavors[FlavorType.Spiciness]; }
-        set { flavors[FlavorType.Spiciness] = value; }
-    }
-
-    public int Sweetness
-    {
-        get { return flavors[FlavorType.Sweetness]; }
-        set { flavors[FlavorType.Sweetness] = value; }
-    }
-
-    public int Saltiness
-    {
-        get { return flavors[FlavorType.Saltiness]; }
-        set { flavors[FlavorType.Saltiness] = value; }
+            return sum;
+        }
     }
 }
