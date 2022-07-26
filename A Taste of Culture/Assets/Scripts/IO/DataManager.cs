@@ -50,7 +50,7 @@ public static class DataManager
     private static Dictionary<LevelID, LevelData> cachedData = new Dictionary<LevelID, LevelData>();
 
     //This attribute and argument make this method run when indicated. Afaik, they're all on
-    //game startup, just at different points of startup.
+    //game startup, just at different points (so they won't make this run more than once).
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Init()
     {
@@ -81,13 +81,9 @@ public static class DataManager
             filename = IDToName(ScnIndToLvlID(SceneManager.GetActiveScene()));
 
         BinaryFormatter binFormatter = new BinaryFormatter();
-        string dataPath = Path.Combine(
-            Application.persistentDataPath,
-            filename + fileExt);
+        using FileStream stream = new FileStream(MakePathWithFilename(filename), FileMode.Create);
 
-        using FileStream stream = new FileStream(dataPath, FileMode.Create);
         binFormatter.Serialize(stream, dataToSave);
-
         cachedData[dataToSave.level] = dataToSave;
     }
 
@@ -125,10 +121,7 @@ public static class DataManager
     /// <param name="updateCache">If we successfully load data, should we update the cache with that data?</param>
     public static LevelData? LoadLevelData(LevelID idToLoad, bool updateCache = true)
     {
-        string dataPath = Path.Combine(
-            Application.persistentDataPath,
-            IDToName(idToLoad) + fileExt);
-
+        string dataPath = MakePathWithFilename(IDToName(idToLoad));
         if (!File.Exists(dataPath)) return null;
 
         BinaryFormatter binFormatter = new BinaryFormatter();
@@ -144,6 +137,21 @@ public static class DataManager
 
         return null;
     }
+
+    public static void DeleteLevelData(LevelID idToDelete)
+    {
+        File.Delete(MakePathWithFilename(IDToName(idToDelete)));
+        cachedData.Remove(idToDelete);
+    }
+
+    public static void ResetAllData()
+    {
+        foreach (var id in (LevelID[])Enum.GetValues(typeof(LevelID)))
+            DeleteLevelData(id);
+    }
+
+    private static string MakePathWithFilename(string filename)
+        => Path.Combine(Application.persistentDataPath, filename + fileExt);
 
     /// <summary>
     /// Takes a scene and returns the level it belongs to.<br/>
