@@ -5,6 +5,7 @@ using UnityEngine;
 public class MenuLvlManager : MonoBehaviour
 {
     [SerializeField] private bool lockedByDefault;
+    [SerializeField] private bool visibleWhenLocked = true;
     [SerializeField] private LevelID level;
     [Space(5)]
     [SerializeField] private UnityEngine.UI.Button startButton;
@@ -12,16 +13,25 @@ public class MenuLvlManager : MonoBehaviour
 
     private int continueTargetInd = 0;
 
-    public static bool TEMP_Level1Entered;
+    public static bool TEMP_Level1Entered = false;
     public void TEMP_SetLvl1Entered() => TEMP_Level1Entered = true;
 
     private void Start()
     {
-        //TODO: Replace this with something less temporary
-        //If locked by default or level 1 hasn't been entered, deactivate.
-        gameObject.SetActive(!lockedByDefault || TEMP_Level1Entered);
+        if (lockedByDefault)
+        {
+            if (visibleWhenLocked)
+            {
+                if (startButton) startButton.interactable = TEMP_Level1Entered;
+                if (continueButton) continueButton.interactable = TEMP_Level1Entered;
+            }
+            else
+            {
+                gameObject.SetActive(TEMP_Level1Entered);
+            }
+        }
 
-        if (continueButton)
+        else if (continueButton)
         {
             if (DataManager.GetLevelData(level) is LevelData lvlData)
             {
