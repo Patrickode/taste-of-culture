@@ -44,6 +44,7 @@ public static class DataManager
 
     private static readonly HashSet<int> dontSaveScenes = new HashSet<int>()
     {
+        0,  //MainMenu
         1,  //IntroDialogue
     };
 
