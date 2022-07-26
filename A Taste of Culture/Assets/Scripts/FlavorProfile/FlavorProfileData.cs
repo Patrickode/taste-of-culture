@@ -12,7 +12,15 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
         { FlavorType.Saltiness, 0 },
     };
 
-    public Dictionary<FlavorType, int> FlavorDict { get => flavors; }
+    public Dictionary<FlavorType, int> FlavorDict 
+    { 
+        get => flavors; 
+        set
+        {
+            flavors = value;
+            FlavorUpdated?.Invoke((FlavorType)(-1), 0);
+        }
+    }
 
     /// <summary>
     /// <b>Arguments:</b><br/>

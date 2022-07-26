@@ -10,6 +10,8 @@ public class MenuLvlManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Button startButton;
     [SerializeField] private UnityEngine.UI.Button continueButton;
 
+    private int continueTargetInd = 0;
+
     public static bool TEMP_Level1Entered;
     public void TEMP_SetLvl1Entered() => TEMP_Level1Entered = true;
 
@@ -24,12 +26,19 @@ public class MenuLvlManager : MonoBehaviour
             if (DataManager.GetLevelData(level) is LevelData lvlData)
             {
                 continueButton.interactable = true;
-                //Add method that the button calls on click; that method uses target index which is set using lvlData
+                continueTargetInd = lvlData.sceneIndex;
             }
             else
             {
                 continueButton.interactable = false;
             }
         }
+    }
+
+    public void LoadSceneAtDataInd() => Transitions.LoadWithTransition?.Invoke(continueTargetInd, -1);
+    public void SetFlavProfileWithData()
+    {
+        if (DataManager.GetLevelData(level) is LevelData data)
+            FlavorProfileData.Instance.FlavorDict = data.flavorProfile;
     }
 }

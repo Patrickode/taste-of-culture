@@ -113,6 +113,18 @@ public static class DataManager
         if (cachedData.TryGetValue(idToLoad, out LevelData cData))
             return cData;
 
+        return LoadLevelData(idToLoad, true);
+    }
+
+    /// <summary>
+    /// Attempts to load level data for the ID passed (returning null on failure; use <see langword="is"/> or
+    /// similar to check for validity).
+    /// <br/><br/>
+    /// <b>Use <see cref="GetLevelData(LevelID)"/> instead</b> unless you want to force a load (to avoid redundant loads).
+    /// </summary>
+    /// <param name="updateCache">If we successfully load data, should we update the cache with that data?</param>
+    public static LevelData? LoadLevelData(LevelID idToLoad, bool updateCache = true)
+    {
         string dataPath = Path.Combine(
             Application.persistentDataPath,
             IDToName(idToLoad) + fileExt);
@@ -124,8 +136,9 @@ public static class DataManager
 
         if (binFormatter.Deserialize(stream) is LevelData lvlData)
         {
-            //If we got here, there's no data cached, so cache what we just loaded.
-            cachedData[idToLoad] = lvlData;
+            if (updateCache)
+                cachedData[idToLoad] = lvlData;
+
             return lvlData;
         }
 
