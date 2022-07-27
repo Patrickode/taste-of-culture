@@ -10,14 +10,14 @@ public class IngredientMover : MonoBehaviour
     [SerializeField] float budgeDuration = 0.125f;
     [Space(5)]
 
-    [SerializeField] [Tooltip("X Position at which player can rotate ingredient")] 
-        float rotateXPosition;
-    [SerializeField] [Tooltip("X Position that triggers transition")] 
-        float finalXPosition;
+    [Tooltip("X Position at which player can rotate ingredient")]
+    [SerializeField] float rotateXPosition;
+    [Tooltip("X Position that triggers transition")]
+    [SerializeField] float finalXPosition;
     [Space(5)]
 
-    [SerializeField] [Tooltip("Desired position of ingredient after it has been rotated")] 
-        Vector2 rotatedPosition;
+    [Tooltip("Desired position of ingredient after it has been rotated")]
+    [SerializeField] Vector2 rotatedPosition;
     [Space(5)]
 
     [SerializeField] GameObject choppedPrefab;
@@ -35,7 +35,7 @@ public class IngredientMover : MonoBehaviour
     // Allow player to rotate ingredient.
     private bool allowRotation = false;
     public bool AllowRotation { set { allowRotation = value; } }
-    
+
     private bool isDoubleIngredient = false;
     public bool IsDoubleIngredient { set { isDoubleIngredient = value; } }
 
@@ -77,7 +77,7 @@ public class IngredientMover : MonoBehaviour
 
     void DoMoveOrBudge()
     {
-        Debug.Log("Allow Movement: " + allowMovement);
+        Debug.Log($"<color=#777>IngMover: Allow Movement = {allowMovement}</color>");
 
         // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
         if (allowMovement)
@@ -149,13 +149,13 @@ public class IngredientMover : MonoBehaviour
         taskComplete = true;
 
         // If ingredient is a double ingredient, make sure other ingredient is finished chopping before task completion
-        if(isDoubleIngredient)
+        if (isDoubleIngredient)
         {
             DoubleIngredient doubleIngredient = gameObject.transform.parent.transform.gameObject.GetComponent<DoubleIngredient>();
             doubleIngredient.FinishedChopping(gameObject);
             doubleIngredient.masks.Add(mask);
 
-            if(!doubleIngredient.DualChoppingComplete) { return; }
+            if (!doubleIngredient.DualChoppingComplete) { return; }
         }
 
         Vector3 scale = new Vector3(1, 1, 0);
@@ -181,14 +181,13 @@ public class IngredientMover : MonoBehaviour
         if (sceneManager != null)
         {
             // Disable knife chop if last ingredient
-            if(sceneManager.bAtLastIngredient) 
-            { 
+            if (sceneManager.bAtLastIngredient)
+            {
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
                 if (knife != null) { knife.CanChop = false; }
             }
-            
+
             Debug.Log("Task Complete!");
-            
             sceneManager.TaskComplete();
         }
     }

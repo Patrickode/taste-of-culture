@@ -13,6 +13,7 @@ TagManager:
   - Spice
   - Initial Spice
   - Double Ingredient
+  - Dialogue
   layers:
   - Default
   - TransparentFX

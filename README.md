@@ -11,8 +11,7 @@
 <br/><br/><br/>
 
 # 601 Archive
-## A Taste of Culture
- *A Taste of Culture* is a game made by *Too Many Cooks*, Team 6 of Fall 2021's 601 class.
+*A Taste of Culture* is a game made by *Too Many Cooks*, Team 6 of Fall 2021's 601 class.
 ### Team Members
  - Joseph Hong - Producer, Team Liaison
  - Patrick Mitchell - Game Design, Git Manager

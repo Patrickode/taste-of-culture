@@ -5,13 +5,13 @@ using UnityEngine;
 public class BaseIngredientSceneManager : MonoBehaviour
 {
     [SerializeField] int nextSceneIndex = -1;
-    [SerializeField] CookingSceneManager sceneManager;
+    //[SerializeField] CookingSceneManager sceneManager;
     // [SerializeField] float sceneTransitionDelay = 3f;
     // [SerializeField] float applauseDelay = 0.5f;
 
     public void TaskComplete()
     {
-        Debug.Log("Task Complete!");
+        Debug.Log($"<color=#777>BaseIngSceneManager \"{name}\": Task Complete!</color>");
 
         StartCoroutine(CompleteTask());
     }
@@ -23,15 +23,15 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     protected void HandleSceneCompletion()
     {
-        Debug.Log("Scene Complete!");
+        Debug.Log("<color=#777>BaseIngSceneManager \"{name}\": Scene Complete!</color>");
 
         StartCoroutine(TransitionToNewScene());
     }
 
     protected IEnumerator TransitionToNewScene()
     {
-        sceneManager.FinishedSliceOrSpice();
-        
+        //sceneManager.FinishedSliceOrSpice();
+
         yield return new WaitForSeconds(5f);
 
         Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);

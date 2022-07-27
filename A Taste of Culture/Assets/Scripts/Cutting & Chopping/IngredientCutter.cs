@@ -7,7 +7,7 @@ public class IngredientCutter : MonoBehaviour
     [SerializeField] GameObject ingredientPrefab;
     [SerializeField] GameObject spriteMask;
     [SerializeField] float cutWidth = 0.25f;
-
+    
     [Tooltip("Should be set to true for cuttable ingredients and false for choppable ingredients.")]
     [SerializeField] bool isCuttable;
 

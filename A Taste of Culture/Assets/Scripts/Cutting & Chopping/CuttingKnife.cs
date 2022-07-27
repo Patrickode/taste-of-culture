@@ -1,3 +1,4 @@
+using DialogueEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,11 @@ public class CuttingKnife : MonoBehaviour
     public IngredientCollider collider2;
 
     public Animator animator;
-    public CookingSceneManager sceneManager;
-    public CookingDialogueTrigger dialogueTrigger;
 
     private AudioSource sliceAudio;
 
     Rigidbody2D rigidbodyComponent;
-    IngredientCutter ingredientCutter;
+    //IngredientCutter ingredientCutter;
     LineRenderer lineRenderer;
 
     Vector2 cutStartPosition;
@@ -25,13 +24,15 @@ public class CuttingKnife : MonoBehaviour
     private bool canChop = true;
     public bool CanChop { set { canChop = value; } }
 
+    [SerializeField] NPCConversation outsideLinesDialogue;
+
     // Start is called before the first frame update
     void Start()
     {
         // Cursor.visible = false;
 
         rigidbodyComponent = GetComponent<Rigidbody2D>();
-        ingredientCutter = GetComponent<IngredientCutter>();
+        //ingredientCutter = GetComponent<IngredientCutter>();
         lineRenderer = GetComponent<LineRenderer>();
 
         sliceAudio = GetComponent<AudioSource>();
@@ -124,8 +125,7 @@ public class CuttingKnife : MonoBehaviour
 
         if ((cutPostion.x > guidelinePosition.x + margin) || (cutPostion.x < guidelinePosition.x - margin))
         {
-            sceneManager.dialogueTrigger = dialogueTrigger;
-            sceneManager.CutOutsideMargins();
+            ConversationManager.Instance.StartConversation(outsideLinesDialogue);
 
             lineRenderer.enabled = false;
             return false;
