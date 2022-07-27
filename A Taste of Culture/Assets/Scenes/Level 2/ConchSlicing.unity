@@ -209,7 +209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &197529681
 PrefabInstance:
@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 1176281770637953019, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1920461719}
+      objectReference: {fileID: 0}
     - target: {fileID: 1176281770637953019, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -261,14 +261,14 @@ PrefabInstance:
     - target: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: sceneManager
       value: 
-      objectReference: {fileID: 1920461719}
+      objectReference: {fileID: 0}
     - target: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: videoFilename
       value: SlicingDemo.mp4
       objectReference: {fileID: 0}
     - target: {fileID: 1176281770708253671, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1176281770708253671, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -321,7 +321,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5555584204655962952, guid: 33bb37fd1659975418a15f6ebdf9fabc, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5555584204655962952, guid: 33bb37fd1659975418a15f6ebdf9fabc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8514143426444354038, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -670,7 +670,7 @@ PrefabInstance:
     - target: {fileID: 8514143426531067262, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1321017251}
+      objectReference: {fileID: 0}
     - target: {fileID: 8514143426733039802, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -697,59 +697,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
---- !u!1 &1031464207 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8514143426444354034, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1031464208 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8514143427429472860, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1031464209 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8514143426733039806, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1031464210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8514143426328432501, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1031464211 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8514143427098217737, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1031464212 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8514143426531067260, guid: 7843fa5b4dd061943a89e9d8b0e8b71d, type: 3}
-  m_PrefabInstance: {fileID: 1031464206}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1038053673 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1176281770708253670, guid: 1816e3dc5510a624da1e6acb09f1e4c8, type: 3}
-  m_PrefabInstance: {fileID: 197529681}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fdeaaf5cce8fe4fb8055d990ff41e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1042771553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -759,7 +706,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5277503325326152736, guid: 9d004ff4965fc9441a1ec528c43c2824, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5277503325326152736, guid: 9d004ff4965fc9441a1ec528c43c2824, type: 3}
       propertyPath: m_LocalPosition.x
@@ -875,7 +822,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1096588467
 GameObject:
@@ -982,10 +929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneIndex: 8
-  sceneManager: {fileID: 1920461719}
   protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
-  choseChicken: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
-  choseTofu: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
   desiredProtein: Conch
 --- !u!4 &1112600301
 Transform:
@@ -1023,14 +967,14 @@ PrefabInstance:
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: sceneManager
       value: 
-      objectReference: {fileID: 1920461719}
+      objectReference: {fileID: 0}
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: dialogueTrigger
       value: 
-      objectReference: {fileID: 1236782931}
+      objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9007410564129555529, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1087,25 +1031,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9007410564129555532, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
   m_PrefabInstance: {fileID: 1236782929}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1236782931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236782930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showContinueButton: 1
-  dialogue:
-    name: Jaya
-    sentences:
-    - "Careful, if you don\u2019t slice evenly enough, the protein may cook unevenly."
-    expressions:
-    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
 --- !u!82 &1236782939
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1232,56 +1157,7 @@ Transform:
   - {fileID: 21070474}
   - {fileID: 753947316}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1321017250
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1321017252}
-  - component: {fileID: 1321017251}
-  m_Layer: 0
-  m_Name: DialogueManager
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1321017251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321017250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d26edc3cc4233cd4f885749c227c603f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 1031464211}
-  dialogueText: {fileID: 1031464210}
-  continueButton: {fileID: 1031464212}
-  animator: {fileID: 1031464209}
-  spriteRenderer: {fileID: 1031464208}
-  sceneManager: {fileID: 1920461719}
---- !u!4 &1321017252
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321017250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1607390465
 GameObject:
@@ -1376,185 +1252,10 @@ RectTransform:
   m_Children:
   - {fileID: 1096588468}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1920461717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1920461720}
-  - component: {fileID: 1920461719}
-  - component: {fileID: 1920461718}
-  - component: {fileID: 1920461721}
-  - component: {fileID: 1920461723}
-  - component: {fileID: 1920461722}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1920461718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920461717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showContinueButton: 1
-  dialogue:
-    name: Jaya
-    sentences:
-    - Next, we need to cut the protein. I like to slice it into strips, so the pieces
-      are totally cooked and covered in sauce without being too small.
-    - Here, let me show you how...
-    expressions:
-    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
-    - {fileID: 21300000, guid: 623c5594fed8a7f47851818b3a943e0a, type: 3}
---- !u!114 &1920461719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920461717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c6fccf44905e6b4aae70e0215f5ab6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursorObj: {fileID: 1236782930}
-  dialogueManager: {fileID: 1321017251}
-  dialogueTrigger: {fileID: 1920461718}
-  dialogue: {fileID: 1031464207}
-  gifManager: {fileID: 1038053673}
-  dialogueString: 
---- !u!4 &1920461720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920461717}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1920461721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920461717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b69231066bcc2af44b068c49c30b05ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showContinueButton: 1
-  dialogue:
-    name: Jaya
-    sentences:
-    - Good job! I'll start cooking these right away. While I do that, let's start
-      chopping the veggies.
-    expressions:
-    - {fileID: 21300000, guid: debad48834a51a045b391d73af778980, type: 3}
---- !u!114 &1920461722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920461717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 21abd6b1a510af541974b51dd1b93ddd, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1920461723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920461717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ea6067486d54e409fa26ab0f79759e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: b002c92acce2d83479bebebc91daa0ab, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

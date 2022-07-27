@@ -6,7 +6,7 @@ using UnityEngine;
 public class ChoppingKnife : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
-    
+
     public Animator animator;
 
     Vector2 knifeTip;
@@ -24,14 +24,14 @@ public class ChoppingKnife : MonoBehaviour
     {
         knifeTip = gameObject.transform.GetChild(0).gameObject.transform.position;
         knifeTip = gameObject.transform.GetChild(1).gameObject.transform.position;
-        
+
         choppingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && canChop)
+        if (Input.GetMouseButtonDown(0) && canChop)
         {
             // this will turn the knife "down" on click
             animator.SetBool("Click", true);
@@ -49,31 +49,31 @@ public class ChoppingKnife : MonoBehaviour
         List<GameObject> Ingredients = new List<GameObject>();
 
         // Get an array of all ingredients that were hit. 
-        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeTip, knifeBase, layerMask);       
+        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeTip, knifeBase, layerMask);
 
-        foreach(RaycastHit2D hitObject in hitObjects)
+        foreach (RaycastHit2D hitObject in hitObjects)
         {
-            if(hitObject.transform.gameObject.CompareTag("Double Ingredient"))
+            if (hitObject.transform.CompareTag("Double Ingredient"))
             {
-                Ingredients.Add(hitObject.transform.gameObject.GetComponent<DoubleIngredient>().Ingredient1);
-                Ingredients.Add(hitObject.transform.gameObject.GetComponent<DoubleIngredient>().Ingredient2);
+                Ingredients.Add(hitObject.transform.GetComponent<DoubleIngredient>().Ingredient1);
+                Ingredients.Add(hitObject.transform.GetComponent<DoubleIngredient>().Ingredient2);
             }
 
             // Ensure that hitObject isn't the child of a double ingredient object 
             // since it would have been added to the ingredient list when its parent was hit
-            else if(!(hitObject.transform.parent.transform.parent.transform.gameObject.CompareTag("Double Ingredient"))) 
+            else if (!UtilFunctions.CompareTagInParents(hitObject.transform, "Double Ingredient", 2, false))
             {
-                Ingredients.Add(hitObject.transform.parent.gameObject); 
+                Ingredients.Add(hitObject.transform.parent.gameObject);
             }
         }
 
-        foreach(GameObject ingredient in Ingredients)
+        foreach (GameObject ingredient in Ingredients)
         {
-            if(!madeFirstCut) { madeFirstCut = true; }
-            else 
+            if (!madeFirstCut) { madeFirstCut = true; }
+            else
             {
                 IngredientMover ingredientMover = ingredient.GetComponent<IngredientMover>();
-                if(ingredientMover.AllowMovement) { continue; }
+                if (ingredientMover.AllowMovement) { continue; }
             }
 
             objectsToCut.Add(ingredient.transform.GetChild(0).gameObject);
@@ -87,14 +87,14 @@ public class ChoppingKnife : MonoBehaviour
         //         IngredientMover ingredientMover = hitObject.transform.parent.gameObject.GetComponent<IngredientMover>();
         //         if(ingredientMover.AllowMovement) { continue; }
         //     }
-            
+
         //     objectsToCut.Add(hitObject.transform.gameObject);
         // }    
 
-        foreach(GameObject objectToCut in objectsToCut)
+        foreach (GameObject objectToCut in objectsToCut)
         {
             objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeTip, objectToCut);
-        }  
+        }
 
         animator.SetBool("Click", false);
     }

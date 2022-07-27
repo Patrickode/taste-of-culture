@@ -395,4 +395,56 @@ public static class UtilFunctions
 
         return false;
     }
+
+    public static bool CompareTagInParentsAndChildren(Transform subject, string tag,
+        int levelsUp = int.MaxValue, int levelsDown = int.MaxValue,
+        bool checkSelf = true, bool parentsFirst = true)
+    {
+        if (parentsFirst)
+        {
+            if (CompareTagInParents(subject, tag, levelsUp, checkSelf)) return true;
+            if (CompareTagInChildren(subject, tag, levelsDown, false)) return true;
+        }
+        else
+        {
+            if (CompareTagInChildren(subject, tag, levelsDown, checkSelf)) return true;
+            if (CompareTagInParents(subject, tag, levelsUp, false)) return true;
+        }
+
+        return false;
+    }
+
+    public static bool CompareTagInParents(Transform subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+    {
+        if (checkSelf && subject.CompareTag(tag)) return true;
+
+        //Get the parent of subject. Then, so long as there are parents (and we haven't gone past the number of
+        //levels specified), CompareTag on those parents.
+        var next = subject.parent;
+        while (next && levels > 0)
+        {
+            if (next.CompareTag(tag)) return true;
+
+            next = next.parent;
+            levels--;
+        }
+
+        return false;
+    }
+    public static bool CompareTagInParents(Component subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+        => CompareTagInParents(subject.transform, tag, levels, checkSelf);
+
+    public static bool CompareTagInChildren(Transform subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+    {
+        if (checkSelf && subject.CompareTag(tag)) return true;
+        if (levels < 1) return false;
+
+        //Compare the tags on each child. If this is the last level (level <= 1), the recursion won't continue inside these checks.
+        foreach (Transform child in subject)
+            if (CompareTagInChildren(child, tag, levels - 1, true)) return true;
+
+        return false;
+    }
+    public static bool CompareTagInChildren(Component subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+        => CompareTagInChildren(subject.transform, tag, levels, checkSelf);
 }
