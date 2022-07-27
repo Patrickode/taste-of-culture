@@ -167,28 +167,30 @@ public static class UtilFunctions
     /// Gets the <see cref="Bounds"/> of this renderer, gets the padding of its sprite, and makes/returns a<br/>
     /// resized <see cref="Bounds"/> without that padding.
     /// </summary>
-    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend)
+    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend, out Vector4 trimmedPadding)
     {
-        if (!rend.sprite)
-            return rend.bounds;
+        trimmedPadding = Vector4.zero;
+        if (!rend.sprite) return rend.bounds;
 
-        Vector4 unitPadding = UnityEngine.Sprites.DataUtility.GetPadding(rend.sprite) / rend.sprite.pixelsPerUnit;
-        unitPadding = Vector4.Scale(unitPadding, new Vector4(
+        trimmedPadding = UnityEngine.Sprites.DataUtility.GetPadding(rend.sprite) / rend.sprite.pixelsPerUnit;
+        trimmedPadding = Vector4.Scale(trimmedPadding, new Vector4(
             rend.transform.localScale.x, rend.transform.localScale.y,
             rend.transform.localScale.x, rend.transform.localScale.y));
 
         //Subtract the combined horizontal/vertical padding from size, then shift the center by half the amount of each side
         Bounds newBounds = rend.bounds;
-        newBounds.size -= Vector3.right * (unitPadding.x + unitPadding.z);
-        newBounds.center += Vector3.right * (unitPadding.x / 2)
-            + Vector3.left * (unitPadding.z / 2);
+        newBounds.size -= Vector3.right * (trimmedPadding.x + trimmedPadding.z);
+        newBounds.center += Vector3.right * (trimmedPadding.x / 2)
+            + Vector3.left * (trimmedPadding.z / 2);
 
-        newBounds.size -= Vector3.up * (unitPadding.y + unitPadding.w);
-        newBounds.center += Vector3.up * (unitPadding.y / 2)
-            + Vector3.down * (unitPadding.w / 2);
+        newBounds.size -= Vector3.up * (trimmedPadding.y + trimmedPadding.w);
+        newBounds.center += Vector3.up * (trimmedPadding.y / 2)
+            + Vector3.down * (trimmedPadding.w / 2);
 
         return newBounds;
     }
+    /// <inheritdoc cref="GetBoundsSansPadding(SpriteRenderer, out Vector4)"/>
+    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend) => GetBoundsSansPadding(rend, out _);
 
     /// <summary>
     /// Uses <see cref="RectTransform.GetWorldCorners(Vector3[])"/> to create and return a <see cref="Bounds"/>.<br/>

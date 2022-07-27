@@ -46,8 +46,10 @@ public class CutGuideline : MonoBehaviour
 
             if (scaleLineWithMargin)
             {
+                //We want X, the width that'll make this rend's unpadded bounds = the margin of error.
+                //The formula for that is marginOfError * currentScaleX / unpaddedRadius, via cross-multiplication.
                 newLine.transform.localScale = new Vector3(
-                    marginOfError * newLine.sprite.pixelsPerUnit,
+                    marginOfError * (newLine.transform.localScale.x) / newLine.GetBoundsSansPadding().extents.x,
                     newLine.transform.localScale.y,
                     newLine.transform.localScale.z);
             }
