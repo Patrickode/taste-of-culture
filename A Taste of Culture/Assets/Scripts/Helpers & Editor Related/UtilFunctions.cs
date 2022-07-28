@@ -167,28 +167,30 @@ public static class UtilFunctions
     /// Gets the <see cref="Bounds"/> of this renderer, gets the padding of its sprite, and makes/returns a<br/>
     /// resized <see cref="Bounds"/> without that padding.
     /// </summary>
-    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend)
+    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend, out Vector4 trimmedPadding)
     {
-        if (!rend.sprite)
-            return rend.bounds;
+        trimmedPadding = Vector4.zero;
+        if (!rend.sprite) return rend.bounds;
 
-        Vector4 unitPadding = UnityEngine.Sprites.DataUtility.GetPadding(rend.sprite) / rend.sprite.pixelsPerUnit;
-        unitPadding = Vector4.Scale(unitPadding, new Vector4(
+        trimmedPadding = UnityEngine.Sprites.DataUtility.GetPadding(rend.sprite) / rend.sprite.pixelsPerUnit;
+        trimmedPadding = Vector4.Scale(trimmedPadding, new Vector4(
             rend.transform.localScale.x, rend.transform.localScale.y,
             rend.transform.localScale.x, rend.transform.localScale.y));
 
         //Subtract the combined horizontal/vertical padding from size, then shift the center by half the amount of each side
         Bounds newBounds = rend.bounds;
-        newBounds.size -= Vector3.right * (unitPadding.x + unitPadding.z);
-        newBounds.center += Vector3.right * (unitPadding.x / 2)
-            + Vector3.left * (unitPadding.z / 2);
+        newBounds.size -= Vector3.right * (trimmedPadding.x + trimmedPadding.z);
+        newBounds.center += Vector3.right * (trimmedPadding.x / 2)
+            + Vector3.left * (trimmedPadding.z / 2);
 
-        newBounds.size -= Vector3.up * (unitPadding.y + unitPadding.w);
-        newBounds.center += Vector3.up * (unitPadding.y / 2)
-            + Vector3.down * (unitPadding.w / 2);
+        newBounds.size -= Vector3.up * (trimmedPadding.y + trimmedPadding.w);
+        newBounds.center += Vector3.up * (trimmedPadding.y / 2)
+            + Vector3.down * (trimmedPadding.w / 2);
 
         return newBounds;
     }
+    /// <inheritdoc cref="GetBoundsSansPadding(SpriteRenderer, out Vector4)"/>
+    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend) => GetBoundsSansPadding(rend, out _);
 
     /// <summary>
     /// Uses <see cref="RectTransform.GetWorldCorners(Vector3[])"/> to create and return a <see cref="Bounds"/>.<br/>
@@ -450,4 +452,56 @@ public static class UtilFunctions
     /// A shorthand function for <see cref="EqualityComparer{T}.Default.Equals(T, T)"/>.
     /// </summary>
     public static bool EquCompEquals<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
+    
+    public static bool CompareTagInParentsAndChildren(Transform subject, string tag,
+        int levelsUp = int.MaxValue, int levelsDown = int.MaxValue,
+        bool checkSelf = true, bool parentsFirst = true)
+    {
+        if (parentsFirst)
+        {
+            if (CompareTagInParents(subject, tag, levelsUp, checkSelf)) return true;
+            if (CompareTagInChildren(subject, tag, levelsDown, false)) return true;
+        }
+        else
+        {
+            if (CompareTagInChildren(subject, tag, levelsDown, checkSelf)) return true;
+            if (CompareTagInParents(subject, tag, levelsUp, false)) return true;
+        }
+
+        return false;
+    }
+
+    public static bool CompareTagInParents(Transform subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+    {
+        if (checkSelf && subject.CompareTag(tag)) return true;
+
+        //Get the parent of subject. Then, so long as there are parents (and we haven't gone past the number of
+        //levels specified), CompareTag on those parents.
+        var next = subject.parent;
+        while (next && levels > 0)
+        {
+            if (next.CompareTag(tag)) return true;
+
+            next = next.parent;
+            levels--;
+        }
+
+        return false;
+    }
+    public static bool CompareTagInParents(Component subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+        => CompareTagInParents(subject.transform, tag, levels, checkSelf);
+
+    public static bool CompareTagInChildren(Transform subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+    {
+        if (checkSelf && subject.CompareTag(tag)) return true;
+        if (levels < 1) return false;
+
+        //Compare the tags on each child. If this is the last level (level <= 1), the recursion won't continue inside these checks.
+        foreach (Transform child in subject)
+            if (CompareTagInChildren(child, tag, levels - 1, true)) return true;
+
+        return false;
+    }
+    public static bool CompareTagInChildren(Component subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+        => CompareTagInChildren(subject.transform, tag, levels, checkSelf);
 }

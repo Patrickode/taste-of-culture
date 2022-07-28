@@ -33,7 +33,7 @@ public class DownloadButtonMethod : MonoBehaviour
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         var request = UnityEngine.Networking.UnityWebRequest.Get(sourcePath);
-        Coroutilities.DoAfter(this,
+        Coroutilities.DoAfterYielder(this,
             () =>
             {
                 fileBytes = request.downloadHandler.data;

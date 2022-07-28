@@ -12,6 +12,8 @@ TagManager:
   - Hand
   - Spice
   - Initial Spice
+  - Double Ingredient
+  - Dialogue
   layers:
   - Default
   - TransparentFX
