@@ -29,15 +29,13 @@ public class IngredientMover : MonoBehaviour
     [SerializeField] Vector2 spriteMaskPosition;
 
     // Allow player to move ingredient.
-    private bool allowMovement = false;
-    public bool AllowMovement { set { allowMovement = value; } get { return allowMovement; } }
+    public bool AllowMovement { get; 
+        set; }
 
     // Allow player to rotate ingredient.
-    private bool allowRotation = false;
-    public bool AllowRotation { set { allowRotation = value; } }
+    public bool AllowRotation { private get; set; }
 
-    private bool isDoubleIngredient = false;
-    public bool IsDoubleIngredient { set { isDoubleIngredient = value; } }
+    public bool IsDoubleIngredient { private get; set; }
 
     Vector2 originalPosition;
     Vector2 cachedIngrPosition;
@@ -63,9 +61,9 @@ public class IngredientMover : MonoBehaviour
 
         TryRotateIngredient();
 
-        if (!allowRotation && (transform.position.x >= rotateXPosition))
+        if (!AllowRotation && (transform.position.x >= rotateXPosition))
         {
-            allowRotation = true;
+            AllowRotation = true;
 
             // Switch to showing rotation instructions
             InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
@@ -77,15 +75,15 @@ public class IngredientMover : MonoBehaviour
 
     void DoMoveOrBudge()
     {
-        Debug.Log($"<color=#777>IngMover: Allow Movement = {allowMovement}</color>");
+        Debug.Log($"<color=#777>IngMover: Allow Movement = {AllowMovement}</color>");
 
         // Only allow movement if a cut has been made. Ingredient cutter class enables allowMovement after cut is made.
-        if (allowMovement)
+        if (AllowMovement)
         {
             transform.position += Vector3.right * movementDistance;
             cachedIngrPosition = transform.position;
 
-            allowMovement = false;
+            AllowMovement = false;
             return;
         }
 
@@ -114,7 +112,7 @@ public class IngredientMover : MonoBehaviour
     // Rotate ingredient and reset it's position
     void TryRotateIngredient()
     {
-        if (!Input.GetKeyDown(KeyCode.Space) || !allowRotation)
+        if (!Input.GetKeyDown(KeyCode.Space) || !AllowRotation)
             return;
 
         // transform.position = originalPosition;
@@ -134,7 +132,7 @@ public class IngredientMover : MonoBehaviour
 
         transform.Rotate(0, 0, 90);
 
-        allowRotation = false;
+        AllowRotation = false;
         hasBeenRotated = true;
 
         InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
@@ -144,23 +142,21 @@ public class IngredientMover : MonoBehaviour
     // Disable knife interaction and inform scene controller that the task has been completed.
     void TryBroadcastTaskCompletion()
     {
-        if (!hasBeenRotated || transform.position.x < finalXPosition) { return; }
+        if (!hasBeenRotated || transform.position.x < finalXPosition) return;
 
         taskComplete = true;
 
         // If ingredient is a double ingredient, make sure other ingredient is finished chopping before task completion
-        if (isDoubleIngredient)
+        if (IsDoubleIngredient)
         {
-            DoubleIngredient doubleIngredient = gameObject.transform.parent.transform.gameObject.GetComponent<DoubleIngredient>();
+            DoubleIngredient doubleIngredient = transform.parent.GetComponent<DoubleIngredient>();
             doubleIngredient.FinishedChopping(gameObject);
             doubleIngredient.masks.Add(mask);
 
-            if (!doubleIngredient.DualChoppingComplete) { return; }
+            if (!doubleIngredient.DualChoppingComplete) return;
         }
 
-        Vector3 scale = new Vector3(1, 1, 0);
-
-        mask.transform.localScale += scale;
+        mask.transform.localScale += Vector3.right + Vector3.up;
 
         // TODO: Replace sceneControllers in level 1 scene and delete this code
         SceneController sceneController = FindObjectOfType<SceneController>();
