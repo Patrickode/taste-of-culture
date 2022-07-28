@@ -19,8 +19,8 @@ public class DoubleIngredient : MonoBehaviour
         Ingredient1 = gameObject.transform.GetChild(0).gameObject;
         Ingredient2 = gameObject.transform.GetChild(1).gameObject;
 
-        Ingredient1.GetComponent<IngredientMover>().IsDoubleIngredient = true;
-        Ingredient2.GetComponent<IngredientMover>().IsDoubleIngredient = true;
+        Ingredient1.GetComponent<IngredientMover>().doublIngrParent = this;
+        Ingredient2.GetComponent<IngredientMover>().doublIngrParent = this;
     }
 
     public void FinishedChopping(GameObject ingredient)

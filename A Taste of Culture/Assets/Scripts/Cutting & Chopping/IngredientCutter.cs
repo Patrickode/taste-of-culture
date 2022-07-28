@@ -26,7 +26,9 @@ public class IngredientCutter : MonoBehaviour
     void Awake()
     {
         if (!isCuttable)
-            ingredientMover = gameObject.transform.parent.GetComponent<IngredientMover>();
+            //The singular version of this throws a compiler error that there is no overload with one argument.
+            //...Even though there is in both the documentation and GitHub source code? yeah ok sure whatever
+            ingredientMover = GetComponentsInParent<IngredientMover>(true)[0];
     }
 
     void Start()
@@ -42,19 +44,16 @@ public class IngredientCutter : MonoBehaviour
     {
         ingredientPosition = gameObject.transform.position;
 
-        // Find the center of the line.
-        Vector2 center = cutCenter;
-
         // Get reference to collider component's bounds to help with sizing info.
         Bounds sizeRefBounds = collRef ? collRef.bounds : UtilFunctions.GetBoundsSansPadding(rendRef);
 
         // Draw sprite mask to make it look like a cut was made.
         CutRotation = cutRotation != default ? cutRotation : Quaternion.identity;
-        RepresentCut(new Vector2(center.x, sizeRefBounds.center.y), sizeRefBounds.size.y + 1f);
+        RepresentCut(new Vector2(cutCenter.x, sizeRefBounds.center.y), sizeRefBounds.size.y + 1f);
 
         // If the ingredient can be moved, allow movement after cut is made.
-        if (ingredientMover != null) { ingredientMover.AllowMovement = true; }
-
+        if (ingredientMover)
+            ingredientMover.AllowMovement = true;
     }
 
     void ResizeCollider(GameObject colliderOwner, Vector2 colliderSize, float colliderXOffset)

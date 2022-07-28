@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class IngredientMover : MonoBehaviour
 {
     [SerializeField] float movementDistance = 2f;
@@ -17,6 +16,7 @@ public class IngredientMover : MonoBehaviour
     [Space(5)]
 
     [Tooltip("Desired position of ingredient after it has been rotated")]
+    [SerializeField] float rotateAmount = 90;
     [SerializeField] Vector2 rotatedPosition;
     [Space(5)]
 
@@ -29,13 +29,12 @@ public class IngredientMover : MonoBehaviour
     [SerializeField] Vector2 spriteMaskPosition;
 
     // Allow player to move ingredient.
-    public bool AllowMovement { get; 
-        set; }
+    public bool AllowMovement { get; set; }
 
     // Allow player to rotate ingredient.
     public bool AllowRotation { private get; set; }
 
-    public bool IsDoubleIngredient { private get; set; }
+    [HideInInspector] public DoubleIngredient doublIngrParent;
 
     Vector2 originalPosition;
     Vector2 cachedIngrPosition;
@@ -53,7 +52,9 @@ public class IngredientMover : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        //On move input, if this mover actually moves (has non-negative, non-zero move distance), try to move.
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            && movementDistance > Mathf.Epsilon)
             DoMoveOrBudge();
 
         if (taskComplete)
@@ -123,14 +124,18 @@ public class IngredientMover : MonoBehaviour
         transform.position = rotatedPosition;
         cachedIngrPosition = rotatedPosition;
 
-        mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
+        if (spriteMask)
+            mask = Instantiate(spriteMask, spriteMaskPosition, Quaternion.identity);
 
         // Instantiate chunks under current ingredient (will become visible when ingredient moves into mask)
-        GameObject choppedIngredient = Instantiate(choppedPrefab, choppedPrefabPosition, Quaternion.identity);
-        choppedIngredient.transform.Rotate(choppedPrefabRotation);      // Manually change to desired prefab rotation
-        choppedIngredient.transform.parent = transform;
+        if (choppedPrefab)
+        {
+            Transform choppedIngredient = Instantiate(choppedPrefab, choppedPrefabPosition, Quaternion.identity).transform;
+            choppedIngredient.Rotate(choppedPrefabRotation);      // Manually change to desired prefab rotation
+            choppedIngredient.parent = transform;
+        }
 
-        transform.Rotate(0, 0, 90);
+        transform.Rotate(0, 0, rotateAmount);
 
         AllowRotation = false;
         hasBeenRotated = true;
@@ -147,13 +152,12 @@ public class IngredientMover : MonoBehaviour
         taskComplete = true;
 
         // If ingredient is a double ingredient, make sure other ingredient is finished chopping before task completion
-        if (IsDoubleIngredient)
+        if (doublIngrParent)
         {
-            DoubleIngredient doubleIngredient = transform.parent.GetComponent<DoubleIngredient>();
-            doubleIngredient.FinishedChopping(gameObject);
-            doubleIngredient.masks.Add(mask);
+            doublIngrParent.FinishedChopping(gameObject);
+            doublIngrParent.masks.Add(mask);
 
-            if (!doubleIngredient.DualChoppingComplete) return;
+            if (!doublIngrParent.DualChoppingComplete) return;
         }
 
         mask.transform.localScale += Vector3.right + Vector3.up;
