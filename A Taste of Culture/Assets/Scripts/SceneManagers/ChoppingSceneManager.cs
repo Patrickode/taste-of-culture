@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChoppingSceneManager : BaseIngredientSceneManager
 {
+    [Header("Chopping Scene Manager Fields")]
     [SerializeField] List<GameObject> ingredients;
     [SerializeField] List<GameObject> instructions;
     [Space(5)]
