@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChoppingSceneManager : BaseIngredientSceneManager
 {
+    [Header("Chopping Scene Manager Fields")]
     [SerializeField] List<GameObject> ingredients;
     [SerializeField] List<GameObject> instructions;
     [Space(5)]
@@ -14,12 +15,11 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
     GameObject currentIngredient;
     GameObject currentInstruction;
 
-    public bool bAtLastIngredient = false;
+    [HideInInspector] public bool bAtLastIngredient = false;
 
     private Coroutine fillAnim;
     private float animProgress;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!(ingredients.Count == 0))
@@ -38,20 +38,7 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
     {
         base.CompleteTask();
 
-        if (progressFill != null)
-        {
-            progressScale.x = (ingredients.IndexOf(currentIngredient) + 1f) / ingredients.Count;
-
-            //I realized too late this doesn't save the intial scale needed for a proper lerp, but it has a nice
-            //easing effect so it was 100% intentional actually
-            Coroutilities.TryStopCoroutine(this, ref fillAnim);
-            fillAnim = Coroutilities.DoUntil(this,
-                () => AdvanceFill(progressFill.transform.localScale, progressScale, fillDuration),
-                () => animProgress >= 1);
-
-            //When the above completes, reset anim progress
-            Coroutilities.DoAfterYielder(this, () => animProgress = 0, fillAnim);
-        }
+        UpdateProgressFill((ingredients.IndexOf(currentIngredient) + 1f) / ingredients.Count);
 
         // If the current ingredient isn't the last in the list, disable it and enable the next ingredient
         if (!(currentIngredient == ingredients[ingredients.Count - 1]))
@@ -80,7 +67,25 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
         else { base.HandleSceneCompletion(); }
     }
 
-    void AdvanceFill(Vector3 start, Vector3 target, float duration)
+    public void UpdateProgressFill(float value, bool normalized = true, bool addValue = false)
+    {
+        if (!progressFill) return;
+        
+        value = normalized ? Mathf.Clamp01(value) : value / ingredients.Count;
+        progressScale.x = addValue ? progressScale.x + value : value;
+
+        //I realized too late this doesn't save the intial scale needed for a proper lerp, but it has a nice
+        //easing effect so it was 100% intentional actually B^)
+        Coroutilities.TryStopCoroutine(this, ref fillAnim);
+        fillAnim = Coroutilities.DoUntil(this,
+            () => AdvanceFill(progressFill.transform.localScale, progressScale, fillDuration),
+            () => animProgress >= 1);
+
+        //When the above completes, reset anim progress
+        Coroutilities.DoAfterYielder(this, () => animProgress = 0, fillAnim);
+    }
+
+    protected void AdvanceFill(Vector3 start, Vector3 target, float duration)
     {
         animProgress = Mathf.Min(
             animProgress + duration > 0 ? Time.deltaTime / duration : 1,
