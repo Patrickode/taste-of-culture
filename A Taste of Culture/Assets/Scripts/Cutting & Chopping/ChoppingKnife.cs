@@ -59,6 +59,8 @@ public class ChoppingKnife : MonoBehaviour
 
     private void TryCutIngr(GameObject ingr, IngredientMover moverToReference = null)
     {
+        //Unity warns not to use null coalescing on unity objects (rightly), but it's fine in this specific
+        //case; we only want to do this if the mover is *exactly* null (i.e., has the default value)
         moverToReference ??= ingr.GetComponent<IngredientMover>();
 
         //If the ingredient can be moved, we've already cut this ingredient (unless this is the first cut), so

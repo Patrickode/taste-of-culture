@@ -36,6 +36,7 @@ public class IngredientMover : MonoBehaviour
     InstructionTooltips tooltipRef;
 
     [HideInInspector] public DoubleIngredient doublIngrParent;
+    private ChoppingSceneManager chopManagerRef;
 
     Vector2 originalPosition;
     Vector2 cachedIngrPosition;
@@ -49,7 +50,9 @@ public class IngredientMover : MonoBehaviour
     {
         originalPosition = transform.position;
         cachedIngrPosition = originalPosition;
+
         tooltipRef = FindObjectOfType<InstructionTooltips>();
+        chopManagerRef = FindObjectOfType<ChoppingSceneManager>();
     }
 
     void Update()
@@ -71,6 +74,9 @@ public class IngredientMover : MonoBehaviour
             // Switch to showing rotation instructions
             if (tooltipRef)
                 tooltipRef.ToggleRotationInstructions();
+
+            if (chopManagerRef)
+                chopManagerRef.UpdateProgressFill(0.5f, false, true);
         }
 
         TryBroadcastTaskCompletion();
@@ -162,30 +168,28 @@ public class IngredientMover : MonoBehaviour
         // TODO: Replace sceneControllers in level 1 scene and delete this code
         SceneController sceneController = FindObjectOfType<SceneController>();
 
-        if (sceneController != null)
+        if (sceneController)
         {
             if (sceneController.CurrentIngredient == SceneController.Ingredient.Tomato)
             {
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
-                if (knife != null) { knife.CanChop = false; }
+                if (knife) { knife.CanChop = false; }
             }
 
             sceneController.TaskComplete();
         }
 
-        ChoppingSceneManager sceneManager = FindObjectOfType<ChoppingSceneManager>();
-
-        if (sceneManager != null)
+        if (chopManagerRef)
         {
             // Disable knife chop if last ingredient
-            if (sceneManager.bAtLastIngredient)
+            if (chopManagerRef.bAtLastIngredient)
             {
                 ChoppingKnife knife = FindObjectOfType<ChoppingKnife>();
-                if (knife != null) { knife.CanChop = false; }
+                if (knife) { knife.CanChop = false; }
             }
 
             Debug.Log("Task Complete!");
-            sceneManager.TaskComplete();
+            chopManagerRef.TaskComplete();
         }
     }
 }
