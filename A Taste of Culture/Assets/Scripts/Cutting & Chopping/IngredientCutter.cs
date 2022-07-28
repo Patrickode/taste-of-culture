@@ -36,7 +36,7 @@ public class IngredientCutter : MonoBehaviour
     }
 
     // public void CutIngredient(Vector2 cutStart, Vector2 cutEnd, GameObject ingredient)
-    public void CutIngredient(Vector2 cutCenter, GameObject ingredient, Quaternion cutRotation = default)
+    public void CutIngredient(Vector2 cutCenter, Quaternion cutRotation = default)
     {
         ingredientPosition = gameObject.transform.position;
 
@@ -48,7 +48,7 @@ public class IngredientCutter : MonoBehaviour
 
         // Draw sprite mask to make it look like a cut was made.
         CutRotation = cutRotation != default ? cutRotation : Quaternion.identity;
-        bool cutDrawnSuccessfully = RepresentCut(new Vector2(center.x, colliderBounds.center.y), colliderBounds.size.y + 1f);
+        /*bool cutDrawnSuccessfully = */RepresentCut(new Vector2(center.x, colliderBounds.center.y), colliderBounds.size.y + 1f);
 
         // If the ingredient can be moved, allow movement after cut is made.
         if (ingredientMover != null) { ingredientMover.AllowMovement = true; }

@@ -31,7 +31,6 @@ public class ChoppingKnife : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && canChop)
         {
             Chop();
-
             choppingAudio.Play();
 
             //true = knife is down, false = knife is up
@@ -42,45 +41,33 @@ public class ChoppingKnife : MonoBehaviour
 
     private void Chop()
     {
-        List<GameObject> objectsToCut = new List<GameObject>();
-        List<GameObject> Ingredients = new List<GameObject>();
+        RaycastHit2D[] ingrHits = Physics2D.LinecastAll(knifeTip.position, knifeBase.position, layersToChop);
 
-        // Get an array of all ingredients that were hit. 
-        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeTip.position, knifeBase.position, layersToChop);
-
-        foreach (RaycastHit2D hitObject in hitObjects)
+        foreach (RaycastHit2D hit in ingrHits)
         {
-            if (hitObject.transform.CompareTag("Double Ingredient"))
+            if (hit.transform.TryGetComponent(out DoubleIngredient doubIngr))
             {
-                Ingredients.Add(hitObject.transform.GetComponent<DoubleIngredient>().Ingredient1);
-                Ingredients.Add(hitObject.transform.GetComponent<DoubleIngredient>().Ingredient2);
+                TryCutIngr(doubIngr.Ingredient1);
+                TryCutIngr(doubIngr.Ingredient2);
             }
-
-            // Ensure that hitObject isn't the child of a double ingredient object 
-            // since it would have been added to the ingredient list when its parent was hit
-            else if (!UtilFunctions.CompareTagInParents(hitObject.transform, "Double Ingredient", 2, false))
-            {
-                Ingredients.Add(hitObject.transform.parent.gameObject);
-            }
-        }
-
-        foreach (GameObject ingredient in Ingredients)
-        {
-            if (!madeFirstCut) { madeFirstCut = true; }
             else
             {
-                IngredientMover ingredientMover = ingredient.GetComponent<IngredientMover>();
-                if (ingredientMover.AllowMovement) { continue; }
+                TryCutIngr(hit.transform.parent);
             }
-
-            objectsToCut.Add(ingredient.transform.GetChild(0).gameObject);
-        }
-
-        foreach (GameObject objectToCut in objectsToCut)
-        {
-            objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeTip.position, objectToCut);
         }
     }
+
+    private void TryCutIngr(GameObject ingr)
+    {
+        //If the ingredient can be moved, we've already cut this ingredient (unless this is the first cut), so
+        //bail out; no need to cut again.
+        if (madeFirstCut && (!ingr.TryGetComponent(out IngredientMover ingrMovr) || ingrMovr.AllowMovement))
+            return;
+
+        madeFirstCut = true;
+        ingr.GetComponentInChildren<IngredientCutter>().CutIngredient(knifeTip.position);
+    }
+    private void TryCutIngr(Component ingrSource) => TryCutIngr(ingrSource.gameObject);
 
     private void SetChopAnim(bool value)
     {
