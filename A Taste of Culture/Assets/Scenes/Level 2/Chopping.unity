@@ -523,8 +523,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117786969}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.83, y: 3.43, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -5.8463, y: 3.4164, z: 0}
+  m_LocalScale: {x: 0.49521184, y: 0.508803, z: 0.5}
   m_Children: []
   m_Father: {fileID: 855846945}
   m_RootOrder: 1
@@ -2476,6 +2476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f1c55dba3f8e042b2bad28ebc07b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endConvo: {fileID: 0}
+  endConvoTriggersTransition: 0
   nextSceneIndex: 9
   ingredients:
   - {fileID: 2120433658632388370}
@@ -3713,8 +3715,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764430180}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.83, y: 3.43, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -5.8463, y: 3.4164, z: 0}
+  m_LocalScale: {x: 0.49521184, y: 0.508803, z: 0.5}
   m_Children: []
   m_Father: {fileID: 855846945}
   m_RootOrder: 2

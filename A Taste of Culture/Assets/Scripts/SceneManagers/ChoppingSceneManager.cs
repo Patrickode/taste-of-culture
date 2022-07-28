@@ -20,7 +20,6 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
     private Coroutine fillAnim;
     private float animProgress;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!(ingredients.Count == 0))
