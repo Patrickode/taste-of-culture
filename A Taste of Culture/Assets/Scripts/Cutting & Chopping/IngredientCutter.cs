@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class IngredientCutter : MonoBehaviour
 {
-    [SerializeField] GameObject ingredientPrefab;
     [SerializeField] GameObject spriteMask;
     [SerializeField] float cutWidth = 0.25f;
 

@@ -33,6 +33,7 @@ public class IngredientMover : MonoBehaviour
 
     // Allow player to rotate ingredient.
     public bool AllowRotation { private get; set; }
+    InstructionTooltips tooltipRef;
 
     [HideInInspector] public DoubleIngredient doublIngrParent;
 
@@ -48,6 +49,7 @@ public class IngredientMover : MonoBehaviour
     {
         originalPosition = transform.position;
         cachedIngrPosition = originalPosition;
+        tooltipRef = FindObjectOfType<InstructionTooltips>();
     }
 
     void Update()
@@ -67,8 +69,8 @@ public class IngredientMover : MonoBehaviour
             AllowRotation = true;
 
             // Switch to showing rotation instructions
-            InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
-            if (tooltips != null) { tooltips.ToggleRotationInstructions(); }
+            if (tooltipRef)
+                tooltipRef.ToggleRotationInstructions();
         }
 
         TryBroadcastTaskCompletion();
@@ -116,11 +118,6 @@ public class IngredientMover : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space) || !AllowRotation)
             return;
 
-        // transform.position = originalPosition;
-        // cachedIngrPosition = originalPosition;
-
-        Debug.Log("Rotating " + gameObject.name);
-
         transform.position = rotatedPosition;
         cachedIngrPosition = rotatedPosition;
 
@@ -140,8 +137,8 @@ public class IngredientMover : MonoBehaviour
         AllowRotation = false;
         hasBeenRotated = true;
 
-        InstructionTooltips tooltips = FindObjectOfType<InstructionTooltips>();
-        if (tooltips != null) { tooltips.ResetInstructions(); }
+        if (tooltipRef)
+            tooltipRef.ResetInstructions();
     }
 
     // Disable knife interaction and inform scene controller that the task has been completed.

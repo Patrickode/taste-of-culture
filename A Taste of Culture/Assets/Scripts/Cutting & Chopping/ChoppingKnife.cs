@@ -47,8 +47,8 @@ public class ChoppingKnife : MonoBehaviour
         {
             if (hit.transform.TryGetComponent(out DoubleIngredient doubIngr))
             {
-                TryCutIngr(doubIngr.Ingredient1);
-                TryCutIngr(doubIngr.Ingredient2);
+                TryCutIngr(doubIngr.Ingredient1, doubIngr.Mover);
+                TryCutIngr(doubIngr.Ingredient2, doubIngr.Mover);
             }
             else
             {
@@ -57,11 +57,13 @@ public class ChoppingKnife : MonoBehaviour
         }
     }
 
-    private void TryCutIngr(GameObject ingr)
+    private void TryCutIngr(GameObject ingr, IngredientMover moverToReference = null)
     {
+        moverToReference ??= ingr.GetComponent<IngredientMover>();
+
         //If the ingredient can be moved, we've already cut this ingredient (unless this is the first cut), so
         //bail out; no need to cut again.
-        if (madeFirstCut && (!ingr.TryGetComponent(out IngredientMover ingrMovr) || ingrMovr.AllowMovement))
+        if (madeFirstCut && (!moverToReference || moverToReference.AllowMovement))
             return;
 
         madeFirstCut = true;
