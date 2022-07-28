@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ChoppingKnife : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask;                           // Layer to detect colliders on.
+    [SerializeField] private Transform knifeTip;
+    [SerializeField] private Transform knifeBase;
+    [Space(5)]
+    [UnityEngine.Serialization.FormerlySerializedAs("layerMask")]
+    [SerializeField] private LayerMask layersToChop;
+    [SerializeField] private float knifeDownDuration = 0.1f;
 
     public Animator animator;
-
-    Vector2 knifeTip;
-    Vector2 knifeBase;
 
     private AudioSource choppingAudio;
 
@@ -19,37 +21,32 @@ public class ChoppingKnife : MonoBehaviour
 
     private bool madeFirstCut = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        knifeTip = gameObject.transform.GetChild(0).gameObject.transform.position;
-        knifeTip = gameObject.transform.GetChild(1).gameObject.transform.position;
-
         choppingAudio = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0) && canChop)
         {
-            // this will turn the knife "down" on click
-            animator.SetBool("Click", true);
+            Chop();
 
-            StartCoroutine(Chop());
             choppingAudio.Play();
+
+            //true = knife is down, false = knife is up
+            SetChopAnim(true);
+            Coroutilities.DoAfterDelay(this, () => SetChopAnim(false), knifeDownDuration);
         }
     }
 
-    IEnumerator Chop()
+    private void Chop()
     {
-        yield return new WaitForSeconds(0.1f);
-
         List<GameObject> objectsToCut = new List<GameObject>();
         List<GameObject> Ingredients = new List<GameObject>();
 
         // Get an array of all ingredients that were hit. 
-        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeTip, knifeBase, layerMask);
+        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(knifeTip.position, knifeBase.position, layersToChop);
 
         foreach (RaycastHit2D hitObject in hitObjects)
         {
@@ -79,23 +76,14 @@ public class ChoppingKnife : MonoBehaviour
             objectsToCut.Add(ingredient.transform.GetChild(0).gameObject);
         }
 
-        // foreach(RaycastHit2D hitObject in hitObjects)
-        // {
-        //     if(!madeFirstCut) { madeFirstCut = true; }
-        //     else 
-        //     {
-        //         IngredientMover ingredientMover = hitObject.transform.parent.gameObject.GetComponent<IngredientMover>();
-        //         if(ingredientMover.AllowMovement) { continue; }
-        //     }
-
-        //     objectsToCut.Add(hitObject.transform.gameObject);
-        // }    
-
         foreach (GameObject objectToCut in objectsToCut)
         {
-            objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeTip, objectToCut);
+            objectToCut.GetComponent<IngredientCutter>().CutIngredient(knifeTip.position, objectToCut);
         }
+    }
 
-        animator.SetBool("Click", false);
+    private void SetChopAnim(bool value)
+    {
+        animator.SetBool("Click", value);
     }
 }

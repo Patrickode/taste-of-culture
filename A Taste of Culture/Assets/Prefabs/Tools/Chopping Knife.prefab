@@ -325,7 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4facf3caa99453f4db7cdfab1ea34f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  knifeTip: {fileID: 6075877295949646230}
+  knifeBase: {fileID: 7166079037865036419}
+  layersToChop:
     serializedVersion: 2
     m_Bits: 0
+  knifeDownDuration: 0.1
   animator: {fileID: 8796227974067563569}
