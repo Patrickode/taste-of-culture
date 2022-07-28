@@ -283,6 +283,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &103598410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4148047150818633032, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+  m_PrefabInstance: {fileID: 505081280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &110162878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1016,6 +1021,107 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1001 &505081280
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4148047150881439656, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Name
+      value: Chop Progress Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439660, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150881439663, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 74386172}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
 --- !u!1 &545925036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,7 +2324,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5277503325326152736, guid: 9d004ff4965fc9441a1ec528c43c2824, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5277503325326152736, guid: 9d004ff4965fc9441a1ec528c43c2824, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2661,8 +2767,8 @@ MonoBehaviour:
   - {fileID: 1808011343}
   - {fileID: 546798017}
   - {fileID: 1236935005}
-  progressFill: {fileID: 0}
-  fillDuration: 0
+  progressFill: {fileID: 103598410}
+  fillDuration: 0.2
   bAtLastIngredient: 0
 --- !u!4 &1311813211
 Transform:
@@ -2687,7 +2793,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5555584204655962952, guid: 33bb37fd1659975418a15f6ebdf9fabc, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5555584204655962952, guid: 33bb37fd1659975418a15f6ebdf9fabc, type: 3}
       propertyPath: m_LocalPosition.x
