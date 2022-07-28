@@ -14,7 +14,7 @@ public class ChoppingSceneManager : BaseIngredientSceneManager
     GameObject currentIngredient;
     GameObject currentInstruction;
 
-    public bool bAtLastIngredient = false;
+    [HideInInspector] public bool bAtLastIngredient = false;
 
     private Coroutine fillAnim;
     private float animProgress;

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class IngredientCutter : MonoBehaviour
 {
-    [SerializeField] GameObject ingredientPrefab;
     [SerializeField] GameObject spriteMask;
     [SerializeField] float cutWidth = 0.25f;
-    
+
     [Tooltip("Should be set to true for cuttable ingredients and false for choppable ingredients.")]
     [SerializeField] bool isCuttable;
 
     private Vector2 ingredientPosition;
 
-    BoxCollider2D colliderComponent;
+    BoxCollider2D collRef;
+    SpriteRenderer rendRef;
 
     CutGuideline guideline;
 
@@ -25,34 +25,34 @@ public class IngredientCutter : MonoBehaviour
     void Awake()
     {
         if (!isCuttable)
-            ingredientMover = gameObject.transform.parent.GetComponent<IngredientMover>();
+            //The singular version of this throws a compiler error that there is no overload with one argument.
+            //...Even though there is in both the documentation and GitHub source code? yeah ok sure whatever
+            ingredientMover = GetComponentsInParent<IngredientMover>(true)[0];
     }
 
     void Start()
     {
-        colliderComponent = GetComponent<BoxCollider2D>();
+        collRef = GetComponent<BoxCollider2D>();
+        rendRef = GetComponent<SpriteRenderer>();
 
         if (isCuttable) { guideline = GetComponent<CutGuideline>(); }
     }
 
     // public void CutIngredient(Vector2 cutStart, Vector2 cutEnd, GameObject ingredient)
-    public void CutIngredient(Vector2 cutCenter, GameObject ingredient, Quaternion cutRotation = default)
+    public void CutIngredient(Vector2 cutCenter, Quaternion cutRotation = default)
     {
         ingredientPosition = gameObject.transform.position;
 
-        // Find the center of the line.
-        Vector2 center = cutCenter;
-
         // Get reference to collider component's bounds to help with sizing info.
-        Bounds colliderBounds = colliderComponent.bounds;
+        Bounds sizeRefBounds = collRef ? collRef.bounds : UtilFunctions.GetBoundsSansPadding(rendRef);
 
         // Draw sprite mask to make it look like a cut was made.
         CutRotation = cutRotation != default ? cutRotation : Quaternion.identity;
-        bool cutDrawnSuccessfully = RepresentCut(new Vector2(center.x, colliderBounds.center.y), colliderBounds.size.y + 1f);
+        RepresentCut(new Vector2(cutCenter.x, sizeRefBounds.center.y), sizeRefBounds.size.y + 1f);
 
         // If the ingredient can be moved, allow movement after cut is made.
-        if (ingredientMover != null) { ingredientMover.AllowMovement = true; }
-
+        if (ingredientMover)
+            ingredientMover.AllowMovement = true;
     }
 
     void ResizeCollider(GameObject colliderOwner, Vector2 colliderSize, float colliderXOffset)
