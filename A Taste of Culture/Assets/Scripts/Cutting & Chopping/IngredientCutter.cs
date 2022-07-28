@@ -7,13 +7,14 @@ public class IngredientCutter : MonoBehaviour
     [SerializeField] GameObject ingredientPrefab;
     [SerializeField] GameObject spriteMask;
     [SerializeField] float cutWidth = 0.25f;
-    
+
     [Tooltip("Should be set to true for cuttable ingredients and false for choppable ingredients.")]
     [SerializeField] bool isCuttable;
 
     private Vector2 ingredientPosition;
 
-    BoxCollider2D colliderComponent;
+    BoxCollider2D collRef;
+    SpriteRenderer rendRef;
 
     CutGuideline guideline;
 
@@ -30,7 +31,8 @@ public class IngredientCutter : MonoBehaviour
 
     void Start()
     {
-        colliderComponent = GetComponent<BoxCollider2D>();
+        collRef = GetComponent<BoxCollider2D>();
+        rendRef = GetComponent<SpriteRenderer>();
 
         if (isCuttable) { guideline = GetComponent<CutGuideline>(); }
     }
@@ -44,11 +46,11 @@ public class IngredientCutter : MonoBehaviour
         Vector2 center = cutCenter;
 
         // Get reference to collider component's bounds to help with sizing info.
-        Bounds colliderBounds = colliderComponent.bounds;
+        Bounds sizeRefBounds = collRef ? collRef.bounds : UtilFunctions.GetBoundsSansPadding(rendRef);
 
         // Draw sprite mask to make it look like a cut was made.
         CutRotation = cutRotation != default ? cutRotation : Quaternion.identity;
-        /*bool cutDrawnSuccessfully = */RepresentCut(new Vector2(center.x, colliderBounds.center.y), colliderBounds.size.y + 1f);
+        RepresentCut(new Vector2(center.x, sizeRefBounds.center.y), sizeRefBounds.size.y + 1f);
 
         // If the ingredient can be moved, allow movement after cut is made.
         if (ingredientMover != null) { ingredientMover.AllowMovement = true; }
