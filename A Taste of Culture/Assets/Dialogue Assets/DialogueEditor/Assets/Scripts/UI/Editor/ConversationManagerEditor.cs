@@ -23,6 +23,9 @@ namespace DialogueEditor
         SerializedProperty ScrollTextSpeedProperty;
         SerializedProperty AllowMouseInteractionProperty;
 
+        SerializedProperty FullbodyPreviewProperty;
+        SerializedProperty HideFullbodyPreviewProperty;
+
         private void OnEnable()
         {
             BackgroundImageProperty = serializedObject.FindProperty("BackgroundImage");
@@ -32,6 +35,9 @@ namespace DialogueEditor
             ScrollTextProperty = serializedObject.FindProperty("ScrollText");
             ScrollTextSpeedProperty = serializedObject.FindProperty("ScrollSpeed");
             AllowMouseInteractionProperty = serializedObject.FindProperty("AllowMouseInteraction");
+
+            FullbodyPreviewProperty = serializedObject.FindProperty("NpcFullBody");
+            HideFullbodyPreviewProperty = serializedObject.FindProperty("HideFullbodyPreview");
         }
 
         public override void OnInspectorGUI()
@@ -47,10 +53,14 @@ namespace DialogueEditor
             GUILayout.Space(BOX_HEIGHT + OPTION_BUFFER + OPTION_HEIGHT);
             EditorGUILayout.EndVertical();
 
+            EditorGUILayout.PropertyField(FullbodyPreviewProperty, new GUIContent("Fullbody Image"));
+            EditorGUILayout.PropertyField(HideFullbodyPreviewProperty);
+            EditorGUILayout.Space();
+
             // Background image
             GUILayout.Label("Dialogue Image Options", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(BackgroundImageProperty);
-            EditorGUILayout.PropertyField(BackgroundImageSlicedProperty); 
+            EditorGUILayout.PropertyField(BackgroundImageSlicedProperty);
             EditorGUILayout.Space();
 
             // Option image

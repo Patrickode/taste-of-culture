@@ -42,13 +42,18 @@ public class FlavorProfileData : Singleton<FlavorProfileData>
     }
     public bool TryGetFlav(FlavorType type, out int value) => flavors.TryGetValue(type, out value);
 
-    public void AddFlavor(Dictionary<FlavorType, int> flavor)
+    public void Set(Dictionary<FlavorType, int> flavor)
     {
+        //Use the indexer property since it handles the invocation of flavor update
         foreach (var typeVal in flavor)
-        {
-            //Use the indexer property since it handles the invocation of flavor update
+            this[typeVal.Key] = typeVal.Value;
+    }
+
+    public void Add(Dictionary<FlavorType, int> flavor)
+    {
+        //Use the indexer property since it handles the invocation of flavor update
+        foreach (var typeVal in flavor)
             this[typeVal.Key] += typeVal.Value;
-        }
     }
     public void AddFlavors(params (FlavorType type, int value)[] flavors)
     {

@@ -5,23 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class CutGuideline : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer guidelinePrefab;
-    [SerializeField] float cutWidth;
-    [SerializeField] float marginOfError;
-    [SerializeField] bool scaleLineWithMargin;
-    public float MarginOfError { get { return marginOfError; } }
-
-    Collider2D colliderComponent;
-
-    private Vector2 guidelinePosition;
-    public Vector2 GuidelinePosition { get { return guidelinePosition; } }
-
+    [SerializeField] private SpriteRenderer guidelinePrefab;
     public bool drawInitialGuideline = true;
+    [Space(5)]
+    [SerializeField] private float cutWidth;
+    [Tooltip("Percentage of cutWidth to compare against the guideline position when determining where the last cut is. " +
+        "0 = cutWidth. 1 = cutWidth * 2. -1 = nothing, i.e., collider.bounds.max.x.")]
+    [SerializeField] [Range(-1, 1)] private float endCutPadding = 0.6f;
+    [SerializeField] private float marginOfError;
+    [SerializeField] private bool scaleLineWithMargin;
+    [Space(5)]
+    [Tooltip("How much to decrement from the guideline image's alpha after each cut.")]
+    [SerializeField] [Range(0, 1)] private float alphaDecrement = 0f;
+    [Tooltip("If true, will treat alphaDecrement as a percentage to decrease by, rather than an absolute alpha value. " +
+        "Note: This assumes that guidelinePrefab's alpha will not change mid-scene by other means.")]
+    [SerializeField] private bool relativeDecrement;
 
-    // Start is called before the first frame update
+    private Collider2D colliderComponent;
+    private SpriteRenderer guidelineCache;
+    private Vector2 guidelinePosition;
+
+    public float MarginOfError { get { return marginOfError; } }
+    public Vector2 GuidelinePosition { get => guidelinePosition; }
+
     void Start()
     {
         colliderComponent = GetComponent<Collider2D>();
+
+        if (guidelinePrefab && relativeDecrement)
+            alphaDecrement = guidelinePrefab.color.a * alphaDecrement;
+
+        endCutPadding = cutWidth * endCutPadding;
 
         // Set initial starting position (left-most edge of ingredient)
         guidelinePosition.x = colliderComponent.bounds.min.x;
@@ -37,24 +51,29 @@ public class CutGuideline : MonoBehaviour
         guidelinePosition.x += cutWidth;
 
         // Check that drawing new guideline won't ask player to cut a piece that is too small
-        if (Vector2.Distance(guidelinePosition, colliderComponent.bounds.max) >= (cutWidth + cutWidth * 0.6f))
+        if (colliderComponent.bounds.max.x - guidelinePosition.x >= cutWidth + endCutPadding)
         {
-            var newLine = Instantiate(guidelinePrefab, guidelinePosition, Quaternion.identity);
-
-            Debug.DrawRay(guidelinePosition + Vector2.right * marginOfError + Vector2.down * 25, Vector3.up * 50, Color.magenta, 1000);
-            Debug.DrawRay(guidelinePosition + Vector2.left * marginOfError + Vector2.down * 25, Vector3.up * 50, Color.magenta, 1000);
+            //If we haven't made the guideline yet, make it. Otherwise, move it to where we want and adjust alpha.
+            if (!guidelineCache)
+                guidelineCache = Instantiate(guidelinePrefab, guidelinePosition, Quaternion.identity);
+            else
+            {
+                guidelineCache.transform.position = guidelinePosition;
+                guidelineCache.color = guidelineCache.color.Adjust(3, -alphaDecrement, true);
+            }
 
             if (scaleLineWithMargin)
             {
                 //We want X, the width that'll make this rend's unpadded bounds = the margin of error.
                 //The formula for that is marginOfError * currentScaleX / unpaddedRadius, via cross-multiplication.
-                newLine.transform.localScale = new Vector3(
-                    marginOfError * (newLine.transform.localScale.x) / newLine.GetBoundsSansPadding().extents.x,
-                    newLine.transform.localScale.y,
-                    newLine.transform.localScale.z);
+                guidelineCache.transform.localScale = new Vector3(
+                    marginOfError * guidelineCache.transform.localScale.x / guidelineCache.GetBoundsSansPadding().extents.x,
+                    guidelineCache.transform.localScale.y,
+                    guidelineCache.transform.localScale.z);
             }
         }
-        else { BroadcastTaskCompletion(); }         // If unable to draw new guideline then task is complete
+        // If unable to draw new guideline then task is complete
+        else BroadcastTaskCompletion();
     }
 
     // Disable knife interaction and inform scene controller that the task has been completed.

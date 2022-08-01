@@ -71,10 +71,6 @@ public class IngredientCutter : MonoBehaviour
             return false;
         }
 
-        // Find old guideline and destroy it when new cut is made.
-        GameObject oldGuideline = GameObject.FindGameObjectWithTag("Guideline");
-        if (oldGuideline != null) { Destroy(oldGuideline); }
-
         GameObject mask = Instantiate(spriteMask, position, cutRotation);
         mask.transform.localScale = new Vector2(cutWidth, verticalScale);
         mask.transform.parent = gameObject.transform.parent;

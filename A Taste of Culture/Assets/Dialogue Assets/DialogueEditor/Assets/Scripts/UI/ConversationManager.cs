@@ -19,6 +19,8 @@ namespace DialogueEditor
             NONE,
         }
 
+        public enum PreviewHideOptns { DontHide, HideIfNull, Hide }
+
         private const float TRANSITION_TIME = 0.2f; // Transition time for fades
 
         public static ConversationManager Instance { get; private set; }
@@ -38,6 +40,7 @@ namespace DialogueEditor
         public Sprite OptionImage;
         public bool OptionImageSliced;
         public bool AllowMouseInteraction;
+        public PreviewHideOptns HideFullbodyPreview;
 
         // Non-User facing 
         // Not exposed via custom inspector
@@ -48,7 +51,7 @@ namespace DialogueEditor
         // Dialogue UI
         public Image DialogueBackground;
         public Image NpcIcon;
-        public Image NpcFullBody;
+        public Image NpcFullBody;   // !! Exposed via edits to original code !! //
         public TMPro.TextMeshProUGUI NameText;
         public TMPro.TextMeshProUGUI DialogueText;
         // Components
@@ -59,13 +62,14 @@ namespace DialogueEditor
         public Sprite BlankSprite;
 
         // Getter properties
-        public bool IsConversationActive
+        public bool IsAnyConvoActive
         {
             get
             {
                 return m_state != eState.NONE && m_state != eState.Off;
             }
         }
+        public Conversation CurrentConvo { get => m_conversation; }
 
         // Private
         private float m_elapsedScrollTime;
@@ -82,6 +86,26 @@ namespace DialogueEditor
         private List<UIConversationButton> m_uiOptions;
         private int m_currentSelectedIndex;
 
+        private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+        {
+            if (!NpcFullBody) return;
+
+            switch (HideFullbodyPreview)
+            {
+                case PreviewHideOptns.HideIfNull:
+                    if (!NpcFullBody.sprite)
+                        NpcFullBody.enabled = false;
+                    break;
+
+                case PreviewHideOptns.Hide:
+                    NpcFullBody.enabled = false;
+                    break;
+
+                case PreviewHideOptns.DontHide:
+                default:
+                    return;
+            }
+        });
 
         //--------------------------------------
         // Awake, Start, Destroy, Update
@@ -99,8 +123,10 @@ namespace DialogueEditor
             m_uiOptions = new List<UIConversationButton>();
 
             NpcIcon.sprite = BlankSprite;
-            NpcFullBody = GameObject.Find("NPCFullBody").GetComponent<Image>();
+            if (!NpcFullBody)   //Originally, there was no if; added to prevent redundancy (see comment on NpcFullBody)
+                NpcFullBody = GameObject.Find("NPCFullBody").GetComponent<Image>();
             NpcFullBody.sprite = BlankSprite;
+            NpcFullBody.enabled = true;
             DialogueText.text = "";
             TurnOffUI();
         }
@@ -157,8 +183,7 @@ namespace DialogueEditor
         public void StartConversation(NPCConversation conversation)
         {
             m_conversation = conversation.Deserialize();
-            if (OnConversationStarted != null)
-                OnConversationStarted.Invoke();
+            OnConversationStarted?.Invoke();
 
             TurnOnUI();
 

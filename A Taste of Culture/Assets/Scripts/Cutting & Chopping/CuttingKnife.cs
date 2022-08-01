@@ -42,10 +42,13 @@ public class CuttingKnife : MonoBehaviour
     void Update()
     {
         // Only allow for knife movement and cutting if knife can chop.
-        if (!canChop) { return; }
+        if (!canChop) return;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         rigidbodyComponent.position = mousePosition;               // Make knife move according to mouse location.
+
+        //Don't allow cutting while the player's being warned about uneven cuts (mostly to prevent minor visual jank).
+        if (outsideLinesDialogue.ConversationActive) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -56,18 +59,13 @@ public class CuttingKnife : MonoBehaviour
             {
                 lineRenderer.enabled = true;                        // Start drawing line at initial "cut location".
                 lineRenderer.SetPosition(0, cutStartPosition);
+
+                // this will turn the knife "down" on click
+                animator.SetBool("Click", true);
             }
-
-            // this will turn the knife "down" on click
-            animator.SetBool("Click", true);
         }
-
-        if (Input.GetMouseButton(0) && lineRenderer.enabled == true)
-        {
-            lineRenderer.SetPosition(1, mousePosition);             // Continue drawing line to current location of mouse.
-        }
-
-        if (Input.GetMouseButtonUp(0))
+        //If the line renderer isn't enabled, the above must've failed, so we don't need to do the following
+        else if (Input.GetMouseButtonUp(0) && lineRenderer.enabled)
         {
             cutEndPosition = mousePosition;
 
@@ -92,6 +90,11 @@ public class CuttingKnife : MonoBehaviour
 
             // this will turn the knife "up" on release"
             animator.SetBool("Click", false);
+        }
+
+        if (Input.GetMouseButton(0) && lineRenderer.enabled)
+        {
+            lineRenderer.SetPosition(1, mousePosition);             // Continue drawing line to current location of mouse.
         }
     }
 

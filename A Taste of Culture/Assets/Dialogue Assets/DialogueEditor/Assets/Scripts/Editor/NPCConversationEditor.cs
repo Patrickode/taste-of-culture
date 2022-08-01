@@ -37,7 +37,10 @@ namespace DialogueEditor
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Conversation: ", boldStyle);
+            var enableCache = GUI.enabled;
+            GUI.enabled = false;
             EditorGUILayout.TextField(serializedObject.targetObject.name, regularStyle);
+            GUI.enabled = enableCache;
             EditorGUILayout.EndHorizontal();
             serializedObject.ApplyModifiedProperties();
         }
