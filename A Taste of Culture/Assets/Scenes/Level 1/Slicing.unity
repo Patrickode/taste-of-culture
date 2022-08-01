@@ -1413,7 +1413,6 @@ MonoBehaviour:
   useIndex: 0
   nextScene: Chopping
   nextSceneIndex: 0
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   tool: {fileID: 1236782930}
 --- !u!1 &1380855856
 GameObject:
@@ -1494,7 +1493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bfe527eb47a844d90017f2a74830ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   finishedConversation: {fileID: 544922497}
   currentIngredient: 0
 --- !u!4 &1533509940
