@@ -305,6 +305,18 @@ public static class UtilFunctions
         return result;
     }
 
+    /// <summary>
+    /// Sets one channel (RGBA, 0123) of a color by <paramref name="val"/>. Optionally allows adding instead.
+    /// </summary>
+    /// <remarks>Will return the color unchanged if <paramref name="indToAdjust"/> is invalid (i&lt;0, i&gt;3).</remarks>
+    public static Color Adjust(this Color c, int indToAdjust, float val, bool addVal = false)
+    {
+        if (indToAdjust < 0 || indToAdjust > 3) return c;
+
+        c[indToAdjust] = addVal ? c[indToAdjust] + val : val;
+        return c;
+    }
+
     public static Vector3 ClampComponents(Vector3 v,
         float xMin, float xMax,
         float yMin, float yMax,
