@@ -8,6 +8,7 @@ public class HandController : MonoBehaviour
     [SerializeField] private Sprite pinchedSprite;
     [SerializeField] private Transform spiceSpawnPoint;
     [SerializeField] private GameObject crosshair;
+    [SerializeField] private float distanceTillDesynced = 0.5f;
     [SerializeField] private bool followMouseOffscreen;
     [SerializeField] private int startingSpiceOrder;
 
@@ -53,7 +54,7 @@ public class HandController : MonoBehaviour
             return;
 
         bool handSynced = Vector2.Distance(rigidbodyRef.position,
-            cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= 0.2;
+            cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= distanceTillDesynced;
 
         crosshair.SafeSetActive(handSynced);
 
