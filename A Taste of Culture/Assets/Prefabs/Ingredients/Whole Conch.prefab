@@ -147,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723fe4dade348954dbf50249850550da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientPrefab: {fileID: 1659590435992888763}
   spriteMask: {fileID: 1490022700101722497, guid: 6519d9b2930210c49b22cd6a2307079b, type: 3}
   cutWidth: 0.1
   isCuttable: 1
@@ -163,11 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648d5f15f748c9a4aafddf46b7cbe3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guidelinePrefab: {fileID: 2505119108103359393, guid: 87b42d52702bdef4db30272d4f786ec7, type: 3}
-  cutWidth: 1
-  marginOfError: 0.65
-  scaleLineWithMargin: 0
+  guidelinePrefab: {fileID: 3218999399568488294, guid: 222904fd2cd64884f9e31e93c995e4ed, type: 3}
   drawInitialGuideline: 1
+  cutWidth: 1
+  endCutPadding: -0.5
+  marginOfError: 0.65
+  scaleLineWithMargin: 1
+  alphaDecrement: 0.33333334
+  relativeDecrement: 1
 --- !u!1 &3270537869083788526
 GameObject:
   m_ObjectHideFlags: 0

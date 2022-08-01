@@ -164,8 +164,8 @@ public static class UtilFunctions
     }
 
     /// <summary>
-    /// Gets the <see cref="Bounds"/> of this renderer, gets the padding of its sprite, and makes/returns a<br/>
-    /// resized <see cref="Bounds"/> without that padding.
+    /// Gets the <see cref="Bounds"/> of this renderer, gets the padding of its sprite, and makes/returns a resized 
+    /// <see cref="Bounds"/> without<br/>that padding. (See <see cref="UnityEngine.Sprites.DataUtility.GetPadding(Sprite)"/>.)
     /// </summary>
     public static Bounds GetBoundsSansPadding(this SpriteRenderer rend, out Vector4 trimmedPadding)
     {
@@ -331,7 +331,6 @@ public static class UtilFunctions
         ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
     public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
         ClampComponents(v, min, max, min, max, min, max);
-
 
     /// <summary>
     /// Returns the closest value to <paramref name="v"/> that's outside the range (<paramref name="rangeMin"/>, 

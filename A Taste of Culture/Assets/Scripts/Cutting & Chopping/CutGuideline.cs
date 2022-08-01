@@ -10,8 +10,8 @@ public class CutGuideline : MonoBehaviour
     [Space(5)]
     [SerializeField] private float cutWidth;
     [Tooltip("Percentage of cutWidth to compare against the guideline position when determining where the last cut is. " +
-        "0 = cutWidth. 1 = cutWidth * 2.")]
-    [SerializeField] [Range(0, 1)] private float endCutPadding = 0.6f;
+        "0 = cutWidth. 1 = cutWidth * 2. -1 = nothing, i.e., collider.bounds.max.x.")]
+    [SerializeField] [Range(-1, 1)] private float endCutPadding = 0.6f;
     [SerializeField] private float marginOfError;
     [SerializeField] private bool scaleLineWithMargin;
     [Space(5)]
