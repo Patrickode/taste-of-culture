@@ -14,8 +14,8 @@ public class CircleizeEdgeCollider : MonoBehaviour
     [Tooltip("360 = a full circle. 180 = a half circle. 0 = nothing.")]
     [SerializeField] [Range(0, 360)] private int arcLength = 360;
     [ApplyButton(true)] [SerializeField] [Min(0)] private float radius = 0.5f;
-    private float radStart;
-    private float radLength;
+    private float startAngInRads;
+    private float arcLnthInRads;
 
 #pragma warning disable IDE0051, IDE0052, CS0414 // Remove unread private members
     private void OnApplyClicked(UnityEditor.SerializedProperty _) => Circleize();
@@ -28,20 +28,20 @@ public class CircleizeEdgeCollider : MonoBehaviour
     {
         if (!edgeColl || numEdges < 3 || arcLength <= 0) return;
 
-        radStart = startAngle * Mathf.Deg2Rad;
-        radLength = arcLength * Mathf.Deg2Rad;
+        startAngInRads = startAngle * Mathf.Deg2Rad;
+        arcLnthInRads = arcLength * Mathf.Deg2Rad;
 
         if (clockwise)
         {
-            radStart *= -1;
-            radLength *= -1;
+            startAngInRads *= -1;
+            arcLnthInRads *= -1;
         }
 
         //Add an extra edge if arc length is a full circle, to close the circle.
         Vector2[] points = new Vector2[numEdges + 1];
         for (int i = 0; i < numEdges; i++)
         {
-            float angle = radStart + radLength * i / numEdges;
+            float angle = startAngInRads + arcLnthInRads * i / numEdges;
             points[i] = new Vector2(
                 radius * Mathf.Cos(angle),
                 radius * Mathf.Sin(angle));
@@ -64,8 +64,8 @@ public class CircleizeEdgeCollider : MonoBehaviour
         {
             //Our last point is the end of the arcLength angle.
             points[numEdges] = new Vector2(
-                radius * Mathf.Cos(radStart + radLength),
-                radius * Mathf.Sin(radStart + radLength));
+                radius * Mathf.Cos(startAngInRads + arcLnthInRads),
+                radius * Mathf.Sin(startAngInRads + arcLnthInRads));
 
             edgeColl.useAdjacentStartPoint = false;
             edgeColl.useAdjacentEndPoint = false;
