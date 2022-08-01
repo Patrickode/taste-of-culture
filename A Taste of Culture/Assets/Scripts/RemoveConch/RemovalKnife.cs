@@ -22,6 +22,11 @@ public class RemovalKnife : RemovalTool
         }
     }
 
+    public float GetProgress()
+    {
+        return unstickProgress / 5.0f;
+    }
+
     public override void Use()
     {
         if (properArea)

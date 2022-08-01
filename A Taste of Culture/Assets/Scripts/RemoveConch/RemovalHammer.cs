@@ -27,6 +27,11 @@ public class RemovalHammer : RemovalTool
         } 
     }
 
+    public float GetProgress()
+    {
+        return holeProgress / 1000f;
+    }
+
     public override void Use()
     {
         if (properArea)
