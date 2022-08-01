@@ -62,13 +62,14 @@ namespace DialogueEditor
         public Sprite BlankSprite;
 
         // Getter properties
-        public bool IsConversationActive
+        public bool IsAnyConvoActive
         {
             get
             {
                 return m_state != eState.NONE && m_state != eState.Off;
             }
         }
+        public Conversation CurrentConvo { get => m_conversation; }
 
         // Private
         private float m_elapsedScrollTime;
@@ -182,8 +183,7 @@ namespace DialogueEditor
         public void StartConversation(NPCConversation conversation)
         {
             m_conversation = conversation.Deserialize();
-            if (OnConversationStarted != null)
-                OnConversationStarted.Invoke();
+            OnConversationStarted?.Invoke();
 
             TurnOnUI();
 

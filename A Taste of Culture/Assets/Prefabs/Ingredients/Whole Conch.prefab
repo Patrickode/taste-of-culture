@@ -165,7 +165,7 @@ MonoBehaviour:
   guidelinePrefab: {fileID: 3218999399568488294, guid: 222904fd2cd64884f9e31e93c995e4ed, type: 3}
   drawInitialGuideline: 1
   cutWidth: 1
-  endCutPadding: -0.5
+  endCutPadding: -0.4
   marginOfError: 0.65
   scaleLineWithMargin: 1
   alphaDecrement: 0.33333334
