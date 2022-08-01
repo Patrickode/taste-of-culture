@@ -403,11 +403,12 @@ MonoBehaviour:
   OptionImage: {fileID: 21300000, guid: bf566e80557acbc45b9a695fcaa25327, type: 3}
   OptionImageSliced: 1
   AllowMouseInteraction: 1
+  HideFullbodyPreview: 1
   DialoguePanel: {fileID: 3900108755395677323}
   OptionsPanel: {fileID: 3852935656990629450}
   DialogueBackground: {fileID: 3900108755395677320}
   NpcIcon: {fileID: 3900108755397112056}
-  NpcFullBody: {fileID: 0}
+  NpcFullBody: {fileID: 1031479177455960462}
   NameText: {fileID: 6116449485086562217}
   DialogueText: {fileID: 3900108754347413305}
   AudioPlayer: {fileID: 3900108755062758274}
