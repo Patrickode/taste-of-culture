@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiceBowl : MonoBehaviour
 {
-    public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
+    public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt, Cardamon, GaramMasala };
 
     [SerializeField] TypeOfSpice spiceCategory;
     [Tooltip("The max distance a spice's center can be from this bowl's center and still be destroyed (put back " +
