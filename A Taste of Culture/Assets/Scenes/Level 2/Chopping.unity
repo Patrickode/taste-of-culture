@@ -1024,6 +1024,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4148047150818633038, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Color.b
+      value: 0.12284136
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150818633038, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150818633038, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4148047150881439656, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
       propertyPath: m_Name
       value: Chop Progress Bar
