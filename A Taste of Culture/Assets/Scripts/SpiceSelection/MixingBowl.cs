@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class MixingBowl : MonoBehaviour
 {
+    [SerializeField] private bool canAddSpicesOnStart = true;
+    [SerializeField] private bool onlyAddOnControlsActivated;
     [SerializeField] private GameObject[] hideUntilSpiceAdded;
+
+    public bool CanAddSpice { get; private set; }
 
     // Flavor Profile values
     int BitternessValue;
@@ -16,16 +20,30 @@ public class MixingBowl : MonoBehaviour
     // Used to toggle reset button after first spice added to bowl
     bool firstSpiceAdded;
 
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        DialogueController.ToggleControls += OnControlsToggle;
+    }
+    private void OnDisable()
+    {
+        DialogueController.ToggleControls -= OnControlsToggle;
+    }
+    private void OnControlsToggle(bool active)
+    {
+        if (!onlyAddOnControlsActivated) return;
+        CanAddSpice = active;
+    }
+
     void Start()
     {
+        CanAddSpice = canAddSpicesOnStart;
         ToggleAllActive(false, hideUntilSpiceAdded);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Spice spice = other.gameObject.GetComponent<Spice>();
-        if (spice == null) { return; }
+        //No need to continue if we can't add spice or the collision wasn't with a spice
+        if (!CanAddSpice || !other.gameObject.TryGetComponent(out Spice spice)) return;
 
         // Toggle reset button
         if (!firstSpiceAdded && other.gameObject.CompareTag("Spice"))
@@ -88,8 +106,7 @@ public class MixingBowl : MonoBehaviour
     private void ToggleAllActive(bool active, params GameObject[] objsToToggle)
     {
         foreach (var obj in objsToToggle)
-            if (obj)
-                obj.SetActive(active);
+            obj.SafeSetActive(active);
     }
 
     private void SaveFavorProfile()
