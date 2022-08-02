@@ -29,6 +29,11 @@ namespace DialogueEditor
 
         // Getters
         public int Version { get { return saveVersion; } }
+        public bool ConversationActive
+        {
+            get => lastDeserialize != null && ConversationManager.Instance.IsAnyConvoActive 
+                && ConversationManager.Instance.CurrentConvo == lastDeserialize;
+        }
 
         // Serialized data
         [SerializeField] public int CurrentIDCounter = 1;
@@ -50,6 +55,7 @@ namespace DialogueEditor
         // Runtime vars
         public UnityEngine.Events.UnityEvent Event;
         public List<EditableParameter> ParameterList; // Serialized into the json string
+        private Conversation lastDeserialize = null;
 
 
 
@@ -133,8 +139,9 @@ namespace DialogueEditor
             // Deserialize an editor-version (containing all info) that 
             // we will use to construct the user-facing Conversation data structure. 
             EditableConversation ec = this.DeserializeForEditor();
+            lastDeserialize = ConstructConversationObject(ec);
 
-            return ConstructConversationObject(ec);
+            return lastDeserialize;
         }
 
         public EditableConversation DeserializeForEditor()

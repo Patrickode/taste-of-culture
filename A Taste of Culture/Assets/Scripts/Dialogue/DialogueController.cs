@@ -11,7 +11,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private string nextScene;
     [SerializeField] private int nextSceneIndex;
     [Space(5)]
-    [SerializeField] private StringVariable protein;
+    //[SerializeField] private StringVariable protein;
     [SerializeField] private GameObject tool;
 
     public static System.Action<bool> ToggleControls;
@@ -65,7 +65,7 @@ public class DialogueController : MonoBehaviour
                 $"but that index is out of range! (convos.Length = {convos.Length})");
     }
 
-    public string getProtein()
+    /*public string getProtein()
     {
         return protein.value;
     }
@@ -73,7 +73,7 @@ public class DialogueController : MonoBehaviour
     public void setProtein(string proteinString)
     {
         protein.SetValue(proteinString);
-    }
+    }*/
 
     public void ConversationEndNextScene()
     {
@@ -84,6 +84,9 @@ public class DialogueController : MonoBehaviour
     {
         ConversationManager.OnConversationEnded += EnableControls;
     }
+
+    public void SaveChoice_Tofu() => DataManager.SaveChoice(DataManager.ScnIndToLvlID(SceneManager.GetActiveScene()), ChoiceFlag.Tofu);
+    public void SaveChoice_Chicken() => DataManager.SaveChoice(DataManager.ScnIndToLvlID(SceneManager.GetActiveScene()), ChoiceFlag.Chicken);
 
     public void EvtOnConversationEnd(UnityEngine.Events.UnityEvent evt)
     {

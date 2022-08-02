@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-    [SerializeField] Sprite openSprite;
-    [SerializeField] Sprite pinchedSprite;
-    [SerializeField] Transform spiceSpawnPoint;
-    [SerializeField] bool followMouseOffscreen;
-    [SerializeField] int startingSpiceOrder;
+    [SerializeField] private Sprite openSprite;
+    [SerializeField] private Sprite pinchedSprite;
+    [SerializeField] private Transform spiceSpawnPoint;
+    [SerializeField] private GameObject crosshair;
+    [SerializeField] private float distanceTillDesynced = 0.5f;
+    [SerializeField] private bool followMouseOffscreen;
+    [SerializeField] private int startingSpiceOrder;
 
-    SpriteRenderer spriteRenderer;
-    Rigidbody2D rigidbodyRef;
-    Camera cachedCam;
-    int layerDropCounter;
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rigidbodyRef;
+    private Camera cachedCam;
+    private int layerDropCounter;
 
     private SpriteRenderer spicePrefab;
     public SpriteRenderer SpicePrefab { set { spicePrefab = value; } }
@@ -52,7 +54,9 @@ public class HandController : MonoBehaviour
             return;
 
         bool handSynced = Vector2.Distance(rigidbodyRef.position,
-            cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= 0.1;
+            cachedCam.ScreenToWorldPoint(Input.mousePosition)) <= distanceTillDesynced;
+
+        crosshair.SafeSetActive(handSynced);
 
         //If the mouse and hand are desynced for whatever reason, don't pick/drop any spice
         if (handSynced && Input.GetMouseButtonDown(0))

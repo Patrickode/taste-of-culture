@@ -194,7 +194,7 @@ public static class UtilFunctions
 
     /// <summary>
     /// Uses <see cref="RectTransform.GetWorldCorners(Vector3[])"/> to create and return a <see cref="Bounds"/>.<br/>
-    /// Inspired by <see href="http://answers.unity.com/answers/1628573/view.html"/>.
+    /// Lightly edited from <see href="http://answers.unity.com/answers/1628573/view.html"/>.
     /// </summary>
     public static Bounds GetWorldBounds(this RectTransform rect)
     {
@@ -295,6 +295,9 @@ public static class UtilFunctions
     public static bool EqualWithinRange(this float subject, float target, float range)
         => subject >= target - range && subject <= target + range;
 
+    public static bool EqualWithinRange(this Vector3 subject, Vector3 target, float range)
+        => (target - subject).sqrMagnitude <= range * range;
+
     /// <summary>
     /// Returns a Vector3 where XYZ = HSV, via <see cref="Color.RGBToHSV(Color, out float, out float, out float)"/>.
     /// </summary>
@@ -328,7 +331,10 @@ public static class UtilFunctions
         return v;
     }
     public static Vector3 ClampComponents(Vector3 v, Vector3 minComponents, Vector3 maxComponents) =>
-        ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
+        ClampComponents(v,
+            minComponents.x, maxComponents.x,
+            minComponents.y, maxComponents.y,
+            minComponents.z, maxComponents.z);
     public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
         ClampComponents(v, min, max, min, max, min, max);
 
@@ -355,7 +361,8 @@ public static class UtilFunctions
     /// <summary>
     /// Scales this transform so that it's sized as if its parent had a scale of (1,1,1).
     /// </summary>
-    /// <param name="parentLevel">The number of parents to go up by. 0 = parent, 1 = grandparent (parent.parent), etc.</param>
+    /// <param name="parentLevel">The number of parents to go up by. 
+    /// 0 = parent, 1 = grandparent (parent.parent), etc.</param>
     public static void NegateParentScale(this Transform tform, int parentLevel = 0)
     {
         Transform targetParent = tform.parent;
@@ -371,11 +378,15 @@ public static class UtilFunctions
     }
 
     /// <summary>
-    /// Lerps between <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>, based on <paramref name="t"/>.<br/>
+    /// Lerps between <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>, based
+    /// on <paramref name="t"/>.<br/>
     /// Optionally allows setting the mid point's "time" [0-1] to something other than 0.5.
     /// </summary>
-    /// <param name="midTime"><paramref name="mid"/>'s "position" along the 0-1 curve between 
-    /// <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>.<br/>0.5 = equal distance to both end points.</param>
+    /// <param name="midTime">
+    ///     <paramref name="mid"/>'s "position" along the 0-1 curve between 
+    ///     <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>.<br/>
+    ///     0.5 = equal distance to both end points.
+    /// </param>
     public static float Lerp3Point(float from, float mid, float to, float t, float midTime = 0.5f)
     {
         if (t <= midTime)
@@ -407,6 +418,52 @@ public static class UtilFunctions
         return false;
     }
 
+    /// <summary>
+    /// Takes a collection and, in the order of the collection, adds all distinct elements 
+    /// of it to <paramref name="destination"/>.
+    /// </summary>
+    /// <param name="clearDest">Whether to <see cref="ICollection{T}.Clear"/> 
+    /// <paramref name="destination"/> before adding to it.</param>
+    public static void DistinctNonAlloc<T>(IEnumerable<T> source, IList<T> destination, bool clearDest = false)
+    {
+        if (clearDest)
+            destination.Clear();
+
+        foreach (var item in source)
+        {
+            if (!destination.Contains(item))
+            {
+                destination.Add(item);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Takes an ordered collection and, in the order of the collection, adds its elements to 
+    /// <paramref name="destination"/>, sans any elements identical<br/>to the one immediately before.
+    /// </summary>
+    /// <param name="clearDest">Whether to <see cref="ICollection{T}.Clear"/> 
+    /// <paramref name="destination"/> before adding to it.</param>
+    public static void RemoveAdjacentDuplicatesNonAlloc<T>(
+        IList<T> source, IList<T> destination, bool clearDest = true)
+    {
+        if (clearDest)
+            destination.Clear();
+
+        for (int i = 0; i < source.Count; i++)
+        {
+            if (i < 1 || !EquCompEquals(source[i - 1], source[i]))
+            {
+                destination.Add(source[i]);
+            }
+        }
+    }
+
+    /// <summary>
+    /// A shorthand function for <see cref="EqualityComparer{T}.Default.Equals(T, T)"/>.
+    /// </summary>
+    public static bool EquCompEquals<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
+    
     public static bool CompareTagInParentsAndChildren(Transform subject, string tag,
         int levelsUp = int.MaxValue, int levelsDown = int.MaxValue,
         bool checkSelf = true, bool parentsFirst = true)

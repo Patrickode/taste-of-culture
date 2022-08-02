@@ -128,6 +128,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4390804124029773825, guid: 74b1a6e7e065f9f4ebc58b02b7cb66ae, type: 3}
   m_PrefabInstance: {fileID: 735263567}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &33844398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 969227755550143345, guid: 74b1a6e7e065f9f4ebc58b02b7cb66ae, type: 3}
+  m_PrefabInstance: {fileID: 735263567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d4c278af0d24b44b36acaa0a758fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &74386170
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentIDCounter: 2
   json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":362.900024,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"ehhh
-    you missed, pal","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Placeholdeman","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
+    you missed, pal","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Placeholderman","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0}]}'
   saveVersion: 110
   IDToStartAt: -1
   DefaultName: Example
@@ -620,8 +631,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855466472}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8465319, y: -0.48815495, z: 10.482896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1284742396}
@@ -945,7 +956,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2382c27197e11be4bae9bd045dd85640, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58a35969948607a40bf26c76abdcdca2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -995,7 +1006,6 @@ MonoBehaviour:
   endConvo: {fileID: 0}
   endConvoTriggersTransition: 0
   nextSceneIndex: 8
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   desiredProtein: Conch
 --- !u!4 &1112600301
 Transform:
@@ -1021,11 +1031,11 @@ PrefabInstance:
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: collider1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1502974765}
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: collider2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 33844398}
     - target: {fileID: 6750727499802787685, guid: 0930bf5a1e91997419652916d1f2f865, type: 3}
       propertyPath: slicingSFX
       value: 
@@ -1279,6 +1289,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1502974765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5409222682906192723, guid: 74b1a6e7e065f9f4ebc58b02b7cb66ae, type: 3}
+  m_PrefabInstance: {fileID: 735263567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d4c278af0d24b44b36acaa0a758fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1424762054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1504,7 +1525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981752606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8465319, y: 0.48815495, z: -10.482896}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 855466474}

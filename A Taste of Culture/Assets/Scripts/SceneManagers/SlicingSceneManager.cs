@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SlicingSceneManager : BaseIngredientSceneManager
 {
-    [Header("Slicing Scene Manager Field")]
-    public StringVariable protein;
+    [Header("Slicing Scene Manager Fields")]
+    //public StringVariable protein;
     //public GameEvent choseChicken;
     //public GameEvent choseTofu;
 
@@ -18,16 +18,18 @@ public class SlicingSceneManager : BaseIngredientSceneManager
         string selectedProtein = "";
         string otherProtein = "";   // Used to deactivate alternative protein in cases where player is given a choice in protein
 
-        if (protein.value == null)
+        //if(protein.value == null)
+        if(DataManager.GetLevelData(LevelID.Makhani) is LevelData data)
         {
-            if (protein.value == "chicken")
+            //if (protein.value == "chicken")
+            if ((ChoiceFlag.Chicken & data.choices) == ChoiceFlag.Chicken)
             {
                 //choseChicken.Raise();
 
                 selectedProtein = "Raw Chicken";
                 otherProtein = "Tofu Block";
             }
-            else if (protein.value == "tofu")
+            else /*if (protein.value == "tofu")*/
             {
                 //choseTofu.Raise();
 

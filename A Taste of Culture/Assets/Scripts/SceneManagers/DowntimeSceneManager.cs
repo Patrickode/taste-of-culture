@@ -7,20 +7,21 @@ using DialogueEditor;
 
 public class DowntimeSceneManager : MonoBehaviour
 {
+    //[SerializeField] private StringVariable protein;
+    [SerializeField] private GameObject flavorProfileObj;
     public GameObject[] backgrounds;
-    private FlavorProfile flavorPfile;
-    [SerializeField] private StringVariable protein;
 
     public static System.Action AnimFinished;
 
     void Start()
     {
-        flavorPfile = backgrounds[10].GetComponentInChildren<FlavorProfile>();
-
         foreach (var bg in backgrounds)
             bg.SetActive(false);
         backgrounds[backgrounds.Length - 1].SetActive(true);
-        ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
+        
+        //ConversationManager.Instance.SetBool("UsedChicken", protein.name.Equals("chicken"));
+        ConversationManager.Instance.SetBool("UsedChicken", DataManager.GetLevelData(LevelID.Makhani) is LevelData data 
+            && (ChoiceFlag.Chicken & data.choices) == ChoiceFlag.Chicken);
 
         AddOnions();
         CookOnions();
@@ -119,8 +120,10 @@ public class DowntimeSceneManager : MonoBehaviour
 
     public void ReturnAfterPlating()
     {
-        Coroutilities.DoAfterYielder(this, () =>
+        Coroutilities.DoAfterYielder(this,
+            () =>
             {
+                flavorProfileObj.SafeSetActive(false);
                 backgrounds[10].SetActive(false);
                 backgrounds[11].SetActive(true);
                 MarkAnimFinished();
@@ -133,8 +136,7 @@ public class DowntimeSceneManager : MonoBehaviour
         yield return StartCoroutine(TransitionAndWait(false, 2));
 
         backgrounds[10].SetActive(true);
-        if (flavorPfile)
-            flavorPfile.VisualizeFlavors();
+        flavorProfileObj.SafeSetActive(true);
 
         yield return new WaitForSeconds(1.5f);
 
