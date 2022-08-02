@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiceBowl : MonoBehaviour
 {
-    public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt };
+    public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt, Cardamon, GaramMasala };
 
     [SerializeField] TypeOfSpice spiceCategory;
     [Tooltip("The max distance a spice's center can be from this bowl's center and still be destroyed (put back " +
@@ -13,7 +13,7 @@ public class SpiceBowl : MonoBehaviour
     [SerializeField] Collider2D triggerRef;
     [Space(5)]
     [SerializeField] SpriteRenderer pinchedSpicePrefab;
-    public CookingDialogueTrigger dialogueTrigger;
+    //public CookingDialogueTrigger dialogueTrigger;
     // public GameObject dialogue;
 
     HandController hand;
@@ -99,8 +99,7 @@ public class SpiceBowl : MonoBehaviour
             //Note that this spice bowl is the owner of the tooltip we're spawning
             TooltipOwnerStateChange?.Invoke(this);
             Coroutilities.TryStopCoroutine(this, ref DisableTooltipCorout);
-
-            dialogueTrigger.TriggerDialogue();
+            Tooltip.ShowTooltip_Static(spiceCategory.ToString());
         }
     }
 
@@ -124,7 +123,7 @@ public class SpiceBowl : MonoBehaviour
     {
         if (CanDisplayTooltip && spiceBowlsHovered < 1)
         {
-            dialogueTrigger.DisableDialogue();
+            Tooltip.HideTooltip_Static();
         }
     }
 }

@@ -164,35 +164,37 @@ public static class UtilFunctions
     }
 
     /// <summary>
-    /// Gets the <see cref="Bounds"/> of this renderer, gets the padding of its sprite, and makes/returns a<br/>
-    /// resized <see cref="Bounds"/> without that padding.
+    /// Gets the <see cref="Bounds"/> of this renderer, gets the padding of its sprite, and makes/returns a resized 
+    /// <see cref="Bounds"/> without<br/>that padding. (See <see cref="UnityEngine.Sprites.DataUtility.GetPadding(Sprite)"/>.)
     /// </summary>
-    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend)
+    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend, out Vector4 trimmedPadding)
     {
-        if (!rend.sprite)
-            return rend.bounds;
+        trimmedPadding = Vector4.zero;
+        if (!rend.sprite) return rend.bounds;
 
-        Vector4 unitPadding = UnityEngine.Sprites.DataUtility.GetPadding(rend.sprite) / rend.sprite.pixelsPerUnit;
-        unitPadding = Vector4.Scale(unitPadding, new Vector4(
+        trimmedPadding = UnityEngine.Sprites.DataUtility.GetPadding(rend.sprite) / rend.sprite.pixelsPerUnit;
+        trimmedPadding = Vector4.Scale(trimmedPadding, new Vector4(
             rend.transform.localScale.x, rend.transform.localScale.y,
             rend.transform.localScale.x, rend.transform.localScale.y));
 
         //Subtract the combined horizontal/vertical padding from size, then shift the center by half the amount of each side
         Bounds newBounds = rend.bounds;
-        newBounds.size -= Vector3.right * (unitPadding.x + unitPadding.z);
-        newBounds.center += Vector3.right * (unitPadding.x / 2)
-            + Vector3.left * (unitPadding.z / 2);
+        newBounds.size -= Vector3.right * (trimmedPadding.x + trimmedPadding.z);
+        newBounds.center += Vector3.right * (trimmedPadding.x / 2)
+            + Vector3.left * (trimmedPadding.z / 2);
 
-        newBounds.size -= Vector3.up * (unitPadding.y + unitPadding.w);
-        newBounds.center += Vector3.up * (unitPadding.y / 2)
-            + Vector3.down * (unitPadding.w / 2);
+        newBounds.size -= Vector3.up * (trimmedPadding.y + trimmedPadding.w);
+        newBounds.center += Vector3.up * (trimmedPadding.y / 2)
+            + Vector3.down * (trimmedPadding.w / 2);
 
         return newBounds;
     }
+    /// <inheritdoc cref="GetBoundsSansPadding(SpriteRenderer, out Vector4)"/>
+    public static Bounds GetBoundsSansPadding(this SpriteRenderer rend) => GetBoundsSansPadding(rend, out _);
 
     /// <summary>
     /// Uses <see cref="RectTransform.GetWorldCorners(Vector3[])"/> to create and return a <see cref="Bounds"/>.<br/>
-    /// Inspired by <see href="http://answers.unity.com/answers/1628573/view.html"/>.
+    /// Lightly edited from <see href="http://answers.unity.com/answers/1628573/view.html"/>.
     /// </summary>
     public static Bounds GetWorldBounds(this RectTransform rect)
     {
@@ -293,6 +295,9 @@ public static class UtilFunctions
     public static bool EqualWithinRange(this float subject, float target, float range)
         => subject >= target - range && subject <= target + range;
 
+    public static bool EqualWithinRange(this Vector3 subject, Vector3 target, float range)
+        => (target - subject).sqrMagnitude <= range * range;
+
     /// <summary>
     /// Returns a Vector3 where XYZ = HSV, via <see cref="Color.RGBToHSV(Color, out float, out float, out float)"/>.
     /// </summary>
@@ -301,6 +306,18 @@ public static class UtilFunctions
         Vector3 result;
         Color.RGBToHSV(c, out result.x, out result.y, out result.z);
         return result;
+    }
+
+    /// <summary>
+    /// Sets one channel (RGBA, 0123) of a color by <paramref name="val"/>. Optionally allows adding instead.
+    /// </summary>
+    /// <remarks>Will return the color unchanged if <paramref name="indToAdjust"/> is invalid (i&lt;0, i&gt;3).</remarks>
+    public static Color Adjust(this Color c, int indToAdjust, float val, bool addVal = false)
+    {
+        if (indToAdjust < 0 || indToAdjust > 3) return c;
+
+        c[indToAdjust] = addVal ? c[indToAdjust] + val : val;
+        return c;
     }
 
     public static Vector3 ClampComponents(Vector3 v,
@@ -314,10 +331,12 @@ public static class UtilFunctions
         return v;
     }
     public static Vector3 ClampComponents(Vector3 v, Vector3 minComponents, Vector3 maxComponents) =>
-        ClampComponents(v, minComponents.x, maxComponents.x, minComponents.y, maxComponents.y, minComponents.z, maxComponents.z);
+        ClampComponents(v,
+            minComponents.x, maxComponents.x,
+            minComponents.y, maxComponents.y,
+            minComponents.z, maxComponents.z);
     public static Vector3 ClampComponents(Vector3 v, float min, float max) =>
         ClampComponents(v, min, max, min, max, min, max);
-
 
     /// <summary>
     /// Returns the closest value to <paramref name="v"/> that's outside the range (<paramref name="rangeMin"/>, 
@@ -342,7 +361,8 @@ public static class UtilFunctions
     /// <summary>
     /// Scales this transform so that it's sized as if its parent had a scale of (1,1,1).
     /// </summary>
-    /// <param name="parentLevel">The number of parents to go up by. 0 = parent, 1 = grandparent (parent.parent), etc.</param>
+    /// <param name="parentLevel">The number of parents to go up by. 
+    /// 0 = parent, 1 = grandparent (parent.parent), etc.</param>
     public static void NegateParentScale(this Transform tform, int parentLevel = 0)
     {
         Transform targetParent = tform.parent;
@@ -358,11 +378,15 @@ public static class UtilFunctions
     }
 
     /// <summary>
-    /// Lerps between <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>, based on <paramref name="t"/>.<br/>
+    /// Lerps between <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>, based
+    /// on <paramref name="t"/>.<br/>
     /// Optionally allows setting the mid point's "time" [0-1] to something other than 0.5.
     /// </summary>
-    /// <param name="midTime"><paramref name="mid"/>'s "position" along the 0-1 curve between 
-    /// <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>.<br/>0.5 = equal distance to both end points.</param>
+    /// <param name="midTime">
+    ///     <paramref name="mid"/>'s "position" along the 0-1 curve between 
+    ///     <paramref name="from"/>-&gt;<paramref name="mid"/>-&gt;<paramref name="to"/>.<br/>
+    ///     0.5 = equal distance to both end points.
+    /// </param>
     public static float Lerp3Point(float from, float mid, float to, float t, float midTime = 0.5f)
     {
         if (t <= midTime)
@@ -393,4 +417,102 @@ public static class UtilFunctions
 
         return false;
     }
+
+    /// <summary>
+    /// Takes a collection and, in the order of the collection, adds all distinct elements 
+    /// of it to <paramref name="destination"/>.
+    /// </summary>
+    /// <param name="clearDest">Whether to <see cref="ICollection{T}.Clear"/> 
+    /// <paramref name="destination"/> before adding to it.</param>
+    public static void DistinctNonAlloc<T>(IEnumerable<T> source, IList<T> destination, bool clearDest = false)
+    {
+        if (clearDest)
+            destination.Clear();
+
+        foreach (var item in source)
+        {
+            if (!destination.Contains(item))
+            {
+                destination.Add(item);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Takes an ordered collection and, in the order of the collection, adds its elements to 
+    /// <paramref name="destination"/>, sans any elements identical<br/>to the one immediately before.
+    /// </summary>
+    /// <param name="clearDest">Whether to <see cref="ICollection{T}.Clear"/> 
+    /// <paramref name="destination"/> before adding to it.</param>
+    public static void RemoveAdjacentDuplicatesNonAlloc<T>(
+        IList<T> source, IList<T> destination, bool clearDest = true)
+    {
+        if (clearDest)
+            destination.Clear();
+
+        for (int i = 0; i < source.Count; i++)
+        {
+            if (i < 1 || !EquCompEquals(source[i - 1], source[i]))
+            {
+                destination.Add(source[i]);
+            }
+        }
+    }
+
+    /// <summary>
+    /// A shorthand function for <see cref="EqualityComparer{T}.Default.Equals(T, T)"/>.
+    /// </summary>
+    public static bool EquCompEquals<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
+    
+    public static bool CompareTagInParentsAndChildren(Transform subject, string tag,
+        int levelsUp = int.MaxValue, int levelsDown = int.MaxValue,
+        bool checkSelf = true, bool parentsFirst = true)
+    {
+        if (parentsFirst)
+        {
+            if (CompareTagInParents(subject, tag, levelsUp, checkSelf)) return true;
+            if (CompareTagInChildren(subject, tag, levelsDown, false)) return true;
+        }
+        else
+        {
+            if (CompareTagInChildren(subject, tag, levelsDown, checkSelf)) return true;
+            if (CompareTagInParents(subject, tag, levelsUp, false)) return true;
+        }
+
+        return false;
+    }
+
+    public static bool CompareTagInParents(Transform subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+    {
+        if (checkSelf && subject.CompareTag(tag)) return true;
+
+        //Get the parent of subject. Then, so long as there are parents (and we haven't gone past the number of
+        //levels specified), CompareTag on those parents.
+        var next = subject.parent;
+        while (next && levels > 0)
+        {
+            if (next.CompareTag(tag)) return true;
+
+            next = next.parent;
+            levels--;
+        }
+
+        return false;
+    }
+    public static bool CompareTagInParents(Component subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+        => CompareTagInParents(subject.transform, tag, levels, checkSelf);
+
+    public static bool CompareTagInChildren(Transform subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+    {
+        if (checkSelf && subject.CompareTag(tag)) return true;
+        if (levels < 1) return false;
+
+        //Compare the tags on each child. If this is the last level (level <= 1), the recursion won't continue inside these checks.
+        foreach (Transform child in subject)
+            if (CompareTagInChildren(child, tag, levels - 1, true)) return true;
+
+        return false;
+    }
+    public static bool CompareTagInChildren(Component subject, string tag, int levels = int.MaxValue, bool checkSelf = true)
+        => CompareTagInChildren(subject.transform, tag, levels, checkSelf);
 }

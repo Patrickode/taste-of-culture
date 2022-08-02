@@ -41,9 +41,9 @@ public class MixingBowl : MonoBehaviour
         SaltinessValue += spice.Saltiness;
 
         Debug.Log($"<color=#888>{name}: Added spice \"{spice.name}\" with flavor profile " +
-            $"(Bit: {spice.Bitterness}, Sp: {spice.Spiciness} " +
+            $"(Bi: {spice.Bitterness}, Sp: {spice.Spiciness} " +
             $"Sw: {spice.Sweetness}, Sa: {spice.Saltiness}).</color>\n" +
-            $"\t<color=#777>Total profile is now (Bit: {BitternessValue}, Sp: {SpicinessValue}, " +
+            $"\t<color=#777>Total profile is now (Bi: {BitternessValue}, Sp: {SpicinessValue}, " +
             $"Sw: {SweetnessValue}, Sa: {SaltinessValue})</color>");
     }
 
@@ -93,15 +93,15 @@ public class MixingBowl : MonoBehaviour
     }
 
     private void SaveFavorProfile()
-    {              
+    {
         FlavorProfileData flavorData = FlavorProfileData.Instance;
 
-        flavorData.Bitterness = BitternessValue;
-        flavorData.Spiciness = SpicinessValue;
-        flavorData.Sweetness = SweetnessValue;
-        flavorData.Saltiness = SaltinessValue;
+        flavorData.AddFlavors(
+            (FlavorType.Bitterness, BitternessValue), (FlavorType.Spiciness, SpicinessValue),
+            (FlavorType.Sweetness, SweetnessValue), (FlavorType.Saltiness, SaltinessValue));
 
-        Debug.Log("Saved flavor profile: " + $"(Bit: {flavorData.Bitterness}, Sp: {flavorData.Spiciness}, " +
-            $"Sw: {flavorData.Sweetness}, Sa: {flavorData.Saltiness})");
+        Debug.Log($"Saved flavor profile: (" +
+            $"Bi: {flavorData[FlavorType.Bitterness]}, Sp: {flavorData[FlavorType.Spiciness]}, " +
+            $"Sw: {flavorData[FlavorType.Sweetness]}, Sa: {flavorData[FlavorType.Saltiness]})");
     }
-} 
+}

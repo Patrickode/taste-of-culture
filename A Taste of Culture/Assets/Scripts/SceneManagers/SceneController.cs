@@ -1,3 +1,4 @@
+using DialogueEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] int nextSceneIndex = -1;
-    public CookingSceneManager sceneManager;
+    //[SerializeField] int nextSceneIndex = -1;
     // [SerializeField] float applauseDelay = 0.5f;
     // [SerializeField] float sceneTransitionDelay = 3f;
-    public StringVariable protein;
-    public GameEvent choseChicken;
-    public GameEvent choseTofu;
+    //public StringVariable protein;
+    //public GameEvent choseChicken;
+    //public GameEvent choseTofu;
+    public NPCConversation finishedConversation;
 
     public enum Ingredient { Protein, Onion, Tomato, Spices };
 
@@ -40,15 +41,17 @@ public class SceneController : MonoBehaviour
             tomatoInstruction = GameObject.Find("Tomato Instruction");
         }
 
-        if (protein.value == "chicken")
+        //if (protein.value == "chicken")
+        if (DataManager.GetLevelData(LevelID.Makhani) is LevelData data
+            && (ChoiceFlag.Chicken & data.choices) == ChoiceFlag.Chicken)
         {
-            choseChicken.Raise();
+            //choseChicken.Raise();
 
             ActivateProtein("Raw Chicken", "Tofu Block");
         }
-        else if (protein.value == "tofu")
+        else /*if (protein.value == "tofu")*/
         {
-            choseTofu.Raise();
+            //choseTofu.Raise();
 
             ActivateProtein("Tofu Block", "Raw Chicken");
         }
@@ -60,8 +63,8 @@ public class SceneController : MonoBehaviour
         // If ingredient is onion, then disable the tomato gameobject
         if (currentIngredient == Ingredient.Onion)
         {
-            if (tomato != null) { tomato.SetActive(false); }
-            if (tomatoInstruction != null) { tomatoInstruction.SetActive(false); }
+            if (tomato) { tomato.SetActive(false); }
+            if (tomatoInstruction) { tomatoInstruction.SetActive(false); }
         }
     }
 
@@ -71,13 +74,13 @@ public class SceneController : MonoBehaviour
         // if(currentProtein != null) { currentProtein.SetActive(true); } 
 
         GameObject proteinToDeactivate = GameObject.Find(otherProtein);
-        if (proteinToDeactivate != null) { proteinToDeactivate.SetActive(false); }
+        if (proteinToDeactivate) { proteinToDeactivate.SetActive(false); }
 
         CuttingKnife knife = FindObjectOfType<CuttingKnife>();
-        if (knife != null && currentProtein != null)
+        if (knife && currentProtein)
         {
-            knife.collider1 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<IngredientCollider>();
-            knife.collider2 = currentProtein.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<IngredientCollider>();
+            knife.collider1 = currentProtein.transform.GetChild(0).GetChild(0).GetComponent<IngredientCollider>();
+            knife.collider2 = currentProtein.transform.GetChild(0).GetChild(1).GetComponent<IngredientCollider>();
         }
     }
 
@@ -94,39 +97,27 @@ public class SceneController : MonoBehaviour
         if (currentIngredient == Ingredient.Onion)
         {
             yield return new WaitForSeconds(1f);
-            if (onion != null) { onion.SetActive(false); }
-            if (onionInstruction != null) { onionInstruction.SetActive(false); }
+            if (onion) { onion.SetActive(false); }
+            if (onionInstruction) { onionInstruction.SetActive(false); }
 
             GameObject spriteMask = GameObject.Find("Chunks Sprite Mask(Clone)");
-            if (spriteMask != null) { GameObject.Destroy(spriteMask); }
+            if (spriteMask) { Destroy(spriteMask); }
 
-            if (tomato != null)
+            if (tomato)
             {
                 // Debug.Log("Found Tomato!");
                 tomato.SetActive(true);
                 currentIngredient = Ingredient.Tomato;
             }
 
-            if (tomatoInstruction != null) { tomatoInstruction.SetActive(true); }
+            if (tomatoInstruction) { tomatoInstruction.SetActive(true); }
 
             yield break;
         }
 
         else
         {
-            sceneManager.FinishedSliceOrSpice();
-            // if(currentIngredient == Ingredient.Chicken || currentIngredient == Ingredient.Tofu)
-            // {
-            //     sceneManager.GetComponent<CookingSceneManager>().FinishedCutting();
-            // }
-            // else 
-            // { 
-            //     /// TODO: Disable hand in spice selection...
-            //     Debug.Log("Done selecting spices");
-            // }
-            yield return new WaitForSeconds(5f);
-
-            Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);
+            ConversationManager.Instance.StartConversation(finishedConversation);
         }
     }
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class BaseIngredientSceneManager : MonoBehaviour
 {
+    [Header("Base Ingr Scene Manager Fields")]
+    [SerializeField] DialogueEditor.NPCConversation endConvo = null;
+    [SerializeField] bool endConvoTriggersTransition = false;
     [SerializeField] int nextSceneIndex = -1;
-    [SerializeField] CookingSceneManager sceneManager;
+    //[SerializeField] CookingSceneManager sceneManager;
     // [SerializeField] float sceneTransitionDelay = 3f;
     // [SerializeField] float applauseDelay = 0.5f;
 
     public void TaskComplete()
     {
-        Debug.Log("Task Complete!");
+        Debug.Log($"<color=#777>BaseIngSceneManager \"{name}\": Task Complete!</color>");
 
         StartCoroutine(CompleteTask());
     }
@@ -23,17 +26,26 @@ public class BaseIngredientSceneManager : MonoBehaviour
 
     protected void HandleSceneCompletion()
     {
-        Debug.Log("Scene Complete!");
+        Debug.Log("<color=#777>BaseIngSceneManager \"{name}\": Scene Complete!</color>");
 
-        StartCoroutine(TransitionToNewScene());
+        if (endConvo)
+        {
+            DialogueEditor.ConversationManager.Instance.StartConversation(endConvo);
+            if (endConvoTriggersTransition) return;
+        }
+
+        StartCoroutine(QueueTransition());
     }
 
-    protected IEnumerator TransitionToNewScene()
+    protected IEnumerator QueueTransition(float delayTime = 5f)
     {
-        sceneManager.FinishedSliceOrSpice();
-        
-        yield return new WaitForSeconds(5f);
+        //sceneManager.FinishedSliceOrSpice();
 
-        Transitions.LoadWithTransition?.Invoke(nextSceneIndex, -1);
+        yield return new WaitForSeconds(delayTime);
+
+        TransitionToNextScene();
     }
+
+    public void TransitionToNextScene(float speed) => Transitions.LoadWithTransition?.Invoke(nextSceneIndex, speed);
+    public void TransitionToNextScene() => TransitionToNextScene(-1);
 }
