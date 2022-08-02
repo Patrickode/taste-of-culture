@@ -3824,6 +3824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garam Masala
       objectReference: {fileID: 0}
+    - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_TagString
+      value: Initial Spice
+      objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
       value: 0
