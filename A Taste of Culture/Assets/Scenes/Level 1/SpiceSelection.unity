@@ -566,6 +566,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
   m_PrefabInstance: {fileID: 123891794}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &123891796 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7780707155668039253, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+  m_PrefabInstance: {fileID: 123891794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &213751818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,7 +1700,7 @@ PrefabInstance:
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
-      objectReference: {fileID: 850890254}
+      objectReference: {fileID: 123891796}
     - target: {fileID: 3956968207194152630, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: m_Name
       value: Cardamom
@@ -1753,11 +1758,6 @@ PrefabInstance:
 --- !u!4 &850890253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3956968207194152632, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
-  m_PrefabInstance: {fileID: 850890252}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &850890254 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3956968207194152631, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
   m_PrefabInstance: {fileID: 850890252}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &884009862
@@ -4413,7 +4413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1979362965
 MonoBehaviour:
   m_ObjectHideFlags: 0
