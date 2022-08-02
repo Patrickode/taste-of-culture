@@ -1024,6 +1024,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4148047150818633038, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Color.b
+      value: 0.12284136
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150818633038, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148047150818633038, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4148047150881439656, guid: 83e35f95a8dca8b4b9b55970981be804, type: 3}
       propertyPath: m_Name
       value: Chop Progress Bar
@@ -3528,7 +3540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2382c27197e11be4bae9bd045dd85640, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58a35969948607a40bf26c76abdcdca2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
