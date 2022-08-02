@@ -2885,7 +2885,6 @@ MonoBehaviour:
   useIndex: 0
   nextScene: Slicing
   nextSceneIndex: 0
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   tool: {fileID: 1715652776}
 --- !u!1001 &1338839916
 PrefabInstance:
@@ -3259,7 +3258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bfe527eb47a844d90017f2a74830ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protein: {fileID: 11400000, guid: 081735c221f3d2f44a52a66dd5daec66, type: 2}
   finishedConversation: {fileID: 1514005784}
   currentIngredient: 3
 --- !u!4 &1533509940
@@ -3333,16 +3331,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1 x Pepper
+  m_text: 'Garam Masala
+
+
+    1 x Pepper
 
     1 x Salt
 
     1 x Turmuric
 
-    3 x Coriander
+    3 x
+    Coriander
 
-    1 x
-    Cumin
+    1 x Cumin
 
     1 x Nutmeg
 
@@ -3373,7 +3374,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.05
+  m_fontSize: 21.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3822,6 +3823,10 @@ PrefabInstance:
     - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_Name
       value: Garam Masala
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780707155668039250, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
+      propertyPath: m_TagString
+      value: Initial Spice
       objectReference: {fileID: 0}
     - target: {fileID: 7780707155668039252, guid: 8be468ae18f92a74bac074bdcb066b0d, type: 3}
       propertyPath: m_RootOrder
