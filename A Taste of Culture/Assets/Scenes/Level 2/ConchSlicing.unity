@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 2
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":362.900024,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"ehhh
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":88.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"ehhh
     you missed, pal","parentUIDs":[],"AdvanceDialogueAutomatically":true,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"ContinueEndOverride":null,"IconGUID":null,"LargeIcon":false,"Name":"Placeholderman","OptionUIDs":null,"SkipNode":false,"SpeechUID":0,"TimeUntilAdvance":1,"Volume":0}]}'
   saveVersion: 110
   IDToStartAt: -1
@@ -1241,7 +1241,7 @@ MonoBehaviour:
       m_Calls: []
   NodeID: 0
   TMPFont: {fileID: 0}
-  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Icon: {fileID: 21300000, guid: 235be6577ff7faa4187eea98270af738, type: 3}
   Audio: {fileID: 0}
 --- !u!4 &1284742396
 Transform:
@@ -1289,17 +1289,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1502974765 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5409222682906192723, guid: 74b1a6e7e065f9f4ebc58b02b7cb66ae, type: 3}
-  m_PrefabInstance: {fileID: 735263567}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87d4c278af0d24b44b36acaa0a758fe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1424762054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1401,6 +1390,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ab250db6cdf19945840a5a2ebc4afdf, type: 3}
+--- !u!114 &1502974765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5409222682906192723, guid: 74b1a6e7e065f9f4ebc58b02b7cb66ae, type: 3}
+  m_PrefabInstance: {fileID: 735263567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d4c278af0d24b44b36acaa0a758fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1607390465
 GameObject:
   m_ObjectHideFlags: 0
