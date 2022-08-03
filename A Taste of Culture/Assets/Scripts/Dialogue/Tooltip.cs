@@ -7,14 +7,23 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private Text tooltipText;
     [SerializeField] private RectTransform backgroundRectTransform;
     [Space(5)]
-    [SerializeField] float textPaddingSize = 12.5f;
-    [SerializeField] int maxLength = 300;
-    [SerializeField] int xAdjustment = -150;
-    [SerializeField] int yAdjustment = 100;
+    [SerializeField] private float textPaddingSize = 12.5f;
+    [SerializeField] private int maxLength = 300;
+    [Space(5)]
+    [Tooltip("0 = min (left/bottom), 1 = max (right/top).")]
+    [SerializeField] private Vector2 offsetAnchor = Vector2.one * 0.5f;
+    [SerializeField] private int xOffset = -150;
+    [SerializeField] private int yOffset = 100;
 
     private static Tooltip instance;
     private RectTransform prntRectRef;
     private Vector2 localPointCache;
+
+    private void OnValidate() => ValidationUtility.DoOnDelayCall(this, () =>
+    {
+        offsetAnchor.x = Mathf.Clamp01(offsetAnchor.x);
+        offsetAnchor.y = Mathf.Clamp01(offsetAnchor.y);
+    });
 
     private void Awake()
     {
@@ -30,8 +39,14 @@ public class Tooltip : MonoBehaviour
             uiCamera,
             out localPointCache);
 
-        localPointCache.x += xAdjustment;
-        localPointCache.y += yAdjustment;
+        localPointCache.x += xOffset;
+        localPointCache.y += yOffset;
+
+        //0 = min on axis, 1 = max, and no offset = center based, 0.5.
+        //Therefore, subtract/add half the size if anchor is 0/1; shift range over to [-0.5, 0.5].
+        localPointCache.x -= backgroundRectTransform.sizeDelta.x * (offsetAnchor.x - 0.5f);
+        localPointCache.y -= backgroundRectTransform.sizeDelta.y * (offsetAnchor.y - 0.5f);
+
         transform.localPosition = localPointCache;
     }
 

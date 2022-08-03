@@ -1464,6 +1464,9 @@ MonoBehaviour:
   backgroundRectTransform: {fileID: 1177301374}
   textPaddingSize: 12.5
   maxLength: 300
+  offsetAnchor: {x: 0.5, y: 0}
+  xOffset: -150
+  yOffset: -100
 --- !u!1001 &806216058
 PrefabInstance:
   m_ObjectHideFlags: 0
