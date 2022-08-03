@@ -1712,6 +1712,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
+      propertyPath: spiceDescription
+      value: Cardamom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: pinchedSpicePrefab
       value: 
       objectReference: {fileID: 123891796}
@@ -2945,7 +2949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
       propertyPath: spiceDescription
-      value: Javitri, or nutmug, is from ground seeds that are pungently sweet, with
+      value: Javitri, or nutmeg, is from ground seeds that are pungently sweet, with
         a warm, savory undertone.
       objectReference: {fileID: 0}
     - target: {fileID: 2898717281772421305, guid: 54c8e475cd8f093408b2726e21cd6c89, type: 3}
