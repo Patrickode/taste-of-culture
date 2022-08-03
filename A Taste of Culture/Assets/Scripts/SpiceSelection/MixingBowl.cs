@@ -9,6 +9,8 @@ public class MixingBowl : MonoBehaviour
     [SerializeField] private bool onlyAddOnControlsActivated;
     [SerializeField] private GameObject[] hideUntilSpiceAdded;
 
+    private HashSet<Spice> addedSpices;
+
     public bool CanAddSpice { get; private set; }
 
     // Flavor Profile values
@@ -42,8 +44,10 @@ public class MixingBowl : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        //No need to continue if we can't add spice or the collision wasn't with a spice
-        if (!CanAddSpice || !other.gameObject.TryGetComponent(out Spice spice)) return;
+        //No need to continue if we can't add spice, the collision wasn't with a spice, or
+        //we've already added this spice
+        if (!CanAddSpice || !other.gameObject.TryGetComponent(out Spice spice) || addedSpices.Contains(spice))
+            return;
 
         // Toggle reset button
         if (!firstSpiceAdded && other.gameObject.CompareTag("Spice"))
@@ -57,6 +61,8 @@ public class MixingBowl : MonoBehaviour
         SpicinessValue += spice.Spiciness;
         SweetnessValue += spice.Sweetness;
         SaltinessValue += spice.Saltiness;
+
+        addedSpices.Add(spice);
 
         Debug.Log($"<color=#888>{name}: Added spice \"{spice.name}\" with flavor profile " +
             $"(Bi: {spice.Bitterness}, Sp: {spice.Spiciness} " +
