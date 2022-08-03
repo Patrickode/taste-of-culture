@@ -9,7 +9,7 @@ public class MixingBowl : MonoBehaviour
     [SerializeField] private bool onlyAddOnControlsActivated;
     [SerializeField] private GameObject[] hideUntilSpiceAdded;
 
-    private HashSet<Spice> addedSpices;
+    private HashSet<Spice> addedSpices = new HashSet<Spice>();
 
     public bool CanAddSpice { get; private set; }
 
