@@ -25,6 +25,7 @@ public class Transitions : MonoBehaviour
     private bool pausedAtMidpoint;
 
     private static Transitions duplicationPreventer = null;
+    public static bool Transitioning { get; private set; }
 
     /// <summary>
     /// <b>Arguments:</b><br/>
@@ -84,7 +85,11 @@ public class Transitions : MonoBehaviour
         MidTransition -= OnMidTransition;
         ContinueTransition -= OnContinueTransition;
     }
-    private void OnParticleSystemStopped() => EndTransition?.Invoke();
+    private void OnParticleSystemStopped()
+    {
+        EndTransition?.Invoke();
+        Transitioning = false;
+    }
 
     private void OnLoadWithTransition(int index, float speed = 0)
     {
@@ -108,6 +113,8 @@ public class Transitions : MonoBehaviour
 
     private void OnStartTransition(bool pauseOnMid, float speed = 0)
     {
+        Transitioning = true;
+
         //Unity gets peeved if speed is set while the system's running. Since the system shouldn't be
         //running anyway, stop it just in case (for example, this is called twice in rapid succession)
         particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
