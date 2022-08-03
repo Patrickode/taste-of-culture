@@ -7,6 +7,7 @@ public class SpiceBowl : MonoBehaviour
     public enum TypeOfSpice { CayennePepper, Cumin, Ginger, Garlic, Paprika, Cinnamon, Nutmeg, Coriander, Salt, Cardamon, GaramMasala };
 
     [SerializeField] TypeOfSpice spiceCategory;
+    [SerializeField, TextArea] string spiceDescription;
     [Tooltip("The max distance a spice's center can be from this bowl's center and still be destroyed (put back " +
         "in the bowl, reclaimed)")]
     [SerializeField] [Min(0)] float maxReclaimDistance;
@@ -99,7 +100,7 @@ public class SpiceBowl : MonoBehaviour
             //Note that this spice bowl is the owner of the tooltip we're spawning
             TooltipOwnerStateChange?.Invoke(this);
             Coroutilities.TryStopCoroutine(this, ref DisableTooltipCorout);
-            Tooltip.ShowTooltip_Static(spiceCategory.ToString());
+            Tooltip.ShowTooltip_Static($"{spiceDescription}");
         }
     }
 
