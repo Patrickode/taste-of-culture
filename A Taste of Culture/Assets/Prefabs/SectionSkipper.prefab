@@ -49,7 +49,7 @@ MonoBehaviour:
   skipButton: {fileID: 5277503326794569091}
   useSkipButton: 0
   useSkipKeystroke: 1
-  transitionOnSkip: 0
+  transitionOnSkip: 1
   transitionSpeed: -1
 --- !u!1 &5277503325863947449
 GameObject:

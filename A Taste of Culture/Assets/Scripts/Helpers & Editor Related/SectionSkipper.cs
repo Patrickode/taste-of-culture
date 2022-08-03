@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class SectionSkipper : Singleton<SectionSkipper>
 {
-#if UNITY_EDITOR
+    // !!! REMOVE THIS `|| true` IN PROPER BUILDS !!! //
+#if UNITY_EDITOR || true
     [Header("Section Skipper Fields")]
     [SerializeField] Canvas skipCanvas;
     [SerializeField] Button skipButton;
