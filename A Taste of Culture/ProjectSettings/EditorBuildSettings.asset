@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 2/MixSalad.unity
     guid: 40671ee232778884abb55bd2af9aa297
+  - enabled: 1
+    path: Assets/Scenes/Level 2/Removing.unity
+    guid: 577ebef4679640843b30d906e45e6ea0
   m_configObjects: {}
