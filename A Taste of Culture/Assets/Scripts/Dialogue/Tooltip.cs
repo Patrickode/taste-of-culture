@@ -44,12 +44,17 @@ public class Tooltip : MonoBehaviour
 
         //0 = min on axis, 1 = max, and no offset = center based, 0.5.
         //Therefore, subtract/add half the size if anchor is 0/1; shift range over to [-0.5, 0.5].
-        localPointCache.x -= backgroundRectTransform.sizeDelta.x * (offsetAnchor.x - 0.5f);
+        //  NOTE: We use maxLength for X because we handle whitespace from < maxLength widths in the next block
+        localPointCache.x -= maxLength * (offsetAnchor.x - 0.5f);
         localPointCache.y -= backgroundRectTransform.sizeDelta.y * (offsetAnchor.y - 0.5f);
-
         transform.localPosition = localPointCache;
 
-        //Not really sure why we have to halve the offscreen offset but if we don't it doesn't behave right so ¯\_('v')_/¯
+        //Assuming bgRect's pivot is (0, 0), if  less than maxLength, this will distribute the leftover space to
+        //each side based on offsetAnchor
+        localPointCache.x = maxLength - backgroundRectTransform.sizeDelta.x;
+        transform.localPosition += Vector3.right * (localPointCache.x * offsetAnchor.x);
+
+        //Not quite sure why we have to halve the offscreen offset but if we don't it doesn't behave right so shrug
         localPointCache = UtilFunctions.PixelsOffscreen(backgroundRectTransform.GetWorldBounds(), uiCamera, true);
         transform.localPosition -= (Vector3)localPointCache * 0.5f;
     }
