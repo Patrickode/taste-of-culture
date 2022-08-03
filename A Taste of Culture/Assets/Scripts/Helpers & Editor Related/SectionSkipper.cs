@@ -13,6 +13,9 @@ public class SectionSkipper : Singleton<SectionSkipper>
     [Space(5)]
     [SerializeField] private bool useSkipButton;
     [SerializeField] private bool useSkipKeystroke;
+    [Space(5)]
+    [SerializeField] private bool transitionOnSkip;
+    [SerializeField] private float transitionSpeed = -1;
 
     private bool[] keystrokeKeysDown = { false, false, false, false };
 
@@ -37,6 +40,7 @@ public class SectionSkipper : Singleton<SectionSkipper>
     private void Update()
     {
         if (!useSkipKeystroke) return;
+        if (transitionOnSkip && Transitions.Transitioning) return;
 
         keystrokeKeysDown[0] = Input.GetKey(KeyCode.S);
         keystrokeKeysDown[1] = Input.GetKey(KeyCode.K);
@@ -56,10 +60,17 @@ public class SectionSkipper : Singleton<SectionSkipper>
 
     void SkipSection()
     {
+        if (transitionOnSkip && Transitions.Transitioning) return;
+
         int nextScIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextScIndex < SceneManager.sceneCountInBuildSettings && nextScIndex >= 0)
         {
             Debug.Log($"<color=#FFF200>Skipping current scene of index {nextScIndex - 1}; loading scene at index {nextScIndex}.</color>");
+            if (transitionOnSkip)
+            {
+                Transitions.LoadWithTransition?.Invoke(nextScIndex, transitionSpeed);
+                return;
+            }
             SceneManager.LoadScene(nextScIndex);
         }
         else
