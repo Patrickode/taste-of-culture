@@ -3255,7 +3255,7 @@ MonoBehaviour:
   - {fileID: 1568822589}
   startingShellObject: {fileID: 976832574}
   flippedShellObject: {fileID: 1014314707}
-  NextSceneIndex: 0
+  NextSceneIndex: 7
   progressSlider: {fileID: 1447545302}
   conchAnimal: {fileID: 2020476408}
   conchEndingHitbox: {fileID: 1535757978}
