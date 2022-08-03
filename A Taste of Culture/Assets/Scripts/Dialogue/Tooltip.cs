@@ -48,6 +48,10 @@ public class Tooltip : MonoBehaviour
         localPointCache.y -= backgroundRectTransform.sizeDelta.y * (offsetAnchor.y - 0.5f);
 
         transform.localPosition = localPointCache;
+
+        //Not really sure why we have to halve the offscreen offset but if we don't it doesn't behave right so ¯\_('v')_/¯
+        localPointCache = UtilFunctions.PixelsOffscreen(backgroundRectTransform.GetWorldBounds(), uiCamera, true);
+        transform.localPosition -= (Vector3)localPointCache * 0.5f;
     }
 
     private void ShowTooltip(string tooltipString)

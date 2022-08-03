@@ -74,12 +74,14 @@ public static class UtilFunctions
     }
 
     /// <remarks>
-    /// This overload will use the <see cref="Bounds.min"/> and <see cref="Bounds.max"/> to check if the <i>entire</i>
-    /// <br/>bounding box is off-screen before returning an amount.
+    /// This overload will use the <see cref="Bounds.min"/> and <see cref="Bounds.max"/> to check if the <b><i>entire</i></b>
+    /// <br/>bounding box is off-screen (by default, see <paramref name="includePartialOffscreen"/>) before returning an amount.
     /// </remarks>
-    /// <param name="coords">The function will check if this <i>entire</i> bounding box is offscreen.</param>
+    /// <param name="coords">The function will check if this <b><i>entire</i></b> bounding box is offscreen.</param>
+    /// <param name="includePartialOffscreen">If true, will return non-zero if any amount of the box is offscreen.<br/>
+    /// This means that when it's <i>entirely</i> offscreen, this will return the size of the bounds.</param>
     /// <inheritdoc cref="PixelsOffscreen(Vector2, Camera)"/>
-    public static Vector2 PixelsOffscreen(Bounds coords, Camera conversionCam)
+    public static Vector2 PixelsOffscreen(Bounds coords, Camera conversionCam, bool includePartialOffscreen = false)
     {
         if (conversionCam)
         {
@@ -93,8 +95,17 @@ public static class UtilFunctions
         Vector2 result = Vector2.zero;
 
         //If X or Y is out of bounds, put how far out of bounds they are (negative or positive) into result.
-        result.x = DistanceOutOfRange(coords.min.x, coords.max.x, 0, maxPixelPos.x);
-        result.y = DistanceOutOfRange(coords.min.y, coords.max.y, 0, maxPixelPos.y);
+        if (includePartialOffscreen)
+        {
+            //Swap min and max to make DistanceOutOfRange compare using high<=>max etc., instead of low<=>max etc.
+            result.x = DistanceOutOfRange(coords.max.x, coords.min.x, 0, maxPixelPos.x);
+            result.y = DistanceOutOfRange(coords.max.y, coords.min.y, 0, maxPixelPos.y);
+        }
+        else
+        {
+            result.x = DistanceOutOfRange(coords.min.x, coords.max.x, 0, maxPixelPos.x);
+            result.y = DistanceOutOfRange(coords.min.y, coords.max.y, 0, maxPixelPos.y);
+        }
 
         return result;
     }
@@ -463,7 +474,7 @@ public static class UtilFunctions
     /// A shorthand function for <see cref="EqualityComparer{T}.Default.Equals(T, T)"/>.
     /// </summary>
     public static bool EquCompEquals<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
-    
+
     public static bool CompareTagInParentsAndChildren(Transform subject, string tag,
         int levelsUp = int.MaxValue, int levelsDown = int.MaxValue,
         bool checkSelf = true, bool parentsFirst = true)
