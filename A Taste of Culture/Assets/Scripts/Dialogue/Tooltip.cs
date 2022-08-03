@@ -8,6 +8,9 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private RectTransform backgroundRectTransform;
     [Space(5)]
     [SerializeField] float textPaddingSize = 12.5f;
+    [SerializeField] int maxLength = 300;
+    [SerializeField] int xAdjustment = -150;
+    [SerializeField] int yAdjustment = 100;
 
     private static Tooltip instance;
     private RectTransform prntRectRef;
@@ -27,8 +30,8 @@ public class Tooltip : MonoBehaviour
             uiCamera,
             out localPointCache);
 
-        localPointCache.x -= 50;
-        localPointCache.y += 100;
+        localPointCache.x += xAdjustment;
+        localPointCache.y += yAdjustment;
         transform.localPosition = localPointCache;
     }
 
@@ -40,6 +43,10 @@ public class Tooltip : MonoBehaviour
         Vector2 backgroundSize = new Vector2(
             tooltipText.preferredWidth + textPaddingSize * 2f,
             tooltipText.preferredHeight + textPaddingSize * 2f);
+        if (backgroundSize.x > maxLength)
+        {
+            backgroundSize.x = maxLength;
+        }
         backgroundRectTransform.sizeDelta = backgroundSize;
     }
 
