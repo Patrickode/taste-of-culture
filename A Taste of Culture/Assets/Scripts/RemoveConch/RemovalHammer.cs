@@ -78,7 +78,7 @@ public class RemovalHammer : RemovalTool
 
         if (isUsing && Input.GetKeyUp(KeyCode.Mouse0))
         {
-            holeProgress += hitPower / 2;
+            holeProgress += hitPower;
             hitPower = 0;
             isUsing = false;
             render.color = Color.white;
