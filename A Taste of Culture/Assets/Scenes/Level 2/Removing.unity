@@ -1359,12 +1359,13 @@ MonoBehaviour:
   canUse: 0
   properArea: 0
   isUsing: 0
-  canSetBack: 0
+  canSetBack: 1
   holeProgress: 0
   hitPower: 0
   render: {fileID: 1092306211}
   setSprite: {fileID: 21300000, guid: c1225bc9b51483245a9cb6d9d416b264, type: 3}
   holdSprite: {fileID: 21300000, guid: 5ffbc8883646a9d44842c45f397d8e7c, type: 3}
+  hasBeenUsed: 0
 --- !u!212 &1092306211
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1610,6 +1611,7 @@ MonoBehaviour:
   isUsing: 0
   canSetBack: 0
   unstickProgress: 0
+  hasBeenUsed: 0
 --- !u!61 &1187847439
 BoxCollider2D:
   m_ObjectHideFlags: 0

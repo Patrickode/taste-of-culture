@@ -8,6 +8,7 @@ public class RemovalKnife : RemovalTool
     [SerializeField] private bool canSetBack;
     [Space(5)]
     [SerializeField] private float unstickProgress;
+    [SerializeField] public bool hasBeenUsed;
 
     public override bool Active
     {
@@ -44,6 +45,8 @@ public class RemovalKnife : RemovalTool
     new void Start()
     {
         base.Start();
+
+        hasBeenUsed = false;
     }
 
     // Update is called once per frame
@@ -51,7 +54,7 @@ public class RemovalKnife : RemovalTool
     {
         base.Update();
 
-        if (canSetBack && Input.GetKeyDown(KeyCode.Mouse0))
+        if (canSetBack && hasBeenUsed && Input.GetKeyDown(KeyCode.Mouse0))
         {
             RemovalManager.Instance.ResetCurrentTool();
         }
@@ -117,22 +120,5 @@ public class RemovalKnife : RemovalTool
             properArea = false;
             canUse = true;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("ForbiddenZone"))
-        {
-            canUse = false;
-            isUsing = false;
-
-            Debug.LogWarning("This person is going to kill this thing with the knife!");
-            // do dialogue warning for knife maybe?
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        canUse = true;
     }
 }

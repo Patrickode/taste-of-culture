@@ -13,6 +13,7 @@ public class RemovalHammer : RemovalTool
     [SerializeField] private SpriteRenderer render;
     [SerializeField] private Sprite setSprite;
     [SerializeField] private Sprite holdSprite;
+    public bool hasBeenUsed;
 
     public override bool Active 
     { 
@@ -61,7 +62,7 @@ public class RemovalHammer : RemovalTool
     {
         base.Update();
 
-        if (canSetBack && Input.GetKeyDown(KeyCode.Mouse0))
+        if (canSetBack && hasBeenUsed && Input.GetKeyDown(KeyCode.Mouse0))
         {
             RemovalManager.Instance.ResetCurrentTool();
         }
@@ -89,7 +90,8 @@ public class RemovalHammer : RemovalTool
                 // do warn dialogue
                 
             }
-            else if (holeProgress >= 1000)
+            
+            if (holeProgress >= 1000)
             {
                 Debug.Log("Move to the knife!");
                 heldZ = -5;

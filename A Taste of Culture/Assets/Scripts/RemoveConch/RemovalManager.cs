@@ -79,7 +79,9 @@ public class RemovalManager : MonoBehaviour
     {
         hammer.Active = true;
         current = hammer;
-        ((RemovalHammer)hammer).ChangeSprite();
+        RemovalHammer h = (RemovalHammer)hammer;
+        h.ChangeSprite();
+        h.hasBeenUsed = true;
 
         ResetHand();
     }
@@ -88,6 +90,7 @@ public class RemovalManager : MonoBehaviour
     {
         knife.Active = true;
         current = knife;
+        ((RemovalKnife)knife).hasBeenUsed = true;
 
         ResetHand();
     }
