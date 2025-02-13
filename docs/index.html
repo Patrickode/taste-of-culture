@@ -27,15 +27,16 @@
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Desktop.loader.js";
+      var loaderUrl = buildUrl + "/docs.loader.js";
       var config = {
-        dataUrl: buildUrl + "/Desktop.data",
-        frameworkUrl: buildUrl + "/Desktop.framework.js",
-        codeUrl: buildUrl + "/Desktop.wasm",
+        dataUrl: buildUrl + "/docs.data.unityweb",
+        frameworkUrl: buildUrl + "/docs.framework.js.unityweb",
+        codeUrl: buildUrl + "/docs.wasm.unityweb",
+        symbolsUrl: buildUrl + "/docs.symbols.json.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Too Many Cooks",
         productName: "A Taste of Culture",
-        productVersion: "1.0",
+        productVersion: "2.0",
       };
 
       var container = document.querySelector("#unity-container");
